@@ -1,0 +1,40 @@
+/* S2 pilot: geometry comes from the three Figma frames. Other sections retain their layout. */
+.fp-s2p1-wrapper,.fp-s2p2-wrapper{transition:none}
+html{overflow-x:clip}
+.s2p1-master-root,.s2p2-master-root{max-width:none!important;padding:0!important;aspect-ratio:auto!important;min-height:0!important}
+.fp-s2p1-wrapper .embed-body-wrapper,.fp-s2p2-wrapper .embed-body-wrapper{padding:0!important;margin:0!important}
+.s2p1-dt-container{top:0!important;transform:scale(var(--s2-layout-scale,1))!important}
+.s2p2-dt-layer{position:absolute!important;top:0;width:1020px!important;transform:scale(var(--s2-layout-scale,1));transform-origin:top left}
+.s2p2-canvas{width:1020px!important;height:650px!important;aspect-ratio:auto!important}
+.s2p1-dt-container .circle-photo-box{top:237.5px}
+.s2p1-dt-container .tag-en{top:319.5px;left:644.43px;font-family:var(--font-sans-tc)}
+.s2p1-dt-container .title-cn{top:333.5px;left:644.43px;color:var(--color-main-brown);font-family:var(--font-display-cn)}
+.s2p1-dt-container .quote-wrapper{top:415.5px;left:644.43px}
+.s2p1-dt-container .desc-paragraph{top:587.5px;left:641.5px;width:558px;margin:0;color:var(--color-charcoal)}
+.s2p2-cards-container{left:205px;right:auto;top:210px;gap:73.7px;justify-content:flex-start}
+.s2p2-card{width:265px;flex:none}
+.s2p2-card-text{font-size:16px;width:245px;margin:13px 0 0}
+@media(min-width:768px) and (max-width:1199.98px){
+ .s2p1-dt-container .tag-en{left:633.5px;top:316.5px;letter-spacing:.04em}
+ .s2p1-dt-container .title-cn{left:631.5px;top:330.5px;font-size:20px}
+ .s2p1-dt-container .quote-wrapper{left:631.5px;top:384.5px}
+ .s2p1-dt-container .quote-text{font-size:32px}
+ .s2p1-dt-container .desc-paragraph{left:631.5px;top:550.5px;width:350px}
+ .s2p2-cards-container{left:0;top:213px}
+ .s2p2-card-text{width:256px}
+ .s2p2-vector2{left:50.6863%}
+ .s2p2-group-bottom{width:825.32px}
+ .s2p2-master-root{--s2p2-man-x:0px;--s2p2-man-shd-x:0px}
+ .s2p2-figure-body{left:calc(51.0784% + (var(--s2p2-man-x,-16px)/1020px * 100%))}
+ .s2p2-shadow-wrapper{left:calc(42.451% + (var(--s2p2-man-shd-x,-20px)/1020px * 100%))}
+}
+@media(max-width:767.98px){
+ .s2p1-mb-container{width:363px!important;max-width:none!important;margin:0!important;height:504px!important;position:absolute!important;top:0;transform:scale(var(--s2-layout-scale,1));transform-origin:top left}
+ .s2p2-mb-layer{width:318px!important;max-width:none!important;margin:0!important;height:601px!important;position:absolute!important;top:0;transform:scale(var(--s2-layout-scale,1));transform-origin:top left}
+ .s2p1-mb-container .circle-photo-box{left:15px;top:220px}
+ .s2p1-mb-container .tag-en{left:179px;top:238px;font-family:var(--font-sans-tc);letter-spacing:.04em}
+ .s2p1-mb-container .title-cn{left:177px;top:252px;font-family:var(--font-display-cn);color:var(--color-main-brown)}
+ .s2p1-mb-container .quote-wrapper{left:179px;top:289px;gap:10px}
+ .s2p1-mb-container .desc-paragraph{left:19px;top:393px;width:312px;margin:0;color:var(--color-charcoal)}
+ .s2p2-mb-text{margin:0}
+}

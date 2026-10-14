@@ -1,0 +1,1 @@
+try{Typekit.load();}catch(error){}

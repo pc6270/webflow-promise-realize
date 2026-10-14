@@ -1,0 +1,30 @@
+<svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_f_s4_14)">
+<rect x="6" y="6" width="56" height="56" rx="28" fill="url(#paint0_radial_s4_14)" fill-opacity="0.39"/>
+</g>
+<rect x="6" y="6" width="56" height="56" rx="28" fill="url(#paint1_radial_s4_14)"/>
+<rect x="6.5" y="6.5" width="55" height="55" rx="27.5" stroke="url(#paint2_linear_s4_14)" stroke-opacity="0.43"/>
+<!-- 左側漏電斷路器塊面 (含 TEST 按鈕負空間圓孔與撥桿) -->
+<path fill-rule="evenodd" clip-rule="evenodd" d="M22.8 21.0C21.2536 21.0 20.0 22.2536 20.0 23.8V44.2C20.0 45.7464 21.2536 47.0 22.8 47.0H28.4C29.9464 47.0 31.2 45.7464 31.2 44.2V23.8C31.2 22.2536 29.9464 21.0 28.4 21.0H22.8ZM25.6 25.4C24.4954 25.4 23.6 26.2954 23.6 27.4C23.6 28.5046 24.4954 29.4 25.6 29.4C26.7046 29.4 27.6 28.5046 27.6 27.4C27.6 26.2954 26.7046 25.4 25.6 25.4ZM24.2 35.6C23.4268 35.6 22.8 36.2268 22.8 37.0V40.6C22.8 41.3732 23.4268 42.0 24.2 42.0H27.0C27.7732 42.0 28.4 41.3732 28.4 40.6V37.0C28.4 36.2268 27.7732 35.6 27.0 35.6H24.2Z" fill="white"/>
+<!-- 右側防護盾牌塊面（內嵌安全檢測打勾負空間） -->
+<path fill-rule="evenodd" clip-rule="evenodd" d="M40.25 21.15C40.72 20.95 41.28 20.95 41.75 21.15L46.75 23.3C47.51 23.63 48.0 24.38 48.0 25.2V34.2C48.0 40.25 44.22 45.18 41.68 46.82C41.26 47.09 40.74 47.09 40.32 46.82C37.78 45.18 34.0 40.25 34.0 34.2V25.2C34.0 24.38 34.49 23.63 35.25 23.3L40.25 21.15ZM44.45 31.15C45.04 31.74 45.04 32.69 44.45 33.27L40.65 37.07C40.06 37.66 39.11 37.66 38.53 37.07L36.93 35.47C36.34 34.89 36.34 33.94 36.93 33.35C37.51 32.76 38.46 32.76 39.05 33.35L39.59 33.89L42.33 31.15C42.91 30.56 43.86 30.56 44.45 31.15Z" fill="white"/>
+<defs>
+<filter id="filter0_f_s4_14" x="0" y="0" width="68" height="68" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="3" result="effect1_foregroundBlur_s4_14"/>
+</filter>
+<radialGradient id="paint0_radial_s4_14" cx="0" cy="0" r="1" gradientTransform="matrix(36.0131 -0.318609 0.481703 33.6216 33.9 34.3186)" gradientUnits="userSpaceOnUse">
+<stop stop-color="#987A6B"/>
+<stop offset="1" stop-color="white"/>
+</radialGradient>
+<radialGradient id="paint1_radial_s4_14" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(33.9305 34) scale(139.461 139.116)">
+<stop stop-color="#987A6B"/>
+<stop offset="1" stop-color="#F5F5F5"/>
+</radialGradient>
+<linearGradient id="paint2_linear_s4_14" x1="12.087" y1="15.7391" x2="34.0002" y2="38.428" gradientUnits="userSpaceOnUse">
+<stop stop-color="#F5F5F5"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+</defs>
+</svg>

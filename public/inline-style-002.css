@@ -1,0 +1,5831 @@
+
+    
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap');
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #FAF7F2 !important; /* 網站主色調：米白 #FAF7F2 */
+    font-family: 'Noto Serif TC', serif;
+  }
+
+  .fp-master-container {
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+    background-color: transparent !important;
+    overflow: visible;
+
+    /* 🎨 Section 4 大背景圓雜訊參數預設值 */
+    --s4-noise-freq: 0.5;
+    --s4-noise-opacity: 0.1;
+
+    /* ✒️ 全站統一線條樣式共用參數 (以 Section 2 Part 1 為標準規格) */
+    --brand-line-color: #675D54;         /* 質感線條主色 (統一 #675D54) */
+    --brand-line-width: 3px;             /* 桌面版與平板版線條粗細 (統一 3px) */
+    --brand-line-mb-width: 1px;          /* 手機版線條粗細 (統一 1px) */
+    --brand-line-flood: rgba(255, 255, 255, 0.25); /* 鉛筆手繪雜訊底色透明度 */
+
+    /* 💻 桌面版區塊相對位置與間距 (>991px) */
+    --sec1-x: 0px;
+    --sec1-y: 0px;
+    --sec1-mt: 0px;
+    --sec1-mb: 0px;
+
+    --s2p1-x: 10px;
+    --s2p1-y: -238px;
+    --s2p1-mt: 0px;
+    --s2p1-mb: 0px;
+
+    --s2p2-x: 108px;
+    --s2p2-y: -47px;
+    --s2p2-mt: 0px;
+    --s2p2-mb: 0px;
+
+    --s2p34-x: -12px;
+    --s2p34-y: -231px;
+    --s2p34-mt: 0px;
+    --s2p34-mb: 0px;
+
+    --sec4-x: 0px;
+    --sec4-y: -210px;
+    --sec4-mt: 0px;
+    --sec4-mb: 0px;
+
+    --sec5-x: -116px;
+    --sec5-y: 82px;
+    --sec5-mt: 0px;
+    --sec5-mb: 0px;
+
+    --sec6-x: 0px;
+    --sec6-y: -88px;
+    --sec6-mt: 0px;
+    --sec6-mb: 0px;
+
+    --sec7-x: 135px;
+    --sec7-y: -158px;
+    --sec7-mt: 0px;
+    --sec7-mb: 0px;
+
+    --sec8-x: 183px;
+    --sec8-y: -138px;
+    --sec8-mt: 0px;
+    --sec8-mb: 0px;
+
+    /* 📝 Section 1 各文字區塊獨立微調參數 (Desktop) */
+    --s1-title-cn-x: 0px;
+    --s1-title-cn-y: 0px;
+    --s1-title-cn-size: 48px;
+    --s1-title-en-x: 0px;
+    --s1-title-en-y: -15px;
+    --s1-title-en-size: 48px;
+    --s1-desc-x: 0px;
+    --s1-desc-y: 53px;
+    --s1-desc-w: 0px;
+    --s1-desc-size: 16px;
+
+    /* 📝 Section 8 各文字區塊獨立微調參數 (Desktop) */
+    --s8-sub-x: 0px;
+    --s8-sub-y: 0px;
+    --s8-cat-x: 0px;
+    --s8-cat-y: 0px;
+    --s8-line-x: 0px;
+    --s8-line-y: 0px;
+    --s8-title-x: 0px;
+    --s8-title-y: 0px;
+    --s8-desc-x: 0px;
+    --s8-desc-y: 0px;
+    --s8-desc-w: 0px;
+
+    /* 👤 Section 7 小人陰影參數 (桌面版) */
+    --s7-shadow-d-x: 601.5px;
+    --s7-shadow-d-y: 508.5px;
+    --s7-shadow-d-sx: 1.1;
+    --s7-shadow-d-sy: -0.8;
+    --s7-shadow-d-rot: -3deg;
+    --s7-shadow-d-skew: 12deg;
+    --s7-shadow-d-op: 0.6;
+
+    /* 📟 平板版區塊相對位置與間距 (768px - 991px，與電腦完全分隔) */
+    --sec1-tab-x: 0px;
+    --sec1-tab-y: 0px;
+    --sec1-tab-mt: 0px;
+    --sec1-tab-mb: 0px;
+
+    --s2p1-tab-x: -18px;
+    --s2p1-tab-y: -189px;
+    --s2p1-tab-mt: 0px;
+    --s2p1-tab-mb: 0px;
+
+    --s2p2-tab-x: 100px;
+    --s2p2-tab-y: -38px;
+    --s2p2-tab-mt: 0px;
+    --s2p2-tab-mb: 0px;
+
+    --s2p34-tab-x: -60px;
+    --s2p34-tab-y: -156px;
+    --s2p34-tab-mt: 0px;
+    --s2p34-tab-mb: 0px;
+
+    --sec4-tab-x: 0px;
+    --sec4-tab-y: -174px;
+    --sec4-tab-mt: 0px;
+    --sec4-tab-mb: 0px;
+
+    --sec5-tab-x: -324px;
+    --sec5-tab-y: 82px;
+    --sec5-tab-mt: 0px;
+    --sec5-tab-mb: 0px;
+
+    --sec6-tab-x: 0px;
+    --sec6-tab-y: -113px;
+    --sec6-tab-mt: 0px;
+    --sec6-tab-mb: 0px;
+
+    --sec7-tab-x: 135px;
+    --sec7-tab-y: -120px;
+    --sec7-tab-mt: 0px;
+    --sec7-tab-mb: 0px;
+
+    --sec8-tab-x: 0px;
+    --sec8-tab-y: -150px;
+    --sec8-tab-mt: 0px;
+    --sec8-tab-mb: 0px;
+
+    /* 📝 Section 1 各文字區塊獨立微調參數 (Tablet) */
+    --s1-tab-title-cn-x: 0px;
+    --s1-tab-title-cn-y: 0px;
+    --s1-tab-title-cn-size: 48px;
+    --s1-tab-title-en-x: 0px;
+    --s1-tab-title-en-y: 0px;
+    --s1-tab-title-en-size: 48px;
+    --s1-tab-desc-x: 0px;
+    --s1-tab-desc-y: 0px;
+    --s1-tab-desc-w: 0px;
+    --s1-tab-desc-size: 16px;
+
+    /* 📝 Section 8 各文字區塊獨立微調參數 (Tablet) */
+    --s8-tab-sub-x: 0px;
+    --s8-tab-sub-y: 0px;
+    --s8-tab-cat-x: 0px;
+    --s8-tab-cat-y: 0px;
+    --s8-tab-line-x: 0px;
+    --s8-tab-line-y: 0px;
+    --s8-tab-title-x: 0px;
+    --s8-tab-title-y: 0px;
+    --s8-tab-desc-x: 0px;
+    --s8-tab-desc-y: 0px;
+    --s8-tab-desc-w: 0px;
+
+    /* 📱 手機版區塊相對位置與間距 (<768px) */
+    --sec1-mb-x: 0px;
+    --sec1-mb-y: 0px;
+    --sec1-mb-mt: 0px;
+    --sec1-mb-mb: 0px;
+
+    --s2p1-mb-x: 0px;
+    --s2p1-mb-y: -179px;
+    --s2p1-mb-mt: 0px;
+    --s2p1-mb-mb: 30px;
+
+    --s2p2-mb-x: 0px;
+    --s2p2-mb-y: -180px;
+    --s2p2-mb-mt: 0px;
+    --s2p2-mb-mb: 30px;
+
+    --s2p34-mb-x: -32px;
+    --s2p34-mb-y: -136px;
+    --s2p34-mb-mt: 0px;
+    --s2p34-mb-mb: 30px;
+
+    --sec4-mb-x: 0px;
+    --sec4-mb-y: -129px;
+    --sec4-mb-mt: 0px;
+    --sec4-mb-mb: 0px;
+
+    --sec5-mb-x: 0px;
+    --sec5-mb-y: 67px;
+    --sec5-mb-mt: 0px;
+    --sec5-mb-mb: 30px;
+
+    --sec6-mb-x: 0px;
+    --sec6-mb-y: -302px;
+    --sec6-mb-mt: 0px;
+    --sec6-mb-mb: 30px;
+
+    --sec7-mb-x: 23px;
+    --sec7-mb-y: -278px;
+    --sec7-mb-mt: 0px;
+    --sec7-mb-mb: 30px;
+
+    --sec8-mb-x: 16px;
+    --sec8-mb-y: -135px;
+    --sec8-mb-mt: 0px;
+    --sec8-mb-mb: 0px;
+
+    /* 📱 Section 8 手機版縮放倍率 */
+    --sec8-mb-scale: 0.92;
+
+    /* 📝 Section 1 各文字區塊獨立微調參數 (Mobile) */
+    --s1-mb-title-cn-x: 0px;
+    --s1-mb-title-cn-y: 0px;
+    --s1-mb-title-cn-size: 30px;
+    --s1-mb-title-en-x: 0px;
+    --s1-mb-title-en-y: 0px;
+    --s1-mb-title-en-size: 26px;
+    --s1-mb-desc-x: 0px;
+    --s1-mb-desc-y: 0px;
+    --s1-mb-desc-w: 0px;
+    --s1-mb-desc-size: 14px;
+
+    /* 📝 Section 8 各文字區塊獨立微調參數 (Mobile) */
+    --s8-mb-sub-x: 0px;
+    --s8-mb-sub-y: 0px;
+    --s8-mb-cat-x: 0px;
+    --s8-mb-cat-y: 0px;
+    --s8-mb-line-x: 0px;
+    --s8-mb-line-y: 0px;
+    --s8-mb-title-x: 0px;
+    --s8-mb-title-y: 0px;
+    --s8-mb-desc-x: 0px;
+    --s8-mb-desc-y: 0px;
+    --s8-mb-desc-w: 0px;
+
+    /* 👤 Section 7 小人陰影參數 (手機版) */
+    --s7-shadow-m-x: 253px;
+    --s7-shadow-m-y: 721px;
+    --s7-shadow-m-sx: 1.2;
+    --s7-shadow-m-sy: -0.8;
+    --s7-shadow-m-rot: -3deg;
+    --s7-shadow-m-skew: 12deg;
+    --s7-shadow-m-op: 0.6;
+  }
+
+  /* 網格區塊通用容器 */
+  .fp-sec-wrapper {
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+    overflow: visible;
+    transition: margin 0.15s ease-out, left 0.15s ease-out;
+  }
+
+  /* 確保所有內部背景純淨透明 */
+  .s1-master-root,
+  .s2p1-master-root,
+  .s2p2-master-root,
+  .s2p34-master-root,
+  .s4-root,
+  .s5-global-container,
+  .wf-sec6-wrapper,
+  .wf-sec6-desktop-sticky-track,
+  .wf-sec6-desktop-sticky-inner,
+  .wf-sec7-wrapper,
+  .wf-sec8-wrapper {
+    background-color: transparent !important;
+    background: transparent !important;
+  }
+
+  /* 💻 桌面版間距、位移與 z-index (>991px 或預設) */
+  .fp-sec1-wrapper {
+    z-index: 1;
+    margin-top: calc(var(--sec1-mt, 0px) + var(--sec1-y, 0px));
+    margin-bottom: var(--sec1-mb, 0px);
+    left: var(--sec1-x, 0px);
+  }
+  .fp-s2p1-wrapper {
+    z-index: 2;
+    margin-top: calc(var(--s2p1-mt, 0px) + var(--s2p1-y, -233px));
+    margin-bottom: var(--s2p1-mb, 0px);
+    left: var(--s2p1-x, 14px);
+  }
+  .fp-s2p2-wrapper {
+    z-index: 3;
+    margin-top: calc(var(--s2p2-mt, 0px) + var(--s2p2-y, -47px));
+    margin-bottom: var(--s2p2-mb, 0px);
+    left: var(--s2p2-x, 108px);
+  }
+  .fp-s2p34-wrapper {
+    z-index: 4;
+    margin-top: calc(var(--s2p34-mt, 0px) + var(--s2p34-y, -231px));
+    margin-bottom: var(--s2p34-mb, 0px);
+    left: var(--s2p34-x, -12px);
+  }
+  .fp-sec4-wrapper {
+    z-index: 5;
+    margin-top: calc(var(--sec4-mt, 0px) + var(--sec4-y, -210px));
+    margin-bottom: var(--sec4-mb, 0px);
+    left: var(--sec4-x, 0px);
+  }
+  .fp-sec5-wrapper {
+    z-index: 6;
+    margin-top: calc(var(--sec5-mt, 0px) + var(--sec5-y, 82px));
+    margin-bottom: var(--sec5-mb, 0px);
+    left: var(--sec5-x, -116px);
+  }
+  .fp-sec6-wrapper {
+    z-index: 7;
+    margin-top: calc(var(--sec6-mt, 0px) + var(--sec6-y, -88px));
+    margin-bottom: var(--sec6-mb, 0px);
+    left: var(--sec6-x, 0px);
+  }
+  .fp-sec7-wrapper {
+    z-index: 8;
+    margin-top: calc(var(--sec7-mt, 0px) + var(--sec7-y, -158px));
+    margin-bottom: var(--sec7-mb, 0px);
+    left: var(--sec7-x, 135px);
+  }
+  .fp-sec8-wrapper {
+    z-index: 9;
+    margin-top: calc(var(--sec8-mt, 0px) + var(--sec8-y, -139px));
+    margin-bottom: var(--sec8-mb, 0px);
+    left: var(--sec8-x, 183px);
+  }
+
+  .wf-sec6-desktop-sticky-inner {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 0 !important;
+  }
+
+  /* 📟 平板版獨立間距與位移 (768px - 991.98px) */
+  @media (min-width: 768px) and (max-width: 991.98px) {
+    .fp-sec1-wrapper {
+      margin-top: calc(var(--sec1-tab-mt, 0px) + var(--sec1-tab-y, 0px));
+      margin-bottom: var(--sec1-tab-mb, 0px);
+      left: var(--sec1-tab-x, 0px);
+    }
+    .fp-s2p1-wrapper {
+      margin-top: calc(var(--s2p1-tab-mt, 0px) + var(--s2p1-tab-y, -189px));
+      margin-bottom: var(--s2p1-tab-mb, 0px);
+      left: var(--s2p1-tab-x, -18px);
+    }
+    .fp-s2p2-wrapper {
+      margin-top: calc(var(--s2p2-tab-mt, 0px) + var(--s2p2-tab-y, -38px));
+      margin-bottom: var(--s2p2-tab-mb, 0px);
+      left: var(--s2p2-tab-x, 100px);
+    }
+    .fp-s2p34-wrapper {
+      margin-top: calc(var(--s2p34-tab-mt, 0px) + var(--s2p34-tab-y, -156px));
+      margin-bottom: var(--s2p34-tab-mb, 0px);
+      left: var(--s2p34-tab-x, -60px);
+    }
+    .fp-sec4-wrapper {
+      margin-top: calc(var(--sec4-tab-mt, 0px) + var(--sec4-tab-y, -174px));
+      margin-bottom: var(--sec4-tab-mb, 0px);
+      left: var(--sec4-tab-x, 0px);
+    }
+    .fp-sec5-wrapper {
+      margin-top: calc(var(--sec5-tab-mt, 0px) + var(--sec5-tab-y, 82px));
+      margin-bottom: var(--sec5-tab-mb, 0px);
+      left: var(--sec5-tab-x, -324px);
+    }
+    .fp-sec6-wrapper {
+      margin-top: calc(var(--sec6-tab-mt, 0px) + var(--sec6-tab-y, -113px));
+      margin-bottom: var(--sec6-tab-mb, 0px);
+      left: var(--sec6-tab-x, 0px);
+    }
+    .fp-sec7-wrapper {
+      margin-top: calc(var(--sec7-tab-mt, 0px) + var(--sec7-tab-y, -120px));
+      margin-bottom: var(--sec7-tab-mb, 0px);
+      left: var(--sec7-tab-x, 135px);
+    }
+    .fp-sec8-wrapper {
+      margin-top: calc(var(--sec8-tab-mt, 0px) + var(--sec8-tab-y, -150px));
+      margin-bottom: var(--sec8-tab-mb, 0px);
+      left: var(--sec8-tab-x, 0px);
+    }
+  }
+
+  /* 📱 手機版間距與位移 (<768px) */
+  @media (max-width: 767.98px) {
+    .fp-sec1-wrapper {
+      margin-top: calc(var(--sec1-mb-mt, 0px) + var(--sec1-mb-y, 0px));
+      margin-bottom: var(--sec1-mb-mb, 0px);
+      left: var(--sec1-mb-x, 0px);
+    }
+    .fp-s2p1-wrapper {
+      margin-top: calc(var(--s2p1-mb-mt, 0px) + var(--s2p1-mb-y, 0px));
+      margin-bottom: var(--s2p1-mb-mb, 30px);
+      left: var(--s2p1-mb-x, 0px);
+    }
+    .fp-s2p2-wrapper {
+      margin-top: calc(var(--s2p2-mb-mt, 0px) + var(--s2p2-mb-y, 0px));
+      margin-bottom: var(--s2p2-mb-mb, 30px);
+      left: var(--s2p2-mb-x, 0px);
+    }
+    .fp-s2p34-wrapper {
+      margin-top: calc(var(--s2p34-mb-mt, 0px) + var(--s2p34-mb-y, 0px));
+      margin-bottom: var(--s2p34-mb-mb, 30px);
+      left: var(--s2p34-mb-x, 0px);
+    }
+    .fp-sec4-wrapper {
+      margin-top: calc(var(--sec4-mb-mt, 0px) + var(--sec4-mb-y, 0px));
+      margin-bottom: var(--sec4-mb-mb, 0px);
+      left: var(--sec4-mb-x, 0px);
+    }
+    .fp-sec5-wrapper {
+      margin-top: calc(var(--sec5-mb-mt, 0px) + var(--sec5-mb-y, 0px));
+      margin-bottom: var(--sec5-mb-mb, 30px);
+      left: var(--sec5-mb-x, 0px);
+    }
+    .fp-sec6-wrapper {
+      margin-top: calc(var(--sec6-mb-mt, 0px) + var(--sec6-mb-y, 0px));
+      margin-bottom: var(--sec6-mb-mb, 30px);
+      left: var(--sec6-mb-x, 0px);
+    }
+    .fp-sec7-wrapper {
+      margin-top: calc(var(--sec7-mb-mt, 0px) + var(--sec7-mb-y, 0px));
+      margin-bottom: var(--sec7-mb-mb, 30px);
+      left: var(--sec7-mb-x, 0px);
+    }
+    .fp-sec8-wrapper {
+      margin-top: calc(var(--sec8-mb-mt, 0px) + var(--sec8-mb-y, 0px));
+      margin-bottom: var(--sec8-mb-mb, 0px);
+      left: var(--sec8-mb-x, 0px);
+    }
+  }
+
+  /* 視窗微調測試時強制手機視態 */
+  .fp-force-mobile {
+    width: 360px !important;
+    max-width: 360px !important;
+    margin: 0 auto !important;
+  }
+  .fp-force-mobile .fp-sec1-wrapper {
+    margin-top: calc(var(--sec1-mb-mt, 0px) + var(--sec1-mb-y, 0px));
+    margin-bottom: var(--sec1-mb-mb, 0px);
+    left: var(--sec1-mb-x, 0px);
+  }
+  .fp-force-mobile .fp-s2p1-wrapper {
+    margin-top: calc(var(--s2p1-mb-mt, 0px) + var(--s2p1-mb-y, 0px));
+    margin-bottom: var(--s2p1-mb-mb, 30px);
+    left: var(--s2p1-mb-x, 0px);
+  }
+  .fp-force-mobile .fp-s2p2-wrapper {
+    margin-top: calc(var(--s2p2-mb-mt, 0px) + var(--s2p2-mb-y, 0px));
+    margin-bottom: var(--s2p2-mb-mb, 30px);
+    left: var(--s2p2-mb-x, 0px);
+  }
+  .fp-force-mobile .fp-s2p34-wrapper {
+    margin-top: calc(var(--s2p34-mb-mt, 0px) + var(--s2p34-mb-y, 0px));
+    margin-bottom: var(--s2p34-mb-mb, 30px);
+    left: var(--s2p34-mb-x, 0px);
+  }
+  .fp-force-mobile .fp-sec4-wrapper {
+    margin-top: calc(var(--sec4-mb-mt, 0px) + var(--sec4-mb-y, 0px));
+    margin-bottom: var(--sec4-mb-mb, 0px);
+    left: var(--sec4-mb-x, 0px);
+  }
+  .fp-force-mobile .fp-sec5-wrapper {
+    margin-top: calc(var(--sec5-mb-mt, 0px) + var(--sec5-mb-y, 0px));
+    margin-bottom: var(--sec5-mb-mb, 30px);
+    left: var(--sec5-mb-x, 0px);
+  }
+  .fp-force-mobile .fp-sec6-wrapper {
+    margin-top: calc(var(--sec6-mb-mt, 0px) + var(--sec6-mb-y, 0px));
+    margin-bottom: var(--sec6-mb-mb, 30px);
+    left: var(--sec6-mb-x, 0px);
+  }
+  .fp-force-mobile .fp-sec7-wrapper {
+    margin-top: calc(var(--sec7-mb-mt, 0px) + var(--sec7-mb-y, 0px));
+    margin-bottom: var(--sec7-mb-mb, 30px);
+    left: var(--sec7-mb-x, 0px);
+  }
+  .fp-force-mobile .fp-sec8-wrapper {
+    margin-top: calc(var(--sec8-mb-mt, 0px) + var(--sec8-mb-y, 0px));
+    margin-bottom: var(--sec8-mb-mb, 0px);
+    left: var(--sec8-mb-x, 0px);
+  }
+
+  /* 視窗微調測試時強制平板視態 */
+  .fp-force-tablet {
+    width: 768px !important;
+    max-width: 768px !important;
+    margin: 0 auto !important;
+  }
+  .fp-force-tablet .fp-sec1-wrapper {
+    margin-top: calc(var(--sec1-tab-mt, 0px) + var(--sec1-tab-y, 0px));
+    margin-bottom: var(--sec1-tab-mb, 0px);
+    left: var(--sec1-tab-x, 0px);
+  }
+  .fp-force-tablet .fp-s2p1-wrapper {
+    margin-top: calc(var(--s2p1-tab-mt, 0px) + var(--s2p1-tab-y, -189px));
+    margin-bottom: var(--s2p1-tab-mb, 0px);
+    left: var(--s2p1-tab-x, -18px);
+  }
+  .fp-force-tablet .fp-s2p2-wrapper {
+    margin-top: calc(var(--s2p2-tab-mt, 0px) + var(--s2p2-tab-y, -38px));
+    margin-bottom: var(--s2p2-tab-mb, 0px);
+    left: var(--s2p2-tab-x, 100px);
+  }
+  .fp-force-tablet .fp-s2p34-wrapper {
+    margin-top: calc(var(--s2p34-tab-mt, 0px) + var(--s2p34-tab-y, -156px));
+    margin-bottom: var(--s2p34-tab-mb, 0px);
+    left: var(--s2p34-tab-x, -60px);
+  }
+  .fp-force-tablet .fp-sec4-wrapper {
+    margin-top: calc(var(--sec4-tab-mt, 0px) + var(--sec4-tab-y, -174px));
+    margin-bottom: var(--sec4-tab-mb, 0px);
+    left: var(--sec4-tab-x, 0px);
+  }
+  .fp-force-tablet .fp-sec5-wrapper {
+    margin-top: calc(var(--sec5-tab-mt, 0px) + var(--sec5-tab-y, 82px));
+    margin-bottom: var(--sec5-tab-mb, 0px);
+    left: var(--sec5-tab-x, -324px);
+  }
+  .fp-force-tablet .fp-sec6-wrapper {
+    margin-top: calc(var(--sec6-tab-mt, 0px) + var(--sec6-tab-y, -113px));
+    margin-bottom: var(--sec6-tab-mb, 0px);
+    left: var(--sec6-tab-x, 0px);
+  }
+  .fp-force-tablet .fp-sec7-wrapper {
+    margin-top: calc(var(--sec7-tab-mt, 0px) + var(--sec7-tab-y, -120px));
+    margin-bottom: var(--sec7-tab-mb, 0px);
+    left: var(--sec7-tab-x, 135px);
+  }
+  .fp-force-tablet .fp-sec8-wrapper {
+    margin-top: calc(var(--sec8-tab-mt, 0px) + var(--sec8-tab-y, -150px));
+    margin-bottom: var(--sec8-tab-mb, 0px);
+    left: var(--sec8-tab-x, 0px);
+  }
+
+  /* ✒️ 全站各區塊線條樣式綁定至共用參數 (以 Section 2 Part 1 為標準規格) */
+  /* Section 1: 線段圖層拉高 z-index 並跟隨統一線條樣式 */
+  .s1-line-box-1, .s1-line-box-2 {
+    z-index: 3 !important;
+  }
+  .s1-line-path {
+    stroke: var(--brand-line-color, #675D54) !important;
+    stroke-width: var(--brand-line-width, 3px) !important;
+    stroke-linecap: round !important;
+    stroke-miterlimit: 10 !important;
+  }
+  @media (max-width: 767.98px) {
+    .s1-line-path {
+      stroke-width: var(--brand-line-mb-width, 1px) !important;
+    }
+  }
+  .fp-force-mobile .s1-line-path {
+    stroke-width: var(--brand-line-mb-width, 1px) !important;
+  }
+
+  /* Section 2 Part 1 */
+  .scurve-full-svg path {
+    stroke: var(--brand-line-color, #675D54) !important;
+    stroke-width: var(--brand-line-width, 3px) !important;
+    stroke-linecap: round !important;
+    stroke-miterlimit: 10 !important;
+  }
+  .vertical-brown-line {
+    background-color: var(--brand-line-color, #675D54) !important;
+    width: var(--brand-line-width, 3px) !important;
+  }
+  .s2p1-mb-line-svg path {
+    stroke: var(--brand-line-color, #675D54) !important;
+    stroke-width: var(--brand-line-mb-width, 1px) !important;
+    stroke-linecap: round !important;
+  }
+  @media (max-width: 767.98px) {
+    .scurve-full-svg path {
+      stroke-width: var(--brand-line-mb-width, 1px) !important;
+    }
+    .vertical-brown-line {
+      width: var(--brand-line-mb-width, 1px) !important;
+    }
+  }
+  .fp-force-mobile .scurve-full-svg path {
+    stroke-width: var(--brand-line-mb-width, 1px) !important;
+  }
+  .fp-force-mobile .vertical-brown-line {
+    width: var(--brand-line-mb-width, 1px) !important;
+  }
+
+  /* Section 2 Part 2 */
+  .s2p2-vector1 path,
+  .s2p2-vector2 path,
+  .s2p2-group-bottom path {
+    stroke: var(--brand-line-color, #675D54) !important;
+    stroke-width: var(--brand-line-width, 3px) !important;
+    stroke-linecap: round !important;
+    stroke-miterlimit: 10 !important;
+  }
+  .s2p2-mb-line-svg path {
+    stroke: var(--brand-line-color, #675D54) !important;
+    stroke-width: var(--brand-line-mb-width, 1px) !important;
+    stroke-linecap: round !important;
+  }
+  @media (max-width: 767.98px) {
+    .s2p2-vector1 path,
+    .s2p2-vector2 path,
+    .s2p2-group-bottom path {
+      stroke-width: var(--brand-line-mb-width, 1px) !important;
+    }
+  }
+  .fp-force-mobile .s2p2-vector1 path,
+  .fp-force-mobile .s2p2-vector2 path,
+  .fp-force-mobile .s2p2-group-bottom path {
+    stroke-width: var(--brand-line-mb-width, 1px) !important;
+  }
+
+  /* Section 2 Part 3-4 */
+  #s2p34-master-path {
+    stroke: var(--brand-line-color, #675D54) !important;
+    stroke-width: var(--brand-line-width, 3px) !important;
+    stroke-linecap: round !important;
+    stroke-miterlimit: 10 !important;
+  }
+  #s2p34-mb-master-path {
+    stroke: var(--brand-line-color, #675D54) !important;
+    stroke-width: var(--brand-line-mb-width, 1px) !important;
+    stroke-linecap: round !important;
+  }
+  @media (max-width: 767.98px) {
+    #s2p34-master-path {
+      stroke-width: var(--brand-line-mb-width, 1px) !important;
+    }
+  }
+  .fp-force-mobile #s2p34-master-path {
+    stroke-width: var(--brand-line-mb-width, 1px) !important;
+  }
+
+  /* Section 5: 垂直裝飾線與所有貫穿路徑統一跟隨顏色、粗細與手繪質感 */
+  .s5-d-accent-line {
+    background-color: var(--brand-line-color, #675D54) !important;
+    width: var(--brand-line-width, 3px) !important;
+    border-radius: var(--brand-line-width, 3px) !important;
+    filter: url(#brandPencilLineFilter) !important;
+  }
+  .s5-m-accent-line {
+    background-color: var(--brand-line-color, #675D54) !important;
+    width: var(--brand-line-mb-width, 1px) !important;
+    border-radius: var(--brand-line-mb-width, 1px) !important;
+    filter: url(#brandPencilLineFilterMobile) !important;
+  }
+  .s5-desktop-wrapper .s5-line-path path {
+    stroke: var(--brand-line-color, #675D54) !important;
+    stroke-width: var(--brand-line-width, 3px) !important;
+    stroke-linecap: round !important;
+    stroke-miterlimit: 10 !important;
+  }
+  .s5-desktop-wrapper .s5-d-top-curve path,
+  .s5-desktop-wrapper .s5-d-bottom-arc path {
+    filter: url(#brandPencilLineFilter) !important;
+  }
+  .s5-mobile-wrapper .s5-line-path path {
+    stroke: var(--brand-line-color, #675D54) !important;
+    stroke-width: var(--brand-line-mb-width, 1px) !important;
+    stroke-linecap: round !important;
+  }
+  .s5-mobile-wrapper .s5-m-top-curve path,
+  .s5-mobile-wrapper .s5-m-top-arch path,
+  .s5-mobile-wrapper .s5-m-bottom-arc path {
+    filter: url(#brandPencilLineFilterMobile) !important;
+  }
+  .s5-active .s5-line-path path {
+    stroke-dashoffset: 0 !important;
+  }
+  @media (max-width: 767.98px) {
+    .s5-d-accent-line {
+      width: var(--brand-line-mb-width, 1px) !important;
+    }
+    .s5-desktop-wrapper .s5-line-path path {
+      stroke-width: var(--brand-line-mb-width, 1px) !important;
+    }
+  }
+  .fp-force-mobile .s5-d-accent-line {
+    width: var(--brand-line-mb-width, 1px) !important;
+  }
+  .fp-force-mobile .s5-desktop-wrapper .s5-line-path path {
+    stroke-width: var(--brand-line-mb-width, 1px) !important;
+  }
+
+  /* Section 6: 橫線填滿條與實心節點圓圈跟隨統一顏色與手繪質感 */
+  .wf-sec6-line-fill-bar {
+    background-color: var(--brand-line-color, #675D54) !important;
+    height: var(--brand-line-width, 3px) !important;
+    filter: url(#brandPencilLineFilter) !important;
+  }
+  .wf-sec6-node-dot.filled {
+    background-color: var(--brand-line-color, #675D54) !important;
+    border-color: var(--brand-line-color, #675D54) !important;
+    box-shadow: 0 0 6px rgba(103, 93, 84, 0.4) !important;
+    filter: url(#brandPencilLineFilter) !important;
+  }
+  .wf-sec6-d-ray-line path {
+    stroke: var(--brand-line-color, #675D54) !important;
+    stroke-width: var(--brand-line-width, 3px) !important;
+  }
+  .wf-sec6-mb-ray-line path {
+    stroke: var(--brand-line-color, #675D54) !important;
+    stroke-width: var(--brand-line-mb-width, 1px) !important;
+  }
+  @media (max-width: 767.98px) {
+    .wf-sec6-line-fill-bar {
+      height: var(--brand-line-mb-width, 1px) !important;
+    }
+    .wf-sec6-d-ray-line path {
+      stroke-width: var(--brand-line-mb-width, 1px) !important;
+    }
+  }
+  .fp-force-mobile .wf-sec6-line-fill-bar {
+    height: var(--brand-line-mb-width, 1px) !important;
+  }
+  .fp-force-mobile .wf-sec6-d-ray-line path {
+    stroke-width: var(--brand-line-mb-width, 1px) !important;
+  }
+
+  /* Section 6: 釘住層改為貼頂對齊（不再垂直置中），縮放原點設在小人坐的那條線上，
+     讓「拿手電筒小人」與他坐的橫線相對位置不受視窗高度影響 */
+  .wf-sec6-desktop-sticky-inner {
+    align-items: flex-start !important;
+  }
+  .wf-sec6-desktop-outer {
+    align-items: flex-start !important;
+  }
+  .wf-sec6-desktop-canvas {
+    transform-origin: 50% var(--sec6-seat-y, 38px) !important;
+  }
+  /* 小人坐的「弧線＋橫線」已移入區塊六釘住層（與小人同一層），釘住時完全不會跳動 */
+  @media (min-width: 768px) {
+    .wf-sec6-desktop-sticky-inner {
+      overflow: visible !important;
+    }
+  }
+  .s6-seat-holder {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+    overflow: visible;
+    z-index: 0; /* 線在小人後面 */
+    pointer-events: none;
+  }
+  .s6-seat-arc {
+    position: absolute;
+    width: 103.65px;
+    height: 103.65px;
+    transform-origin: 0 0;
+  }
+  .s6-seat-line {
+    position: absolute;
+    width: 856px;
+    height: 4.32px;
+    transform-origin: 0 0;
+  }
+  .s6-seat-arc path {
+    stroke: var(--brand-line-color, #675D54) !important;
+    stroke-width: var(--brand-line-width, 3px) !important;
+    stroke-linecap: round !important;
+    filter: url(#brandPencilLineFilter) !important;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    transition: stroke-dashoffset 0.5s linear;
+  }
+  .s6-seat-line path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 0.7s linear 0.5s;
+  }
+  .s6-seat-holder.is-drawn .s6-seat-arc path,
+  .s6-seat-holder.is-drawn .s6-seat-line path {
+    stroke-dashoffset: 0;
+  }
+  @media (max-width: 767.98px) {
+    .s6-seat-holder { display: none !important; }
+  }
+  .fp-force-mobile .s6-seat-holder { display: none !important; }
+
+  /* Section 7: 迴旋主線跟隨統一顏色、粗細與手繪鉛筆質感 */
+  .wf-sec7-vector-svg path {
+    stroke: var(--brand-line-color, #675D54) !important;
+    stroke-width: var(--brand-line-width, 3px) !important;
+    stroke-linecap: round !important;
+    stroke-miterlimit: 10 !important;
+    filter: url(#brandPencilLineFilter) !important;
+  }
+  .wf-sec7-m-vector-svg path {
+    stroke: var(--brand-line-color, #675D54) !important;
+    stroke-width: var(--brand-line-mb-width, 1px) !important;
+    stroke-linecap: round !important;
+    filter: url(#brandPencilLineFilterMobile) !important;
+  }
+  @media (max-width: 767.98px) {
+    .wf-sec7-vector-svg path {
+      stroke-width: var(--brand-line-mb-width, 1px) !important;
+      filter: url(#brandPencilLineFilterMobile) !important;
+    }
+  }
+  .fp-force-mobile .wf-sec7-vector-svg path {
+    stroke-width: var(--brand-line-mb-width, 1px) !important;
+    filter: url(#brandPencilLineFilterMobile) !important;
+  }
+
+  /* Section 8: 圖形 (img-透明資訊 3 圓圈、交疊月牙與內部裝飾線) 100% 依據 Figma 974:3115 原始設計，完全不覆蓋其 SVG 濾鏡與內嵌描邊 */
+  .wf-sec8-anim-circles-block {
+    opacity: 1 !important;
+  }
+  .wf-sec8-man3-group {
+    opacity: 1 !important;
+  }
+  /* 確保交疊月牙塊座標 100% 吻合 Figma 974:3115 */
+  .wf-sec8-gradient-1 {
+    position: absolute;
+    left: 701.55px !important;
+    top: 444px !important;
+    width: 170.395px !important;
+    height: 68px !important;
+  }
+  .wf-sec8-intersect-1 {
+    position: absolute;
+    left: 701.55px !important;
+    top: 444px !important;
+    width: 170.395px !important;
+    height: 68px !important;
+  }
+  .wf-sec8-gradient-2 {
+    position: absolute;
+    left: 702.05px !important;
+    top: 624px !important;
+    width: 170.395px !important;
+    height: 68px !important;
+  }
+  .wf-sec8-intersect-2 {
+    position: absolute;
+    left: 702.05px !important;
+    top: 624px !important;
+    width: 170.395px !important;
+    height: 68px !important;
+  }
+  /* 僅 Section 8 外圍背景貫穿線與垂直線跟隨統一線條樣式 */
+  .wf-sec8-vert-line {
+    background-color: var(--brand-line-color, #675D54) !important;
+    width: var(--brand-line-width, 3px) !important;
+  }
+  .wf-sec8-desktop-outer .wf-sec8-line-path path {
+    stroke: var(--brand-line-color, #675D54) !important;
+    stroke-width: var(--brand-line-width, 3px) !important;
+    stroke-linecap: round !important;
+    stroke-miterlimit: 10 !important;
+  }
+  .wf-sec8-mob-vert-line {
+    background-color: var(--brand-line-color, #675D54) !important;
+    width: var(--brand-line-mb-width, 1px) !important;
+  }
+  .wf-sec8-mobile-outer .wf-sec8-line-path path,
+  .wf-sec8-mobile-outer .wf-sec8-mob-line-path path {
+    stroke: var(--brand-line-color, #675D54) !important;
+    stroke-width: var(--brand-line-mb-width, 1px) !important;
+    stroke-linecap: round !important;
+  }
+  @media (max-width: 767.98px) {
+    .wf-sec8-vert-line {
+      width: var(--brand-line-mb-width, 1px) !important;
+    }
+    .wf-sec8-desktop-outer .wf-sec8-line-path path {
+      stroke-width: var(--brand-line-mb-width, 1px) !important;
+    }
+  }
+  .fp-force-mobile .wf-sec8-vert-line {
+    width: var(--brand-line-mb-width, 1px) !important;
+  }
+  .fp-force-mobile .wf-sec8-desktop-outer .wf-sec8-line-path path {
+    stroke-width: var(--brand-line-mb-width, 1px) !important;
+  }
+
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap');
+
+  .s1-master-root {
+    width: 100%;
+    max-width: 1020px;
+    margin: 0 auto;
+    position: relative;
+    box-sizing: border-box;
+    font-family: 'Noto Serif TC', serif;
+    background-color: transparent;
+    overflow: visible !important;
+    padding: 20px 0;
+    container-type: inline-size;
+    aspect-ratio: 1020 / 650;
+
+    /* 🎨 圓圈體色雜訊預設值 */
+    --s1-noise-freq: 1.5;
+    --s1-noise-opacity: 0.1;
+
+    /* 📏 線條粗細變數 (桌面/平板與手機獨立) */
+    --s1-line-width: 3px;
+    --s1-mb-line-width: 1px;
+
+    /* 💻 桌面版 CSS 變數 (>768px) */
+    --s1-circle1-x: 0px;
+    --s1-circle1-y: 2px;
+    --s1-circle1-scale: 1;
+
+    --s1-circle2-x: 0px;
+    --s1-circle2-y: 2px;
+    --s1-circle2-scale: 1;
+
+    --s1-circle3-x: 0px;
+    --s1-circle3-y: 2px;
+    --s1-circle3-scale: 1;
+
+    --s1-wmn-x: 0px;
+    --s1-wmn-y: 11.5px;
+    --s1-wmn-scale: 1;
+
+    --s1-wmn-shd-x: -1px;
+    --s1-wmn-shd-y: 63.5px;
+    --s1-wmn-shd-scale: 1;
+    --s1-wmn-shd-scaley: -0.77;
+    --s1-wmn-shd-skew: -7deg;
+    --s1-wmn-shd-blur: 1.9px;
+
+    /* 📱 手機版 CSS 變數 (<768px) */
+    --s1-mb-circle1-x: 0px;
+    --s1-mb-circle1-y: 14px;
+    --s1-mb-circle1-scale: 1;
+
+    --s1-mb-circle2-x: 0px;
+    --s1-mb-circle2-y: 14px;
+    --s1-mb-circle2-scale: 1;
+
+    --s1-mb-circle3-x: 0px;
+    --s1-mb-circle3-y: 14px;
+    --s1-mb-circle3-scale: 1;
+
+    --s1-mb-wmn-x: 1px;
+    --s1-mb-wmn-y: 17.5px;
+    --s1-mb-wmn-scale: 1;
+
+    --s1-mb-wmn-shd-x: -3.5px;
+    --s1-mb-wmn-shd-y: 41px;
+    --s1-mb-wmn-shd-scale: 1.17;
+    --s1-mb-wmn-shd-scaley: -1.09;
+    --s1-mb-wmn-shd-skew: -6deg;
+    --s1-mb-wmn-shd-blur: 0.8px;
+  }
+
+  /* 💻 桌面與平板 1020px 基準畫布 - 自適應比例縮放 */
+  .s1-dt-container {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 1020px;
+    height: 620px;
+    transform-origin: top left;
+    transform: scale(var(--s1-dt-scale, clamp(70%, calc(100cqw / 10.20 * 1%), 100%)));
+    overflow: visible !important;
+  }
+
+  /* 1. 主標題與副標題 (0.1s ~ 0.8s 淡入) - 支援獨立微調 CSS 變數 */
+  .s1-header-box {
+    position: absolute;
+    top: calc(30px + var(--s1-header-y, 0px));
+    left: calc(0px + var(--s1-header-x, 0px));
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  .s1-active .s1-header-box {
+    opacity: 1;
+    transform: translateY(0px);
+    transition-delay: 0.1s;
+  }
+
+  .s1-title-cn {
+    position: relative;
+    left: var(--s1-title-cn-x, 0px);
+    top: var(--s1-title-cn-y, 0px);
+    font-family: 'Noto Serif TC', serif;
+    font-size: var(--s1-title-cn-size, 48px);
+    font-weight: 600;
+    color: #7C5A4A;
+    letter-spacing: 0.86em;
+    margin: 0 0 10px 0;
+    line-height: 1.8;
+    text-indent: 0.86em;
+  }
+
+  .s1-title-en {
+    position: relative;
+    left: var(--s1-title-en-x, 0px);
+    top: var(--s1-title-en-y, 0px);
+    font-family: 'Big Caslon CC', 'Noto Serif TC', serif;
+    font-size: var(--s1-title-en-size, 48px);
+    font-weight: 400;
+    color: #7C5A4A;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1.16;
+  }
+
+  /* 2. 說明段落 (0.7s ~ 1.4s 淡入) - 支援獨立微調 CSS 變數 */
+  .s1-desc-paragraph {
+    position: absolute;
+    top: calc(165px + var(--s1-desc-y, 0px));
+    left: calc(50% + var(--s1-desc-x, 0px));
+    transform: translateX(-50%) translateY(15px);
+    width: calc(560px + var(--s1-desc-w, 0px));
+    text-align: center;
+    font-size: var(--s1-desc-size, 16px);
+    font-weight: 500;
+    line-height: 1.6;
+    color: #232323;
+    letter-spacing: 0.03em;
+    opacity: 0;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  .s1-active .s1-desc-paragraph {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0px);
+    transition-delay: 0.7s;
+  }
+
+  /* 3. 圓圈 1: 協助驗屋 (1.3s 淡入放大) */
+  .s1-circle-node-1 {
+    position: absolute;
+    left: calc(69px + var(--s1-circle1-x, 0px));
+    top: calc(340px + var(--s1-circle1-y, 0px));
+    width: 216px;
+    height: 216px;
+    z-index: 2;
+    opacity: 0;
+    transform: scale(calc(var(--s1-circle1-scale, 1.0) * 0.9));
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .s1-active .s1-circle-node-1 {
+    opacity: 1;
+    transform: scale(var(--s1-circle1-scale, 1.0));
+    transition-delay: 1.3s;
+  }
+
+  /* 4. 連接線 1 SVG Drawing Animation (1.7s ~ 2.5s) */
+  .s1-line-box-1 {
+    position: absolute;
+    left: 285px;
+    top: 445px;
+    width: 115px;
+    height: 10px;
+    z-index: 1;
+  }
+
+  .s1-line-svg {
+    overflow: visible !important;
+  }
+  .s1-line-path {
+    stroke-width: var(--s1-line-width, 3px);
+  }
+
+  .s1-line-svg path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 0.8s linear;
+  }
+
+  .s1-active .s1-line-svg path {
+    stroke-dashoffset: 0;
+  }
+
+  .s1-line-box-1 .s1-line-svg path {
+    transition-delay: 1.7s;
+  }
+
+  /* 5. 站立小人與陰影 (2.0s 從左側 20px 移動至原本位置並淡入) */
+  .s1-figure-man-box {
+    position: absolute;
+    left: calc(314px + var(--s1-wmn-x, 0px));
+    top: calc(343px + var(--s1-wmn-y, 0px));
+    width: 60px;
+    height: 110px;
+    z-index: 4;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .s1-active .s1-figure-man-box {
+    opacity: 1;
+    transform: translateX(0px);
+    transition-delay: 2.0s;
+  }
+
+  .s1-figure-man-body {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 53.79px;
+    height: 102.38px;
+    transform: scale(var(--s1-wmn-scale, 1.0));
+    transform-origin: top left;
+  }
+
+  .s1-figure-man-shadow {
+    position: absolute;
+    left: calc(-25px + var(--s1-wmn-shd-x, 0px));
+    top: calc(102px + var(--s1-wmn-shd-y, 0px));
+    width: 81.64px;
+    height: 85px;
+    transform: skewX(var(--s1-wmn-shd-skew, 0deg)) scale(var(--s1-wmn-shd-scale, 1.0)) scaleY(var(--s1-wmn-shd-scaley, 1.0));
+    filter: blur(var(--s1-wmn-shd-blur, 0px));
+    opacity: 0.7;
+    transform-origin: top left;
+  }
+
+  /* 6. 圓圈 2: 責任銷售 (2.5s 淡入放大) */
+  .s1-circle-node-2 {
+    position: absolute;
+    left: calc(402px + var(--s1-circle2-x, 0px));
+    top: calc(347px + var(--s1-circle2-y, 0px));
+    width: 216px;
+    height: 216px;
+    z-index: 2;
+    opacity: 0;
+    transform: scale(calc(var(--s1-circle2-scale, 1.0) * 0.9));
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .s1-active .s1-circle-node-2 {
+    opacity: 1;
+    transform: scale(var(--s1-circle2-scale, 1.0));
+    transition-delay: 2.5s;
+  }
+
+  /* 7. 連接線 2 SVG Drawing Animation (2.9s ~ 3.7s) */
+  .s1-line-box-2 {
+    position: absolute;
+    left: 618px;
+    top: 445px;
+    width: 115px;
+    height: 10px;
+    z-index: 1;
+  }
+
+  .s1-line-box-2 .s1-line-svg path {
+    transition-delay: 2.9s;
+  }
+
+  /* 8. 圓圈 3: 透明資訊 (3.7s 淡入放大) */
+  .s1-circle-node-3 {
+    position: absolute;
+    left: calc(735px + var(--s1-circle3-x, 0px));
+    top: calc(347px + var(--s1-circle3-y, 0px));
+    width: 216px;
+    height: 216px;
+    z-index: 2;
+    opacity: 0;
+    transform: scale(calc(var(--s1-circle3-scale, 1.0) * 0.9));
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .s1-active .s1-circle-node-3 {
+    opacity: 1;
+    transform: scale(var(--s1-circle3-scale, 1.0));
+    transition-delay: 3.7s;
+  }
+
+  /* 圓圈內通用文字樣式 */
+  .s1-circle-inline-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .s1-circle-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 15px;
+  }
+
+  .s1-circle-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: #232323;
+    letter-spacing: 0.06em;
+    margin: 0 0 6px 0;
+    line-height: 1.8;
+    text-indent: 0.06em;
+  }
+
+  .s1-circle-sub {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #4A4A4A;
+    letter-spacing: 0.10em;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* 📱 手機版專屬樣式 (<768px) 參照 Figma 347-360px 橫向 3 圓圈佈局 */
+  .s1-mb-container {
+    display: none;
+  }
+
+  @media (max-width: 767.98px) {
+    .s1-master-root {
+      aspect-ratio: auto !important;
+      min-height: 480px;
+      padding: 10px 0;
+    }
+
+    .embed-body-wrapper,
+    .preview-container {
+      padding: 15px 10px !important;
+      margin-left: 0 !important;
+    }
+
+    .s1-dt-container {
+      display: none !important;
+    }
+
+    .s1-mb-container {
+      display: block !important;
+      position: relative;
+      width: 100%;
+      max-width: 360px;
+      margin: 0 auto;
+      height: 450px;
+    }
+  }
+
+  /* 視窗微調測試時強制手機視態 */
+  .s1-force-mobile {
+    aspect-ratio: auto !important;
+    min-height: 480px;
+    padding: 10px 0;
+  }
+  .s1-force-mobile .s1-dt-container {
+    display: none !important;
+  }
+  .s1-force-mobile .s1-mb-container {
+    display: block !important;
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+    height: 450px;
+  }
+  .s1-force-mobile-wrapper {
+    padding: 15px 10px !important;
+  }
+
+  /* 📟 平板版專屬樣式 (768px - 991px) 與強制平板視態 */
+  @media (min-width: 768px) and (max-width: 991.98px) {
+    .s1-header-box {
+      top: calc(30px + var(--s1-tab-header-y, var(--s1-header-y, 0px)));
+      left: calc(0px + var(--s1-tab-header-x, var(--s1-header-x, 0px)));
+    }
+    .s1-title-cn {
+      left: var(--s1-tab-title-cn-x, var(--s1-title-cn-x, 0px));
+      top: var(--s1-tab-title-cn-y, var(--s1-title-cn-y, 0px));
+      font-size: var(--s1-tab-title-cn-size, var(--s1-title-cn-size, 48px));
+    }
+    .s1-title-en {
+      left: var(--s1-tab-title-en-x, var(--s1-title-en-x, 0px));
+      top: var(--s1-tab-title-en-y, var(--s1-title-en-y, 0px));
+      font-size: var(--s1-tab-title-en-size, var(--s1-title-en-size, 48px));
+    }
+    .s1-desc-paragraph {
+      top: calc(165px + var(--s1-tab-desc-y, var(--s1-desc-y, 0px)));
+      left: calc(50% + var(--s1-tab-desc-x, var(--s1-desc-x, 0px)));
+      width: calc(560px + var(--s1-tab-desc-w, var(--s1-desc-w, 0px)));
+      font-size: var(--s1-tab-desc-size, var(--s1-desc-size, 16px));
+    }
+  }
+
+  .s1-force-tablet {
+    width: 768px !important;
+    max-width: 768px !important;
+    margin: 0 auto !important;
+  }
+  .s1-force-tablet .s1-header-box {
+    top: calc(30px + var(--s1-tab-header-y, var(--s1-header-y, 0px)));
+    left: calc(0px + var(--s1-tab-header-x, var(--s1-header-x, 0px)));
+  }
+  .s1-force-tablet .s1-title-cn {
+    left: var(--s1-tab-title-cn-x, var(--s1-title-cn-x, 0px));
+    top: var(--s1-tab-title-cn-y, var(--s1-title-cn-y, 0px));
+    font-size: var(--s1-tab-title-cn-size, var(--s1-title-cn-size, 48px));
+  }
+  .s1-force-tablet .s1-title-en {
+    left: var(--s1-tab-title-en-x, var(--s1-title-en-x, 0px));
+    top: var(--s1-tab-title-en-y, var(--s1-title-en-y, 0px));
+    font-size: var(--s1-tab-title-en-size, var(--s1-title-en-size, 48px));
+  }
+  .s1-force-tablet .s1-desc-paragraph {
+    top: calc(165px + var(--s1-tab-desc-y, var(--s1-desc-y, 0px)));
+    left: calc(50% + var(--s1-tab-desc-x, var(--s1-desc-x, 0px)));
+    width: calc(560px + var(--s1-tab-desc-w, var(--s1-desc-w, 0px)));
+    font-size: var(--s1-tab-desc-size, var(--s1-desc-size, 16px));
+  }
+  .s1-force-tablet-wrapper {
+    padding: 20px 0 !important;
+  }
+
+  /* 手機版 橫向時間軸佈局 (參照 Figma Node 1198:8728) - 支援獨立微調 CSS 變數 */
+  .s1-mb-container .s1-header-box {
+    top: calc(10px + var(--s1-mb-header-y, 0px));
+    left: calc(0px + var(--s1-mb-header-x, 0px));
+  }
+  .s1-mb-container .s1-title-cn {
+    position: relative;
+    left: var(--s1-mb-title-cn-x, 0px);
+    top: var(--s1-mb-title-cn-y, 0px);
+    font-size: var(--s1-mb-title-cn-size, 30px);
+    letter-spacing: 0.86em;
+    text-indent: 0.86em;
+    margin-bottom: 4px;
+  }
+  .s1-mb-container .s1-title-en {
+    position: relative;
+    left: var(--s1-mb-title-en-x, 0px);
+    top: var(--s1-mb-title-en-y, 0px);
+    font-size: var(--s1-mb-title-en-size, 26px);
+    letter-spacing: 0.04em;
+  }
+  .s1-mb-container .s1-desc-paragraph {
+    top: calc(125px + var(--s1-mb-desc-y, 0px));
+    left: calc(50% + var(--s1-mb-desc-x, 0px));
+    width: calc(312px + var(--s1-mb-desc-w, 0px));
+    font-size: var(--s1-mb-desc-size, 14px);
+    line-height: 1.6;
+  }
+
+  /* 手機版橫向 3 圓圈與線段 */
+  .s1-mb-container .s1-circle-node-1 {
+    left: calc(6px + var(--s1-mb-circle1-x, 0px));
+    top: calc(270px + var(--s1-mb-circle1-y, 0px));
+    width: 99px;
+    height: 99px;
+    transform: scale(var(--s1-mb-circle1-scale, 1.0));
+  }
+  .s1-mb-container .s1-circle-node-2 {
+    left: calc(130px + var(--s1-mb-circle2-x, 0px));
+    top: calc(270px + var(--s1-mb-circle2-y, 0px));
+    width: 99px;
+    height: 99px;
+    transform: scale(var(--s1-mb-circle2-scale, 1.0));
+  }
+  .s1-mb-container .s1-circle-node-3 {
+    left: calc(254px + var(--s1-mb-circle3-x, 0px));
+    top: calc(270px + var(--s1-mb-circle3-y, 0px));
+    width: 99px;
+    height: 99px;
+    transform: scale(var(--s1-mb-circle3-scale, 1.0));
+  }
+
+  /* 📱 手機版圓圈文字特別要求：隱藏英文，中文字絕對垂直水平置中圓圈 */
+  .s1-mb-container .s1-circle-content {
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 0 !important;
+  }
+  .s1-mb-container .s1-circle-sub {
+    display: none !important;
+  }
+  .s1-mb-container .s1-circle-title {
+    font-size: 15px !important;
+    margin: 0 !important;
+    line-height: 1.2 !important;
+    letter-spacing: 0.08em !important;
+    text-indent: 0.08em !important;
+    text-align: center !important;
+  }
+
+  /* 手機版線段粗細獨立控制 */
+  .s1-mb-container .s1-line-path {
+    stroke-width: var(--s1-mb-line-width, 1px) !important;
+  }
+  .s1-mb-container .s1-line-box-1 {
+    left: 104px;
+    top: 319px;
+    width: 27px;
+    height: 4px;
+  }
+  .s1-mb-container .s1-line-box-2 {
+    left: 228px;
+    top: 319px;
+    width: 27px;
+    height: 4px;
+  }
+
+  /* 手機版站立小人與陰影 (位在線段1上方) */
+  .s1-mb-container .s1-figure-man-box {
+    left: calc(105px + var(--s1-mb-wmn-x, 0px));
+    top: calc(272px + var(--s1-mb-wmn-y, 0px));
+    width: 25px;
+    height: 48px;
+    transform: translateX(-10px);
+  }
+  .s1-active .s1-mb-container .s1-figure-man-box {
+    transform: translateX(0px);
+  }
+  .s1-mb-container .s1-figure-man-body {
+    width: 23.7px;
+    height: 45.1px;
+    transform: scale(var(--s1-mb-wmn-scale, 1.0));
+  }
+  .s1-mb-container .s1-figure-man-shadow {
+    left: calc(-10px + var(--s1-mb-wmn-shd-x, 0px));
+    top: calc(45px + var(--s1-mb-wmn-shd-y, 0px));
+    width: 36px;
+    height: 37.5px;
+    transform: skewX(var(--s1-mb-wmn-shd-skew, 0deg)) scale(var(--s1-mb-wmn-shd-scale, 1.0)) scaleY(var(--s1-mb-wmn-shd-scaley, 1.0));
+    filter: blur(var(--s1-mb-wmn-shd-blur, 0px));
+  }
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap');
+
+  .s2p1-master-root {
+    width: 100%;
+    max-width: 1215px;
+    margin: 0 auto;
+    position: relative;
+    box-sizing: border-box;
+    font-family: 'Noto Serif TC', serif;
+    background-color: transparent;
+    overflow: visible !important;
+    padding: 20px 0;
+    container-type: inline-size;
+    aspect-ratio: 1215 / 750;
+
+    /* 💻 桌面版 CSS 變數 (>768px) */
+    --s2p1-wmn-x: -78.5px;
+    --s2p1-wmn-y: -20px;
+    --s2p1-wmn-scale: 0.82;
+
+    --s2p1-wmn-shd-x: 12.5px;
+    --s2p1-wmn-shd-y: 32px;
+    --s2p1-wmn-shd-scale: 0.82;
+    --s2p1-wmn-shd-scaley: 0.71;
+    --s2p1-wmn-shd-skew: -26deg;
+    --s2p1-wmn-shd-blur: 0px;
+
+    --s2p1-photo-x: -195px;
+    --s2p1-photo-y: 97.5px;
+    --s2p1-photo-scale: 1;
+
+    --s2p1-text-x: -183.5px;
+    --s2p1-text-y: 56.5px;
+
+    /* 📱 手機版 CSS 變數 (<768px) */
+    --s2p1-mb-wmn-x: 0px;
+    --s2p1-mb-wmn-y: 0px;
+    --s2p1-mb-wmn-scale: 1;
+
+    --s2p1-mb-wmn-shd-x: 0px;
+    --s2p1-mb-wmn-shd-y: 0px;
+    --s2p1-mb-wmn-scale: 1;
+    --s2p1-mb-wmn-shd-scaley: 0.71;
+    --s2p1-mb-wmn-shd-skew: -45deg;
+    --s2p1-mb-wmn-shd-blur: 1px;
+
+    --s2p1-mb-photo-x: -15px;
+    --s2p1-mb-photo-y: 0px;
+    --s2p1-mb-photo-scale: 1;
+
+    --s2p1-mb-text-x: 0px;
+    --s2p1-mb-text-y: 0px;
+  }
+
+  /* 💻 桌面與平板 1215px 固定基準畫布 (left:0 完全包含整體畫面，零偏移漂移) */
+  .s2p1-dt-container {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 1215px;
+    height: 750px;
+    transform-origin: top left;
+    transform: scale(var(--s2p1-dt-scale, clamp(50%, calc(100cqw / 12.15 * 1%), 100%)));
+    overflow: visible !important;
+  }
+
+  /* 1. S 曲線繪製層 (從 left: 195px 起繪製 1020px 基準線段，0s ~ 3.0s 劃落) */
+  .scurve-full-svg {
+    position: absolute;
+    top: 0;
+    left: 195px;
+    width: 960.192px;
+    height: 343.32px;
+    z-index: 1;
+    pointer-events: none;
+    overflow: visible !important;
+  }
+
+  .scurve-full-svg path {
+    stroke-width: 3px !important;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+
+  .scurve-full-svg path:nth-child(1) {
+    transition: stroke-dashoffset 1.0s linear 0s;
+  }
+
+  .scurve-full-svg path:nth-child(2) {
+    transition: stroke-dashoffset 1.0s linear 1.0s;
+  }
+
+  .scurve-full-svg path:nth-child(3) {
+    transition: stroke-dashoffset 1.0s linear 2.0s;
+  }
+
+  .s2p1-active .scurve-full-svg path {
+    stroke-dashoffset: 0;
+  }
+
+  /* 2. S 曲線上站立男小人與陰影 (於 1.0s 經過小人時，右側 20px 移動至原本位置並淡入) */
+  .figure-on-scurve {
+    position: absolute;
+    left: calc(195px + 810px + var(--s2p1-wmn-x, -78.5px));
+    top: calc(182px + var(--s2p1-wmn-y, -20px));
+    width: 100px;
+    height: 100px;
+    z-index: 4;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .s2p1-active .figure-on-scurve {
+    opacity: 1;
+    transform: translateX(0px);
+    transition-delay: 1.0s;
+  }
+
+  .figure-woman-body {
+    position: absolute;
+    left: 17px;
+    top: 0px;
+    width: 45px;
+    transform: scale(var(--s2p1-wmn-scale, 0.82));
+    transform-origin: top left;
+  }
+
+  .figure-woman-shadow {
+    position: absolute;
+    left: calc(0px + var(--s2p1-wmn-shd-x, 12.5px));
+    top: calc(44px + var(--s2p1-wmn-shd-y, 32px));
+    width: 60px;
+    transform: skewX(var(--s2p1-wmn-shd-skew, -26deg)) scale(var(--s2p1-wmn-shd-scale, 0.82)) scaleY(var(--s2p1-wmn-shd-scaley, 0.71));
+    filter: blur(var(--s2p1-wmn-shd-blur, 0px));
+    opacity: 0.6;
+    transform-origin: top left;
+  }
+
+  /* 3. 大圓形照片 (405.5px) - 基準 left: 195px，配合 photo-x: -195px 達到淨左界為 0px。線段 3.0s 劃完到達頂部後第 1 個淡入 (3.1s) */
+  .circle-photo-box {
+    position: absolute;
+    left: 195px;
+    top: 222.5px;
+    width: 405.5px;
+    height: 405.5px;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 2;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    filter: none !important;
+    opacity: 0;
+    transform: translate(var(--s2p1-photo-x, -195px), var(--s2p1-photo-y, 97.5px)) scale(var(--s2p1-photo-scale, 1.0));
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .s2p1-active .circle-photo-box {
+    opacity: 1;
+    transform: translate(var(--s2p1-photo-x, -195px), var(--s2p1-photo-y, 97.5px)) scale(var(--s2p1-photo-scale, 1.0));
+    transition-delay: 3.1s;
+  }
+
+  .circle-photo-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+
+  /* 4. 標題文字 - 基準 left: calc(195px + 453.5px)。第 2 個淡入 (3.6s) */
+  .tag-en {
+    position: absolute;
+    left: 648.5px;
+    top: 312px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #987A6B;
+    letter-spacing: 0.10em;
+    z-index: 3;
+    opacity: 0;
+    transform: translate(var(--s2p1-text-x, -183.5px), var(--s2p1-text-y, 56.5px));
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .title-cn {
+    position: absolute;
+    left: 648.5px;
+    top: 345px;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.8;
+    color: #232323;
+    letter-spacing: 0.06em;
+    margin: 0;
+    z-index: 3;
+    opacity: 0;
+    transform: translate(var(--s2p1-text-x, -183.5px), var(--s2p1-text-y, 56.5px));
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .s2p1-active .tag-en,
+  .s2p1-active .title-cn {
+    opacity: 1;
+    transform: translate(var(--s2p1-text-x, -183.5px), var(--s2p1-text-y, 56.5px));
+    transition-delay: 3.6s;
+  }
+
+  /* 5. 豎線與 Quote 引言 - 豎線上下各延伸 5px - 第 3 個淡入 (4.1s) */
+  .quote-wrapper {
+    position: absolute;
+    left: 648.5px;
+    top: 410px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    z-index: 3;
+    opacity: 0;
+    transform: translate(var(--s2p1-text-x, -183.5px), var(--s2p1-text-y, 56.5px));
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .vertical-brown-line {
+    width: 3px;
+    align-self: stretch;
+    margin-top: -5px;
+    margin-bottom: -5px;
+    background-color: #987A6B;
+    flex-shrink: 0;
+  }
+
+  .quote-text {
+    margin: 0;
+    padding: 0;
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 1.8;
+    color: #232323;
+    letter-spacing: 0.10em;
+  }
+
+  .s2p1-active .quote-wrapper {
+    opacity: 1;
+    transform: translate(var(--s2p1-text-x, -183.5px), var(--s2p1-text-y, 56.5px));
+    transition-delay: 4.1s;
+  }
+
+  /* 6. 說明段落 - 第 4 個淡入 (4.6s) - 豎線底部(559px)距離段落文字39px，故 top: 598px */
+  .desc-paragraph {
+    position: absolute;
+    left: 648.5px;
+    top: 598px;
+    width: 350px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.6;
+    color: #4A4A4A;
+    letter-spacing: 0.03em;
+    z-index: 3;
+    opacity: 0;
+    transform: translate(var(--s2p1-text-x, -183.5px), var(--s2p1-text-y, 56.5px));
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .s2p1-active .desc-paragraph {
+    opacity: 1;
+    transform: translate(var(--s2p1-text-x, -183.5px), var(--s2p1-text-y, 56.5px));
+    transition-delay: 4.6s;
+  }
+
+  /* 📱 手機版專屬樣式 (<768px) */
+  .mobile-scurve-box {
+    display: none;
+  }
+
+  .s2p1-mb-container {
+    display: none;
+  }
+
+  @media (max-width: 767.98px) {
+    .s2p1-master-root {
+      aspect-ratio: auto !important;
+      min-height: 620px;
+      padding: 10px 0;
+    }
+
+    .embed-body-wrapper,
+    .preview-container {
+      padding: 15px 10px !important;
+      margin-left: 0 !important;
+    }
+
+    .s2p1-dt-container {
+      display: none !important;
+    }
+
+    .s2p1-mb-container {
+      display: block !important;
+      position: relative;
+      width: 100%;
+      max-width: 360px;
+      margin: 0 auto;
+      height: 620px;
+    }
+  }
+
+  /* 視窗微調測試時強制手機視態 */
+  .s2p1-force-mobile {
+    aspect-ratio: auto !important;
+    min-height: 620px;
+    padding: 10px 0;
+  }
+  .s2p1-force-mobile .s2p1-dt-container {
+    display: none !important;
+  }
+  .s2p1-force-mobile .s2p1-mb-container {
+    display: block !important;
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+    height: 620px;
+  }
+  .s2p1-force-mobile-wrapper {
+    padding: 15px 10px !important;
+  }
+
+  /* 視窗微調測試時強制平板視態 (768px) */
+  .s2p1-force-tablet {
+    width: 768px !important;
+    max-width: 768px !important;
+    margin: 0 auto !important;
+  }
+  .s2p1-force-tablet-wrapper {
+    padding: 20px 0 !important;
+  }
+
+  /* 手機版線段 Drawing Animation (0s ~ 3.0s) */
+  .mobile-pencil-svg path {
+    stroke-width: 1px !important;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+
+  .mobile-pencil-svg path:nth-child(1) {
+    transition: stroke-dashoffset 1.8s linear 0s;
+  }
+
+  .mobile-pencil-svg path:nth-child(2) {
+    transition: stroke-dashoffset 1.2s linear 1.8s;
+  }
+
+  .s2p1-active .mobile-pencil-svg path {
+    stroke-dashoffset: 0;
+  }
+
+  .mobile-scurve-box {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+  }
+
+  .mobile-pencil-svg {
+    width: 100%;
+    display: block;
+    overflow: visible !important;
+  }
+
+  /* 手機小人與陰影 (到達小人時 1.0s 淡入) */
+  .s2p1-mb-container .figure-on-scurve {
+    position: absolute;
+    left: calc(232.5px + var(--s2p1-mb-wmn-x, 0px));
+    top: calc(106.5px + var(--s2p1-mb-wmn-y, 0px));
+    width: 45px;
+    height: 44px;
+    z-index: 4;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .s2p1-active .s2p1-mb-container .figure-on-scurve {
+    opacity: 1;
+    transform: translateX(0px);
+    transition-delay: 1.0s;
+  }
+
+  .s2p1-mb-container .figure-woman-body {
+    position: absolute;
+    left: 17px;
+    top: 0px;
+    width: 20.34px;
+    transform: scale(var(--s2p1-mb-wmn-scale, 1.0));
+    transform-origin: top left;
+  }
+
+  .s2p1-mb-container .figure-woman-shadow {
+    position: absolute;
+    left: calc(16px + var(--s2p1-mb-wmn-shd-x, 0px));
+    top: calc(43px + var(--s2p1-mb-wmn-shd-y, 0px));
+    width: 27.34px;
+    transform: skewX(var(--s2p1-mb-wmn-shd-skew, -45deg)) scale(var(--s2p1-mb-wmn-shd-scale, 1.0)) scaleY(var(--s2p1-mb-wmn-shd-scaley, 0.71));
+    filter: blur(var(--s2p1-mb-wmn-shd-blur, 1.0px));
+    opacity: 0.6;
+    transform-origin: top left;
+  }
+
+  /* 手機照片 (145.6px) - 線段 3.0s 劃落完畢後第 1 個淡入 (3.1s) */
+  .s2p1-mb-container .circle-photo-box {
+    position: absolute;
+    left: 12px;
+    top: 220px;
+    width: 145.6px;
+    height: 145.6px;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 2;
+    opacity: 0;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    filter: none !important;
+    transform: translate(var(--s2p1-mb-photo-x, -15px), var(--s2p1-mb-photo-y, 0px)) scale(var(--s2p1-mb-photo-scale, 1.0));
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .s2p1-active .s2p1-mb-container .circle-photo-box {
+    opacity: 1;
+    transform: translate(var(--s2p1-mb-photo-x, -15px), var(--s2p1-mb-photo-y, 0px)) scale(var(--s2p1-mb-photo-scale, 1.0));
+    transition-delay: 3.1s;
+  }
+
+  /* 手機標題文字 - 第 2 個淡入 (3.6s) */
+  .s2p1-mb-container .tag-en {
+    position: absolute;
+    left: 175px;
+    top: 235px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #987A6B;
+    letter-spacing: 0.10em;
+    z-index: 3;
+    opacity: 0;
+    transform: translate(var(--s2p1-mb-text-x, 0px), calc(var(--s2p1-mb-text-y, 0px) + 10px));
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .s2p1-mb-container .title-cn {
+    position: absolute;
+    left: 175px;
+    top: 260px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.8;
+    color: #232323;
+    letter-spacing: 0.06em;
+    margin: 0;
+    z-index: 3;
+    opacity: 0;
+    transform: translate(var(--s2p1-mb-text-x, 0px), calc(var(--s2p1-mb-text-y, 0px) + 10px));
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .s2p1-active .s2p1-mb-container .tag-en,
+  .s2p1-active .s2p1-mb-container .title-cn {
+    opacity: 1;
+    transform: translate(var(--s2p1-mb-text-x, 0px), var(--s2p1-mb-text-y, 0px));
+    transition-delay: 3.6s;
+  }
+
+  /* 手機豎線與 Quote 引言 - 第 3 個淡入 (4.1s) */
+  .s2p1-mb-container .quote-wrapper {
+    position: absolute;
+    left: 175px;
+    top: 305px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 3;
+    opacity: 0;
+    transform: translate(var(--s2p1-mb-text-x, 0px), calc(var(--s2p1-mb-text-y, 0px) + 10px));
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .s2p1-mb-container .vertical-brown-line {
+    width: 1px;
+    align-self: stretch;
+    margin-top: -3px;
+    margin-bottom: -3px;
+    background-color: #987A6B;
+    flex-shrink: 0;
+  }
+
+  .s2p1-mb-container .quote-text {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.8;
+    color: #232323;
+    letter-spacing: 0.10em;
+  }
+
+  .s2p1-active .s2p1-mb-container .quote-wrapper {
+    opacity: 1;
+    transform: translate(var(--s2p1-mb-text-x, 0px), var(--s2p1-mb-text-y, 0px));
+    transition-delay: 4.1s;
+  }
+
+  /* 手機段落 - 第 4 個淡入 (4.6s) */
+  .s2p1-mb-container .desc-paragraph {
+    position: absolute;
+    left: 12px;
+    top: 400px;
+    width: 336px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.6;
+    color: #4A4A4A;
+    letter-spacing: 0.03em;
+    z-index: 3;
+    opacity: 0;
+    transform: translate(var(--s2p1-mb-text-x, 0px), calc(var(--s2p1-mb-text-y, 0px) + 10px));
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .s2p1-active .s2p1-mb-container .desc-paragraph {
+    opacity: 1;
+    transform: translate(var(--s2p1-mb-text-x, 0px), var(--s2p1-mb-text-y, 0px));
+    transition-delay: 4.6s;
+  }
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&display=swap');
+
+  .s2p2-master-root {
+    width: 100%;
+    max-width: 1020px;
+    margin: 0 auto;
+    position: relative;
+    box-sizing: border-box;
+    font-family: 'Noto Serif TC', serif;
+    background-color: transparent;
+    overflow: visible !important;
+    padding: 20px 0;
+
+    /* 💻 桌面版 CSS 變數 (>768px) */
+    --s2p2-man-x: -16px;
+    --s2p2-man-y: 0px;
+    --s2p2-man-scale: 1;
+
+    --s2p2-man-shd-x: -20px;
+    --s2p2-man-shd-y: -4.5px;
+    --s2p2-man-shd-scale: 1.21;
+    --s2p2-man-shd-scaley: 0.71;
+    --s2p2-man-shd-skew: -53deg;
+    --s2p2-man-shd-blur: 2.2px;
+
+    --s2p2-card1-x: 0px;
+    --s2p2-card1-y: 0px;
+    --s2p2-card1-scale: 1;
+
+    --s2p2-card2-x: 0px;
+    --s2p2-card2-y: 0px;
+    --s2p2-card2-scale: 1;
+
+    /* 📱 手機版 CSS 變數 (<768px) */
+    --s2p2-mb-man-x: 0px;
+    --s2p2-mb-man-y: 0px;
+    --s2p2-mb-man-scale: 1;
+
+    --s2p2-mb-man-shd-x: -6.5px;
+    --s2p2-mb-man-shd-y: 0px;
+    --s2p2-mb-man-shd-scale: 1.32;
+    --s2p2-mb-man-shd-scaley: 0.71;
+    --s2p2-mb-man-shd-skew: -53deg;
+    --s2p2-mb-man-shd-blur: 2px;
+
+    --s2p2-mb-card1-x: 0px;
+    --s2p2-mb-card1-y: 0px;
+    --s2p2-mb-card1-scale: 1;
+
+    --s2p2-mb-card2-x: 0px;
+    --s2p2-mb-card2-y: 0px;
+    --s2p2-mb-card2-scale: 1;
+
+    --s2p2-mb-text-y: 0px;
+  }
+
+  /* 💻 桌面版畫布 */
+  .s2p2-dt-layer {
+    display: block;
+    width: 100%;
+    position: relative;
+    overflow: visible !important;
+  }
+
+  .s2p2-canvas {
+    width: 100%;
+    aspect-ratio: 1020 / 650;
+    position: relative;
+    overflow: visible !important;
+  }
+
+  .s2p2-line-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    overflow: visible !important;
+  }
+
+  .s2p2-line-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible !important;
+  }
+
+  /* 桌面線段動態 Drawing Animation */
+  .s2p2-vector1 path,
+  .s2p2-vector2 path,
+  .s2p2-group-bottom path {
+    stroke-width: 3px !important;
+  }
+  .s2p2-vector1 path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 1.0s linear;
+  }
+  .s2p2-vector2 path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 1.5s linear 1.0s;
+  }
+  .s2p2-group-bottom path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 1.0s linear 2.5s;
+  }
+
+  .s2p2-active .s2p2-vector1 path,
+  .s2p2-active .s2p2-vector2 path,
+  .s2p2-active .s2p2-group-bottom path {
+    stroke-dashoffset: 0;
+  }
+
+  .s2p2-vector1 {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 80.3255%;
+    height: 18.0492%;
+    z-index: 1;
+    overflow: visible !important;
+  }
+
+  .s2p2-vector2 {
+    position: absolute;
+    top: 17.3846%;
+    left: 78.0392%;
+    width: 24.6392%;
+    height: 76.8185%;
+    z-index: 1;
+    overflow: visible !important;
+  }
+
+  .s2p2-group-bottom {
+    position: absolute;
+    top: 93.3846%;
+    left: -2.451%;
+    width: 80.9137%;
+    height: 0.8185%;
+    z-index: 1;
+    overflow: visible !important;
+  }
+
+  /* 桌面站立男小人 (到達小人時，從原本位置左側20px移動到原本位置並淡入) */
+  .s2p2-figure-body {
+    position: absolute;
+    top: calc(2.7692% + (var(--s2p2-man-y, 0px) / 650px * 100%));
+    left: calc(79.6078% + (var(--s2p2-man-x, -16px) / 1020px * 100%));
+    width: 7.5431%;
+    height: 16.4508%;
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateX(-20px) scale(var(--s2p2-man-scale, 1.0));
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .s2p2-shadow-wrapper {
+    position: absolute;
+    top: calc(18.3077% + (var(--s2p2-man-shd-y, -4.5px) / 650px * 100%));
+    left: calc(70.9804% + (var(--s2p2-man-shd-x, -20px) / 1020px * 100%));
+    width: 20.7922%;
+    height: 13.56%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .s2p2-shadow-skew {
+    transform: skewX(var(--s2p2-man-shd-skew, -53deg)) scale(var(--s2p2-man-shd-scale, 1.21)) scaleY(var(--s2p2-man-shd-scaley, 0.71));
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .s2p2-shadow-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+    filter: blur(var(--s2p2-man-shd-blur, 2.2px));
+  }
+
+  /* Active 狀態：小人與陰影在 1.0s 延遲淡入與左滑動入 */
+  .s2p2-active .s2p2-figure-body {
+    opacity: 1;
+    transform: translateX(0px) scale(var(--s2p2-man-scale, 1.0));
+    transition-delay: 1.0s;
+  }
+
+  .s2p2-active .s2p2-shadow-wrapper {
+    opacity: 1;
+    transform: translateX(0px);
+    transition-delay: 1.0s;
+  }
+
+  /* 桌面圖文卡片排版 */
+  .s2p2-cards-container {
+    position: absolute;
+    top: 32.3077%;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 7.1568%;
+    z-index: 2;
+  }
+
+  .s2p2-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25.9804%;
+    max-width: 265px;
+    opacity: 0;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .s2p2-card:nth-child(1) {
+    transform: translate(calc(var(--s2p2-card1-x, 0px)), calc(var(--s2p2-card1-y, 0px))) scale(var(--s2p2-card1-scale, 1.0));
+  }
+
+  .s2p2-card:nth-child(2) {
+    transform: translate(calc(var(--s2p2-card2-x, 0px)), calc(var(--s2p2-card2-y, 0px))) scale(var(--s2p2-card2-scale, 1.0));
+  }
+
+  /* Active 狀態：圖文卡片一組一組淡入 (Card 1: 1.5s, Card 2: 2.5s) */
+  .s2p2-active .s2p2-card:nth-child(1) {
+    opacity: 1;
+    transition-delay: 1.5s;
+  }
+
+  .s2p2-active .s2p2-card:nth-child(2) {
+    opacity: 1;
+    transition-delay: 2.5s;
+  }
+
+  .s2p2-photo-circle {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    background-color: transparent;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+  .s2p2-photo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border: none !important;
+    outline: none !important;
+  }
+
+  .s2p2-card-text {
+    margin-top: 5.2%;
+    width: 100%;
+    font-size: clamp(12px, 1.57vw, 16px);
+    font-weight: 500;
+    line-height: 1.6;
+    letter-spacing: 0.03em;
+    color: #000000;
+    text-align: left;
+    word-break: break-word;
+  }
+
+  /* 📱 手機版專屬樣式 */
+  .s2p2-mb-layer {
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    .s2p2-dt-layer {
+      display: none !important;
+    }
+
+    .s2p2-mb-layer {
+      display: block !important;
+      position: relative;
+      width: 100%;
+      max-width: 347px;
+      margin: 0 auto;
+      height: 600px;
+    }
+  }
+
+  /* 視窗微調測試時強制手機視態 */
+  .s2p2-force-mobile .s2p2-dt-layer {
+    display: none !important;
+  }
+  .s2p2-force-mobile .s2p2-mb-layer {
+    display: block !important;
+    position: relative;
+    width: 100%;
+    max-width: 347px;
+    margin: 0 auto;
+    height: 600px;
+  }
+
+  /* 手機版線段動態 Drawing Animation */
+  .s2p2-mb-vector-top path,
+  .s2p2-mb-arc-top path,
+  .s2p2-mb-line-vert path,
+  .s2p2-mb-arc-bottom path {
+    stroke-width: 1px !important;
+  }
+  .s2p2-mb-vector-top path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 0.8s linear;
+  }
+  .s2p2-mb-arc-top path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 0.6s linear 0.8s;
+  }
+  .s2p2-mb-line-vert path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 1.2s linear 1.4s;
+  }
+  .s2p2-mb-arc-bottom path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 0.8s linear 2.6s;
+  }
+
+  .s2p2-active .s2p2-mb-vector-top path,
+  .s2p2-active .s2p2-mb-arc-top path,
+  .s2p2-active .s2p2-mb-line-vert path,
+  .s2p2-active .s2p2-mb-arc-bottom path {
+    stroke-dashoffset: 0;
+  }
+
+  .s2p2-mb-vector-top {
+    position: absolute;
+    top: 0;
+    left: 45px;
+    width: 162px;
+    height: 115px;
+    z-index: 1;
+  }
+
+  .s2p2-mb-arc-top {
+    position: absolute;
+    top: 113px;
+    left: 205px;
+    width: 113px;
+    height: 113px;
+    transform: scaleY(-1) rotate(180deg);
+    z-index: 1;
+  }
+
+  .s2p2-mb-line-vert {
+    position: absolute;
+    top: 226px;
+    left: 319px;
+    width: 264px;
+    height: 3px;
+    transform: rotate(90deg);
+    transform-origin: top left;
+    z-index: 1;
+  }
+
+  .s2p2-mb-arc-bottom {
+    position: absolute;
+    top: 488px;
+    left: 205px;
+    width: 113px;
+    height: 113px;
+    transform: rotate(180deg);
+    z-index: 1;
+  }
+
+  /* 手機小人與陰影 (到達小人時，由原本位置左側20px移動到原本位置並淡入) */
+  .s2p2-mb-figure {
+    position: absolute;
+    top: calc(55px + var(--s2p2-mb-man-y, 0px));
+    left: calc(192.87px + var(--s2p2-mb-man-x, 0px));
+    width: 45.35px;
+    height: 63.02px;
+    z-index: 3;
+    opacity: 0;
+    transform: translateX(-20px) scale(var(--s2p2-mb-man-scale, 1.0));
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .s2p2-mb-shadow {
+    position: absolute;
+    top: calc(114.49px + var(--s2p2-mb-man-shd-y, 0px));
+    left: calc(141px + var(--s2p2-mb-man-shd-x, -6.5px));
+    width: 125px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .s2p2-mb-shadow-skew {
+    transform: skewX(var(--s2p2-mb-man-shd-skew, -53deg)) scale(var(--s2p2-mb-man-shd-scale, 1.32)) scaleY(var(--s2p2-mb-man-shd-scaley, 0.71));
+    filter: blur(var(--s2p2-mb-man-shd-blur, 2px));
+    width: 100%;
+    height: 100%;
+  }
+
+  .s2p2-active .s2p2-mb-figure {
+    opacity: 1;
+    transform: translateX(0px) scale(var(--s2p2-mb-man-scale, 1.0));
+    transition-delay: 1.0s;
+  }
+
+  .s2p2-active .s2p2-mb-shadow {
+    opacity: 1;
+    transform: translateX(0px);
+    transition-delay: 1.0s;
+  }
+
+  /* 手機圖文卡片 */
+  .s2p2-mb-card1 {
+    position: absolute;
+    top: calc(221px + var(--s2p2-mb-card1-y, 0px));
+    left: calc(0px + var(--s2p2-mb-card1-x, 0px));
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    z-index: 2;
+    opacity: 0;
+    transform: scale(var(--s2p2-mb-card1-scale, 1.0));
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .s2p2-mb-card2 {
+    position: absolute;
+    top: calc(366px + var(--s2p2-mb-card2-y, 0px));
+    left: calc(0px + var(--s2p2-mb-card2-x, 0px));
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    z-index: 2;
+    opacity: 0;
+    transform: scale(var(--s2p2-mb-card2-scale, 1.0));
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .s2p2-active .s2p2-mb-card1 {
+    opacity: 1;
+    transition-delay: 1.5s;
+  }
+
+  .s2p2-active .s2p2-mb-card2 {
+    opacity: 1;
+    transition-delay: 2.5s;
+  }
+
+  .s2p2-mb-circle {
+    width: 126px;
+    height: 126px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .s2p2-mb-text {
+    width: 155px;
+    max-width: 155px;
+    flex-shrink: 0;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.6;
+    letter-spacing: 0.42px;
+    color: #232323;
+    word-break: break-word;
+    transform: translateY(var(--s2p2-mb-text-y, 0px));
+  }
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&display=swap');
+
+  .s2p34-master-root {
+    width: 100%;
+    max-width: 1360px; /* 邊界外擴至 1360px，包覆 Figma 1180px 原生大圓弧 */
+    margin: 0 auto;
+    position: relative;
+    box-sizing: border-box;
+    font-family: 'Noto Serif TC', serif;
+    background-color: transparent;
+    overflow: visible !important;
+    padding: 20px 0;
+  }
+
+  /* === 💻 桌面版 100% 依據 1360px 等比例縮放畫布 === */
+  .s2p34-dt-wrapper {
+    display: block;
+    width: 100%;
+    position: relative;
+    overflow: visible !important;
+  }
+
+  .s2p34-dt-canvas {
+    width: 100%;
+    aspect-ratio: 1360 / 1060;
+    position: relative;
+    overflow: visible !important;
+  }
+
+  .s2p34-line-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    overflow: visible !important;
+  }
+
+  .s2p34-line-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible !important;
+  }
+
+  /* SVG 線條嚴格指定 linear 勻速無縫劃出 (3.5s Linear) */
+  #s2p34-master-path {
+    stroke-width: 3px !important;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 3.5s linear;
+  }
+
+  .s2p34-active #s2p34-master-path {
+    stroke-dashoffset: 0;
+  }
+
+  /* 1. 頂部站立男小人 (男小人延遲 1.0s) */
+  .s2p34-man-body {
+    position: absolute;
+    top: calc(0% + (var(--s2-man-y, 46px) / 1060px * 100%));
+    left: 10.808%;
+    width: 3.455%;
+    height: 11.132%;
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateX(calc(var(--s2-man-x, 73px) / 47px * 100%)) scale(var(--s2-man-scale, 0.77));
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .s2p34-man-body img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .s2p34-man-shadow {
+    position: absolute;
+    top: calc(10.471% + (var(--s2-man-shd-y, 21.5px) / 1060px * 100%));
+    left: 4.191%;
+    width: 13.786%;
+    height: 10.080%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    transform: translateX(calc(var(--s2-man-shd-x, 72.5px) / 187.5px * 100%));
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  /* 雙小人倒影 模糊羽化與漸層漸隱 */
+  .s2p34-man-shadow-inner {
+    transform: skewX(var(--s2-man-shd-skew, -45deg)) scale(var(--s2-man-shd-scale, 1)) scaleY(var(--s2-man-shd-scaley, 0.71));
+    opacity: var(--s2-man-shd-op, 0.6);
+    filter: blur(var(--s2-man-shd-blur, 1.8px));
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.65) 55%, rgba(0, 0, 0, 0.1) 90%, rgba(0, 0, 0, 0) 100%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.65) 55%, rgba(0, 0, 0, 0.1) 90%, rgba(0, 0, 0, 0) 100%);
+    width: 100%;
+    height: 100%;
+  }
+  .s2p34-man-shadow-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* 2. 圓形照片卡片 (延遲 1.0s) */
+  .s2p34-photo-card {
+    position: absolute;
+    top: calc(15.936% + (var(--s2-photo-y, 21.5px) / 1060px * 100%));
+    left: 14.926%;
+    width: 25.453%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 2;
+    opacity: 0;
+    transform: translateX(calc(var(--s2-photo-x, 0px) / 346px * 100%)) scale(var(--s2-photo-scale, 1));
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .s2p34-photo-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* 3. 中間橫線上站立女小人 (女小人延遲 2.5s) */
+  .s2p34-woman-body {
+    position: absolute;
+    top: calc(22.830% + (var(--s2-wmn-y, 36.5px) / 1060px * 100%));
+    left: 41.911%;
+    width: 2.930%;
+    height: 9.438%;
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateX(calc(var(--s2-wmn-x, 442px) / 40px * 100%)) scale(var(--s2-wmn-scale, 1));
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .s2p34-woman-body img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* 女小人倒影 */
+  .s2p34-woman-shadow {
+    position: absolute;
+    top: calc(31.320% + (var(--s2-wmn-shd-y, 32px) / 1060px * 100%));
+    left: 39.220%;
+    width: 4.889%;
+    height: 7.358%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    transform: translateX(calc(var(--s2-wmn-shd-x, 449px) / 66.5px * 100%));
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .s2p34-woman-shadow-inner {
+    transform: skewX(var(--s2-wmn-shd-skew, -25deg)) scale(var(--s2-wmn-shd-scale, 1)) scaleY(var(--s2-wmn-shd-scaley, 0.91));
+    opacity: var(--s2-wmn-shd-op, 0.6);
+    filter: blur(var(--s2-wmn-shd-blur, 1.8px));
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.65) 55%, rgba(0, 0, 0, 0.1) 90%, rgba(0, 0, 0, 0) 100%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.65) 55%, rgba(0, 0, 0, 0.1) 90%, rgba(0, 0, 0, 0) 100%);
+    width: 100%;
+    height: 100%;
+  }
+  .s2p34-woman-shadow-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* 4. 品牌宣言文案 (延遲 1.5s) */
+  .s2p34-brand-text {
+    position: absolute;
+    top: 36.037%;
+    left: 41.985%;
+    width: 28.529%;
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 500;
+    font-size: clamp(12px, 1.18vw, 16px);
+    line-height: 1.6;
+    letter-spacing: 0.48px;
+    color: #000000;
+    word-break: break-word;
+    z-index: 4;
+    opacity: 0;
+    transition: opacity 0.6s ease-out;
+  }
+
+  /* Active 狀態：男小人 1.0s 延遲，女小人 2.5s 延遲 */
+  .s2p34-active .s2p34-man-body {
+    opacity: 1;
+    transform: translateX(calc(var(--s2-man-x, 73px) / 47px * 100%)) scale(var(--s2-man-scale, 0.77));
+    transition-delay: 1.0s;
+  }
+  .s2p34-active .s2p34-man-shadow {
+    opacity: 1;
+    transform: translateX(calc(var(--s2-man-shd-x, 72.5px) / 187.5px * 100%));
+    transition-delay: 1.0s;
+  }
+
+  .s2p34-active .s2p34-photo-card {
+    opacity: 1;
+    transform: translateX(calc(var(--s2-photo-x, 0px) / 346px * 100%)) scale(var(--s2-photo-scale, 1));
+    transition-delay: 1.0s;
+  }
+
+  .s2p34-active .s2p34-brand-text {
+    opacity: 1;
+    transition-delay: 1.5s;
+  }
+
+  .s2p34-active .s2p34-woman-body {
+    opacity: 1;
+    transform: translateX(calc(var(--s2-wmn-x, 442px) / 40px * 100%)) scale(var(--s2-wmn-scale, 1));
+    transition-delay: 2.5s;
+  }
+  .s2p34-active .s2p34-woman-shadow {
+    opacity: 1;
+    transform: translateX(calc(var(--s2-wmn-shd-x, 449px) / 66.5px * 100%));
+    transition-delay: 2.5s;
+  }
+
+  /* === 📱 手機版 100% 精確對照 Figma Frame 125 (375px 畫布，無女小人) === */
+  .s2p34-mb-wrapper {
+    display: none;
+    width: 100%;
+    max-width: 375px;
+    margin: 0 auto;
+    position: relative;
+    padding: 10px 0 30px 0;
+    box-sizing: border-box;
+    overflow: visible !important;
+  }
+
+  .s2p34-mb-canvas {
+    width: 100%;
+    height: 720px;
+    position: relative;
+    overflow: visible !important;
+  }
+
+  /* 📱 手機版全畫布貫穿 100% SVG 無縫連貫 S-線條圖層 */
+  .s2p34-mb-line-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    overflow: visible !important;
+  }
+
+  .s2p34-mb-line-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible !important;
+  }
+
+  #s2p34-mb-master-path {
+    stroke-width: 1px !important;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 3.5s linear;
+  }
+
+  .s2p34-active #s2p34-mb-master-path {
+    stroke-dashoffset: 0;
+  }
+
+  /* 📱 1. 手機版男小人 (支援 --s2-mb-man-scale 獨立縮放) */
+  .s2p34-mb-man-body {
+    position: absolute;
+    top: calc(0px + var(--s2-mb-man-y, -34px));
+    left: calc(66px + var(--s2-mb-man-x, 0px));
+    width: 94px;
+    height: 109px;
+    z-index: 3;
+    opacity: 0;
+    transform: scale(var(--s2-mb-man-scale, 0.69));
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .s2p34-mb-man-body img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* 📱 手機版男小人倒影 (支援 --s2-mb-man-shd-scale 獨立縮放) */
+  .s2p34-mb-man-shadow {
+    position: absolute;
+    top: calc(55px + var(--s2-mb-man-shd-y, -2px));
+    left: calc(20px + var(--s2-mb-man-shd-x, 13.5px));
+    width: 140px;
+    height: 60px;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(var(--s2-mb-man-shd-scale, 1.14));
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .s2p34-mb-man-shadow-inner {
+    transform: skewX(var(--s2-mb-man-shd-skew, -45deg)) scaleY(var(--s2-mb-man-shd-scaley, 0.71));
+    opacity: 0.6;
+    filter: blur(var(--s2-mb-man-shd-blur, 1.8px));
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.65) 55%, rgba(0,0,0,0) 100%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.65) 55%, rgba(0,0,0,0) 100%);
+  }
+  .s2p34-mb-man-shadow-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* 📱 2. 手機圓形照片卡片 */
+  .s2p34-mb-photo-card {
+    position: absolute;
+    top: calc(133px + var(--s2-mb-photo-y, 0px));
+    left: calc(49px + var(--s2-mb-photo-x, 0px));
+    width: 298px;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 2;
+    opacity: 0;
+    transform: scale(var(--s2-mb-photo-scale, 1.0));
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .s2p34-mb-photo-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* 📱 3. 手機品牌文案 */
+  .s2p34-mb-brand-text {
+    position: absolute;
+    top: calc(458px + var(--s2-mb-text-y, 0px));
+    left: calc(43px + var(--s2-mb-text-x, 0px));
+    width: 312px;
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.6;
+    letter-spacing: 0.42px;
+    color: #232323;
+    text-align: justify;
+    word-break: break-word;
+    z-index: 4;
+    opacity: 0;
+    transition: opacity 0.6s ease-out;
+  }
+
+  /* 📱 Active 動態出現與延遲 */
+  .s2p34-active .s2p34-mb-man-body {
+    opacity: 1;
+    transform: scale(var(--s2-mb-man-scale, 0.69));
+    transition-delay: 1.0s;
+  }
+  .s2p34-active .s2p34-mb-man-shadow {
+    opacity: 1;
+    transform: scale(var(--s2-mb-man-shd-scale, 1.14));
+    transition-delay: 1.0s;
+  }
+
+  .s2p34-active .s2p34-mb-photo-card {
+    opacity: 1;
+    transform: scale(var(--s2-mb-photo-scale, 1.0));
+    transition-delay: 1.0s;
+  }
+
+  .s2p34-active .s2p34-mb-brand-text {
+    opacity: 1;
+    transition-delay: 1.5s;
+  }
+
+  @media (max-width: 767.98px) {
+    .s2p34-dt-wrapper {
+      display: none !important;
+    }
+    .s2p34-mb-wrapper {
+      display: block !important;
+    }
+  }
+
+  .s2p34-force-mobile .s2p34-dt-wrapper {
+    display: none !important;
+  }
+  .s2p34-force-mobile .s2p34-mb-wrapper {
+    display: block !important;
+  }
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap');
+
+  .s4-root {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    box-sizing: border-box;
+    font-family: 'Noto Serif TC', serif;
+    background-color: transparent;
+    padding: 20px 0 60px 0;
+    overflow: visible !important;
+  }
+
+  /* 頂部接續線條與站立男小人 (Section 2 Part 4 下接端點, 小人高度 84px) */
+  .s4-top-connector {
+    position: relative;
+    width: 100%;
+    height: 124px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .s4-top-line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 32px;
+    height: 123px;
+  }
+
+  .s4-top-man {
+    position: absolute;
+    top: 0;
+    left: calc(50% - 32px);
+    width: 64px;
+    height: 84px;
+  }
+
+  /* 背景大光輪 1:1 絕對正圓 (Ellipse 74 - 最頂點切齊小人腳底 y = 84px) */
+  .s4-bg-ellipse {
+    position: absolute;
+    top: 84px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1120px;
+    height: 1120px;
+    max-width: 100%;
+    aspect-ratio: 1 / 1 !important;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.9;
+    overflow: hidden;
+  }
+
+  .s4-bg-ellipse img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    aspect-ratio: 1 / 1 !important;
+  }
+
+  /* 主要內容容器 */
+  .s4-content-wrapper {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  /* 標題與副標題 */
+  .s4-header-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.8;
+    letter-spacing: 1.92px;
+    color: #000000;
+    text-align: center;
+    margin: 0 0 8px 0;
+  }
+
+  .s4-header-subtitle {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.6;
+    letter-spacing: 0.48px;
+    color: #000000;
+    text-align: center;
+    margin: 0 0 20px 0;
+  }
+
+  /* ✨ 100% 忠實對齊 Figma 截圖 (Desktop Mode >= 1200px) */
+  .s4-tab-switcher {
+    width: 908px;
+    max-width: 100%;
+    height: 122px;
+    position: relative;
+    margin-bottom: 40px;
+    box-sizing: border-box;
+  }
+
+  /* 頁籤背景軌道 (長條)：作為所有發光膠囊與按鈕文字的唯一參照容器 */
+  .s4-tab-track {
+    position: relative;
+    width: 898px;
+    max-width: calc(100% - 10px);
+    height: 94px;
+    margin: 14px auto 0 auto;
+    background: linear-gradient(90deg, rgba(250,247,242,0.86) 0%, rgba(245,243,240,0.86) 100%);
+    border-radius: 99px;
+    box-shadow: 2px 2px 6px 0px rgba(168,154,148,0.63);
+    backdrop-filter: blur(1px);
+    z-index: 0;
+    overflow: hidden !important;
+    clip-path: inset(0 round 99px);
+  }
+
+  /* 滑動膠囊外層發光影 (left: 10px, 寬度: calc(100% / 3 - 20px)，讓「機電」右邊距與「建築」左邊距 100% 絕對相等 10px) */
+  .s4-tab-glow {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    width: calc(100% / 3 - 20px);
+    height: 94px;
+    border-radius: 99px;
+    background: radial-gradient(circle, rgba(152,122,107,0.79) 0%, rgba(189,174,168,0) 100%);
+    filter: blur(9.8px);
+    z-index: 1;
+    pointer-events: none;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  /* 滑動高亮內膠囊 (top: 9px, left: 10px, 寬度: calc(100% / 3 - 20px)) */
+  .s4-tab-active-pill {
+    position: absolute;
+    top: 9px;
+    left: 10px;
+    width: calc(100% / 3 - 20px);
+    height: 76px;
+    border-radius: 99px;
+    background: radial-gradient(ellipse 170px 65px at 42% 35%, #987A6B 0%, rgba(189, 174, 168, 0.7) 70%, rgba(227, 227, 229, 0.6) 91%);
+    box-shadow: 5px 5px 7.7px 0px rgba(145, 139, 136, 0.4);
+    z-index: 2;
+    pointer-events: none;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  /* 1:1 Linear Gradient Border (0% #E3E3E5 60% -> 100% #987A6B 28%) */
+  .s4-tab-active-pill::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 99px;
+    padding: 2px;
+    background: linear-gradient(135deg, rgba(227, 227, 229, 0.6) 0%, rgba(152, 122, 107, 0.28) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* 按鈕列容器：嵌套於 s4-tab-track 內部 */
+  .s4-tab-buttons-row {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    z-index: 5;
+  }
+
+  .s4-tab-btn {
+    flex: 1;
+    height: 100%;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    text-decoration: none;
+    z-index: 6;
+  }
+
+  .s4-tab-btn-title {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: 0.96px;
+    color: #232323;
+    transition: color 0.3s ease;
+    line-height: 1.1;
+    text-align: center;
+  }
+
+  .s4-tab-btn-subtitle {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1.2px;
+    color: #666666;
+    margin-top: 4px;
+    transition: color 0.3s ease;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .s4-tab-btn.active .s4-tab-btn-title {
+    color: #FAF7F2;
+  }
+
+  .s4-tab-btn.active .s4-tab-btn-subtitle {
+    color: #FAF7F2;
+    opacity: 0.95;
+  }
+
+  /* 100% 滿版卡片外層 Flex 置中容器 (網頁中線對齊) */
+  .s4-panels-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    margin: 0 auto;
+  }
+
+  /* 下方方形頁面容器 Video Cards Container */
+  .s4-panels-container {
+    width: 100%;
+    max-width: 1039px;
+    height: 605px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  .s4-tab-panel {
+    display: none;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .s4-tab-panel.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  /* 手風琴橫向展開容器 */
+  .s4-cards-accordion {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    gap: 14px;
+    box-sizing: border-box;
+    align-items: center;
+  }
+
+  /* 卡片預設折疊 (flex: 1)，Hover 時展開 (flex: 3.8) */
+  .s4-accordion-card {
+    position: relative;
+    height: 605px;
+    flex: 1;
+    min-width: 90px;
+    background: #F3F3F3;
+    border-radius: 25px;
+    overflow: hidden;
+    box-sizing: border-box;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    transition: flex 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
+                background-color 0.4s ease, 
+                box-shadow 0.4s ease;
+    cursor: pointer;
+  }
+
+  .s4-accordion-card:hover {
+    flex: 3.8 !important;
+    background-color: #FAF8F5;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+  }
+
+  /* 卡片背景照片 */
+  .s4-card-bg-photo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0.3;
+    transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .s4-accordion-card:hover .s4-card-bg-photo {
+    opacity: 1 !important;
+    transform: scale(1.02);
+  }
+
+  /* 照片加深時下方文字閱讀防干擾遮罩 */
+  .s4-card-text-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70%;
+    background: linear-gradient(180deg, rgba(250,248,245,0) 0%, rgba(250,248,245,0.85) 50%, rgba(250,248,245,0.96) 100%);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  .s4-accordion-card:hover .s4-card-text-overlay {
+    opacity: 1;
+  }
+
+  /* === ✨ 全版型單一灰色圓圈圖示 (Unified Single Animated Icon) ===
+     折疊時固定於底部置中 (bottom: 35px, 50px)，展開時平滑平移縮放至左上角 (top: 35px, left: 35px, 56px)
+  */
+  .s4-card-icon {
+    position: absolute;
+    bottom: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #B7B7B7;
+    z-index: 5;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    transition: top 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
+                bottom 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
+                left 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
+                width 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
+                height 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
+                transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    pointer-events: none;
+  }
+
+  .s4-card-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .s4-accordion-card:hover .s4-card-icon,
+  .s4-accordion-card.active .s4-card-icon {
+    top: 35px;
+    left: 35px;
+    bottom: auto;
+    transform: translate(0, 0);
+    width: 56px;
+    height: 56px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+
+  /* === 折疊狀態內容 (直排文字 100% 垂直置中) === */
+  .s4-collapsed-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 35px 15px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  .s4-accordion-card:hover .s4-collapsed-content {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* 直排標題文字：margin: auto 0 實現 100% 垂直精確置中 */
+  .s4-collapsed-title {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: 1.8px;
+    color: #000000;
+    line-height: 1.5;
+    margin: auto 0 !important;
+    white-space: nowrap;
+    text-shadow: 0 1px 3px rgba(255,255,255,0.9);
+  }
+
+  /* === 展開狀態內容 === */
+  .s4-expanded-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 35px 35px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    z-index: 3;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease 0.1s;
+  }
+
+  .s4-accordion-card:hover .s4-expanded-content {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .s4-expanded-bottom-box {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .s4-expanded-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .s4-expanded-title {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1.8px;
+    color: #000000;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .s4-btn-watch-video {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 138px;
+    height: 48px;
+    border-radius: 30px;
+    background: radial-gradient(ellipse at 35% 35%, rgba(159, 159, 159, 0.8) 0%, rgba(198, 198, 198, 0.7) 54%, rgba(227, 227, 229, 0.6) 91%);
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.22);
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .s4-btn-watch-video::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 30px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(227, 227, 229, 0.6) 0%, rgba(213, 213, 213, 0.6) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .s4-btn-watch-video:hover {
+    transform: translateY(-2px);
+    box-shadow: 4px 6px 14px rgba(0, 0, 0, 0.3);
+  }
+
+  .s4-btn-watch-text {
+    position: relative;
+    z-index: 1;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 1.8px;
+    color: #FAF7F2;
+  }
+
+  .s4-divider-line {
+    width: 100%;
+    height: 2px;
+    margin: 4px 0 8px 0;
+    display: block !important;
+  }
+
+  .s4-divider-line img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .s4-expanded-desc {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.75;
+    color: #000000;
+    margin: 0;
+  }
+
+  /* ==========================================================================
+     RWD BREAKPOINTS (3 Tiers: Desktop >= 1200px, Tablet 769px ~ 1199px, Mobile <= 768px)
+     ========================================================================== */
+
+  /* === TABLET MODE (769px ~ 1199px): 維持橫向手風琴 + 自適應頁籤與字級 === */
+  @media screen and (min-width: 768px) and (max-width: 991px) {
+    .s4-root {
+      position: relative;
+      width: 100%;
+      padding: 20px 24px 60px 24px;
+      box-sizing: border-box;
+      overflow: visible !important;
+    }
+
+    .s4-top-connector {
+      height: 60px;
+      margin-bottom: 10px;
+    }
+
+    .s4-top-line, .s4-top-man {
+      height: 60px;
+    }
+
+    .s4-bg-ellipse {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 860px !important;
+      height: 860px !important;
+      min-width: 860px !important;
+      min-height: 860px !important;
+      max-width: none !important;
+      aspect-ratio: 1 / 1 !important;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.9;
+      overflow: hidden;
+    }
+
+    .s4-header-title {
+      font-size: 26px;
+      font-weight: 600;
+      line-height: 1.5;
+      letter-spacing: 1.5px;
+      margin-bottom: 6px;
+    }
+    
+    .s4-header-subtitle {
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.45px;
+      margin-bottom: 24px;
+    }
+
+    .s4-tab-switcher {
+      width: 100%;
+      max-width: 760px;
+      height: 96px;
+      margin: 0 auto 32px auto;
+      position: relative;
+      z-index: 10;
+      box-sizing: border-box;
+    }
+
+    .s4-tab-track {
+      position: relative;
+      width: 100%;
+      max-width: 750px;
+      height: 80px;
+      margin: 8px auto 0 auto;
+      border-radius: 99px;
+      background: linear-gradient(90deg, rgba(250,247,242,0.9) 0%, rgba(245,243,240,0.9) 100%);
+      box-shadow: 2px 2px 6px 0px rgba(168,154,148,0.5);
+      z-index: 0;
+      overflow: hidden !important;
+      clip-path: inset(0 round 99px);
+    }
+
+    .s4-tab-glow {
+      position: absolute;
+      top: 0;
+      left: 8px;
+      width: calc(100% / 3 - 16px);
+      height: 80px;
+      border-radius: 99px;
+      background: radial-gradient(circle, rgba(152,122,107,0.79) 0%, rgba(189,174,168,0) 100%);
+      filter: blur(8px);
+      z-index: 1;
+    }
+
+    .s4-tab-active-pill {
+      position: absolute;
+      top: 7px;
+      left: 8px;
+      width: calc(100% / 3 - 16px);
+      height: 66px;
+      border-radius: 99px;
+      background: radial-gradient(ellipse at 42% 35%, #987A6B 0%, rgba(189, 174, 168, 0.7) 70%, rgba(227, 227, 229, 0.6) 91%);
+      box-shadow: 4px 4px 7px 0px rgba(145, 139, 136, 0.38);
+      z-index: 2;
+    }
+
+    .s4-tab-buttons-row {
+      height: 80px;
+    }
+
+    .s4-tab-btn-title {
+      font-size: 20px;
+    }
+
+    .s4-tab-btn-subtitle {
+      font-size: 11px;
+      display: block !important;
+    }
+
+    .s4-panels-wrapper {
+      width: 100%;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      margin: 0 auto;
+    }
+
+    .s4-panels-container {
+      width: 100%;
+      height: 520px;
+      margin: 0 auto;
+    }
+
+    .s4-cards-accordion {
+      display: flex !important;
+      flex-direction: row !important;
+      height: 100% !important;
+      gap: 12px !important;
+    }
+
+    .s4-accordion-card {
+      height: 520px !important;
+      flex: 1 !important;
+      min-width: 80px;
+    }
+
+    .s4-accordion-card:hover, .s4-accordion-card.active {
+      flex: 3.5 !important;
+    }
+
+    .s4-card-icon {
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 44px;
+      height: 44px;
+    }
+
+    .s4-accordion-card:hover .s4-card-icon,
+    .s4-accordion-card.active .s4-card-icon {
+      top: 24px;
+      left: 20px;
+      bottom: auto;
+      transform: translate(0, 0);
+      width: 46px;
+      height: 46px;
+    }
+
+    .s4-collapsed-content {
+      padding: 24px 10px !important;
+    }
+
+    .s4-collapsed-title {
+      font-size: 15px;
+      writing-mode: vertical-rl !important;
+      margin: auto 0 !important;
+    }
+
+    .s4-expanded-content {
+      padding: 24px 20px !important;
+    }
+
+    .s4-expanded-title {
+      font-size: 16px;
+      display: block !important;
+    }
+
+    .s4-btn-watch-video {
+      width: 124px;
+      height: 42px;
+    }
+
+    .s4-btn-watch-text {
+      font-size: 14px;
+    }
+
+    .s4-expanded-desc {
+      font-size: 13.5px;
+      line-height: 1.65;
+    }
+  }
+
+  /* === MOBILE MODE (<= 768px): 768px 及以下 100% 嚴格切換至手機版單欄排版 === */
+  @media screen and (max-width: 767px) {
+    .s4-root {
+      position: relative;
+      width: 100%;
+      padding: 16px 12px 50px 12px;
+      box-sizing: border-box;
+      overflow: visible !important;
+    }
+
+    .s4-top-connector {
+      height: 20px;
+      margin-bottom: 8px;
+    }
+
+    .s4-top-line, .s4-top-man {
+      display: none !important;
+    }
+
+    /* 背景大光輪 (手機版: 固定頂部 top: -24px 置中，卡片滑開時背景圓 100% 靜止完全不動) */
+    .s4-bg-ellipse {
+      position: absolute;
+      top: -24px !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+      width: 880px !important;
+      height: 880px !important;
+      min-width: 880px !important;
+      min-height: 880px !important;
+      max-width: none !important;
+      aspect-ratio: 1 / 1 !important;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.95;
+      overflow: hidden;
+    }
+
+    .s4-bg-ellipse img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .s4-header-title {
+      font-size: 22px;
+      font-weight: 600;
+      line-height: 1.4;
+      letter-spacing: 1.2px;
+      margin-bottom: 6px;
+    }
+    
+    .s4-header-subtitle {
+      font-size: 13.5px;
+      font-weight: 500;
+      letter-spacing: 0.42px;
+      margin-bottom: 20px;
+    }
+
+    .s4-tab-switcher {
+      width: 100%;
+      max-width: 100%;
+      height: 54px;
+      margin: 0 auto 20px auto;
+      position: relative;
+      z-index: 10;
+      overflow: hidden !important;
+      border-radius: 99px;
+    }
+
+    .s4-tab-track {
+      position: relative;
+      width: 100%;
+      height: 54px;
+      margin: 0;
+      border-radius: 99px;
+      background: linear-gradient(90deg, rgba(250,247,242,0.95) 0%, rgba(245,243,240,0.95) 100%);
+      box-shadow: 2px 2px 6px 0px rgba(168,154,148,0.4);
+      padding: 0;
+      z-index: 1;
+      overflow: hidden !important;
+      clip-path: inset(0 round 99px);
+    }
+
+    .s4-tab-glow {
+      position: absolute;
+      top: 0;
+      left: 5px;
+      width: calc(100% / 3 - 10px);
+      height: 54px;
+      border-radius: 99px;
+      background: radial-gradient(circle, rgba(152,122,107,0.79) 0%, rgba(189,174,168,0) 100%);
+      filter: blur(7px);
+      z-index: 2;
+      pointer-events: none;
+      display: block !important;
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .s4-tab-active-pill {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      width: calc(100% / 3 - 10px);
+      height: 44px;
+      border-radius: 99px;
+      background: radial-gradient(ellipse at 42% 35%, #987A6B 0%, rgba(189, 174, 168, 0.7) 70%, rgba(227, 227, 229, 0.6) 91%);
+      box-shadow: 3px 3px 6px 0px rgba(145, 139, 136, 0.35);
+      z-index: 3;
+      pointer-events: none;
+      display: block !important;
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .s4-tab-buttons-row {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 54px;
+      display: flex !important;
+      flex-direction: row !important;
+      z-index: 5;
+    }
+
+    .s4-tab-btn {
+      flex: 1;
+      height: 100%;
+      border: none;
+      background: transparent !important;
+      cursor: pointer !important;
+      pointer-events: auto !important;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0 !important;
+      border-radius: 99px !important;
+      z-index: 6;
+    }
+
+    .s4-tab-btn-subtitle {
+      display: none !important;
+    }
+
+    .s4-tab-btn-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: #232323;
+      line-height: 1;
+      transition: color 0.3s ease;
+      text-align: center !important;
+    }
+
+    .s4-tab-btn.active .s4-tab-btn-title {
+      color: #FAF7F2 !important;
+    }
+
+    .s4-panels-wrapper {
+      width: 100%;
+      max-width: 100%;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      margin: 0 auto;
+    }
+
+    .s4-panels-container {
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+      height: auto;
+    }
+
+    .s4-cards-accordion {
+      display: flex;
+      flex-direction: column !important;
+      height: auto !important;
+      gap: 12px !important;
+      width: 100% !important;
+    }
+
+    .s4-accordion-card {
+      position: relative;
+      width: 100% !important;
+      max-width: 100% !important;
+      height: 116px !important;
+      flex: none !important;
+      border-radius: 20px;
+      overflow: hidden;
+      box-sizing: border-box;
+      background-color: #F3F3F3;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      cursor: pointer;
+      transition: height 0.55s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.45s ease, background-color 0.45s ease !important;
+    }
+
+    .s4-accordion-card:hover {
+      flex: none !important;
+    }
+
+    .s4-accordion-card:hover .s4-collapsed-content {
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+
+    .s4-accordion-card:hover .s4-expanded-content {
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
+    .s4-accordion-card.active {
+      height: 320px !important;
+      background-color: #FAF8F5;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+
+    .s4-accordion-card.active .s4-collapsed-content {
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
+    .s4-accordion-card.active .s4-expanded-content {
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+
+    /* 手機版單一圖示: 折疊時頂部 top: 39px left: 16px，滑開時平滑滑動至 top: 20px left: 16px */
+    .s4-card-icon {
+      top: 39px !important;
+      left: 16px !important;
+      bottom: auto !important;
+      transform: none !important;
+      width: 38px !important;
+      height: 38px !important;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+      transition: top 0.55s cubic-bezier(0.25, 1, 0.5, 1), left 0.55s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    }
+
+    .s4-accordion-card.active .s4-card-icon {
+      top: 20px !important;
+      left: 16px !important;
+    }
+
+    .s4-collapsed-content {
+      position: absolute !important;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 116px !important;
+      padding: 0 16px 0 68px !important;
+      box-sizing: border-box;
+      display: flex !important;
+      flex-direction: row !important;
+      justify-content: flex-start !important;
+      align-items: center !important;
+      z-index: 2;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+
+    .s4-collapsed-title {
+      writing-mode: horizontal-tb !important;
+      text-orientation: unset !important;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 15.5px;
+      font-weight: 500;
+      letter-spacing: 1.1px;
+      color: #000000;
+      margin: 0 !important;
+      white-space: normal;
+      text-align: left;
+      line-height: 1.4;
+    }
+
+    .s4-expanded-content {
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      padding: 20px 16px !important;
+      box-sizing: border-box;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-end !important;
+      z-index: 3;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.45s ease 0.12s !important;
+    }
+
+    .s4-expanded-title-row {
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      width: 100% !important;
+      gap: 8px !important;
+    }
+
+    .s4-expanded-title {
+      display: block !important;
+      font-family: 'Noto Sans TC', sans-serif !important;
+      font-size: 15px !important;
+      font-weight: 500 !important;
+      letter-spacing: 1px !important;
+      color: #000000 !important;
+      margin: 0 !important;
+      white-space: normal !important;
+      line-height: 1.3 !important;
+      flex: 1 !important;
+    }
+
+    .s4-btn-watch-video {
+      width: 124px;
+      height: 42px;
+      border-radius: 26px;
+    }
+
+    .s4-btn-watch-text {
+      font-size: 14px;
+      letter-spacing: 1.2px;
+    }
+
+    .s4-divider-line {
+      margin: 6px 0 8px 0;
+    }
+
+    .s4-expanded-desc {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: #333333;
+    }
+  }
+
+  /* ------------------------------------------
+     SECTION 4 滾動動態: 4 階段序淡入 (最新使用者微調數值)
+     1. 小人本體 + 陰影淡入 -> 2. 背景大圓淡入 -> 3. 標題字淡入 -> 4. 其他物件一起淡入
+     ------------------------------------------ */
+  .s4-top-line {
+    top: var(--s4-man-y, -50px) !important;
+    left: calc(50% + var(--s4-man-x, 0px)) !important;
+    opacity: 0;
+    transform: translateX(-50%) translateY(-12px) scale(var(--s4-man-scale, 1)) rotate(var(--s4-man-rotate, 0deg));
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .s4-top-man {
+    top: var(--s4-svg-shd-y, 54.5px) !important;
+    left: calc(50% - 32px + var(--s4-svg-shd-x, -11px)) !important;
+    opacity: 0;
+    transform: translateY(-12px) scaleX(var(--s4-svg-shd-scalex, 1.15)) scaleY(var(--s4-svg-shd-scaley, 0.67)) skewX(var(--s4-svg-shd-skewx, -15.5deg)) rotate(var(--s4-svg-shd-rotate, 0deg));
+    filter: blur(var(--s4-svg-shd-blur, 2px));
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .s4-bg-ellipse {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.90);
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .s4-header-title, .s4-header-subtitle {
+    opacity: 0;
+    transform: translateY(-15px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .s4-tab-switcher, .s4-panels-container, .s4-cards-accordion {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Active 觸發狀態與時序控制 */
+  .s4-active .s4-top-line {
+    opacity: var(--s4-man-op, 1);
+    transform: translateX(-50%) translateY(0) scale(var(--s4-man-scale, 1)) rotate(var(--s4-man-rotate, 0deg));
+    transition-delay: 0.1s;
+  }
+  .s4-active .s4-top-man {
+    opacity: var(--s4-svg-shd-op, 0.6);
+    transform: translateY(0) scaleX(var(--s4-svg-shd-scalex, 1.15)) scaleY(var(--s4-svg-shd-scaley, 0.67)) skewX(var(--s4-svg-shd-skewx, -15.5deg)) rotate(var(--s4-svg-shd-rotate, 0deg));
+    transition-delay: 0.1s;
+  }
+  .s4-active .s4-bg-ellipse {
+    opacity: 0.95;
+    transform: translateX(-50%) scale(1);
+    transition-delay: 0.5s;
+  }
+  .s4-active .s4-header-title {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.9s;
+  }
+  .s4-active .s4-header-subtitle {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 1.05s;
+  }
+  .s4-active .s4-tab-switcher,
+  .s4-active .s4-panels-container,
+  .s4-active .s4-cards-accordion {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 1.3s;
+  }
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap');
+
+  .s5-global-container * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  .s5-global-container {
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-color: #fdfbf7;
+    padding: 40px 0;
+  }
+
+  /* ------------------------------------------
+     1. DESKTOP & TABLET VIEW (>= 688px)
+     ------------------------------------------ */
+  .s5-desktop-wrapper {
+    display: block;
+    width: 100%;
+    max-width: 1171px;
+    margin: 0 auto;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .s5-desktop-scaler {
+    width: 1171px;
+    height: 740px;
+    position: relative;
+    transform-origin: top left;
+    box-sizing: border-box;
+    font-family: 'Noto Serif TC', serif;
+  }
+
+  .s5-d-top-curve {
+    position: absolute;
+    top: -2px;
+    left: 704px;
+    width: 251px;
+    height: 203px;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .s5-d-subtitle-en {
+    position: absolute;
+    top: 201px;
+    left: 141px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 1.2px;
+    color: #987A6B;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .s5-d-title-cn {
+    position: absolute;
+    top: 219px;
+    left: 141px;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.8;
+    letter-spacing: 1.92px;
+    color: #987A6B;
+    margin: 0;
+  }
+
+  .s5-d-slogan-block {
+    position: absolute;
+    top: 305px;
+    left: 141px;
+    display: flex;
+    align-items: flex-start;
+    gap: 26px;
+  }
+
+  .s5-d-accent-line {
+    width: 3px;
+    height: 155px;
+    background: #987A6B;
+    flex-shrink: 0;
+    border-radius: 3px;
+    margin-top: 4px;
+  }
+
+  .s5-d-slogan-text {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 1.8;
+    letter-spacing: 4px;
+    color: #232323;
+    margin: 0;
+    white-space: nowrap;
+  }
+  .s5-d-slogan-text p {
+    margin: 0;
+  }
+
+  .s5-d-desc {
+    position: absolute;
+    top: 488px;
+    left: 141px;
+    width: 545px;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.6;
+    letter-spacing: 0.48px;
+    color: #000000;
+    margin: 0;
+  }
+
+  .s5-d-photo-frame {
+    position: absolute;
+    top: 198px;
+    left: 738px;
+    width: 433px;
+    height: 433px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: none;
+    background: #F3F3F3;
+    z-index: 5;
+  }
+  .s5-d-photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .s5-d-bottom-arc {
+    position: absolute;
+    top: 625.89px;
+    left: 855px;
+    width: 103.65px;
+    height: 103.65px;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .s5-d-bottom-line {
+    position: absolute;
+    top: 725.22px;
+    left: 0;
+    width: 856px;
+    height: 4.32px;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  /* ------------------------------------------
+     2. MOBILE VIEW (<= 687px) - 用戶微調確認數值
+     ------------------------------------------ */
+  .s5-mobile-wrapper {
+    display: none;
+    width: 100%;
+    max-width: 767.98px;
+    margin: 0 auto;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .s5-mobile-scaler {
+    width: 375px;
+    height: 790px;
+    position: relative;
+    transform-origin: top center;
+    box-sizing: border-box;
+    font-family: 'Noto Serif TC', serif;
+    margin: 0 auto;
+  }
+
+  /* 手機版第一段頂線 (用戶指定: top: 2.00px; left: 88.40px;) */
+  .s5-m-top-curve {
+    position: absolute;
+    top: 2.00px;
+    left: 88.40px;
+    width: 93.5px;
+    height: 107.86px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 3;
+  }
+  .s5-m-top-curve-inner {
+    width: 93.5px;
+    height: 107.86px;
+    transform: rotate(180.0deg) scale(1.00);
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .s5-m-top-arch {
+    position: absolute;
+    top: 107.5px;
+    left: 0;
+    width: 88.99px;
+    height: 107.12px;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .s5-m-left-line {
+    position: absolute;
+    top: 212px;
+    left: 0;
+    width: 2.32px;
+    height: 477.66px;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .s5-m-subtitle-en {
+    position: absolute;
+    top: 205px;
+    left: 37px;
+    width: 276px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 0.48px;
+    color: #987A6B;
+    margin: 0;
+  }
+
+  .s5-m-title-cn {
+    position: absolute;
+    top: 223px;
+    left: 37px;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.8;
+    letter-spacing: 0.96px;
+    color: #987A6B;
+    margin: 0;
+  }
+
+  .s5-m-accent-line {
+    position: absolute;
+    top: 258px;
+    left: 37px;
+    width: 1px;
+    height: 61px;
+    background: #987A6B;
+    z-index: 3;
+  }
+
+  .s5-m-slogan-text {
+    position: absolute;
+    top: 260px;
+    left: 49px;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.8;
+    letter-spacing: 1.6px;
+    color: #232323;
+    margin: 0;
+    white-space: nowrap;
+  }
+  .s5-m-slogan-text p {
+    margin: 0;
+  }
+
+  .s5-m-photo-frame {
+    position: absolute;
+    top: 341px;
+    left: 72.5px;
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: none;
+    background: #F3F3F3;
+    z-index: 5;
+  }
+  .s5-m-photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .s5-m-desc {
+    position: absolute;
+    top: 607px;
+    left: 35px;
+    width: 295px;
+    max-width: calc(100% - 70px);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.6;
+    letter-spacing: 0.42px;
+    color: #232323;
+    text-align: justify;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
+    margin: 0;
+  }
+
+  .s5-m-bottom-arc {
+    position: absolute;
+    top: 689px;
+    left: 0;
+    width: 101.15px;
+    height: 101.15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 3;
+  }
+  .s5-m-bottom-arc-inner {
+    width: 101.15px;
+    height: 101.15px;
+    transform: scaleY(-1) rotate(180deg);
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .s5-m-bottom-line {
+    position: absolute;
+    top: 787.78px;
+    left: 99.83px;
+    width: 282.5px;
+    height: 2.37px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 3;
+  }
+  .s5-m-bottom-line-inner {
+    width: 282.5px;
+    height: 2.37px;
+    transform: scaleY(-1) rotate(180deg);
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  @media screen and (max-width: 767.98px) {
+    .s5-desktop-wrapper {
+      display: none !important;
+    }
+    .s5-mobile-wrapper {
+      display: block !important;
+    }
+  }
+
+  /* ------------------------------------------
+     3. 滾動動態 (Scroll Animations) 初始狀態與 Active 狀態
+     ------------------------------------------ */
+  .s5-anim-text-1,
+  .s5-anim-text-2,
+  .s5-anim-text-3,
+  .s5-anim-text-4 {
+    opacity: 0;
+    transform: translateY(-15px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .s5-d-photo-frame, .s5-m-photo-frame {
+    opacity: 0;
+    transform: scale(0.88);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .s5-line-path path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    transition: stroke-dashoffset 0.8s linear;
+  }
+  .s5-desktop-wrapper .s5-line-path path {
+    stroke-width: 3px !important;
+  }
+  .s5-mobile-wrapper .s5-line-path path {
+    stroke-width: 1px !important;
+  }
+
+  .s5-active .s5-line-path path {
+    stroke-dashoffset: 0;
+  }
+
+  .s5-active .s5-anim-text-1,
+  .s5-active .s5-anim-text-2,
+  .s5-active .s5-anim-text-3,
+  .s5-active .s5-anim-text-4 {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .s5-active .s5-d-photo-frame,
+  .s5-active .s5-m-photo-frame {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+.wf-sec6-wrapper * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-shadow: none !important;
+    outline: none !important;
+    border: none !important;
+  }
+
+  .wf-sec6-wrapper {
+    width: 100%;
+    background-color: transparent !important;
+    position: relative;
+    font-family: "Noto Serif TC", "Playfair Display", serif, sans-serif;
+    color: #333333;
+  }
+
+  /* ------------------------------------------
+     桌面版 Sticky 視口釘住與 4 階段滾動容器 (>= 688px)
+     ------------------------------------------ */
+  .wf-sec6-desktop-sticky-track {
+    width: 100%;
+    height: 350vh; /* 4 階段滾動軌道 */
+    position: relative;
+    background-color: transparent !important;
+  }
+
+  .wf-sec6-desktop-sticky-inner {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: transparent !important;
+  }
+
+  .wf-sec6-desktop-outer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .wf-sec6-desktop-canvas {
+    width: 1221px;
+    height: 936px;
+    position: relative;
+    transform-origin: center center;
+    flex-shrink: 0;
+    background-color: transparent !important;
+  }
+
+  /* 桌面資產 5 1 標籤 (165px, 0px, 59px, 0deg) */
+  .wf-sec6-asset-tag {
+    position: absolute;
+    left: 165px;
+    top: 0px;
+    width: 59px;
+    height: 74.09px;
+    transform: rotate(0deg);
+    z-index: 15;
+    transition: transform 0.3s ease;
+  }
+  .wf-sec6-asset-tag img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* 桌面手電筒 Vector 圖示 (221px, 30px, 26px, scaleX(-1) rotate(6.5deg)) */
+  .wf-sec6-flashlight-icon {
+    position: absolute;
+    left: 221px;
+    top: 30px;
+    width: 26px;
+    height: 30px;
+    transform: scaleX(-1) rotate(6.5deg);
+    z-index: 15;
+    transition: transform 0.3s ease;
+  }
+  .wf-sec6-flashlight-icon img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* 桌面放射虛線 SVG (z-index: 8 -> 圖片 z-index 5 之上，標題 z-index 10 之下) */
+  .wf-sec6-d-ray-svg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1221px;
+    height: 936px;
+    z-index: 8 !important; /* 圖片之上、標題之下 */
+    pointer-events: none;
+    overflow: visible !important;
+    transition: opacity 0.4s ease;
+  }
+
+  /* 放射虛線樣式 (預設 stroke-dashoffset: 2500，階段 0~1 慢慢繪製顯現) */
+  .wf-sec6-d-ray-line {
+    stroke-dashoffset: 2500;
+    transition: stroke-dashoffset 0.1s linear;
+  }
+
+  /* 數字標題與動態內文組 (z-index: 10 > ray z-index: 8) */
+  .wf-sec6-header-group {
+    position: absolute;
+    left: 206px;
+    top: 255px;
+    display: flex;
+    align-items: baseline;
+    gap: 25px;
+    z-index: 10 !important;
+    transition: left 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
+  }
+
+  .wf-sec6-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 96px;
+    font-weight: 400;
+    color: #987a6b;
+    line-height: 1;
+    letter-spacing: 3.84px;
+  }
+
+  .wf-sec6-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #987a6b;
+    letter-spacing: 0.96px;
+  }
+
+  .wf-sec6-desc {
+    position: absolute;
+    left: 206px;
+    top: 845px;
+    width: 320px;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.6;
+    color: #000000;
+    letter-spacing: 0.48px;
+    text-align: justify;
+    z-index: 10 !important;
+    transition: left 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
+  }
+
+  /* 桌面圓形圖案區域 (z-index: 5 < ray z-index: 8) */
+  .wf-sec6-circle-card {
+    position: absolute;
+    border-radius: 50%;
+    overflow: hidden !important;
+    background: transparent !important;
+    z-index: 5 !important;
+    cursor: pointer;
+    transition: left 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                top 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                width 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                height 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                filter 0.3s ease;
+  }
+  .wf-sec6-circle-card:hover {
+    filter: brightness(1.04);
+  }
+
+  .wf-sec6-circle-1 {
+    left: 153px;
+    top: 368px;
+    width: 448px;
+    height: 448px;
+  }
+
+  .wf-sec6-circle-2 {
+    left: 627px;
+    top: 540.2px;
+    width: 276px;
+    height: 276px;
+  }
+
+  .wf-sec6-circle-3 {
+    left: 928px;
+    top: 540.2px;
+    width: 276px;
+    height: 276px;
+  }
+
+  .wf-sec6-circle-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 50%;
+    transform: scale(1);
+    transform-origin: center center;
+  }
+
+  /* 幾何貫穿橫線與咖啡色漸進填滿覆蓋層 */
+  .wf-sec6-line-wrapper {
+    position: absolute;
+    height: 0px;
+    overflow: visible;
+  }
+
+  .wf-sec6-line-109 {
+    left: 0px;
+    top: 820px;
+    width: 283px;
+  }
+  .wf-sec6-line-109 img {
+    position: absolute;
+    top: -8.66px;
+    left: -0.66px;
+    width: 292.32px;
+    height: 17.32px;
+    max-width: none;
+    display: block;
+  }
+
+  .wf-sec6-line-107 {
+    left: 186px;
+    top: 820px;
+    width: 461px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .wf-sec6-line-107-rotate {
+    transform: rotate(180deg);
+    width: 461px;
+    height: 0px;
+    position: relative;
+  }
+  .wf-sec6-line-107-rotate img {
+    position: absolute;
+    top: -8.66px;
+    left: -8.66px;
+    width: 470.32px;
+    height: 17.32px;
+    max-width: none;
+    display: block;
+  }
+
+  .wf-sec6-line-103 {
+    left: 647px;
+    top: 820px;
+    width: 283px;
+  }
+  .wf-sec6-line-103 img {
+    position: absolute;
+    top: -8.66px;
+    left: -0.66px;
+    width: 292.32px;
+    height: 17.32px;
+    max-width: none;
+    display: block;
+  }
+
+  .wf-sec6-line-110 {
+    left: 930px;
+    top: 820px;
+    width: 187px;
+  }
+  .wf-sec6-line-110 img {
+    position: absolute;
+    top: -8.66px;
+    left: -8.66px;
+    width: 196.32px;
+    height: 17.32px;
+    max-width: none;
+    display: block;
+  }
+
+  /* 咖啡色實線動態填滿 Overlay Bar (819.2px, 統一厚度 1.5px) */
+  .wf-sec6-line-fill-bar {
+    position: absolute;
+    top: 819.2px;
+    left: 0;
+    height: 1.5px;
+    background-color: #987a6b;
+    width: 0px;
+    z-index: 12;
+    transition: width 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    border-radius: 2px;
+  }
+
+  /* 橫線上的 3 個圓點節點 (預設即為實心灰圓 #aca8a5，填滿時切換為實心深咖啡圓 #987a6b，支援點擊互動) */
+  .wf-sec6-node-dot {
+    position: absolute;
+    top: 820px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background-color: #aca8a5 !important; /* 實心灰色圓圈 */
+    border: 2px solid #aca8a5 !important;
+    transform: translate(-50%, -50%);
+    z-index: 13;
+    cursor: pointer;
+    transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .wf-sec6-node-dot:hover {
+    transform: translate(-50%, -50%) scale(1.3);
+  }
+
+  .wf-sec6-node-dot.filled {
+    background-color: #987a6b !important; /* 實心咖啡色圓圈 */
+    border-color: #987a6b !important;
+    transform: translate(-50%, -50%) scale(1.18);
+    box-shadow: 0 0 8px rgba(152, 122, 107, 0.5);
+  }
+
+  .wf-sec6-node-dot.filled:hover {
+    transform: translate(-50%, -50%) scale(1.35);
+  }
+
+  /* 精確對齊 Figma 線條結點與卡片 (Node 1: 206px, Node 2: 647px, Node 3: 930px) */
+  .wf-sec6-node-dot-1 { left: 206px; }
+  .wf-sec6-node-dot-2 { left: 647px; }
+  .wf-sec6-node-dot-3 { left: 930px; }
+
+  /* ------------------------------------------
+     手機版 (<= 687px 獨立排版)
+     ------------------------------------------ */
+  @media screen and (max-width: 767.98px) {
+    .wf-sec6-desktop-sticky-track {
+      display: none !important;
+    }
+
+    .wf-sec6-mobile-outer {
+      display: flex !important;
+      justify-content: center;
+      width: 100%;
+      background: transparent !important;
+      padding: 295px 0 40px 0;
+      overflow: visible !important;
+    }
+
+    .wf-sec6-mobile-canvas {
+      width: 375px;
+      height: 560px;
+      position: relative;
+      overflow: visible;
+      background: transparent !important;
+    }
+
+    .wf-sec6-m-flashlight {
+      position: absolute;
+      right: 96px;
+      top: -68px;
+      width: 21px;
+      height: 26px;
+      transform: rotate(11.5deg);
+      z-index: 15;
+    }
+    .wf-sec6-m-flashlight img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .wf-sec6-m-asset-tag {
+      position: absolute;
+      right: 38px;
+      top: -97px;
+      width: 59px;
+      height: 74.09px;
+      transform: scaleY(-1) rotate(180deg);
+      z-index: 15;
+    }
+    .wf-sec6-m-asset-tag img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .wf-sec6-m-ray-svg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 375px;
+      height: 560px;
+      z-index: 8 !important;
+      pointer-events: none;
+      overflow: visible !important;
+    }
+    .wf-sec6-m-ray-svg line {
+      stroke-width: 1px !important;
+    }
+
+    .wf-sec6-m-header-group {
+      position: absolute;
+      left: 96px;
+      top: 36px;
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      z-index: 10;
+    }
+
+    .wf-sec6-m-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      font-weight: 400;
+      color: #987a6b;
+      line-height: 1;
+      letter-spacing: 1.92px;
+    }
+
+    .wf-sec6-m-title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: #987a6b;
+      letter-spacing: 0.8px;
+    }
+
+    .wf-sec6-m-circle-card {
+      position: absolute;
+      left: 57.5px;
+      top: 104px;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      overflow: hidden !important;
+      background: transparent !important;
+      z-index: 5 !important;
+    }
+
+    .wf-sec6-m-circle-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      transform: scale(1);
+      transform-origin: center center;
+      transition: opacity 0.3s ease;
+    }
+
+    .wf-sec6-m-btn-left {
+      position: absolute;
+      left: 8px;
+      top: 216px;
+      width: 46px;
+      height: 46px;
+      min-width: 46px;
+      min-height: 46px;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 25;
+      overflow: visible;
+      filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.08));
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+    .wf-sec6-m-btn-right {
+      position: absolute;
+      right: 8px;
+      top: 216px;
+      width: 46px;
+      height: 46px;
+      min-width: 46px;
+      min-height: 46px;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 25;
+      overflow: visible;
+      filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.08));
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+    .wf-sec6-m-btn-left:active,
+    .wf-sec6-m-btn-right:active {
+      transform: scale(0.92);
+      filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.06));
+    }
+
+    .wf-sec6-m-btn-left img,
+    .wf-sec6-m-btn-right img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .wf-sec6-m-line-container {
+      position: absolute;
+      left: 0;
+      top: 390px;
+      width: 375px;
+      height: 10px;
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    .wf-sec6-m-line99 {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      width: 96px;
+      height: 6.65px;
+      overflow: hidden;
+    }
+    .wf-sec6-m-line99 img {
+      width: 102px;
+      height: 6.65px;
+      display: block;
+    }
+
+    .wf-sec6-m-line113 {
+      position: absolute;
+      left: 96px;
+      top: 0px;
+      width: 279px;
+      height: 6.65px;
+      overflow: hidden;
+    }
+    .wf-sec6-m-line113 img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 413.98px;
+      height: 6.65px;
+      transform: scaleX(-1);
+      transform-origin: 207px center;
+      display: block;
+    }
+
+    .wf-sec6-m-desc {
+      position: absolute;
+      left: 96px;
+      top: 412px;
+      width: 250px;
+      font-family: 'Noto Serif TC', serif;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.6;
+      color: #232323;
+      letter-spacing: 0.42px;
+      text-align: justify;
+      transition: opacity 0.3s ease;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .wf-sec6-mobile-outer {
+      display: none !important;
+    }
+  }
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap');
+
+  .wf-sec7-wrapper * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-shadow: none !important;
+    outline: none !important;
+    border: none !important;
+  }
+
+  .wf-sec7-wrapper {
+    width: 100%;
+    background-color: transparent !important;
+    position: relative;
+    font-family: "Noto Serif TC", serif;
+    color: #333333;
+    overflow: hidden;
+    overflow-x: clip;
+    max-width: 100vw;
+    padding: 40px 0;
+  }
+
+  /* ------------------------------------------
+     RWD 斷點切換 (Desktop >= 688px, Mobile < 688px)
+     ------------------------------------------ */
+  @media (min-width: 768px) {
+    .wf-sec7-desktop-outer { display: flex !important; }
+    .wf-sec7-mobile-outer { display: none !important; }
+  }
+
+  @media (max-width: 767.98px) {
+    .wf-sec7-desktop-outer { display: none !important; }
+    .wf-sec7-mobile-outer { display: flex !important; }
+  }
+
+  /* ------------------------------------------
+     桌面版與平板容器 (>= 688px) - 100% 原版還原
+     ------------------------------------------ */
+  .wf-sec7-desktop-outer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: visible;
+  }
+
+  .wf-sec7-desktop-canvas {
+    width: 1221px;
+    height: 800px;
+    position: relative;
+    transform-origin: center top;
+    flex-shrink: 0;
+    background-color: transparent;
+  }
+
+  /* 頂部主標題 */
+  .wf-sec7-main-title {
+    position: absolute;
+    left: 491px;
+    top: 149px;
+    font-family: "Swei Spring CJK TC", "Noto Serif TC", serif;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.8;
+    color: #232323;
+    letter-spacing: 1.92px;
+    white-space: nowrap;
+    z-index: 10;
+  }
+
+  /* 段落內文 */
+  .wf-sec7-description {
+    position: absolute;
+    left: 496px;
+    top: 219px;
+    width: 497px;
+    font-family: "Noto Serif TC", serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.6;
+    color: #000000;
+    letter-spacing: 0.48px;
+    text-align: justify;
+    z-index: 10;
+  }
+
+  /* 背景大迴旋裝飾線 SVG */
+  .wf-sec7-vector-svg {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 1221px;
+    height: 800px;
+    z-index: 2;
+    pointer-events: none;
+    overflow: visible;
+  }
+
+  .wf-sec7-vector-svg path {
+    stroke-width: 3px !important;
+    stroke-dasharray: 2500;
+    stroke-dashoffset: 2500;
+    transition: none;
+  }
+
+  /* 氣泡球與推球小人組區域 */
+  .wf-sec7-balls-container {
+    position: absolute;
+    left: 0px;
+    top: 275px;
+    width: 977px;
+    height: 527px;
+    z-index: 5;
+  }
+
+  /* 氣泡球通用容器 */
+  .wf-sec7-ball {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+
+  .wf-sec7-ball-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .wf-sec7-ball-text {
+    position: relative;
+    z-index: 2;
+    font-family: "Noto Sans TC", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #675d54;
+    letter-spacing: 1.8px;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  /* 1. 購屋流程 (157px x 157px, left: 99px, top: 139px) */
+  .wf-sec7-ball-1 {
+    left: 99px;
+    top: 139px;
+    width: 157px;
+    height: 157px;
+  }
+
+  /* 2. 貸款規劃 (157px x 157px, left: 291px, top: 139px) */
+  .wf-sec7-ball-2 {
+    left: 291px;
+    top: 139px;
+    width: 157px;
+    height: 157px;
+  }
+
+  /* 3. 設備挑選 (157px x 157px, left: 195px, top: 291px) */
+  .wf-sec7-ball-3 {
+    left: 195px;
+    top: 291px;
+    width: 157px;
+    height: 157px;
+  }
+
+  /* 4. 法律諮詢 (160px x 160px, left: 0px, top: 288px) */
+  .wf-sec7-ball-4 {
+    left: 0px;
+    top: 288px;
+    width: 160px;
+    height: 160px;
+  }
+
+  /* 5. 裝潢細節 (157px x 157px, left: 480px, top: 288px) */
+  .wf-sec7-ball-5 {
+    left: 480px;
+    top: 288px;
+    width: 157px;
+    height: 157px;
+  }
+
+  /* 推球小人 (man-push: left: 636px, top: 305px, width: 54.2px, height: 140.6px) */
+  .wf-sec7-man-push {
+    position: absolute;
+    left: 636px;
+    top: 305px;
+    width: 54.2px;
+    height: 140.6px;
+    z-index: 6;
+  }
+
+  .wf-sec7-man-push svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* 小人真實動態陰影 (Desktop) - 支援即時參數自訂 */
+  .wf-sec7-man-shadow {
+    position: absolute;
+    left: var(--s7-shadow-d-x, 601.5px);
+    top: var(--s7-shadow-d-y, 508.5px);
+    width: 71.3px;
+    height: 90.7px;
+    z-index: 4;
+    pointer-events: none;
+    transform-origin: top left;
+  }
+
+  .wf-sec7-man-shadow svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
+  }
+
+  /* ------------------------------------------
+     手機版容器 (< 688px) - 100% 依據 Figma Node 1308:9307
+     ------------------------------------------ */
+  .wf-sec7-mobile-outer {
+    width: 100%;
+    display: none;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .wf-sec7-mobile-canvas {
+    width: 346px;
+    height: 718px;
+    position: relative;
+    transform-origin: center top;
+    flex-shrink: 0;
+    background-color: transparent;
+  }
+
+  /* 頂部主標題 (Mobile) */
+  .wf-sec7-m-main-title {
+    position: absolute;
+    left: 14px;
+    top: 266px;
+    font-family: "Swei Spring CJK TC", "Noto Serif TC", serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.8;
+    color: #232323;
+    letter-spacing: 0.96px;
+    white-space: nowrap;
+    z-index: 10;
+  }
+
+  /* 段落內文 (Mobile) */
+  .wf-sec7-m-description {
+    position: absolute;
+    left: 14px;
+    top: 304px;
+    width: 312px;
+    font-family: "Noto Serif TC", serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.6;
+    color: #232323;
+    letter-spacing: 0.42px;
+    text-align: justify;
+    z-index: 10;
+  }
+
+  /* 背景大迴旋裝飾線 SVG (Mobile) */
+  .wf-sec7-m-vector-svg {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 346px;
+    height: 718px;
+    z-index: 2;
+    pointer-events: none;
+    overflow: visible;
+  }
+
+  .wf-sec7-m-vector-svg path {
+    stroke-width: 1px !important;
+    stroke-dasharray: 750;
+    stroke-dashoffset: 750;
+    transition: none;
+  }
+
+  /* 氣泡球 (Mobile) - 80px x 80px */
+  .wf-sec7-m-ball {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+    pointer-events: auto;
+  }
+
+  .wf-sec7-m-ball-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .wf-sec7-m-ball-text {
+    position: relative;
+    z-index: 2;
+    font-family: "Noto Sans TC", "Noto Serif TC", serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #675d54;
+    letter-spacing: 1.2px;
+    line-height: 1.8;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .wf-sec7-m-ball-1 { left: 40px; top: 523px; }
+  .wf-sec7-m-ball-2 { left: 120px; top: 523px; }
+  .wf-sec7-m-ball-3 { left: 0px; top: 593px; }
+  .wf-sec7-m-ball-4 { left: 80px; top: 593px; }
+  .wf-sec7-m-ball-5 { left: 209px; top: 593px; }
+
+  /* 推球小人 (Mobile) */
+  .wf-sec7-m-man-push {
+    position: absolute;
+    left: 286.84px;
+    top: 603px;
+    width: 27.37px;
+    height: 71.015px;
+    z-index: 6;
+  }
+
+  .wf-sec7-m-man-push svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* 小人真實動態陰影 (Mobile) - 支援即時參數自訂 */
+  .wf-sec7-m-man-shadow {
+    position: absolute;
+    left: var(--s7-shadow-m-x, 253px);
+    top: var(--s7-shadow-m-y, 721px);
+    width: 36.372px;
+    height: 45.782px;
+    z-index: 4;
+    pointer-events: none;
+    transform-origin: top left;
+  }
+
+  .wf-sec7-m-man-shadow svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
+  }
+
+  /* ------------------------------------------
+     滾動動態 (Scroll Animations) 初始狀態與 Active 狀態
+     ------------------------------------------ */
+  .wf-sec7-anim-title {
+    opacity: 0;
+    transform: translateY(-16px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .wf-sec7-anim-desc {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* 推球小人與陰影初始狀態：從右方 100px 平移淡入 (過程 2.5 秒) */
+  .wf-sec7-man-push {
+    opacity: 0;
+    transform: translateX(100px);
+    transition: opacity 2.5s cubic-bezier(0.22, 1, 0.36, 1), transform 2.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .wf-sec7-man-shadow {
+    opacity: 0;
+    transform: translateX(100px) scaleY(var(--s7-shadow-d-sy, -0.8)) scaleX(var(--s7-shadow-d-sx, 1.1)) rotate(var(--s7-shadow-d-rot, -3deg)) skewX(var(--s7-shadow-d-skew, 12deg));
+    transition: opacity 2.5s cubic-bezier(0.22, 1, 0.36, 1), transform 2.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* 推的球 (Ball 5 "裝潢細節") 初始狀態：從右方 100px + 反向 70 度角推入 (過程 2.5 秒) */
+  .wf-sec7-ball-5 {
+    opacity: 0;
+    transform: translateX(100px) rotate(70deg);
+    transition: opacity 2.5s cubic-bezier(0.22, 1, 0.36, 1), transform 2.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* 其餘 4 顆氣泡球 (Ball 1 ~ 4) 初始狀態：與推球小人同步出現 (過程 2.5 秒) */
+  .wf-sec7-ball-other {
+    opacity: 0;
+    transform: scale(0.88);
+    transition: opacity 2.5s cubic-bezier(0.22, 1, 0.36, 1), transform 2.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* 手機版動態初始 */
+  .wf-sec7-m-man-push {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 2.0s cubic-bezier(0.22, 1, 0.36, 1), transform 2.0s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .wf-sec7-m-man-shadow {
+    opacity: 0;
+    transform: translateX(50px) scaleY(var(--s7-shadow-m-sy, -1.25)) scaleX(var(--s7-shadow-m-sx, 1.2)) rotate(var(--s7-shadow-m-rot, -3deg)) skewX(var(--s7-shadow-m-skew, 25deg));
+    transition: opacity 2.0s cubic-bezier(0.22, 1, 0.36, 1), transform 2.0s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .wf-sec7-m-ball-5 {
+    opacity: 0;
+    transform: translateX(50px) rotate(45deg);
+    transition: opacity 2.0s cubic-bezier(0.22, 1, 0.36, 1), transform 2.0s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .wf-sec7-m-ball-other {
+    opacity: 0;
+    transition: opacity 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* 觸發 Active 狀態 */
+  .wf-sec7-active .wf-sec7-anim-title,
+  .wf-sec7-active .wf-sec7-anim-desc {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  .wf-sec7-active .wf-sec7-man-push {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+  }
+
+  .wf-sec7-active .wf-sec7-man-shadow {
+    opacity: var(--s7-shadow-d-op, 0.6) !important;
+    transform: translateX(0) scaleY(var(--s7-shadow-d-sy, -0.8)) scaleX(var(--s7-shadow-d-sx, 1.1)) rotate(var(--s7-shadow-d-rot, -3deg)) skewX(var(--s7-shadow-d-skew, 12deg)) !important;
+  }
+
+  .wf-sec7-active .wf-sec7-ball-5 {
+    opacity: 1 !important;
+    transform: translateX(0) rotate(0deg) !important;
+  }
+
+  .wf-sec7-active .wf-sec7-ball-other {
+    opacity: 1 !important;
+    transform: scale(1) !important;
+  }
+
+  .wf-sec7-active .wf-sec7-m-man-push {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+  }
+
+  .wf-sec7-active .wf-sec7-m-man-shadow {
+    opacity: var(--s7-shadow-m-op, 0.6) !important;
+    transform: translateX(0) scaleY(var(--s7-shadow-m-sy, -1.25)) scaleX(var(--s7-shadow-m-sx, 1.2)) rotate(var(--s7-shadow-m-rot, -3deg)) skewX(var(--s7-shadow-m-skew, 25deg)) !important;
+  }
+
+  .wf-sec7-active .wf-sec7-m-ball-5 {
+    opacity: 1 !important;
+    transform: translateX(0) rotate(0deg) !important;
+  }
+
+  .wf-sec7-active .wf-sec7-m-ball-other {
+    opacity: 1 !important;
+  }
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap');
+
+  .wf-sec8-wrapper * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-shadow: none !important;
+    outline: none !important;
+    border: none !important;
+  }
+
+  .wf-sec8-wrapper {
+    width: 100%;
+    background-color: #fdfbf7;
+    position: relative;
+    font-family: "Noto Serif TC", serif;
+    color: #333333;
+    overflow: visible !important;
+    padding: 20px 0 40px 0;
+  }
+
+  /* ------------------------------------------
+     桌面與平板容器 (>= 688px)
+     ------------------------------------------ */
+  @media (min-width: 768px) {
+    .wf-sec8-desktop-outer { display: flex !important; }
+    .wf-sec8-mobile-outer { display: none !important; }
+  }
+
+  @media (max-width: 767.98px) {
+    .wf-sec8-desktop-outer { display: none !important; }
+    .wf-sec8-mobile-outer { display: flex !important; }
+  }
+
+  .wf-sec8-desktop-outer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    overflow: visible !important;
+  }
+
+  .wf-sec8-desktop-canvas {
+    width: 1221px;
+    height: 1200px;
+    position: relative;
+    transform-origin: top center;
+    flex-shrink: 0;
+    background-color: transparent;
+    overflow: visible !important;
+  }
+
+  /* Figma 背景貫穿線條 SVG 組 (Desktop) */
+  .wf-sec8-line-top { position: absolute; left: 27px; top: 0px; width: 117.3px; height: 112.7px; z-index: 2; pointer-events: none; }
+  .wf-sec8-line-horiz { position: absolute; left: 144px; top: 112.7px; width: 777.5px; height: 4.3px; z-index: 2; pointer-events: none; }
+  .wf-sec8-line-loop { position: absolute; left: 921px; top: 113px; width: 116px; height: 747.5px; z-index: 2; pointer-events: none; }
+  .wf-sec8-line-bottom { position: absolute; left: 32.5px; top: 861px; width: 1004.5px; height: 113px; z-index: 2; pointer-events: none; }
+  .wf-sec8-desktop-outer .wf-sec8-line-path path {
+    stroke-width: 3px !important;
+  }
+  
+
+  /* 左側文字區塊 (Desktop) - 支援獨立微調 CSS 變數 */
+  .wf-sec8-subtitle { position: absolute; left: calc(68px + var(--s8-sub-x, 0px)); top: calc(284px + var(--s8-sub-y, 0px)); font-family: "Noto Sans TC", sans-serif; font-size: 12px; font-weight: 500; line-height: 1.5; color: #987a6b; letter-spacing: 1.2px; width: 276px; z-index: 10; }
+  .wf-sec8-category-title { position: absolute; left: calc(68px + var(--s8-cat-x, 0px)); top: calc(302px + var(--s8-cat-y, 0px)); font-family: "Swei Spring CJK TC", "Noto Serif TC", serif; font-size: 32px; font-weight: 600; line-height: 1.8; color: #987a6b; letter-spacing: 1.92px; white-space: nowrap; z-index: 10; }
+  .wf-sec8-vert-line { position: absolute; left: calc(68px + var(--s8-line-x, 0px)); top: calc(382px + var(--s8-line-y, 0px)); width: 3px; height: 155px; background-color: #987a6b; z-index: 10; transform-origin: top center; }
+  .wf-sec8-main-title { position: absolute; left: calc(96px + var(--s8-title-x, 0px)); top: calc(388px + var(--s8-title-y, 0px)); font-family: "Noto Serif TC", serif; font-size: 40px; font-weight: 500; line-height: 1.8; color: #232323; letter-spacing: 4px; white-space: nowrap; z-index: 10; }
+  .wf-sec8-description { position: absolute; left: calc(68px + var(--s8-desc-x, 0px)); top: calc(593px + var(--s8-desc-y, 0px)); width: calc(486px + var(--s8-desc-w, 0px)); font-family: "Noto Serif TC", serif; font-size: 16px; font-weight: 500; line-height: 1.6; color: #000000; letter-spacing: 0.48px; text-align: justify; z-index: 10; }
+
+  /* 右側 3 個透明圓圈與外框 (Desktop) */
+  .wf-sec8-circle { position: absolute; width: 247px; height: 247px; z-index: 10; background: transparent !important; pointer-events: none; }
+  .wf-sec8-circle-1 { left: 663px; top: 265px; }
+  .wf-sec8-circle-2 { left: 663px; top: 444px; width: 248px; height: 248px; }
+  .wf-sec8-circle-3 { left: 664px; top: 624px; }
+
+  .wf-sec8-circle-text { position: absolute; font-family: "Noto Sans TC", sans-serif; font-size: 18px; font-weight: 500; color: #675d54; letter-spacing: 1.8px; white-space: nowrap; z-index: 11; }
+  .wf-sec8-text-1 { left: 728px; top: 367px; }
+  .wf-sec8-text-2 { left: 728px; top: 557px; }
+  .wf-sec8-text-3 { left: 748px; top: 748px; }
+
+  /* 交界處漸層月牙塊與裝飾線 (Desktop) */
+  .wf-sec8-gradient-1 { position: absolute; left: 701.55px; top: 442px; width: 170.4px; height: 68px; z-index: 5; pointer-events: none; }
+  .wf-sec8-gradient-2 { position: absolute; left: 701.55px; top: 625.5px; width: 170.4px; height: 68px; z-index: 5; pointer-events: none; }
+  .wf-sec8-intersect-1 { position: absolute; left: 701.55px; top: 441.5px; width: 170.4px; height: 68px; z-index: 7; pointer-events: none; }
+  .wf-sec8-intersect-2 { position: absolute; left: 701.55px; top: 625px; width: 170.4px; height: 68px; z-index: 7; pointer-events: none; }
+
+  /* 3 組小人實體與影子 (Desktop) */
+  .wf-sec8-man-1 { position: absolute; left: 29px; top: 872px; width: 57.4px; height: 101.7px; z-index: 8; }
+  .wf-sec8-man-2 { position: absolute; left: 135px; top: 921px; width: 36.1px; height: 53.2px; z-index: 8; }
+  .wf-sec8-man-3 { position: absolute; left: 721px; top: 187px; width: 65px; height: 112px; z-index: 12; }
+  .wf-sec8-man-3 svg { width: 100%; height: 100%; display: block; }
+
+  .wf-sec8-shadow { position: absolute; z-index: 6; pointer-events: none; transform-origin: top left; overflow: visible !important; }
+  .wf-sec8-shadow svg { width: 100%; height: 100%; display: block; overflow: visible !important; }
+
+  .wf-sec8-shadow-1 { left: -1px; top: 1042px; width: 80px; height: 110px; transform: scaleY(0.6) scaleX(-0.95) rotate(-176deg) skewX(19deg); opacity: 0.6; }
+  .wf-sec8-shadow-2 { left: 118.4px; top: 1030px; width: 47.9px; height: 41.0px; transform: scaleY(-0.96) scaleX(1) rotate(0deg) skewX(15deg); opacity: 0.6; }
+  .wf-sec8-shadow-3 { left: 684px; top: 257.5px; width: 83.6px; height: 56.1px; transform: scaleY(-0.85) scaleX(-1.25) rotate(-180deg) skewX(26deg); opacity: 0.6; }
+
+  /* ------------------------------------------
+     手機版容器與樣式 (< 688px)
+     ------------------------------------------ */
+  .wf-sec8-mobile-outer {
+    width: 100%;
+    display: none;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    overflow: visible !important;
+  }
+
+  .wf-sec8-mobile-canvas {
+    width: 375px;
+    height: 1140px;
+    position: relative;
+    transform-origin: top center;
+    flex-shrink: 0;
+    background-color: transparent;
+    overflow: visible !important;
+  }
+
+  /* 手機版貫穿線 (銜接校正: left: 161px; top: 112.14px) */
+  .wf-sec8-mob-line-top { position: absolute; left: 47px; top: 0px; width: 117.3px; height: 112.7px; z-index: 2; pointer-events: none; }
+  .wf-sec8-mob-line-horiz { position: absolute; left: 161px; top: 112.14px; width: 71px; height: 3px; z-index: 2; pointer-events: none; }
+  .wf-sec8-mob-line-loop { position: absolute; left: 230px; top: 112.14px; width: 116px; height: 801px; z-index: 2; pointer-events: none; }
+  .wf-sec8-mob-line-bottom { position: absolute; left: 24px; top: 913px; width: 322px; height: 113px; z-index: 2; pointer-events: none; }
+  .wf-sec8-mobile-outer .wf-sec8-line-path path {
+    stroke-width: 1px !important;
+  }
+  
+
+  /* 手機版文字區塊 - 支援獨立微調 CSS 變數 */
+  .wf-sec8-mob-subtitle { position: absolute; left: calc(34px + var(--s8-mb-sub-x, 0px)); top: calc(203px + var(--s8-mb-sub-y, 0px)); font-family: "Noto Sans TC", sans-serif; font-size: 12px; font-weight: 500; color: #987a6b; letter-spacing: 0.48px; width: 276px; z-index: 10; }
+  .wf-sec8-mob-category-title { position: absolute; left: calc(34px + var(--s8-mb-cat-x, 0px)); top: calc(221px + var(--s8-mb-cat-y, 0px)); font-family: "Swei Spring CJK TC", "Noto Serif TC", serif; font-size: 16px; font-weight: 600; color: #987a6b; letter-spacing: 0.96px; white-space: nowrap; z-index: 10; }
+  .wf-sec8-mob-vert-line { position: absolute; left: calc(34px + var(--s8-mb-line-x, 0px)); top: calc(256px + var(--s8-mb-line-y, 0px)); width: 1px; height: 61px; background-color: #987a6b; z-index: 10; transform-origin: top center; }
+  .wf-sec8-mob-main-title { position: absolute; left: calc(46px + var(--s8-mb-title-x, 0px)); top: calc(258px + var(--s8-mb-title-y, 0px)); font-family: "Noto Serif TC", serif; font-size: 16px; font-weight: 600; line-height: 1.8; color: #232323; letter-spacing: 1.6px; white-space: nowrap; z-index: 10; }
+  .wf-sec8-mob-description { position: absolute; left: calc(21px + var(--s8-mb-desc-x, 0px)); top: calc(746px + var(--s8-mb-desc-y, 0px)); width: calc(312px + var(--s8-mb-desc-w, 0px)); font-family: "Noto Serif TC", serif; font-size: 14px; font-weight: 500; line-height: 1.6; color: #232323; letter-spacing: 0.42px; text-align: justify; z-index: 10; }
+
+  .wf-sec8-mob-circle { position: absolute; width: 118px; height: 118px; z-index: 10; background: transparent !important; pointer-events: none; }
+  .wf-sec8-mob-circle-1 { left: 118px; top: 392px; }
+  .wf-sec8-mob-circle-2 { left: 118px; top: 487px; }
+  .wf-sec8-mob-circle-3 { left: 118px; top: 582px; }
+
+  .wf-sec8-mob-circle-text { position: absolute; font-family: "Noto Sans TC", sans-serif; font-size: 15px; font-weight: 500; color: #675d54; letter-spacing: 1.5px; white-space: nowrap; z-index: 11; }
+  .wf-sec8-mob-text-1 { left: 128px; top: 437px; }
+  .wf-sec8-mob-text-2 { left: 129px; top: 536px; }
+  .wf-sec8-mob-text-3 { left: 144px; top: 632px; }
+
+  .wf-sec8-mob-gradient-1 { position: absolute; left: 142px; top: 487px; width: 70px; height: 23px; z-index: 5; pointer-events: none; }
+  .wf-sec8-mob-gradient-2 { position: absolute; left: 142px; top: 582px; width: 70px; height: 23px; z-index: 5; transform: scaleY(-1); pointer-events: none; }
+
+  .wf-sec8-mob-intersect-1 { position: absolute; left: 142px; top: 487px; width: 70px; height: 23px; z-index: 7; transform: scaleY(-1); pointer-events: none; }
+  .wf-sec8-mob-intersect-2 { position: absolute; left: 142px; top: 582px; width: 70px; height: 23px; z-index: 7; pointer-events: none; }
+
+  /* 最新 Mobile 陰影數值 */
+  .wf-sec8-mob-man-3 { position: absolute; left: 136px; top: 362px; width: 32px; height: 55px; z-index: 12; }
+  .wf-sec8-mob-shadow-3 { position: absolute; left: 117px; top: 378px; width: 36px; height: 38px; z-index: 6; pointer-events: none; transform: scaleY(1.8) scaleX(1.45) rotate(0deg) skewX(25deg); opacity: 0.6; transform-origin: top left; overflow: visible !important; }
+  .wf-sec8-mob-shadow-3 svg { width: 100%; height: 100%; display: block; overflow: visible !important; }
+
+  .wf-sec8-mob-man-1 { position: absolute; left: 19.75px; top: 957px; width: 39.1px; height: 69.2px; z-index: 8; }
+  .wf-sec8-mob-shadow-1 { position: absolute; left: 45px; top: 1073.5px; width: 51.6px; height: 50.8px; z-index: 6; pointer-events: none; transform: scaleY(1.05) scaleX(1.2) rotate(-176deg) skewX(-18deg); opacity: 0.6; transform-origin: top left; overflow: visible !important; }
+  .wf-sec8-mob-shadow-1 svg { width: 100%; height: 100%; display: block; overflow: visible !important; }
+
+  .wf-sec8-mob-man-2 { position: absolute; left: 235.6px; top: 991px; width: 25px; height: 37px; z-index: 8; }
+  .wf-sec8-mob-shadow-2 { position: absolute; left: 222.4px; top: 1062.5px; width: 32.6px; height: 27.9px; z-index: 6; pointer-events: none; transform: scaleY(-1.5) scaleX(1.7) rotate(0deg) skewX(-3deg); opacity: 0.6; transform-origin: top left; overflow: visible !important; }
+  .wf-sec8-mob-shadow-2 svg { width: 100%; height: 100%; display: block; overflow: visible !important; }
+
+
+  /* ------------------------------------------
+     滾動動態 (Scroll Animations) 初始狀態與動畫
+     ------------------------------------------ */
+  .wf-sec8-anim-top {
+    opacity: 0;
+    transform: translateY(-16px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .wf-sec8-anim-bottom {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .wf-sec8-anim-scalev {
+    opacity: 0;
+    transform: scaleY(0);
+    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  
+  /* 坐姿小人下方圓圈整體區塊淡入 (統一整個區塊淡入) */
+  .wf-sec8-anim-circles-block {
+    opacity: 1;
+    transition: opacity 0.85s linear;
+  }
+
+  /* 奔跑/走路小人移動淡入 (Man 2 + Shadow 2) */
+  .wf-sec8-man2-group {
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  
+  /* 媽媽抱小孩淡入 (Man 1 + Shadow 1) */
+  .wf-sec8-man1-group {
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity: 0;
+  }
+
+  /* 坐姿小人淡入 (Man 3 + Shadow 3) */
+  .wf-sec8-man3-group {
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity: 1;
+  }
+
+  /* 當進入視窗觸發 .wf-sec8-active 時 */
+  .wf-sec8-active .wf-sec8-anim-top,
+  .wf-sec8-active .wf-sec8-anim-bottom {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .wf-sec8-active .wf-sec8-anim-scalev {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+  .wf-sec8-active .wf-sec8-anim-circles-block {
+    opacity: 1;
+  }
+  .wf-sec8-active .wf-sec8-man2-group {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .wf-sec8-active .wf-sec8-man1-group {
+    opacity: 1;
+  }
+  .wf-sec8-active .wf-sec8-man3-group {
+    opacity: 1;
+  }
+
+
+  /* ✒️ 線段端點與弧線位移（桌面）：橫線只改兩端點、弧線只位移 */
+  .fp-master-container {
+  --s2p1-arc1-x: 0px;
+  --s2p1-arc1-y: 0px;
+  --s2p1-h1-start: 309.66px;
+  --s2p1-h1-end: 1039.92px;
+  --s2p1-h1-y: 227.9px;
+  --s2p1-arc2-x: 0px;
+  --s2p1-arc2-y: 0px;
+  --s2p2-arc1-x: 0px;
+  --s2p2-arc1-y: 0px;
+  --s2p2-h1-start: 115.14px;
+  --s2p2-h1-end: 798.16px;
+  --s2p2-h1-y: 115.16px;
+  --s2p2-arc2-x: 0px;
+  --s2p2-arc2-y: 0px;
+  --s2p2-h2-start: -77px;
+  --s2p2-h2-end: 798px;
+  --s2p2-h2-y: 610.16px;
+  --s2p34-arc1-x: 0px;
+  --s2p34-arc1-y: 1px;
+  --s2p34-h1-start: 112.65px;
+  --s2p34-h1-end: 927px;
+  --s2p34-h1-y: 342px;
+  --s2p34-arc2-x: 0px;
+  --s2p34-arc2-y: 0px;
+  --s2p34-h2-start: 737px;
+  --s2p34-h2-end: 927px;
+  --s2p34-h2-y: 836px;
+  --s2p34-arc3-x: 24.91px;
+  --s2p34-arc3-y: 0px;
+  --s5-arc1-x: 0px;
+  --s5-arc1-y: 0px;
+  --s5-h1-start: 805.49px;
+  --s5-h1-end: 854.16px;
+  --s5-h1-y: 99.6px;
+  --s5-arc2-x: 0px;
+  --s5-arc2-y: 0px;
+  --s5-arc3-x: 0px;
+  --s5-arc3-y: 0px;
+  --s5-h2-start: -600px;
+  --s5-h2-end: 857.16px;
+  --s5-h2-y: 727.38px;
+  --s6-step1-x: 283px;
+  --s6-step2-x: 647px;
+  --s6-step3-x: 930px;
+  --s6-h1-start: -600px;
+  --s6-h1-end: 283px;
+  --s6-h-y: 855px;
+  --s6-h2-start: 283px;
+  --s6-h2-end: 647px;
+  --s6-h3-start: 647px;
+  --s6-h3-end: 930px;
+  --s6-h4-start: 930px;
+  --s6-h4-end: 1131.87px;
+  --s7-arc1-x: 4.4px;
+  --s7-arc1-y: -6.32px;
+  --s7-h1-start: 448px;
+  --s7-h1-end: 956.87px;
+  --s7-h1-y: 490.84px;
+  --s8-arc1-x: 0px;
+  --s8-arc1-y: 0px;
+  --s8-h1-start: 141.85px;
+  --s8-h1-end: 923.16px;
+  --s8-h1-y: 114.9px;
+  --s8-arc2-x: 0px;
+  --s8-arc2-y: 0px;
+  --s8-v1-start: 230.65px;
+  --s8-v1-end: 862.66px;
+  --s8-v1-x: 1039.16px;
+  --s8-arc3-x: 0px;
+  --s8-arc3-y: 0px;
+  --s8-h2-start: 34.66px;
+  --s8-h2-end: 926.17px;
+  --s8-h2-y: 976.13px;
+  }
+  svg path.fp-seg.fp-seg.fp-seg {
+    stroke: var(--brand-line-color, #675D54) !important;
+    stroke-width: var(--brand-line-width, 3px) !important;
+    stroke-linecap: round !important;
+    stroke-miterlimit: 10 !important;
+    fill: none !important;
+    filter: none !important;
+    stroke-dasharray: 1 !important;
+    stroke-dashoffset: 1 !important;
+    transition: stroke-dashoffset var(--fp-d, 1s) linear var(--fp-dl, 0s) !important;
+  }
+  .s2p1-active svg path.fp-seg.fp-seg.fp-seg[data-chain="s2p1"],
+  .s2p2-active svg path.fp-seg.fp-seg.fp-seg[data-chain="s2p2"],
+  .s2p34-active svg path.fp-seg.fp-seg.fp-seg[data-chain="s2p34"],
+  .s5-active svg path.fp-seg.fp-seg.fp-seg[data-chain="s5top"],
+  .s6-seat-holder.is-drawn svg path.fp-seg.fp-seg.fp-seg[data-chain="s5seat"],
+  .wf-sec7-active svg path.fp-seg.fp-seg.fp-seg[data-chain="s7"],
+  .wf-sec8-active svg path.fp-seg.fp-seg.fp-seg[data-chain="s8"] {
+    stroke-dashoffset: 0 !important;
+  }
+  svg path.fp-track.fp-track {
+    stroke: #E0E0E0 !important;
+    stroke-width: var(--brand-line-width, 3px) !important;
+    stroke-linecap: round !important;
+    fill: none !important;
+    stroke-dasharray: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+
+  

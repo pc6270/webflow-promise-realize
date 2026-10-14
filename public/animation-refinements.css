@@ -1,0 +1,50 @@
+.s2p34-active .s2p34-man-body img,
+.s2p34-active .s2p34-mb-man-body img{animation:fp-person-forward .6s ease-out 1s both;--person-entry:-20px}
+.s2p34-active .s2p34-woman-body img{animation:fp-person-forward .6s ease-out 2.5s both;--person-entry:20px}
+@keyframes fp-person-forward{from{translate:var(--person-entry) 0;opacity:0}to{translate:0 0;opacity:1}}
+.s6-seat-holder.fp-seat-sequence svg path.fp-seg.fp-seg.fp-seg{stroke-dasharray:1!important;stroke-dashoffset:1!important;transition:stroke-dashoffset .5s linear!important}
+.s6-seat-holder.fp-seat-sequence .s6-seat-line svg path.fp-seg.fp-seg.fp-seg{transition:stroke-dashoffset .7s linear .5s!important}
+.s6-seat-holder.fp-seat-sequence.is-drawn svg path.fp-seg.fp-seg.fp-seg{stroke-dashoffset:0!important}
+@media(prefers-reduced-motion:reduce){.s2p34-active .s2p34-man-body img,.s2p34-active .s2p34-mb-man-body img,.s2p34-active .s2p34-woman-body img{animation:none}.s6-seat-holder.fp-seat-sequence svg path.fp-seg.fp-seg.fp-seg{transition:none!important}}
+
+/* Figma 357:5961: retain the existing three interactive tabs. */
+.s4-tab-track{background:linear-gradient(90deg,rgba(250,247,242,.86),rgba(245,243,240,.86));box-shadow:2px 2px 6px rgba(168,154,148,.63);overflow:visible!important;clip-path:none}
+.s4-tab-glow{left:0!important;width:31.403%!important;height:100%!important;top:0!important;background:radial-gradient(ellipse at center,rgba(152,122,107,.79),rgba(189,174,168,0));filter:blur(9.8px)}
+.s4-tab-active-pill{left:1.114%!important;width:29.245%!important;top:9.574%!important;height:81.049%!important;box-sizing:border-box;border:2px solid rgba(227,227,229,.6);background:radial-gradient(ellipse 64.61% 98.93% at 50% 50%,#987a6b 0%,rgba(189,174,168,.7) 69.775%,rgba(227,227,229,.6) 90.868%);box-shadow:5px 5px 7.7px rgba(145,139,136,.4)}
+.s4-tab-active-pill::before{display:none}
+.s4-tab-btn-title{line-height:normal;font-weight:500}
+.s4-tab-btn-subtitle{color:#232323;font-weight:500}
+.s4-tab-btn.active .s4-tab-btn-title,.s4-tab-btn.active .s4-tab-btn-subtitle{color:#faf7f2;opacity:1}
+@media(max-width:767px){
+ #wf-sec7-root .wf-sec7-m-vector-svg path{stroke-dasharray:1!important;stroke-dashoffset:1!important;transition:stroke-dashoffset 1.8s linear!important}
+ #wf-sec7-root.wf-sec7-active .wf-sec7-m-vector-svg path{stroke-dashoffset:0!important}
+ .s4-tab-glow{filter:blur(4px)}
+ .s4-tab-active-pill{border-width:1px;box-shadow:2px 2px 4px rgba(145,139,136,.4)}
+}
+
+/* Diagonal inner gradient rims and matte glass highlights. */
+.s4-tab-active-pill{border:0;background:radial-gradient(ellipse at center,#987a6b 0%,rgba(189,174,168,.7) 69.775%,rgba(227,227,229,.6) 90.868%);backdrop-filter:blur(8px);box-shadow:inset 1px 1px 2px rgba(255,255,255,.32),inset -1px -1px 2px rgba(152,122,107,.15),5px 5px 7.7px rgba(145,139,136,.4)}
+.s4-tab-active-pill::before{display:block;content:'';position:absolute;inset:0;border-radius:inherit;padding:2px;background:linear-gradient(135deg,rgba(227,227,229,.6),rgba(152,122,107,.28));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.s4-tab-track{box-shadow:inset 1px 1px 2px rgba(255,255,255,.45),2px 2px 6px rgba(168,154,148,.63);backdrop-filter:blur(8px)}
+.s4-btn-watch-video{width:138px;height:76px!important;flex-shrink:0;background:none!important;box-shadow:none!important;isolation:isolate;border-radius:30px;overflow:visible}
+.s4-btn-watch-video::before{inset:19.06% 5.79% 18.49% 5.49%;padding:1px;z-index:2;background:linear-gradient(135deg,rgba(227,227,229,.6),rgba(213,213,213,.6))}
+.s4-btn-watch-video::after{content:'';position:absolute;inset:19.06% 5.79% 18.49% 5.49%;border-radius:30px;z-index:-1;background:radial-gradient(ellipse at center,rgba(159,159,159,.8),rgba(198,198,198,.7) 53.846%,rgba(227,227,229,.6) 90.868%);backdrop-filter:blur(8px);box-shadow:inset 1px 1px 2px rgba(255,255,255,.3),2px 2px 8px rgba(0,0,0,.25),0 0 12px rgba(159,159,159,.18)}
+.s4-btn-watch-text{font-size:18px;letter-spacing:1.8px;font-weight:500;line-height:normal}
+#inspection-video-modal{position:fixed;inset:0;margin:0;padding:0;border:0;width:100vw;max-width:none;height:100dvh;max-height:none;background:transparent;color:white;overflow:hidden}
+#inspection-video-modal::backdrop{background:rgba(2,2,2,.6)}
+.inspection-video-frame{position:absolute;left:50%;top:50%;translate:-50% -50%;width:min(79.375vw,1143px);max-width:calc(100vw - 32px);aspect-ratio:1143/643;max-height:80dvh;background:#d9d9d9;display:grid;place-items:center;color:#675d54}
+.inspection-video-frame video,.inspection-video-frame iframe{width:100%;height:100%;border:0;display:block}
+.inspection-video-close{position:absolute;right:5%;top:5.55%;display:flex;align-items:center;gap:9px;border:0;background:transparent;color:white;cursor:pointer;font:24px 'Bacasime Antique',Georgia,serif;letter-spacing:.96px;padding:0}
+.inspection-video-close img{width:25px;height:25px}
+@media(max-width:767px){.inspection-video-frame{width:calc(100vw - 32px)}.s4-btn-watch-text{font-size:14px}.s4-btn-watch-video{width:118px;height:66px!important}}
+
+/* Keep S1 circles in front of the incoming S2 arc on both layouts. */
+.fp-sec1-wrapper{z-index:10!important}
+.s1-circle-node-1,.s1-circle-node-2,.s1-circle-node-3{background:#faf7f2;border-radius:50%}
+.inspection-video-close{width:116px;height:29px;display:block;overflow:hidden;font-family:'Big Caslon CC','Big Caslon',Georgia,serif;font-size:20px;letter-spacing:.4px;line-height:25px;text-align:left}
+.inspection-close-roll{display:flex;flex-direction:column;gap:4px;transition:transform .3s cubic-bezier(.25,1,.5,1)}
+.inspection-close-row{height:25px;flex:none;display:flex;align-items:center;gap:9px;white-space:nowrap}
+.inspection-video-close:hover .inspection-close-roll,.inspection-video-close:focus-visible .inspection-close-roll,.inspection-video-close:active .inspection-close-roll,.inspection-video-close.is-closing .inspection-close-roll{transform:translateY(-29px)}
+.inspection-video-close:active{opacity:.75}
+.inspection-video-close:focus-visible{outline:1px solid white;outline-offset:5px}
+@media(prefers-reduced-motion:reduce){.inspection-close-roll{transition:none}}

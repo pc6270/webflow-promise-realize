@@ -1,0 +1,35 @@
+<svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_f_s4_02)">
+<rect x="6" y="6" width="56" height="56" rx="28" fill="url(#paint0_radial_s4_02)" fill-opacity="0.39"/>
+</g>
+<rect x="6" y="6" width="56" height="56" rx="28" fill="url(#paint1_radial_s4_02)"/>
+<rect x="6.5" y="6.5" width="55" height="55" rx="27.5" stroke="url(#paint2_linear_s4_02)" stroke-opacity="0.43"/>
+<!-- 左上長方磁磚 (款式A核心塊面) -->
+<path d="M31.2 21.0H23.5C22.1193 21.0 21.0 22.1193 21.0 23.5V34.2C21.0 35.5807 22.1193 36.7 23.5 36.7H31.2C32.5807 36.7 33.7 35.5807 33.7 34.2V23.5C33.7 22.1193 32.5807 21.0 31.2 21.0Z" fill="white"/>
+<!-- 左下小方磁磚 -->
+<path d="M27.2 39.5H23.5C22.1193 39.5 21.0 40.6193 21.0 42.0V44.5C21.0 45.8807 22.1193 47.0 23.5 47.0H27.2C28.5807 47.0 29.7 45.8807 29.7 44.5V42.0C29.7 40.6193 28.5807 39.5 27.2 39.5Z" fill="white"/>
+<!-- 右下大磁磚 -->
+<path d="M44.5 34.0H35.0C33.6193 34.0 32.5 35.1193 32.5 36.5V44.5C32.5 45.8807 33.6193 47.0 35.0 47.0H44.5C45.8807 47.0 47.0 45.8807 47.0 44.5V36.5C47.0 35.1193 45.8807 34.0 44.5 34.0Z" fill="white"/>
+<!-- 右上檢測敲擊棒 (圓球槌頭 + 斜向握柄) -->
+<circle cx="38.2" cy="28.4" r="3.4" fill="white"/>
+<path d="M41.3 25.3L45.9 20.7C46.68 19.92 47.95 19.92 48.73 20.7C49.51 21.48 49.51 22.75 48.73 23.53L44.13 28.13C43.35 28.91 42.08 28.91 41.3 28.13C40.52 27.35 40.52 26.08 41.3 25.3Z" fill="white"/>
+<defs>
+<filter id="filter0_f_s4_02" x="0" y="0" width="68" height="68" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="3" result="effect1_foregroundBlur_s4_02"/>
+</filter>
+<radialGradient id="paint0_radial_s4_02" cx="0" cy="0" r="1" gradientTransform="matrix(36.0131 -0.318609 0.481703 33.6216 33.9 34.3186)" gradientUnits="userSpaceOnUse">
+<stop stop-color="#987A6B"/>
+<stop offset="1" stop-color="white"/>
+</radialGradient>
+<radialGradient id="paint1_radial_s4_02" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(33.9305 34) scale(139.461 139.116)">
+<stop stop-color="#987A6B"/>
+<stop offset="1" stop-color="#F5F5F5"/>
+</radialGradient>
+<linearGradient id="paint2_linear_s4_02" x1="12.087" y1="15.7391" x2="34.0002" y2="38.428" gradientUnits="userSpaceOnUse">
+<stop stop-color="#F5F5F5"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+</defs>
+</svg>

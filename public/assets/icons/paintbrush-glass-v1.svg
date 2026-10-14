@@ -1,0 +1,22 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+<title>霧面玻璃油漆刷</title>
+<defs>
+<linearGradient id="brushWarm" x1="50" y1="16" x2="50" y2="86" gradientUnits="userSpaceOnUse"><stop stop-color="#D9B29E"/><stop offset="1" stop-color="#987A6B"/></linearGradient>
+<linearGradient id="glassMilk" x1="50" y1="4" x2="50" y2="96" gradientUnits="userSpaceOnUse"><stop stop-color="#E3E3E5" stop-opacity=".6"/><stop offset="1" stop-color="#C4BDB3" stop-opacity=".6"/></linearGradient>
+<linearGradient id="glassEdge" x1="18" y1="7" x2="80" y2="93" gradientUnits="userSpaceOnUse"><stop stop-color="white" stop-opacity=".95"/><stop offset=".48" stop-color="white" stop-opacity=".18"/><stop offset="1" stop-color="white" stop-opacity=".8"/></linearGradient>
+<linearGradient id="ferruleEdge" x1="50" y1="42" x2="50" y2="63" gradientUnits="userSpaceOnUse"><stop stop-color="white"/><stop offset="1" stop-color="white" stop-opacity="0"/></linearGradient>
+<filter id="frostBlur" x="15" y="6" width="70" height="90" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="2"/></filter>
+<filter id="discShadow" x="0" y="0" width="100" height="100" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feDropShadow dx="0" dy="1.2" stdDeviation="1.4" flood-color="#987A6B" flood-opacity=".12"/></filter>
+<path id="brushShape" fill-rule="evenodd" clip-rule="evenodd" d="M30 16H70Q73 16 73 19V44H27V19Q27 16 30 16ZM27 47H73V53Q73 61 65 62H59Q57 62 57 65V80Q57 87 50 87Q43 87 43 80V65Q43 62 41 62H35Q27 61 27 53V47ZM50 75a3 3 0 1 0 0 6a3 3 0 1 0 0-6Z"/>
+<clipPath id="ferruleClip"><path d="M27 43H73V53Q73 61 65 62H59Q57 62 57 65H43Q43 62 41 62H35Q27 61 27 53Z"/></clipPath>
+</defs>
+<circle cx="50" cy="50" r="45.5" fill="url(#glassMilk)" filter="url(#discShadow)"/>
+<circle cx="50" cy="50" r="45.5" stroke="url(#glassEdge)" stroke-width="1.5"/>
+<circle cx="50" cy="50" r="43.8" stroke="white" stroke-opacity=".18" stroke-width=".65"/>
+<g transform="rotate(-35 50 50)">
+<use href="#brushShape" fill="url(#brushWarm)"/>
+<path d="M36 16V26M45 16V24M55 16V26M64 16V24" stroke="#FAF7F2" stroke-opacity=".8" stroke-width="1.8" stroke-linecap="round"/>
+<g clip-path="url(#ferruleClip)"><use href="#brushShape" fill="url(#brushWarm)" filter="url(#frostBlur)"/><path d="M27 43H73V65H27Z" fill="url(#glassMilk)"/></g>
+<path d="M29 44.5H71M28.5 44.5V53Q28.5 59.7 35 60.5" stroke="url(#ferruleEdge)" stroke-width="1.5" stroke-linecap="round"/>
+</g>
+</svg>

@@ -1,0 +1,13 @@
+.fp-sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip-path:inset(50%)!important;white-space:nowrap!important;border:0!important}
+#fp-master-root .s1-title-cn,#fp-master-root .s1-circle-title,#fp-master-root .wf-sec6-title,#fp-master-root .wf-sec6-m-title,#fp-master-root .wf-sec8-main-title,#fp-master-root .wf-sec8-mob-main-title{margin:0}
+#fp-master-root .s2p1-dt-container .desc-paragraph{animation:none!important;transition-property:opacity!important;}
+
+#fp-master-root .s5-d-desc,#fp-master-root .s5-m-desc{transform:none!important;animation:none!important;transition-property:opacity!important}
+
+@media(min-width:768px){#fp-master-root .quote-text,#fp-master-root .s5-d-slogan-text,#fp-master-root .wf-sec8-main-title{letter-spacing:.04em!important}
+#fp-master-root .s2p1-dt-container .quote-text{white-space:nowrap!important;max-width:none!important}
+#fp-master-root .s5-d-slogan-text p{display:block!important;white-space:nowrap!important;margin:0!important}
+#fp-master-root .s5-d-slogan-text{width:max-content!important;max-width:none!important}}
+#fp-master-root .s4-card-icon.has-icon{background:transparent!important;box-shadow:none!important}
+
+#fp-master-root .quote-text .fp-quote-line{display:block!important;white-space:nowrap!important}

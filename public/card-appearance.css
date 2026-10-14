@@ -1,0 +1,7 @@
+#fp-master-root .s4-accordion-card:not(.active):not(.fp-card-hint) .s4-card-bg-photo{opacity:var(--s4-card-opacity,.5)!important}
+#fp-master-root[data-card-look="solid"] .s4-accordion-card:not(.active) .s4-card-bg-photo{opacity:1!important}
+#fp-master-root[data-card-look="solid"] .s4-collapsed-title{color:#fff!important;text-shadow:0 1px 4px rgba(0,0,0,.4)}
+#fp-master-root .s4-accordion-card.active .s4-card-bg-photo,#fp-master-root .s4-accordion-card.fp-card-hint .s4-card-bg-photo{opacity:1!important}
+@media(min-width:1200px){#fp-master-root .s4-accordion-card:hover .s4-card-bg-photo{opacity:1!important}}
+
+@media(max-width:767.98px){#fp-master-root .s4-accordion-card:not(.active) .s4-collapsed-title{text-shadow:0 1px 2px rgba(0,0,0,.8),0 2px 7px rgba(0,0,0,.65),0 0 14px rgba(0,0,0,.4)!important}}
