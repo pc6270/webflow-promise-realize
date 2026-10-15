@@ -65,5 +65,5 @@
       }
     }
   }
-  window.addEventListener('resize',update);window.addEventListener('load',update);update();
+  window.addEventListener('resize',update);window.addEventListener('fp:webflow-ready',update);update();
 })();

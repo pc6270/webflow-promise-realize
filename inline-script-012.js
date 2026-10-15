@@ -119,8 +119,8 @@
     window.fpSegTiming = function (k) { if (!timing[k]) update(); return timing[k] || null; };
     var tm = null;
     function soon() { clearTimeout(tm); tm = setTimeout(update, 30); }
-    document.addEventListener('DOMContentLoaded', update);
-    window.addEventListener('load', update);
+    document.addEventListener('fp:webflow-ready', update);
+    window.addEventListener('fp:webflow-ready', update);
     window.addEventListener('resize', soon);
     var r = document.getElementById('fp-master-root');
     if (r && 'MutationObserver' in window) {

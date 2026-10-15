@@ -12,5 +12,5 @@
   window.fpTabletSetPhase?.(Math.max(0,(+document.getElementById('sec6-d-num').textContent||1)-1));window.fpLinesUpdate?.();window.fpSectionGuidesUpdate?.();
  }
  function soon(){if(!queued){queued=true;requestAnimationFrame(()=>requestAnimationFrame(layout));}}
- window.fpTabletLayoutUpdate=soon;addEventListener('load',soon);addEventListener('resize',soon);document.fonts.ready.then(soon);soon();
+ window.fpTabletLayoutUpdate=soon;addEventListener('fp:webflow-ready',soon);addEventListener('resize',soon);document.fonts.ready.then(soon);soon();
 })();

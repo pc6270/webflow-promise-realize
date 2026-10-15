@@ -21,7 +21,7 @@
  function soon(){if(!pending){pending=true;requestAnimationFrame(update);}}
  window.fpTabletStickyUpdate=update;
  addEventListener('scroll',soon,{passive:true});
- addEventListener('resize',soon);addEventListener('load',soon);
+ addEventListener('resize',soon);addEventListener('fp:webflow-ready',soon);
  new ResizeObserver(soon).observe(track);
  document.fonts.ready.then(soon);soon();
 })();

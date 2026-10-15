@@ -25,7 +25,7 @@
     }
 
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initS2P2Animation);
+      document.addEventListener('fp:webflow-ready', initS2P2Animation);
     } else {
       initS2P2Animation();
     }

@@ -53,5 +53,5 @@
  }
  window.fpTabletOpticsUpdate=optics;
  const resize=new ResizeObserver(quotes);document.querySelectorAll('.s5-d-slogan-text,.s5-m-slogan-text').forEach(el=>resize.observe(el));
- addEventListener('resize',()=>{quotes();optics();});addEventListener('load',()=>{quotes();optics();});document.fonts.ready.then(()=>{quotes();optics();});quotes();
+ addEventListener('resize',()=>{quotes();optics();});addEventListener('fp:webflow-ready',()=>{quotes();optics();});document.fonts.ready.then(()=>{quotes();optics();});quotes();
 })();

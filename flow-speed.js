@@ -6,5 +6,5 @@
   path.style.setProperty('transition-duration',duration+'s','important');
   path.style.setProperty('transition-timing-function','linear','important');
  });}
- addEventListener('load',update);addEventListener('resize',()=>requestAnimationFrame(update));update();
+ addEventListener('fp:webflow-ready',update);addEventListener('resize',()=>requestAnimationFrame(update));update();
 })();

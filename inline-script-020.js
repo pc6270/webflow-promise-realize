@@ -26,8 +26,8 @@
       setTimeout(placeSeatLine, 200);
     }
     window.addEventListener('resize', placeSoon);
-    window.addEventListener('load', function () { placeSoon(); setTimeout(placeSeatLine, 1000); });
-    document.addEventListener('DOMContentLoaded', placeSoon);
+    window.addEventListener('fp:webflow-ready', function () { placeSoon(); setTimeout(placeSeatLine, 1000); });
+    document.addEventListener('fp:webflow-ready', placeSoon);
     var root = document.getElementById('fp-master-root');
     if (root && 'MutationObserver' in window) {
       new MutationObserver(placeSoon).observe(root, { attributes: true, attributeFilter: ['style', 'class'] });

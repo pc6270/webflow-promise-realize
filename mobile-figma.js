@@ -23,7 +23,7 @@
  }
  function soon(){if(!pending){pending=true;requestAnimationFrame(layout);}}
  window.fpMobileLayoutUpdate=soon;
- window.addEventListener('load',soon);window.addEventListener('resize',soon);document.fonts.ready.then(soon);
+ window.addEventListener('fp:webflow-ready',soon);window.addEventListener('resize',soon);document.fonts.ready.then(soon);
  new ResizeObserver(soon).observe(document.getElementById('s4-root-container'));
  soon();
 })();

@@ -49,7 +49,7 @@ function switchS4Tab(index) {
   });
 
   // 僅在手機版 (<= 768px) 啟用直向卡片點擊展合 Toggle
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('fp:webflow-ready', function() {
     var accordionContainers = document.querySelectorAll('.s4-cards-accordion');
     accordionContainers.forEach(function(container) {
       var cards = container.querySelectorAll('.s4-accordion-card');

@@ -36,7 +36,7 @@
       }
     }
     window.addEventListener('resize', handleSec8Resize);
-    window.addEventListener('load', handleSec8Resize);
+    window.addEventListener('fp:webflow-ready', handleSec8Resize);
     handleSec8Resize();
 
     // SVG 線條無縫 Linear 動態劃出與小人精準同步處理

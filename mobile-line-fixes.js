@@ -2,6 +2,9 @@
  const root=document.getElementById('fp-master-root'),NS='http://www.w3.org/2000/svg';
  const make=(name,attrs)=>{const n=document.createElementNS(NS,name);for(const [k,v]of Object.entries(attrs))n.setAttribute(k,v);return n;};
  const overlays=new Map();
+ const filterStyles=new Map();
+ function restoreFilters(){for(const [el,[value,priority]]of filterStyles){if(value)el.style.setProperty('filter',value,priority);else el.style.removeProperty('filter');}filterStyles.clear();}
+ function unfiltered(el){if(!filterStyles.has(el))filterStyles.set(el,[el.style.getPropertyValue('filter'),el.style.getPropertyPriority('filter')]);el.style.setProperty('filter','none','important');}
  function overlay(container){
   if(overlays.has(container))return overlays.get(container);
   const svg=make('svg',{class:'mobile-seams',viewBox:'0 0 402 900',width:402,height:900,'aria-hidden':'true'});
@@ -37,7 +40,7 @@
   });
  }
  function update(){
-  if(innerWidth>=768)return;
+  if(innerWidth>=768){restoreFilters();return;}
   const cs=getComputedStyle(root),stroke=parseFloat(cs.getPropertyValue('--brand-line-mb-width'))||2;
   gray.setAttribute('stroke-width',stroke);fill.setAttribute('stroke-width',stroke);
   const scale=Math.min(1,innerWidth/402);
@@ -115,10 +118,17 @@
    p.style.setProperty('filter','url(#mobileLinearPencil)','important');
    for(let g=p.parentElement;g&&g.tagName.toLowerCase()!=='svg';g=g.parentElement)if(g.hasAttribute('filter'))g.setAttribute('filter','none');
   });
+  // WebKit can drop zero-height stroked paths when an SVG displacement filter is applied.
+  // Retain the exact geometry and stroke, without filtering the mobile flow lines.
+  root.querySelectorAll('.s1-mb-container svg path,.s2p1-mb-container svg path,.s2p2-mb-layer svg path,.s2p34-mb-canvas svg path,.s5-mobile-wrapper svg path,.mobile-s6-track path,.wf-sec7-mobile-outer svg path,.wf-sec8-mobile-outer svg path').forEach(path=>{
+   if(getComputedStyle(path).stroke==='none')return;
+   unfiltered(path);
+   for(let parent=path.parentElement;parent&&parent.tagName.toLowerCase()!=='svg';parent=parent.parentElement)if(parent.hasAttribute('filter')||parent.style.filter)unfiltered(parent);
+  });
  }
  let pending=false;function soon(){if(!pending){pending=true;requestAnimationFrame(()=>{pending=false;update();});}}
  window.fpMobileConnectionsUpdate=update;
- window.addEventListener('resize',soon);window.addEventListener('load',soon);document.fonts.ready.then(soon);
+ window.addEventListener('resize',soon);window.addEventListener('fp:webflow-ready',soon);document.fonts.ready.then(soon);
  new MutationObserver(soon).observe(document.getElementById('sec6-m-num'),{childList:true,characterData:true,subtree:true});
  soon();
 })();

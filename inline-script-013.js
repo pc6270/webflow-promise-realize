@@ -27,7 +27,7 @@
     if (document.readyState === 'complete' || document.readyState === 'interactive') {
       setTimeout(triggerS2P34Animation, 50);
     } else {
-      window.addEventListener('DOMContentLoaded', () => setTimeout(triggerS2P34Animation, 50));
+      window.addEventListener('fp:webflow-ready', () => setTimeout(triggerS2P34Animation, 50));
     }
 
     window.replayS2P34Animation = function() {

@@ -12,6 +12,6 @@
     new MutationObserver(sync).observe(circle,{attributes:true,attributeFilter:['style']});
   });
   window.addEventListener('resize',sync);
-  window.addEventListener('load',sync);
+  window.addEventListener('fp:webflow-ready',sync);
   sync();
 })();

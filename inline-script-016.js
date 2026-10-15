@@ -149,6 +149,6 @@
     };
 
     window.addEventListener('resize', handleSec5Resize);
-    window.addEventListener('load', handleSec5Resize);
+    window.addEventListener('fp:webflow-ready', handleSec5Resize);
     handleSec5Resize();
   })();

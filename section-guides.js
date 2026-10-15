@@ -16,7 +16,7 @@
  function soon(){if(!pending){pending=true;requestAnimationFrame(update);}}
  window.fpSectionGuidesUpdate=soon;
  addEventListener('message',e=>{if(e.origin!==location.origin||e.source!==parent||e.data?.type!=='fp:guides')return;enabled=!!e.data.enabled;layer.style.display=enabled?'block':'none';soon();});
- soon();addEventListener('load',soon);document.fonts.ready.then(soon);
+ soon();addEventListener('fp:webflow-ready',soon);document.fonts.ready.then(soon);
  addEventListener('resize',soon);addEventListener('scroll',soon,{passive:true});
  const resize=new ResizeObserver(soon);items.forEach(({section})=>resize.observe(section));
  new MutationObserver(soon).observe(document.getElementById('fp-master-root'),{attributes:true,subtree:true,attributeFilter:['style']});

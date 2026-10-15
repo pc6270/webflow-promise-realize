@@ -18,5 +18,5 @@
  function soon(){if(!pending){pending=true;requestAnimationFrame(update);}}
  const observer=new MutationObserver(records=>{records.forEach(record=>dirty.add(record.target));soon();});
  for(const id of ['s1-root-container','s2p1-root-container','s2p2-root-container','s2p34-root-container','s4-root-container','s5-global-container','wf-sec6-root','wf-sec7-root','wf-sec8-root'])observer.observe(document.getElementById(id),{attributes:true,attributeFilter:['class']});
- addEventListener('load',()=>{dirty.add(root);soon();});addEventListener('resize',()=>{dirty.add(root);soon();});soon();
+ addEventListener('fp:webflow-ready',()=>{dirty.add(root);soon();});addEventListener('resize',()=>{dirty.add(root);soon();});soon();
 })();

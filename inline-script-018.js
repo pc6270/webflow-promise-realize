@@ -120,6 +120,6 @@
     };
 
     window.addEventListener('resize', handleSec7Resize);
-    window.addEventListener('load', handleSec7Resize);
+    window.addEventListener('fp:webflow-ready', handleSec7Resize);
     handleSec7Resize();
   })();

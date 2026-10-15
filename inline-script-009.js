@@ -49,7 +49,7 @@
     }
 
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initS2P1Animation);
+      document.addEventListener('fp:webflow-ready', initS2P1Animation);
     } else {
       initS2P1Animation();
     }

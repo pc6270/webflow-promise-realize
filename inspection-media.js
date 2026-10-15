@@ -17,4 +17,15 @@
   slot.setAttribute('aria-hidden','true');
  }}
  window.fpInspectionMediaUpdate=apply;apply();
+ // Delegation works even when this file arrives after DOMContentLoaded in Webflow.
+ document.addEventListener('click',event=>{
+  if(innerWidth>=768)return;
+  const card=event.target.closest?.('.s4-accordion-card');
+  if(!card||event.target.closest('.s4-btn-watch-video'))return;
+  event.preventDefault();event.stopImmediatePropagation();
+  const active=card.classList.contains('active');
+  card.closest('.s4-cards-accordion').querySelectorAll('.s4-accordion-card').forEach(item=>item.classList.remove('active'));
+  if(!active)card.classList.add('active');
+  requestAnimationFrame(()=>window.fpMobileLayoutUpdate?.());
+ },true);
 })();

@@ -48,7 +48,7 @@
     }
 
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initS1Animation);
+      document.addEventListener('fp:webflow-ready', initS1Animation);
     } else {
       initS1Animation();
     }

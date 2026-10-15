@@ -100,9 +100,17 @@
       }
 
     }
+    const seatPath=root.querySelector('path[data-k="s5-h2"]'),seatArc=root.querySelector('path[data-k="s5-arc3"]');
+    if(seatPath&&seatArc){
+      const inverse=seatPath.getScreenCTM().inverse();
+      const from=seatArc.getPointAtLength(seatArc.getTotalLength()).matrixTransform(seatArc.getScreenCTM()).matrixTransform(inverse);
+      const edge=new DOMPoint(-2,0).matrixTransform(inverse);
+      set('--s5-h2-start',edge.x+'px');set('--s5-h2-end',from.x+'px');
+      seatPath.setAttribute('d',`M ${from.x} ${from.y} H ${edge.x}`);
+    }
   }
   function schedule(){if(!queued){queued=true;requestAnimationFrame(layout);}}
-  window.addEventListener('resize',schedule);window.addEventListener('load',schedule);
+  window.addEventListener('resize',schedule);window.addEventListener('fp:webflow-ready',schedule);
   new MutationObserver(schedule).observe(root,{attributes:true,attributeFilter:['style']});
   document.fonts.ready.then(schedule);schedule();
 })();

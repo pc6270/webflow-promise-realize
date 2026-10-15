@@ -48,7 +48,7 @@
   }
   function soon(){if(!scheduled){scheduled=true;requestAnimationFrame(update)}}
   window.addEventListener('resize',soon);
-  window.addEventListener('load',soon);
+  window.addEventListener('fp:webflow-ready',soon);
   document.fonts?.ready.then(soon);
   soon();
 })();

@@ -73,6 +73,9 @@
  },{passive:true});
  function showMobile(){if(innerWidth>=768)return;current=items.length-1;complete=true;const classes=['s1-active','s2p1-active','s2p2-active','s2p34-active','s4-active','s5-active',null,'wf-sec7-active','wf-sec8-active'];items.forEach((item,index)=>{window.fpSequenceAuthorize(item.root.id);window.fpSequenceMark(item.root.id);item.wrapper.classList.remove('fp-sequence-pending');if(classes[index])item.root.classList.add(classes[index]);});document.getElementById('wf-sec6-root').classList.add('s6-lower-ready');}
  addEventListener('resize',showMobile);
- function init(){if(innerWidth<768){showMobile();return;}requestAnimationFrame(()=>requestAnimationFrame(()=>start(0)));}
- if(document.readyState==='complete')init();else addEventListener('load',init,{once:true});
+ let initialized=false;
+ function init(){if(initialized)return;initialized=true;if(innerWidth<768){showMobile();return;}requestAnimationFrame(()=>requestAnimationFrame(()=>start(0)));}
+ window.fpStartAnimationSequence=init;
+ if(window.FP_WEBFLOW_BOOTSTRAP)addEventListener('fp:webflow-ready',init,{once:true});
+ else if(document.readyState==='complete')init();else addEventListener('fp:webflow-ready',init,{once:true});
 })();

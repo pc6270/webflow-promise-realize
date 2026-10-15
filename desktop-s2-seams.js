@@ -51,6 +51,6 @@
  function schedule(){if(pending)return;pending=true;requestAnimationFrame(()=>requestAnimationFrame(()=>requestAnimationFrame(()=>{pending=false;update();})));}
  const previous=window.fpLinesUpdate;
  if(previous)window.fpLinesUpdate=(...args)=>{const result=previous(...args);schedule();return result;};
- addEventListener('load',schedule);addEventListener('resize',schedule);document.fonts.ready.then(schedule);
+ addEventListener('fp:webflow-ready',schedule);addEventListener('resize',schedule);document.fonts.ready.then(schedule);
  schedule();
 })();
