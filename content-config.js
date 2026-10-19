@@ -176,437 +176,437 @@ window.FP_CONTENT_CONFIG = {
   },
   "assets": {
     "sec1-image-001": {
-      "src": new URL("assets/hero-walking-man.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3eef85390ad43d3275_6f3a2cb8191ef9a9dfcae4a583c0ced0dadde22836e6de3176d7c26109c47d70.svg",
       "alt": "",
       "decorative": true
     },
     "sec1-image-002": {
-      "src": new URL("assets/hero-walking-man-shadow.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3fe5cc08f7853c26cf_dd0793152c52614ff1b71282598dd01d4d596fc0f8046e055e22b50443c7ee9d.svg",
       "alt": "",
       "decorative": true
     },
     "sec1-image-003": {
-      "src": new URL("assets/hero-mobile-walking-man.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d5908bc86762969571b_c05c674c307345dcb3b19488f4fff9ee76ee1a30010754252753fdae92ecc07e.svg",
       "alt": "",
       "decorative": true
     },
     "sec1-image-004": {
-      "src": new URL("assets/hero-mobile-walking-man-shadow.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3f7cb16c7fbb4a57c0_493727bee6d2375c866404f3e03bcca10dae8a22cdf1bb45dcc3c32e6519933f.svg",
       "alt": "",
       "decorative": true
     },
     "s2p1-image-005": {
-      "src": new URL("assets/inspection-walking-woman.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3e574eef5bc4f31694_115f94c183bf3810e38e44f06adedbc4104ec49d20a40c1e5a6d2432047e8fcf.svg",
       "alt": "",
       "decorative": true
     },
     "s2p1-image-006": {
-      "src": new URL("assets/inspection-walking-woman-shadow.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3f76ae06e28bb5b7c7_b53de952c7e736921123bd92be09546137f68e21ada684f7952952319914119c.svg",
       "alt": "",
       "decorative": true
     },
     "s2p1-image-007": {
-      "src": new URL("assets/home-inspection-consultation.png",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f10efe018e9c944043_home-inspection-consultation.avif",
       "alt": "協助驗屋討論會議",
       "decorative": false
     },
     "s2p1-image-008": {
-      "src": new URL("assets/inspection-walking-woman.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3e574eef5bc4f31694_115f94c183bf3810e38e44f06adedbc4104ec49d20a40c1e5a6d2432047e8fcf.svg",
       "alt": "",
       "decorative": true
     },
     "s2p1-image-009": {
-      "src": new URL("assets/inspection-walking-woman-shadow.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3f76ae06e28bb5b7c7_b53de952c7e736921123bd92be09546137f68e21ada684f7952952319914119c.svg",
       "alt": "",
       "decorative": true
     },
     "s2p1-image-010": {
-      "src": new URL("assets/home-inspection-consultation.png",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f10efe018e9c944043_home-inspection-consultation.avif",
       "alt": "協助驗屋討論會議",
       "decorative": false
     },
     "s2p2-image-011": {
-      "src": new URL("assets/inspection-checklist.png",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f1f4a6cc5862676499_inspection-checklist.avif",
       "alt": "提供「驗屋缺失表」，將檢驗細項清楚條列。",
       "decorative": false
     },
     "s2p2-image-012": {
-      "src": new URL("assets/inspection-thermal-camera.png",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d4032cc569c675c1f06_dc9517a2058cdb6fbdd13a4646ae821a02aad54cfd8a0ee75873b8745dfa88c3.avif",
       "alt": "透過專業設備逐項檢驗，驗屋完成後，留下完整的紀錄。",
       "decorative": false
     },
     "s2p2-image-013": {
-      "src": new URL("assets/inspection-checklist.png",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f1f4a6cc5862676499_inspection-checklist.avif",
       "alt": "提供「驗屋缺失表」，將檢驗細項清楚條列。",
       "decorative": false
     },
     "s2p2-image-014": {
-      "src": new URL("assets/inspection-thermal-camera.png",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d4032cc569c675c1f06_dc9517a2058cdb6fbdd13a4646ae821a02aad54cfd8a0ee75873b8745dfa88c3.avif",
       "alt": "透過專業設備逐項檢驗，驗屋完成後，留下完整的紀錄。",
       "decorative": false
     },
     "s2p34-image-015": {
-      "src": new URL("assets/handover-standing-man.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3f0e375c961a9a88ec_d633c29089071221cb76c04977e6e572a83bd036385373ae3a231470ff41ca43.svg",
       "alt": "",
       "decorative": true
     },
     "s2p34-image-016": {
-      "src": new URL("assets/handover-standing-man-shadow.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3f7cb16c7fbb4a57c4_68ea837001defd32033c0e003cb97c570be8625f26659e89040601167c68dab6.svg",
       "alt": "",
       "decorative": true
     },
     "s2p34-image-017": {
-      "src": new URL("assets/home-key-handover.png",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f1352da31dcf96496f_home-key-handover.avif",
       "alt": "購屋者與服務人員共同確認交屋與驗屋事項",
       "decorative": false
     },
     "s2p34-image-018": {
-      "src": new URL("assets/handover-walking-woman.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3fddfaeb36cc8a0436_48faeba8ce77af2551c58077dc944951ffb4ed388c4db8becd0e5d3a5dff94ce.svg",
       "alt": "",
       "decorative": true
     },
     "s2p34-image-019": {
-      "src": new URL("assets/handover-walking-woman-shadow.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3eef85390ad43d3278_0cec7b31ced631a71c9e15cef98beacc2e2392b5347e31a4b560fb80c136c00c.svg",
       "alt": "",
       "decorative": true
     },
     "s2p34-image-020": {
-      "src": new URL("assets/handover-standing-man.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3f0e375c961a9a88ec_d633c29089071221cb76c04977e6e572a83bd036385373ae3a231470ff41ca43.svg",
       "alt": "",
       "decorative": true
     },
     "s2p34-image-021": {
-      "src": new URL("assets/handover-standing-man-shadow.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3f7cb16c7fbb4a57c4_68ea837001defd32033c0e003cb97c570be8625f26659e89040601167c68dab6.svg",
       "alt": "",
       "decorative": true
     },
     "s2p34-image-022": {
-      "src": new URL("assets/home-key-handover.png",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f1352da31dcf96496f_home-key-handover.avif",
       "alt": "購屋者與服務人員共同確認交屋與驗屋事項",
       "decorative": false
     },
     "sec4-image-023": {
-      "src": new URL("assets/inspection-pulling-man.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3f3a09d6422fc4a3dc_9608e94e85eafac8f0d8a7eae876c98bcfa72c6c7342ecc12fda276cb76061b8.svg",
       "alt": "",
       "decorative": true
     },
     "sec4-image-024": {
-      "src": new URL("assets/inspection-pulling-man-shadow.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3efde27c03be90f3a1_70bc8e718ee5627dcec788e3eb831c2521d700f103c0264b9db83ee669a45dea.svg",
       "alt": "",
       "decorative": true
     },
     "sec4-image-025": {
-      "src": new URL("assets/inspection/01-wall-paint-and-floor-grout.png",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f764d876e731708694_01-wall-paint-and-floor-grout.avif",
       "alt": "牆面油漆及地板填縫檢驗",
       "decorative": false
     },
     "sec4-image-026": {
-      "src": new URL("assets/inspection-card-icon-primary.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3f7cb16c7fbb4a57bb_052b6057b259e05195cef491a437a733113d63c2dc346516b94008770cab690e.svg",
       "alt": "",
       "decorative": true
     },
     "sec4-image-027": {
-      "src": new URL("assets/inspection-card-divider.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d40e5cc08f7853c27df_fadc04536fa7aee20013a13d07196cb69f15e96b73f9b33a096e2ccf2269c9d6.svg",
       "alt": "",
       "decorative": true
     },
     "sec4-image-028": {
-      "src": new URL("assets/inspection/02-floor-tile-tapping.png",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f7352da31dcf964c23_02-floor-tile-tapping.avif",
       "alt": "地磚敲擊測驗",
       "decorative": false
     },
     "sec4-image-029": {
-      "src": new URL("assets/inspection-card-icon-secondary.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3ed0d04a27b5d789ea_5bea56e6b4f4e23fcbe386fe1975cdfda2b99fef29d0739051b72088f68520eb.svg",
       "alt": "",
       "decorative": true
     },
     "sec4-image-030": {
-      "src": new URL("assets/inspection-card-divider.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d40e5cc08f7853c27df_fadc04536fa7aee20013a13d07196cb69f15e96b73f9b33a096e2ccf2269c9d6.svg",
       "alt": "",
       "decorative": true
     },
     "sec4-image-031": {
-      "src": new URL("assets/inspection/03-door-and-window-operation.png",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f61c135e9d8d37f900_03-door-and-window-operation.avif",
       "alt": "門窗操作檢驗",
       "decorative": false
     },
     "sec4-image-032": {
-      "src": new URL("assets/inspection-card-icon-secondary.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3ed0d04a27b5d789ea_5bea56e6b4f4e23fcbe386fe1975cdfda2b99fef29d0739051b72088f68520eb.svg",
       "alt": "",
       "decorative": true
     },
     "sec4-image-033": {
-      "src": new URL("assets/inspection-card-divider.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d40e5cc08f7853c27df_fadc04536fa7aee20013a13d07196cb69f15e96b73f9b33a096e2ccf2269c9d6.svg",
       "alt": "",
       "decorative": true
     },
     "sec4-image-034": {
-      "src": new URL("assets/inspection/04-wall-and-column-level.png",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f726bc37e5648145c0_04-wall-and-column-level.avif",
       "alt": "室內牆柱水平儀檢驗",
       "decorative": false
     },
     "sec4-image-035": {
-      "src": new URL("assets/inspection-card-icon-secondary.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3ed0d04a27b5d789ea_5bea56e6b4f4e23fcbe386fe1975cdfda2b99fef29d0739051b72088f68520eb.svg",
       "alt": "",
       "decorative": true
     },
     "sec4-image-036": {
-      "src": new URL("assets/inspection-card-divider.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d40e5cc08f7853c27df_fadc04536fa7aee20013a13d07196cb69f15e96b73f9b33a096e2ccf2269c9d6.svg",
       "alt": "",
       "decorative": true
     },
     "sec4-image-037": {
-      "src": new URL("assets/inspection/05-window-frame-water-test.png",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f845db255be52a34a8_05-window-frame-water-test.avif",
       "alt": "窗框試水",
       "decorative": false
     },
     "sec4-image-038": {
-      "src": new URL("assets/inspection-card-icon-primary.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3f7cb16c7fbb4a57bb_052b6057b259e05195cef491a437a733113d63c2dc346516b94008770cab690e.svg",
       "alt": "",
       "decorative": true
     },
     "sec4-image-039": {
-      "src": new URL("assets/inspection-card-divider.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d40e5cc08f7853c27df_fadc04536fa7aee20013a13d07196cb69f15e96b73f9b33a096e2ccf2269c9d6.svg",
       "alt": "",
       "decorative": true
     },
     "sec4-image-040": {
-      "src": new URL("assets/inspection/06-wall-moisture-measurement.png",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f85f450630fda8f7b6_06-wall-moisture-measurement.avif",
       "alt": "牆壁水分量測",
       "decorative": false
     },
     "sec4-image-041": {
-      "src": new URL("assets/inspection-card-icon-secondary.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3ed0d04a27b5d789ea_5bea56e6b4f4e23fcbe386fe1975cdfda2b99fef29d0739051b72088f68520eb.svg",
       "alt": "",
       "decorative": true
     },
     "sec4-image-042": {
-      "src": new URL("assets/inspection-card-divider.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d40e5cc08f7853c27df_fadc04536fa7aee20013a13d07196cb69f15e96b73f9b33a096e2ccf2269c9d6.svg",
       "alt": "",
       "decorative": true
     },
     "sec4-image-043": {
-      "src": new URL("assets/inspection/07-shower-glass-water-test.png",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f8ae8a115fc9feb521_07-shower-glass-water-test.avif",
       "alt": "淋浴間玻璃沖水測試",
       "decorative": false
     },
     "sec4-image-044": {
-      "src": new URL("assets/inspection-card-icon-secondary.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3ed0d04a27b5d789ea_5bea56e6b4f4e23fcbe386fe1975cdfda2b99fef29d0739051b72088f68520eb.svg",
       "alt": "",
       "decorative": true
     },
     "sec4-image-045": {
-      "src": new URL("assets/inspection-card-divider.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d40e5cc08f7853c27df_fadc04536fa7aee20013a13d07196cb69f15e96b73f9b33a096e2ccf2269c9d6.svg",
       "alt": "",
       "decorative": true
     },
     "sec4-image-046": {
-      "src": new URL("assets/inspection/08-drainage-pipe-water-test.png",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f72301321ef22d574a_08-drainage-pipe-water-test.avif",
       "alt": "各區排水管路試水",
       "decorative": false
     },
     "sec4-image-047": {
-      "src": new URL("assets/inspection-card-icon-secondary.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3ed0d04a27b5d789ea_5bea56e6b4f4e23fcbe386fe1975cdfda2b99fef29d0739051b72088f68520eb.svg",
       "alt": "",
       "decorative": true
     },
     "sec4-image-048": {
-      "src": new URL("assets/inspection-card-divider.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d40e5cc08f7853c27df_fadc04536fa7aee20013a13d07196cb69f15e96b73f9b33a096e2ccf2269c9d6.svg",
       "alt": "",
       "decorative": true
     },
     "sec4-image-049": {
-      "src": new URL("assets/inspection/09-balcony-ponding-and-drainage.png",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f76f53e107860ddb18_09-balcony-ponding-and-drainage.avif",
       "alt": "陽台積水及排水測試",
       "decorative": false
     },
     "sec4-image-050": {
-      "src": new URL("assets/inspection-card-icon-secondary.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3ed0d04a27b5d789ea_5bea56e6b4f4e23fcbe386fe1975cdfda2b99fef29d0739051b72088f68520eb.svg",
       "alt": "",
       "decorative": true
     },
     "sec4-image-051": {
-      "src": new URL("assets/inspection-card-divider.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d40e5cc08f7853c27df_fadc04536fa7aee20013a13d07196cb69f15e96b73f9b33a096e2ccf2269c9d6.svg",
       "alt": "",
       "decorative": true
     },
     "sec4-image-052": {
-      "src": new URL("assets/inspection/10-bedroom-light-switch.png",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f737b8878396a34b21_10-bedroom-light-switch.avif",
       "alt": "臥室燈開關檢測",
       "decorative": false
     },
     "sec4-image-053": {
-      "src": new URL("assets/inspection-card-icon-primary.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3f7cb16c7fbb4a57bb_052b6057b259e05195cef491a437a733113d63c2dc346516b94008770cab690e.svg",
       "alt": "",
       "decorative": true
     },
     "sec4-image-054": {
-      "src": new URL("assets/inspection-card-divider.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d40e5cc08f7853c27df_fadc04536fa7aee20013a13d07196cb69f15e96b73f9b33a096e2ccf2269c9d6.svg",
       "alt": "",
       "decorative": true
     },
     "sec4-image-055": {
-      "src": new URL("assets/inspection/11-socket-phase-test.png",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f8ed230bbb19225d64_11-socket-phase-test.avif",
       "alt": "插座相位測試儀",
       "decorative": false
     },
     "sec4-image-056": {
-      "src": new URL("assets/inspection-card-icon-secondary.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3ed0d04a27b5d789ea_5bea56e6b4f4e23fcbe386fe1975cdfda2b99fef29d0739051b72088f68520eb.svg",
       "alt": "",
       "decorative": true
     },
     "sec4-image-057": {
-      "src": new URL("assets/inspection-card-divider.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d40e5cc08f7853c27df_fadc04536fa7aee20013a13d07196cb69f15e96b73f9b33a096e2ccf2269c9d6.svg",
       "alt": "",
       "decorative": true
     },
     "sec4-image-058": {
-      "src": new URL("assets/inspection/12-tv-signal-test.png",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f83a493081c6d63aeb_12-tv-signal-test.avif",
       "alt": "電視線訊號測試",
       "decorative": false
     },
     "sec4-image-059": {
-      "src": new URL("assets/inspection-card-icon-secondary.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3ed0d04a27b5d789ea_5bea56e6b4f4e23fcbe386fe1975cdfda2b99fef29d0739051b72088f68520eb.svg",
       "alt": "",
       "decorative": true
     },
     "sec4-image-060": {
-      "src": new URL("assets/inspection-card-divider.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d40e5cc08f7853c27df_fadc04536fa7aee20013a13d07196cb69f15e96b73f9b33a096e2ccf2269c9d6.svg",
       "alt": "",
       "decorative": true
     },
     "sec4-image-061": {
-      "src": new URL("assets/inspection/13-distribution-board-bedroom-circuit.png",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f863ee8810d794e961_13-distribution-board-bedroom-circuit.avif",
       "alt": "變電箱臥室開關測試",
       "decorative": false
     },
     "sec4-image-062": {
-      "src": new URL("assets/inspection-card-icon-secondary.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3ed0d04a27b5d789ea_5bea56e6b4f4e23fcbe386fe1975cdfda2b99fef29d0739051b72088f68520eb.svg",
       "alt": "",
       "decorative": true
     },
     "sec4-image-063": {
-      "src": new URL("assets/inspection-card-divider.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d40e5cc08f7853c27df_fadc04536fa7aee20013a13d07196cb69f15e96b73f9b33a096e2ccf2269c9d6.svg",
       "alt": "",
       "decorative": true
     },
     "sec4-image-064": {
-      "src": new URL("assets/inspection/14-earth-leakage-trip-test.png",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f8b212e35336b3f269_14-earth-leakage-trip-test.avif",
       "alt": "漏電斷電測試",
       "decorative": false
     },
     "sec4-image-065": {
-      "src": new URL("assets/inspection-card-icon-secondary.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3ed0d04a27b5d789ea_5bea56e6b4f4e23fcbe386fe1975cdfda2b99fef29d0739051b72088f68520eb.svg",
       "alt": "",
       "decorative": true
     },
     "sec4-image-066": {
-      "src": new URL("assets/inspection-card-divider.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d40e5cc08f7853c27df_fadc04536fa7aee20013a13d07196cb69f15e96b73f9b33a096e2ccf2269c9d6.svg",
       "alt": "",
       "decorative": true
     },
     "sec5-image-067": {
-      "src": new URL("assets/responsible-sales-consultation.png",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f17b9051f9731309e8_responsible-sales-consultation.avif",
       "alt": "photo",
       "decorative": false
     },
     "sec5-image-068": {
-      "src": new URL("assets/responsible-sales-consultation.png",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f17b9051f9731309e8_responsible-sales-consultation.avif",
       "alt": "photo",
       "decorative": false
     },
     "sec6-image-069": {
-      "src": new URL("assets/flashlight-seated-man.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3fe9d03d81e7427440_b381c525898fba0a4b24e8d699614f7e89f595dc0df120b950017cef95a8ebd3.svg",
       "alt": "",
       "decorative": true
     },
     "sec6-image-070": {
-      "src": new URL("assets/flashlight.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3e7b440f5dabbba8a8_499a7740688419a634b58e8a88f17cb75aacac16c276854b5b3f5c9b3809ecd6.svg",
       "alt": "",
       "decorative": true
     },
     "sec6-image-071": {
-      "src": new URL("assets/space-planning.png",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f2fff2e5e8d4de3b8d_space-planning.avif",
       "alt": "平板上的住宅平面配置圖與空間規劃草圖",
       "decorative": false
     },
     "sec6-image-072": {
-      "src": new URL("assets/reception-lobby.png",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f25f450630fda8f615_reception-lobby.avif",
       "alt": "自然光映入接待大廳與迎賓櫃台",
       "decorative": false
     },
     "sec6-image-073": {
-      "src": new URL("assets/welcome-courtyard.png",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f3ac367c08a6073a8b_welcome-courtyard.avif",
       "alt": "植栽環繞的迎賓走廊與休憩空間",
       "decorative": false
     },
     "sec6-image-074": {
-      "src": new URL("assets/flashlight-seated-man.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3fe9d03d81e7427440_b381c525898fba0a4b24e8d699614f7e89f595dc0df120b950017cef95a8ebd3.svg",
       "alt": "",
       "decorative": true
     },
     "sec6-image-075": {
-      "src": new URL("assets/flashlight.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3e7b440f5dabbba8a8_499a7740688419a634b58e8a88f17cb75aacac16c276854b5b3f5c9b3809ecd6.svg",
       "alt": "",
       "decorative": true
     },
     "sec6-image-076": {
-      "src": new URL("assets/space-planning.png",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f2fff2e5e8d4de3b8d_space-planning.avif",
       "alt": "平板上的住宅平面配置圖與空間規劃草圖",
       "decorative": false
     },
     "sec6-image-077": {
-      "src": new URL("assets/carousel-arrow-left.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3f1a9ccd34654101a0_5222810897ffe2363dfaed5ea8f89509109c985fd4e13771ff583f3c8087dca6.svg",
       "alt": "",
       "decorative": true
     },
     "sec6-image-078": {
-      "src": new URL("assets/carousel-arrow-right.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3e5aaab1391e8136bb_725a244cfac54062d5dd1a76a52a0c8c8d46fabea6b5b70f14f10cd6c948b928.svg",
       "alt": "",
       "decorative": true
     },
     "sec6-image-079": {
-      "src": new URL("assets/mobile-carousel-line-primary.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3fe158f13c5157d307_efd8797579be3ed65c7da7f5cc9b83875aade91134bb2b39ccc83fc8ac0c3344.svg",
       "alt": "",
       "decorative": true
     },
     "sec6-image-080": {
-      "src": new URL("assets/mobile-carousel-line-secondary.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d41285421e112b545a2_7be23af74698e5ae76bf9b9b6e6036341f2dbc1a1930a4eab3afcae396da04ea.svg",
       "alt": "",
       "decorative": true
     },
     "sec8-image-081": {
-      "src": new URL("assets/s8-mobile-intersect.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d40ef85390ad43d32c6_s8-mobile-intersect.svg",
       "alt": "",
       "decorative": true
     },
     "sec8-image-082": {
-      "src": new URL("assets/s8-mobile-intersect.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d40ef85390ad43d32c6_s8-mobile-intersect.svg",
       "alt": "",
       "decorative": true
     },
     "sec8-image-083": {
-      "src": new URL("assets/s8-mobile-mask1.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d40991d1fd2cd920b59_s8-mobile-mask1.svg",
       "alt": "",
       "decorative": true
     },
     "sec8-image-084": {
-      "src": new URL("assets/s8-mobile-mask2.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d408b7f6f634c3130b7_s8-mobile-mask2.svg",
       "alt": "",
       "decorative": true
     },
     "sec8-image-085": {
-      "src": new URL("assets/s8-mobile-circle.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d408b7f6f634c31304c_s8-mobile-circle.svg",
       "alt": "",
       "decorative": true
     },
     "sec8-image-086": {
-      "src": new URL("assets/s8-mobile-circle.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d408b7f6f634c31304c_s8-mobile-circle.svg",
       "alt": "",
       "decorative": true
     },
     "sec8-image-087": {
-      "src": new URL("assets/s8-mobile-circle.svg",window.FP_ASSET_BASE).href,
+      "src": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d408b7f6f634c31304c_s8-mobile-circle.svg",
       "alt": "",
       "decorative": true
     }
@@ -616,21 +616,21 @@ window.FP_CONTENT_CONFIG = {
       "num": "01",
       "title": "空間裁切的匠心",
       "desc": "在坪數規劃上，與建設一同細心思量，讓空間能承載不同家庭的樣貌。",
-      "img": new URL("assets/space-planning.png",window.FP_ASSET_BASE).href,
+      "img": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f2fff2e5e8d4de3b8d_space-planning.avif",
       "alt": "平板上的住宅平面配置圖與空間規劃草圖"
     },
     {
       "num": "02",
       "title": "真摯不溢的坦誠",
       "desc": "在廣告與銷售中，不誇大、不隱瞞，誠實呈現家的本質。",
-      "img": new URL("assets/reception-lobby.png",window.FP_ASSET_BASE).href,
+      "img": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f25f450630fda8f615_reception-lobby.avif",
       "alt": "自然光映入接待大廳與迎賓櫃台"
     },
     {
       "num": "03",
       "title": "溫暖舒心的迎賓體驗",
       "desc": "在現場，以溫暖的氛圍迎接——迎賓茶點、流動香氛，讓對話不只是資訊交換，而是一段舒心的交流。",
-      "img": new URL("assets/welcome-courtyard.png",window.FP_ASSET_BASE).href,
+      "img": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f3ac367c08a6073a8b_welcome-courtyard.avif",
       "alt": "植栽環繞的迎賓走廊與休憩空間"
     }
   ]

@@ -2221,7 +2221,7 @@ function switchS4Tab(index) {
 ;/* inspection-video.js */
 (() => {
  const modal=document.createElement('dialog');modal.id='inspection-video-modal';modal.setAttribute('aria-label','驗屋服務影片');
- modal.innerHTML='<button type="button" class="inspection-video-close" aria-label="關閉影片"><span class="inspection-close-roll"><span class="inspection-close-row"><img data-fp-src="assets/video-close.svg" alt=""><span>CLOSE</span></span><span class="inspection-close-row" aria-hidden="true"><img data-fp-src="assets/video-close.svg" alt=""><span>CLOSE</span></span></span></button><div class="inspection-video-frame"></div>';
+ modal.innerHTML='<button type="button" class="inspection-video-close" aria-label="關閉影片"><span class="inspection-close-roll"><span class="inspection-close-row"><img src="https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d40991d1fd2cd920b72_video-close.svg" alt=""><span>CLOSE</span></span><span class="inspection-close-row" aria-hidden="true"><img src="https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d40991d1fd2cd920b72_video-close.svg" alt=""><span>CLOSE</span></span></span></button><div class="inspection-video-frame"></div>';
  document.body.append(modal);const frame=modal.querySelector('.inspection-video-frame');let previousOverflow='';
  function close(){modal.close();}
  modal.querySelector('button').onclick=()=>{modal.querySelector('button').classList.add('is-closing');setTimeout(close,180);};
@@ -2662,9 +2662,8 @@ function switchS4Tab(index) {
   if(!webkit){
    for(const [el,[value,priority]]of saved){if(value)el.style.setProperty('filter',value,priority);else el.style.removeProperty('filter');}saved.clear();return;
   }
-  root.querySelectorAll('img[src$=".svg"]').forEach(img=>{
-   if(/\/s8-mobile-(circle|intersect|mask1|mask2)\.svg$/.test(img.src))img.src=img.src.replace(/\.svg$/,'.clean.svg');
-  });
+  const cleanSources={"https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d408b7f6f634c31304c_s8-mobile-circle.svg": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d40371ba39dd9aac7dd_s8-mobile-circle.clean.svg", "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d40ef85390ad43d32c6_s8-mobile-intersect.svg": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d40b12f6a7a2adbc6ae_s8-mobile-intersect.clean.svg", "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d40991d1fd2cd920b59_s8-mobile-mask1.svg": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d40d6eb5bc4a9ce9130_s8-mobile-mask1.clean.svg", "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d408b7f6f634c3130b7_s8-mobile-mask2.svg": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d405ed6263e17864a46_s8-mobile-mask2.clean.svg"};
+  root.querySelectorAll('img[src$=".svg"]').forEach(img=>{if(cleanSources[img.src])img.src=cleanSources[img.src];});
   root.querySelectorAll('path.fp-seg,path.fp-track,.fp-fill-path,.fp-baton-arc,.s1-line-path,.mobile-seam-path,.mobile-s6-track path').forEach(path=>{
    clearFilter(path);
    for(let node=path.parentElement;node&&node!==root&&node.tagName.toLowerCase()!=='svg';node=node.parentElement)if(node.hasAttribute('filter')||node.style.filter)clearFilter(node);
