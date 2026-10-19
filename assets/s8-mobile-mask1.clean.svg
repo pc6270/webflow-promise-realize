@@ -1,0 +1,23 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="70.0029" height="23" viewBox="0 0 70.0029 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Mask group">
+<mask id="mask0_0_511" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="71" height="23">
+<path id="Intersect" d="M35.002 0C48.1058 5.72789e-07 60.2113 4.27285 70.0029 11.5C60.2113 18.7272 48.1058 23 35.002 23C21.8978 23 9.79177 18.7274 0 11.5C9.79177 4.27256 21.8978 2.56404e-07 35.002 0Z" fill="url(#paint0_radial_0_511)"/>
+</mask>
+<g mask="url(#mask0_0_511)">
+<g id="Ellipse 88">
+<path d="M73 -15C73 1.94492 56.1809 16 35 16C13.8191 16 -3 1.94491 -3 -15C-3 -31.9449 13.8191 -46 35 -46C56.1809 -46 73 -31.9449 73 -15Z" stroke="#E0E0E0" stroke-width="2"/>
+</g>
+<g id="Ellipse 89">
+<path d="M63 -15C63 -2.46622 50.6494 8 35 8C19.3506 8 7 -2.46622 7 -15C7 -27.5338 19.3506 -38 35 -38C50.6494 -38 63 -27.5338 63 -15Z" stroke="#E0E0E0" stroke-width="2"/>
+</g>
+</g>
+</g>
+<defs>
+
+
+<radialGradient id="paint0_radial_0_511" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-5.99804 13) rotate(90) scale(68 70.7733)">
+<stop stop-color="#987A6B"/>
+<stop offset="1" stop-color="#F5F5F5"/>
+</radialGradient>
+</defs>
+</svg>

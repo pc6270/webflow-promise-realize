@@ -1,1 +1,0 @@
-(() => {const root=document.getElementById('fp-master-root');function update(){root.dataset.cardLook=Number(window.FP_PAGE_CONFIG?.['--s4-card-look'])===1?'solid':'soft';}addEventListener('resize',update);addEventListener('fp:webflow-ready',update);update();})();

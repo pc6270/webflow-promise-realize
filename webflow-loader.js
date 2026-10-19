@@ -11,6 +11,7 @@
   await script('webflow-manifest.js');
   const loaded=window.FP_WEBFLOW_MANIFEST;
   for(const item of loaded.scripts){try{await script(item.src);}catch(error){if(item.src.startsWith('https://use.typekit.net/'))console.warn(error);else throw error;}}
+  await window.FP_BUNDLE_READY;
   dispatchEvent(new Event('resize'));
   document.dispatchEvent(new Event('fp:webflow-ready',{bubbles:true}));
   document.getElementById('fp-webflow-mount').dataset.loaded='1';

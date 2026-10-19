@@ -1,1 +1,0 @@
-(() => {function update(){const root=document.getElementById('fp-master-root');if(root)root.classList.toggle('fp-tablet',innerWidth>=768&&innerWidth<1200);}addEventListener('resize',update);document.addEventListener('fp:webflow-ready',update,{once:true});})();
