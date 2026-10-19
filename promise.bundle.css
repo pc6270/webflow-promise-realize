@@ -7105,6 +7105,19 @@ body{padding-top:var(--site-header-height,110px)!important}
 @media(min-width:1200px){#fp-master-root #sec6-d-flashlight-icon{left:calc(221px + var(--desktop-lamp-adjust-x,0px))!important;top:calc(25px + var(--desktop-seat-shift,0px) + var(--desktop-lamp-adjust-y,0px))!important}}
 
 #fp-master-root .s4-btn-watch-video[hidden]{display:none!important;pointer-events:none!important}
+@media(max-width:767.98px){
+ #fp-master-root .wf-sec6-m-line-container{overflow:visible!important;isolation:isolate}
+ #fp-master-root .mobile-s6-node-dot{position:absolute;display:block;width:11px;height:11px;border-radius:50%;background:var(--brand-line-color,#675D54);transform:translate(-50%,-50%);z-index:3;pointer-events:none;filter:none!important;clip-path:none!important}
+}
+
+/* One painted progress rail; match the physical weight and brand colour. */
+@media(min-width:768px){
+ #fp-master-root #sec6-d-fill-path,#fp-master-root #sec6-d-baton-arc{stroke:var(--brand-line-color,#675D54)!important;vector-effect:non-scaling-stroke}
+ #fp-master-root .wf-sec6-node-dot.filled{background-color:var(--brand-line-color,#675D54)!important;border-color:var(--brand-line-color,#675D54)!important;box-shadow:none!important}
+}
+@media(min-width:1200px){
+ #fp-master-root #wf-sec8-canvas[data-compact="1"]{min-height:0!important;overflow:visible!important}
+}
 
 @media(min-width:768px) and (max-width:1199.98px){
  #fp-master-root.fp-tablet{--body-size:calc(18px / var(--tablet-scale,1))}

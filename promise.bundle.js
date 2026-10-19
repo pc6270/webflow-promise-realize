@@ -233,6 +233,7 @@ try{Typekit.load();}catch(error){}
 
       document.querySelectorAll('[data-fp-h]').forEach(function (p) {
         var k = p.getAttribute('data-fp-h');
+        if(window.innerWidth>=1200 && k.startsWith('s8-') && p.closest('#wf-sec8-canvas[data-compact="1"]'))return;
         var s = num(cs, '--' + k + '-start', +p.dataset.s), e = num(cs, '--' + k + '-end', +p.dataset.e);
         var y = num(cs, p.dataset.yk, +p.dataset.y), ox = +p.dataset.ox || 0, oy = +p.dataset.oy || 0;
 
@@ -252,10 +253,20 @@ try{Typekit.load();}catch(error){}
 
         var a = s - ox, b = e - ox;
         if (p.dataset.dir === 'rtl') { var t = a; a = b; b = t; }
+        if(k === 's5-h2') {
+          const arc=document.querySelector('path[data-k="s5-arc3"]');
+          const matrix=p.getScreenCTM();
+          if(arc&&matrix){
+            const joint=arc.getPointAtLength(arc.getTotalLength()).matrixTransform(arc.getScreenCTM()).matrixTransform(matrix.inverse());
+            p.setAttribute('d','M '+joint.x+' '+joint.y+' H '+window.fpScreenLeft(p.ownerSVGElement));
+            return;
+          }
+        }
         p.setAttribute('d', 'M ' + f(a) + ' ' + f(y - oy) + ' H ' + f(b));
       });
       document.querySelectorAll('[data-fp-v]').forEach(function (p) {
         var k = p.getAttribute('data-fp-v');
+        if(window.innerWidth>=1200 && k.startsWith('s8-') && p.closest('#wf-sec8-canvas[data-compact="1"]'))return;
         var s = num(cs, '--' + k + '-start', +p.dataset.s), e = num(cs, '--' + k + '-end', +p.dataset.e);
         var x = num(cs, '--' + k + '-x', +p.dataset.x), ox = +p.dataset.ox || 0, oy = +p.dataset.oy || 0;
         var a = s - oy, b = e - oy;
@@ -264,6 +275,7 @@ try{Typekit.load();}catch(error){}
       });
       document.querySelectorAll('[data-fp-arc]').forEach(function (g) {
         var k = g.getAttribute('data-fp-arc');
+        if(window.innerWidth>=1200 && k.startsWith('s8-') && g.closest('#wf-sec8-canvas[data-compact="1"]'))return;
         g.setAttribute('transform', 'translate(' + f(num(cs, '--' + k + '-x', 0)) + ' ' + f(num(cs, '--' + k + '-y', 0)) + ')');
       });
       document.querySelectorAll('circle.fp-node').forEach(function (c) {
@@ -436,6 +448,8 @@ function switchS4Tab(index) {
       }
     });
   }
+
+  window.switchS4Tab = switchS4Tab;
 
   window.addEventListener('resize', function() {
     var activeBtn = document.querySelector('.s4-tab-btn.active');
@@ -1783,10 +1797,20 @@ function switchS4Tab(index) {
 ;/* s6-s7-connection.js */
 (function(){
   const root=document.getElementById('fp-master-root');
-  const originals=new WeakMap();let queued=false;
+  const originals=new WeakMap();let queued=false,applying=false;
   const measure=document.createElement('div');measure.setAttribute('aria-hidden','true');document.body.append(measure);
   function layout(){
-    queued=false;if(innerWidth<1200){[7,8].forEach(n=>{const canvas=document.getElementById('wf-sec'+n+'-canvas');for(const key of ['--body-size','--quote-size','--label-cn-size','--label-en-size'])canvas.style.removeProperty(key);});return;}
+    queued=false;if(innerWidth<1200){
+      const compact=document.getElementById('wf-sec8-canvas');
+      if(compact.dataset.compact){
+        delete compact.dataset.compact;for(const prop of ['height','left','top'])compact.style.removeProperty(prop);
+        document.getElementById('wf-sec8-desktop-outer').style.removeProperty('height');
+        compact.querySelectorAll('.wf-sec8-subtitle,.wf-sec8-category-title,.wf-sec8-main-title,.wf-sec8-description,.wf-sec8-vert-line,.wf-sec8-circles-block,.wf-sec8-man3-group,.wf-sec8-man1-group,.wf-sec8-man2-group,.wf-sec8-circle-text,.wf-sec8-shadow-1,.wf-sec8-shadow-2').forEach(el=>{for(const prop of ['position','top','height','transform','transform-origin','translate','scale','font-size'])el.style.removeProperty(prop);});
+        compact.querySelector('path[data-k="s8-arc3"]')?.removeAttribute('transform');
+      }
+      [7,8].forEach(n=>{const canvas=document.getElementById('wf-sec'+n+'-canvas');for(const key of ['--body-size','--quote-size','--label-cn-size','--label-en-size'])canvas.style.removeProperty(key);});return;
+    }
+    applying=true;
     if(window.fpLinesUpdate)window.fpLinesUpdate();
     const cs=getComputedStyle(root),s6=document.getElementById('wf-sec6-canvas');
     let shared=1;
@@ -1819,7 +1843,41 @@ function switchS4Tab(index) {
     });
     const scale8=1;
     independent8.style.transform='scale('+scale8+')';
-    document.getElementById('wf-sec8-desktop-outer').style.height=(1200*scale8)+'px';
+    const compactHeight=Math.max(560,Math.min(850,innerHeight-headerHeight-24));
+    const artScale=Math.min(1,(compactHeight-120)/606);
+    independent8.dataset.compact='1';
+    independent8.style.height=compactHeight+'px';
+    document.getElementById('wf-sec8-desktop-outer').style.height=compactHeight+'px';
+    const put=(selector,property,value)=>independent8.querySelector(selector)?.style.setProperty(property,value,'important');
+    put('.wf-sec8-subtitle','top','40px');
+    put('.wf-sec8-category-title','top','68px');
+    put('.wf-sec8-main-title','top','148px');
+    const quote=independent8.querySelector('.wf-sec8-main-title');
+    put('.wf-sec8-description','top',(148+quote.offsetHeight+28)+'px');
+    put('.wf-sec8-vert-line','top','137px');
+    put('.wf-sec8-vert-line','height',(quote.offsetHeight+22)+'px');
+    for(const selector of ['.wf-sec8-circles-block','.wf-sec8-man3-group']){
+      // Separate layout from the entrance animation's transform property.
+      put(selector,'transform','none');
+      put(selector,'translate',`${786.5*(1-artScale)}px ${70-265*artScale}px`);
+      put(selector,'scale',String(artScale));
+      put(selector,'transform-origin','0 0');
+    }
+    independent8.querySelectorAll('.wf-sec8-circle-text').forEach(el=>el.style.setProperty('font-size',(18/artScale)+'px','important'));
+    for(const [selector,bodySelector,shadowSelector]of [
+      ['.wf-sec8-man1-group','.wf-sec8-man-1','.wf-sec8-shadow-1'],
+      ['.wf-sec8-man2-group','.wf-sec8-man-2','.wf-sec8-shadow-2']
+    ]){
+      const body=independent8.querySelector(bodySelector);
+      const foot=body.offsetTop+(parseFloat(getComputedStyle(body).height)||body.offsetHeight);
+      // These groups were static-positioned: top had no effect. Translate
+      // the pair by its actual foot, independently of the entrance transform.
+      put(selector,'translate',`0px ${compactHeight-52-foot}px`);
+      put(selector,'top','0px');
+      // Preserve the original shadow's reflected geometry and its own anchor;
+      // translating the pair already moves it by exactly the body's offset.
+      independent8.querySelector(shadowSelector)?.style.removeProperty('top');
+    }
     const arc=document.querySelector('#wf-sec7-canvas path[data-k="s7-arc1"]');
     const baseline=document.querySelector('#wf-sec7-canvas path[data-k="s7-h1"]');
     const svg=document.querySelector('.fp-s6-track'),track=document.getElementById('sec6-d-track'),sticky=track.querySelector('.wf-sec6-desktop-sticky-inner');
@@ -1857,15 +1915,23 @@ function switchS4Tab(index) {
     const circle7=canvas7.querySelector('.wf-sec7-ball-4');
     if(entry8&&circle7){
       canvas8.style.left='0px';canvas8.style.top='0px';outer8.style.marginTop='0px';
-      const centered=canvas8.getBoundingClientRect();canvas8.style.left=(innerWidth/2-centered.left-centered.width/2)+'px';
+      // Center the visible text/circle composition, rather than the 1221px artboard.
+      const compositionCenter=(68+786.5+123.5*artScale)/2;
+      const centered=canvas8.getBoundingClientRect();canvas8.style.left=(innerWidth/2-centered.left-compositionCenter)+'px';
       entry8.removeAttribute('transform');
       entry8.setAttribute('d','M29.16 2.16C29.16 64.3757 79.6129 114.808 141.854 114.808');
       const circleShape=circle7.querySelector('circle');
       const rect=circle7.getBoundingClientRect();
       let edge=new DOMPoint(rect.left+rect.width/2,rect.bottom);
       if(circleShape){const c=circleShape,border=parseFloat(getComputedStyle(c).strokeWidth)||0;edge=new DOMPoint(+c.getAttribute('cx'),+c.getAttribute('cy')+(+c.getAttribute('r'))+border/2).matrixTransform(c.getScreenCTM());}
-      const matrix8=entry8.getScreenCTM(),cap=(parseFloat(getComputedStyle(entry8).strokeWidth)||3)*Math.hypot(matrix8.a,matrix8.b)/2;
+      const initialMatrix8=entry8.getScreenCTM(),cap=(parseFloat(getComputedStyle(entry8).strokeWidth)||3)*Math.hypot(initialMatrix8.a,initialMatrix8.b)/2;
       edge.y+=cap;
+      // The entry arc stays on S7; its horizontal exit becomes S8's top edge.
+      const entryRise=112.648*Math.hypot(initialMatrix8.a,initialMatrix8.b);
+      const topShift=edge.y+entryRise-canvas8.getBoundingClientRect().top;
+      canvas8.style.top=topShift+'px';
+      outer8.style.height=(compactHeight+Math.max(0,topShift))+'px';
+      const matrix8=entry8.getScreenCTM();
       const entry=entry8.getPointAtLength(0).matrixTransform(matrix8);
       canvas8.querySelector('#s7-s8-extension')?.remove();
       const localEdge=edge.matrixTransform(matrix8.inverse()),localEntry=entry8.getPointAtLength(0);
@@ -1879,7 +1945,14 @@ function switchS4Tab(index) {
         const wanted=new DOMPoint(finish.x,exit.y).matrixTransform(rail8.getScreenCTM()).matrixTransform(nextArc.getScreenCTM().inverse()),start=nextArc.getPointAtLength(0);
         nextArc.setAttribute('transform',`translate(${wanted.x-start.x} ${wanted.y-start.y})`);
         const vertical=canvas8.querySelector('path[data-k="s8-v1"]'),bottomArc=canvas8.querySelector('path[data-k="s8-arc3"]');
-        if(vertical&&bottomArc){const from=nextArc.getPointAtLength(nextArc.getTotalLength()).matrixTransform(nextArc.getScreenCTM()).matrixTransform(vertical.getScreenCTM().inverse()),to=bottomArc.getPointAtLength(0).matrixTransform(bottomArc.getScreenCTM()).matrixTransform(vertical.getScreenCTM().inverse());vertical.setAttribute('d',`M ${from.x} ${from.y} V ${to.y}`);}
+        if(vertical&&bottomArc){
+          bottomArc.removeAttribute('transform');
+          const arcEnd=bottomArc.getPointAtLength(bottomArc.getTotalLength());
+          bottomArc.setAttribute('transform',`translate(0 ${compactHeight-52-arcEnd.y})`);
+          const from=nextArc.getPointAtLength(nextArc.getTotalLength()).matrixTransform(nextArc.getScreenCTM()).matrixTransform(vertical.getScreenCTM().inverse()),to=bottomArc.getPointAtLength(0).matrixTransform(bottomArc.getScreenCTM()).matrixTransform(vertical.getScreenCTM().inverse());vertical.setAttribute('d',`M ${from.x} ${from.y} V ${to.y}`);
+          const bottom=canvas8.querySelector('path[data-k="s8-h2"]');
+          if(bottom){const end=bottomArc.getPointAtLength(bottomArc.getTotalLength()).matrixTransform(bottomArc.getScreenCTM()).matrixTransform(bottom.getScreenCTM().inverse());bottom.setAttribute('d',`M ${end.x} ${end.y} H 33.5`);}
+        }
       }
 
     }
@@ -1890,11 +1963,27 @@ function switchS4Tab(index) {
       const edge=new DOMPoint(-2,0).matrixTransform(inverse);
       set('--s5-h2-start',edge.x+'px');set('--s5-h2-end',from.x+'px');
       seatPath.setAttribute('d',`M ${from.x} ${from.y} H ${edge.x}`);
+      // Keep the line engine's local origin in sync; it otherwise redraws the
+      // shortened line from the old 725.22px offset on the next update.
+      seatPath.dataset.s=String(edge.x);seatPath.dataset.e=String(from.x);
+      seatPath.dataset.oy=String((parseFloat(cs.getPropertyValue('--s5-h2-y'))||727.38)-from.y);
+      seatPath.dataset.dir='rtl';
     }
+    applying=false;
   }
   function schedule(){if(!queued){queued=true;requestAnimationFrame(layout);}}
+  const previousLines=window.fpLinesUpdate;
+  if(previousLines)window.fpLinesUpdate=(...args)=>{const value=previousLines(...args);if(!applying&&innerWidth>=1200)schedule();return value;};
   window.addEventListener('resize',schedule);window.addEventListener('fp:webflow-ready',schedule);
-  new MutationObserver(schedule).observe(root,{attributes:true,attributeFilter:['style']});
+  const anchorCircle=document.querySelector('#wf-sec7-canvas .wf-sec7-ball-4');
+  // The circle's scale entrance changes its visual lower edge without a resize.
+  // Re-anchor after that transition, rather than retaining the early 0.88 scale.
+  anchorCircle?.addEventListener('transitionend',schedule);
+  anchorCircle?.addEventListener('animationend',schedule);
+  const section7=document.getElementById('wf-sec7-root');
+  if(section7)new MutationObserver(()=>{schedule();setTimeout(schedule,2800);}).observe(section7,{attributes:true,attributeFilter:['class']});
+  // This layout writes root variables itself; observing those writes caused
+  // repeated measure/write cycles and competing line geometry on each frame.
   document.fonts.ready.then(schedule);schedule();
 })();
 
@@ -1957,8 +2046,10 @@ function switchS4Tab(index) {
  const gray=make('path',{fill:'none',stroke:'#E0E0E0','stroke-linecap':'round'});
  const fill=make('path',{fill:'none',stroke:'var(--brand-line-color,#675D54)','stroke-linecap':'round',pathLength:1,'stroke-dasharray':1});
  fill.style.transition='stroke-dashoffset .35s ease';
- const dot=make('circle',{r:5.5,fill:'#987a6b',class:'mobile-s6-node-dot'});
- group.append(gray,fill);track.append(group,dot);lineBox.append(track);
+ // Paint the dot outside the 10px SVG viewport; a centre at y=0 must not
+ // lose its upper half to SVG clipping in Safari or embedded Webflow styles.
+ const dot=document.createElement('span');dot.className='mobile-s6-node-dot';dot.setAttribute('aria-hidden','true');
+ group.append(gray,fill);track.append(group);lineBox.append(track,dot);
  function local(svg,point){return point.matrixTransform(svg.getScreenCTM().inverse());}
  function end(path,last,svg){const point=path.getPointAtLength(last?path.getTotalLength():0).matrixTransform(path.getScreenCTM());return svg?local(svg,point):point;}
  function join(svg,pairs,maxGap=25){
@@ -2037,7 +2128,7 @@ function switchS4Tab(index) {
   const geometry=`M ${leftEdge.x} ${entry.y} H ${entry.x}`;gray.setAttribute('d',geometry);fill.setAttribute('d',geometry);
   const stage=Math.max(0,Math.min(2,(+document.getElementById('sec6-m-num').textContent||1)-1));
   const target=entry.x;
-  fill.style.transition='none';fill.style.strokeDashoffset='0';dot.setAttribute('cx',96+(parseFloat(cs.getPropertyValue('--s6-mb-desc-x'))||0));dot.setAttribute('cy',entry.y);
+  fill.style.transition='none';fill.style.strokeDashoffset='0';dot.style.left=(96+(parseFloat(cs.getPropertyValue('--s6-mb-desc-x'))||0))+'px';dot.style.top=entry.y+'px';
   arc.setAttribute('pathLength',1);root.style.removeProperty('--mobile-s7-offset');
   // Limit the first text row to the curved boundary, including a 14px gutter.
   const desc=document.getElementById('sec6-m-desc');const number=k=>parseFloat(cs.getPropertyValue('--s6-mb-'+k))||0;desc.style.left=(96+number('desc-x'))+'px';desc.style.top=(412+number('desc-y'))+'px';const manualWidth=number('desc-w');desc.style.width=(manualWidth>0?manualWidth:275)+'px';const dr=desc.getBoundingClientRect();let boundary=Infinity;
@@ -2572,7 +2663,7 @@ function switchS4Tab(index) {
  const pairs=[['.s2p1-dt-container .quote-wrapper','.s2p1-dt-container .quote-text','.s2p1-dt-container .desc-paragraph'],['.s5-d-slogan-block','.s5-d-slogan-text','.s5-d-desc'],[null,'.s5-m-slogan-text','.s5-m-desc'],[null,'.wf-sec8-main-title','.wf-sec8-description'],[null,'.wf-sec8-mob-main-title','.wf-sec8-mob-description'],[null,'.wf-sec7-main-title','.wf-sec7-description'],[null,'.wf-sec7-m-main-title','.wf-sec7-m-description']];
  const entries=pairs.map(([block,text,desc])=>({block:block&&document.querySelector(block),text:document.querySelector(text),desc:document.querySelector(desc)})).filter(e=>e.text&&e.desc);const originals=new Map();let queued=false;
  function restore(el){const saved=originals.get(el);if(!saved)return;if(saved[0])el.style.setProperty('top',...saved);else el.style.removeProperty('top');}
- function update(){queued=false;for(const {block,text,desc}of entries){restore(desc);if(!text.getClientRects().length||!desc.getClientRects().length)continue;const baseline=parseFloat(getComputedStyle(desc).top);if(!Number.isFinite(baseline))continue;const top=(block?block.offsetTop:0)+text.offsetTop,bottom=top+text.offsetHeight;const tablet=innerWidth>=768&&innerWidth<1200;const minimum=innerWidth<768?16:tablet?45/(parseFloat(getComputedStyle(document.getElementById('fp-master-root')).getPropertyValue('--tablet-scale'))||1):24;const next=tablet?bottom+minimum:Math.max(baseline,bottom+minimum);if(Math.abs(next-baseline)>.5){if(!originals.has(desc))originals.set(desc,[desc.style.getPropertyValue('top'),desc.style.getPropertyPriority('top')]);desc.style.setProperty('top',next+'px','important');}}}
+ function update(){queued=false;for(const {block,text,desc}of entries){if(innerWidth>=1200&&text.closest('#wf-sec8-canvas[data-compact="1"]'))continue;restore(desc);if(!text.getClientRects().length||!desc.getClientRects().length)continue;const baseline=parseFloat(getComputedStyle(desc).top);if(!Number.isFinite(baseline))continue;const top=(block?block.offsetTop:0)+text.offsetTop,bottom=top+text.offsetHeight;const tablet=innerWidth>=768&&innerWidth<1200;const minimum=innerWidth<768?16:tablet?45/(parseFloat(getComputedStyle(document.getElementById('fp-master-root')).getPropertyValue('--tablet-scale'))||1):24;const next=tablet?bottom+minimum:Math.max(baseline,bottom+minimum);if(Math.abs(next-baseline)>.5){if(!originals.has(desc))originals.set(desc,[desc.style.getPropertyValue('top'),desc.style.getPropertyPriority('top')]);desc.style.setProperty('top',next+'px','important');}}}
  function soon(){if(!queued){queued=true;requestAnimationFrame(()=>requestAnimationFrame(update));}}
  addEventListener('fp:webflow-ready',soon);addEventListener('resize',soon);document.fonts.ready.then(soon);document.fonts.addEventListener?.('loadingdone',soon);const observer=new ResizeObserver(soon);entries.forEach(({text,desc})=>{observer.observe(text);observer.observe(desc);});soon();
 })();
