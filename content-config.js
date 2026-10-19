@@ -176,122 +176,122 @@ window.FP_CONTENT_CONFIG = {
   },
   "assets": {
     "sec1-image-001": {
-      "src": new URL("assets/6f3a2cb8191ef9a9dfcae4a583c0ced0dadde22836e6de3176d7c26109c47d70.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/hero-walking-man.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "sec1-image-002": {
-      "src": new URL("assets/dd0793152c52614ff1b71282598dd01d4d596fc0f8046e055e22b50443c7ee9d.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/hero-walking-man-shadow.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "sec1-image-003": {
-      "src": new URL("assets/c05c674c307345dcb3b19488f4fff9ee76ee1a30010754252753fdae92ecc07e.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/hero-mobile-walking-man.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "sec1-image-004": {
-      "src": new URL("assets/493727bee6d2375c866404f3e03bcca10dae8a22cdf1bb45dcc3c32e6519933f.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/hero-mobile-walking-man-shadow.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "s2p1-image-005": {
-      "src": new URL("assets/115f94c183bf3810e38e44f06adedbc4104ec49d20a40c1e5a6d2432047e8fcf.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-walking-woman.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "s2p1-image-006": {
-      "src": new URL("assets/b53de952c7e736921123bd92be09546137f68e21ada684f7952952319914119c.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-walking-woman-shadow.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "s2p1-image-007": {
-      "src": new URL("assets/72649ef610cd25cec54e068a2232e9865ded26ba9d99d09257c81bc68311313b.png",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/home-inspection-consultation.png",window.FP_ASSET_BASE).href,
       "alt": "協助驗屋討論會議",
       "decorative": false
     },
     "s2p1-image-008": {
-      "src": new URL("assets/115f94c183bf3810e38e44f06adedbc4104ec49d20a40c1e5a6d2432047e8fcf.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-walking-woman.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "s2p1-image-009": {
-      "src": new URL("assets/b53de952c7e736921123bd92be09546137f68e21ada684f7952952319914119c.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-walking-woman-shadow.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "s2p1-image-010": {
-      "src": new URL("assets/72649ef610cd25cec54e068a2232e9865ded26ba9d99d09257c81bc68311313b.png",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/home-inspection-consultation.png",window.FP_ASSET_BASE).href,
       "alt": "協助驗屋討論會議",
       "decorative": false
     },
     "s2p2-image-011": {
-      "src": new URL("assets/42dd01da107df99bc2c0b5422451c9ff07cd975d89ee22f392e36ab742690f50.png",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-checklist.png",window.FP_ASSET_BASE).href,
       "alt": "提供「驗屋缺失表」，將檢驗細項清楚條列。",
       "decorative": false
     },
     "s2p2-image-012": {
-      "src": new URL("assets/dc9517a2058cdb6fbdd13a4646ae821a02aad54cfd8a0ee75873b8745dfa88c3.png",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-thermal-camera.png",window.FP_ASSET_BASE).href,
       "alt": "透過專業設備逐項檢驗，驗屋完成後，留下完整的紀錄。",
       "decorative": false
     },
     "s2p2-image-013": {
-      "src": new URL("assets/42dd01da107df99bc2c0b5422451c9ff07cd975d89ee22f392e36ab742690f50.png",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-checklist.png",window.FP_ASSET_BASE).href,
       "alt": "提供「驗屋缺失表」，將檢驗細項清楚條列。",
       "decorative": false
     },
     "s2p2-image-014": {
-      "src": new URL("assets/dc9517a2058cdb6fbdd13a4646ae821a02aad54cfd8a0ee75873b8745dfa88c3.png",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-thermal-camera.png",window.FP_ASSET_BASE).href,
       "alt": "透過專業設備逐項檢驗，驗屋完成後，留下完整的紀錄。",
       "decorative": false
     },
     "s2p34-image-015": {
-      "src": new URL("assets/d633c29089071221cb76c04977e6e572a83bd036385373ae3a231470ff41ca43.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/handover-standing-man.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "s2p34-image-016": {
-      "src": new URL("assets/68ea837001defd32033c0e003cb97c570be8625f26659e89040601167c68dab6.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/handover-standing-man-shadow.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "s2p34-image-017": {
-      "src": new URL("assets/04ba259d15c8f0342df78c5e6b1e31e1cbcc0d913b34291c6f1e6e55230fa941.png",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/home-key-handover.png",window.FP_ASSET_BASE).href,
       "alt": "購屋者與服務人員共同確認交屋與驗屋事項",
       "decorative": false
     },
     "s2p34-image-018": {
-      "src": new URL("assets/48faeba8ce77af2551c58077dc944951ffb4ed388c4db8becd0e5d3a5dff94ce.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/handover-walking-woman.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "s2p34-image-019": {
-      "src": new URL("assets/0cec7b31ced631a71c9e15cef98beacc2e2392b5347e31a4b560fb80c136c00c.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/handover-walking-woman-shadow.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "s2p34-image-020": {
-      "src": new URL("assets/d633c29089071221cb76c04977e6e572a83bd036385373ae3a231470ff41ca43.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/handover-standing-man.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "s2p34-image-021": {
-      "src": new URL("assets/68ea837001defd32033c0e003cb97c570be8625f26659e89040601167c68dab6.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/handover-standing-man-shadow.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "s2p34-image-022": {
-      "src": new URL("assets/04ba259d15c8f0342df78c5e6b1e31e1cbcc0d913b34291c6f1e6e55230fa941.png",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/home-key-handover.png",window.FP_ASSET_BASE).href,
       "alt": "購屋者與服務人員共同確認交屋與驗屋事項",
       "decorative": false
     },
     "sec4-image-023": {
-      "src": new URL("assets/9608e94e85eafac8f0d8a7eae876c98bcfa72c6c7342ecc12fda276cb76061b8.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-pulling-man.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "sec4-image-024": {
-      "src": new URL("assets/70bc8e718ee5627dcec788e3eb831c2521d700f103c0264b9db83ee669a45dea.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-pulling-man-shadow.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
@@ -301,12 +301,12 @@ window.FP_CONTENT_CONFIG = {
       "decorative": false
     },
     "sec4-image-026": {
-      "src": new URL("assets/052b6057b259e05195cef491a437a733113d63c2dc346516b94008770cab690e.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-card-icon-primary.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "sec4-image-027": {
-      "src": new URL("assets/fadc04536fa7aee20013a13d07196cb69f15e96b73f9b33a096e2ccf2269c9d6.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-card-divider.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
@@ -316,12 +316,12 @@ window.FP_CONTENT_CONFIG = {
       "decorative": false
     },
     "sec4-image-029": {
-      "src": new URL("assets/5bea56e6b4f4e23fcbe386fe1975cdfda2b99fef29d0739051b72088f68520eb.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-card-icon-secondary.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "sec4-image-030": {
-      "src": new URL("assets/fadc04536fa7aee20013a13d07196cb69f15e96b73f9b33a096e2ccf2269c9d6.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-card-divider.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
@@ -331,12 +331,12 @@ window.FP_CONTENT_CONFIG = {
       "decorative": false
     },
     "sec4-image-032": {
-      "src": new URL("assets/5bea56e6b4f4e23fcbe386fe1975cdfda2b99fef29d0739051b72088f68520eb.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-card-icon-secondary.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "sec4-image-033": {
-      "src": new URL("assets/fadc04536fa7aee20013a13d07196cb69f15e96b73f9b33a096e2ccf2269c9d6.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-card-divider.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
@@ -346,12 +346,12 @@ window.FP_CONTENT_CONFIG = {
       "decorative": false
     },
     "sec4-image-035": {
-      "src": new URL("assets/5bea56e6b4f4e23fcbe386fe1975cdfda2b99fef29d0739051b72088f68520eb.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-card-icon-secondary.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "sec4-image-036": {
-      "src": new URL("assets/fadc04536fa7aee20013a13d07196cb69f15e96b73f9b33a096e2ccf2269c9d6.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-card-divider.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
@@ -361,12 +361,12 @@ window.FP_CONTENT_CONFIG = {
       "decorative": false
     },
     "sec4-image-038": {
-      "src": new URL("assets/052b6057b259e05195cef491a437a733113d63c2dc346516b94008770cab690e.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-card-icon-primary.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "sec4-image-039": {
-      "src": new URL("assets/fadc04536fa7aee20013a13d07196cb69f15e96b73f9b33a096e2ccf2269c9d6.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-card-divider.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
@@ -376,12 +376,12 @@ window.FP_CONTENT_CONFIG = {
       "decorative": false
     },
     "sec4-image-041": {
-      "src": new URL("assets/5bea56e6b4f4e23fcbe386fe1975cdfda2b99fef29d0739051b72088f68520eb.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-card-icon-secondary.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "sec4-image-042": {
-      "src": new URL("assets/fadc04536fa7aee20013a13d07196cb69f15e96b73f9b33a096e2ccf2269c9d6.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-card-divider.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
@@ -391,12 +391,12 @@ window.FP_CONTENT_CONFIG = {
       "decorative": false
     },
     "sec4-image-044": {
-      "src": new URL("assets/5bea56e6b4f4e23fcbe386fe1975cdfda2b99fef29d0739051b72088f68520eb.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-card-icon-secondary.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "sec4-image-045": {
-      "src": new URL("assets/fadc04536fa7aee20013a13d07196cb69f15e96b73f9b33a096e2ccf2269c9d6.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-card-divider.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
@@ -406,12 +406,12 @@ window.FP_CONTENT_CONFIG = {
       "decorative": false
     },
     "sec4-image-047": {
-      "src": new URL("assets/5bea56e6b4f4e23fcbe386fe1975cdfda2b99fef29d0739051b72088f68520eb.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-card-icon-secondary.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "sec4-image-048": {
-      "src": new URL("assets/fadc04536fa7aee20013a13d07196cb69f15e96b73f9b33a096e2ccf2269c9d6.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-card-divider.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
@@ -421,12 +421,12 @@ window.FP_CONTENT_CONFIG = {
       "decorative": false
     },
     "sec4-image-050": {
-      "src": new URL("assets/5bea56e6b4f4e23fcbe386fe1975cdfda2b99fef29d0739051b72088f68520eb.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-card-icon-secondary.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "sec4-image-051": {
-      "src": new URL("assets/fadc04536fa7aee20013a13d07196cb69f15e96b73f9b33a096e2ccf2269c9d6.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-card-divider.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
@@ -436,12 +436,12 @@ window.FP_CONTENT_CONFIG = {
       "decorative": false
     },
     "sec4-image-053": {
-      "src": new URL("assets/052b6057b259e05195cef491a437a733113d63c2dc346516b94008770cab690e.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-card-icon-primary.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "sec4-image-054": {
-      "src": new URL("assets/fadc04536fa7aee20013a13d07196cb69f15e96b73f9b33a096e2ccf2269c9d6.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-card-divider.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
@@ -451,12 +451,12 @@ window.FP_CONTENT_CONFIG = {
       "decorative": false
     },
     "sec4-image-056": {
-      "src": new URL("assets/5bea56e6b4f4e23fcbe386fe1975cdfda2b99fef29d0739051b72088f68520eb.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-card-icon-secondary.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "sec4-image-057": {
-      "src": new URL("assets/fadc04536fa7aee20013a13d07196cb69f15e96b73f9b33a096e2ccf2269c9d6.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-card-divider.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
@@ -466,12 +466,12 @@ window.FP_CONTENT_CONFIG = {
       "decorative": false
     },
     "sec4-image-059": {
-      "src": new URL("assets/5bea56e6b4f4e23fcbe386fe1975cdfda2b99fef29d0739051b72088f68520eb.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-card-icon-secondary.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "sec4-image-060": {
-      "src": new URL("assets/fadc04536fa7aee20013a13d07196cb69f15e96b73f9b33a096e2ccf2269c9d6.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-card-divider.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
@@ -481,12 +481,12 @@ window.FP_CONTENT_CONFIG = {
       "decorative": false
     },
     "sec4-image-062": {
-      "src": new URL("assets/5bea56e6b4f4e23fcbe386fe1975cdfda2b99fef29d0739051b72088f68520eb.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-card-icon-secondary.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "sec4-image-063": {
-      "src": new URL("assets/fadc04536fa7aee20013a13d07196cb69f15e96b73f9b33a096e2ccf2269c9d6.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-card-divider.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
@@ -496,82 +496,82 @@ window.FP_CONTENT_CONFIG = {
       "decorative": false
     },
     "sec4-image-065": {
-      "src": new URL("assets/5bea56e6b4f4e23fcbe386fe1975cdfda2b99fef29d0739051b72088f68520eb.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-card-icon-secondary.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "sec4-image-066": {
-      "src": new URL("assets/fadc04536fa7aee20013a13d07196cb69f15e96b73f9b33a096e2ccf2269c9d6.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/inspection-card-divider.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "sec5-image-067": {
-      "src": new URL("assets/c5641d4d155922a148c6f13c6c954e01cbf9a4572a589a199a4a8d676a08ad3e.png",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/responsible-sales-consultation.png",window.FP_ASSET_BASE).href,
       "alt": "photo",
       "decorative": false
     },
     "sec5-image-068": {
-      "src": new URL("assets/c5641d4d155922a148c6f13c6c954e01cbf9a4572a589a199a4a8d676a08ad3e.png",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/responsible-sales-consultation.png",window.FP_ASSET_BASE).href,
       "alt": "photo",
       "decorative": false
     },
     "sec6-image-069": {
-      "src": new URL("assets/b381c525898fba0a4b24e8d699614f7e89f595dc0df120b950017cef95a8ebd3.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/flashlight-seated-man.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "sec6-image-070": {
-      "src": new URL("assets/499a7740688419a634b58e8a88f17cb75aacac16c276854b5b3f5c9b3809ecd6.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/flashlight.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "sec6-image-071": {
-      "src": new URL("assets/dfeae67230d72c90903b65229b6aa8fef67a141c09629838beb6985b43908f5f.png",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/space-planning.png",window.FP_ASSET_BASE).href,
       "alt": "平板上的住宅平面配置圖與空間規劃草圖",
       "decorative": false
     },
     "sec6-image-072": {
-      "src": new URL("assets/3e3b0643a980605fe003d7cdfdfbdff1cd180a13cdff959ab161c77399c77327.png",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/reception-lobby.png",window.FP_ASSET_BASE).href,
       "alt": "自然光映入接待大廳與迎賓櫃台",
       "decorative": false
     },
     "sec6-image-073": {
-      "src": new URL("assets/cf4b633dc8e6b673f9dbdb8124acaf0f1e30c940a323c9220c9a03bea1fd16b6.png",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/welcome-courtyard.png",window.FP_ASSET_BASE).href,
       "alt": "植栽環繞的迎賓走廊與休憩空間",
       "decorative": false
     },
     "sec6-image-074": {
-      "src": new URL("assets/b381c525898fba0a4b24e8d699614f7e89f595dc0df120b950017cef95a8ebd3.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/flashlight-seated-man.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "sec6-image-075": {
-      "src": new URL("assets/499a7740688419a634b58e8a88f17cb75aacac16c276854b5b3f5c9b3809ecd6.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/flashlight.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "sec6-image-076": {
-      "src": new URL("assets/dfeae67230d72c90903b65229b6aa8fef67a141c09629838beb6985b43908f5f.png",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/space-planning.png",window.FP_ASSET_BASE).href,
       "alt": "平板上的住宅平面配置圖與空間規劃草圖",
       "decorative": false
     },
     "sec6-image-077": {
-      "src": new URL("assets/5222810897ffe2363dfaed5ea8f89509109c985fd4e13771ff583f3c8087dca6.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/carousel-arrow-left.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "sec6-image-078": {
-      "src": new URL("assets/725a244cfac54062d5dd1a76a52a0c8c8d46fabea6b5b70f14f10cd6c948b928.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/carousel-arrow-right.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "sec6-image-079": {
-      "src": new URL("assets/efd8797579be3ed65c7da7f5cc9b83875aade91134bb2b39ccc83fc8ac0c3344.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/mobile-carousel-line-primary.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
     "sec6-image-080": {
-      "src": new URL("assets/7be23af74698e5ae76bf9b9b6e6036341f2dbc1a1930a4eab3afcae396da04ea.svg",window.FP_ASSET_BASE).href,
+      "src": new URL("assets/mobile-carousel-line-secondary.svg",window.FP_ASSET_BASE).href,
       "alt": "",
       "decorative": true
     },
@@ -616,21 +616,21 @@ window.FP_CONTENT_CONFIG = {
       "num": "01",
       "title": "空間裁切的匠心",
       "desc": "在坪數規劃上，與建設一同細心思量，讓空間能承載不同家庭的樣貌。",
-      "img": new URL("assets/dfeae67230d72c90903b65229b6aa8fef67a141c09629838beb6985b43908f5f.png",window.FP_ASSET_BASE).href,
+      "img": new URL("assets/space-planning.png",window.FP_ASSET_BASE).href,
       "alt": "平板上的住宅平面配置圖與空間規劃草圖"
     },
     {
       "num": "02",
       "title": "真摯不溢的坦誠",
       "desc": "在廣告與銷售中，不誇大、不隱瞞，誠實呈現家的本質。",
-      "img": new URL("assets/3e3b0643a980605fe003d7cdfdfbdff1cd180a13cdff959ab161c77399c77327.png",window.FP_ASSET_BASE).href,
+      "img": new URL("assets/reception-lobby.png",window.FP_ASSET_BASE).href,
       "alt": "自然光映入接待大廳與迎賓櫃台"
     },
     {
       "num": "03",
       "title": "溫暖舒心的迎賓體驗",
       "desc": "在現場，以溫暖的氛圍迎接——迎賓茶點、流動香氛，讓對話不只是資訊交換，而是一段舒心的交流。",
-      "img": new URL("assets/cf4b633dc8e6b673f9dbdb8124acaf0f1e30c940a323c9220c9a03bea1fd16b6.png",window.FP_ASSET_BASE).href,
+      "img": new URL("assets/welcome-courtyard.png",window.FP_ASSET_BASE).href,
       "alt": "植栽環繞的迎賓走廊與休憩空間"
     }
   ]
