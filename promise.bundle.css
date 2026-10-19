@@ -1,5 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap');
 /* global.css */
 /* ==========================================================================
    Project: Webflow Global Styles (Synced with Figma)
@@ -470,7 +472,7 @@
 /* inline-style-002.css */
 
     
-  500;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap');
+  
 
   html, body {
     margin: 0;
@@ -1365,7 +1367,7 @@
   }
 
 
-500;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap');
+
 
   .s1-master-root {
     width: 100%;
@@ -1926,7 +1928,7 @@
     filter: blur(var(--s1-mb-wmn-shd-blur, 0px));
   }
 
-500;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap');
+
 
   .s2p1-master-root {
     width: 100%;
@@ -2471,7 +2473,7 @@
     transition-delay: 4.6s;
   }
 
-500;600;700&display=swap');
+
 
   .s2p2-master-root {
     width: 100%;
@@ -2969,7 +2971,7 @@
     transform: translateY(var(--s2p2-mb-text-y, 0px));
   }
 
-500;600;700&display=swap');
+
 
   .s2p34-master-root {
     width: 100%;
@@ -3375,7 +3377,7 @@
     display: block !important;
   }
 
-500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap');
+
 
   .s4-root {
     width: 100%;
@@ -4504,7 +4506,7 @@
     transition-delay: 1.3s;
   }
 
-500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap');
+
 
   .s5-global-container * {
     box-sizing: border-box;
@@ -5472,7 +5474,7 @@
     }
   }
 
-500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap');
+
 
   .wf-sec7-wrapper * {
     box-sizing: border-box;
@@ -5955,7 +5957,7 @@
     opacity: 1 !important;
   }
 
-500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap');
+
 
   .wf-sec8-wrapper * {
     box-sizing: border-box;
@@ -6909,7 +6911,7 @@ html,body{scrollbar-width:none;-ms-overflow-style:none}html::-webkit-scrollbar,b
 @media(max-width:767px){.vertical-brown-line,.s5-m-accent-line,.wf-sec8-mob-vert-line{width:var(--quote-line-mb-width,1px)!important}}
 
 /* design-fonts.css?v=20261014-1 */
-500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap');
+
 @font-face{font-family:'Swei Spring CJK TC';src:url('assets/fonts/swei-spring-tc-medium.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
 @font-face{font-family:'Swei Spring CJK TC';src:url('assets/fonts/swei-spring-tc-semibold.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap}
 @font-face{font-family:'Playfair Display';src:url('assets/fonts/playfair-display.ttf') format('truetype');font-weight:400 900;font-style:normal;font-display:swap}
