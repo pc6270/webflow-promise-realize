@@ -2152,7 +2152,10 @@ function switchS4Tab(index) {
   const bottomStart=end(bottomPath,0,seams5),vertical=scaler.querySelector('.s5-m-left-line');
   const height=(bottomStart.y-archEnd.y)*477.66/476.5;
   vertical.style.height=height+'px';vertical.style.left=(archEnd.x-1.16)+'px';vertical.style.top=(archEnd.y-height*1.16/477.66)+'px';
-  const edge=local(seams5,new DOMPoint(innerWidth+20,br.top+br.height/2));
+  // The line layer is reflected below: solve its far endpoint before reflection
+  // so the final, reflected seat line reaches the physical left viewport edge.
+  const mirrorJoint=topCurve.getPointAtLength(0).matrixTransform(topCurve.getScreenCTM());
+  const edge=local(seams5,new DOMPoint(2*mirrorJoint.x+2,br.top+br.height/2));
   const arcEnd=end(bottomPath,1,seams5),bar=scaler.querySelector('.s5-m-bottom-line'),inner=bar.firstElementChild,barSvg=inner.querySelector('svg'),barPath=barSvg.querySelector('path');
   const left=arcEnd.x-.66,width=Math.max(1,edge.x-left+.66);
   bar.style.left=left+'px';bar.style.top=(seat.y-1.16)+'px';bar.style.width=width+'px';inner.style.width=width+'px';

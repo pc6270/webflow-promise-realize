@@ -7203,5 +7203,11 @@ body{padding-top:var(--site-header-height,110px)!important}
  #fp-master-root .s4-panels-container{width:100%!important;max-width:100%!important;left:0!important;margin-left:0!important;margin-right:0!important}
 }
 
+/* Webflow SVG defaults must not clip rails extending outside their canvas. */
+@media(max-width:767.98px){
+ #fp-master-root .mobile-s6-track{overflow:visible!important;max-width:none!important}
+ #fp-master-root .s5-m-bottom-line,#fp-master-root .s5-m-bottom-line>div,#fp-master-root .s5-m-bottom-line svg{overflow:visible!important;max-width:none!important}
+}
+
 /* webflow-integration.css */
 body{padding-top:0!important}#fp-webflow-mount{padding-top:var(--site-header-height,110px);position:relative;overflow:visible}#fp-webflow-mount #fp-master-root{margin:0!important}[data-fp-fragment]{visibility:hidden}#fp-webflow-mount>.w-embed{display:contents}
