@@ -2105,6 +2105,27 @@ function switchS4Tab(index) {
   }
   svg.querySelector('path').setAttribute('d',d.join(' '));
  }
+ // Paint each connected mobile flow in one SVG coordinate system. The
+ // original segments remain measurement references, avoiding independent
+ // SVG viewBox rounding and WebKit seams after breakpoint changes.
+ function continuous(svg,paths){
+  const inverse=svg.getScreenCTM().inverse();let previous=null;const commands=[];
+  for(const source of paths){
+   if(!source)continue;
+   const length=source.getTotalLength(),count=Math.max(1,Math.ceil(length/2));
+   let points=Array.from({length:count+1},(_,i)=>source.getPointAtLength(length*i/count).matrixTransform(source.getScreenCTM()).matrixTransform(inverse));
+   if(previous){
+    const distance=p=>Math.hypot(p.x-previous.x,p.y-previous.y);
+    if(distance(points.at(-1))<distance(points[0]))points.reverse();
+    const dx=previous.x-points[0].x,dy=previous.y-points[0].y;
+    points=points.map(p=>({x:p.x+dx,y:p.y+dy}));
+   }else if(points[0].y>points.at(-1).y)points.reverse();
+   points.forEach((p,i)=>commands.push(`${!previous&&i===0?'M':'L'} ${p.x.toFixed(4)} ${p.y.toFixed(4)}`));
+   previous=points.at(-1);source.classList.add('mobile-flow-reference');
+  }
+  const paint=svg.querySelector('path');paint.setAttribute('d',commands.join(' '));
+  paint.classList.add('mobile-continuous-flow');paint.style.setProperty('opacity','1','important');
+ }
  function widenFilters(){
   document.querySelectorAll('.s2p2-mb-layer .s2p2-line-svg filter,.s5-mobile-wrapper .s5-line-path filter').forEach(f=>{
    if(f.dataset.mobileExpanded)return;f.dataset.mobileExpanded='1';
@@ -2165,6 +2186,8 @@ function switchS4Tab(index) {
   join(seams5,s5Paths.slice(1).map((p,i)=>[s5Paths[i],p]));
   const s2Paths=['.s2p2-mb-vector-top','.s2p2-mb-arc-top','.s2p2-mb-line-vert','.s2p2-mb-arc-bottom'].map(selector=>p2.querySelector(selector+' path'));
   join(seams2,s2Paths.slice(1).map((p,i)=>[s2Paths[i],p]),100);
+  continuous(seams2,s2Paths);
+  continuous(seams5,s5Paths);
   // Snap the next horizontal segment to the bottom arc in its own SVG coordinates.
   // Preserve the remaining curve and all content positions.
   const nextPath=p34.querySelector('#s2p34-mb-master-path');
@@ -2236,7 +2259,8 @@ function switchS4Tab(index) {
  }
  let pending=false;function soon(){if(!pending){pending=true;requestAnimationFrame(()=>{pending=false;update();});}}
  window.fpMobileConnectionsUpdate=update;
- window.addEventListener('resize',soon);window.addEventListener('fp:webflow-ready',soon);document.fonts.ready.then(soon);
+ window.addEventListener('resize',soon);window.addEventListener('fp:webflow-ready',soon);window.addEventListener('pageshow',soon);window.addEventListener('orientationchange',soon);document.fonts.ready.then(soon);
+ root.addEventListener('fp:webflow-ready',event=>{if(event.target.tagName==='IMG')soon();},true);
  new MutationObserver(soon).observe(document.getElementById('sec6-m-num'),{childList:true,characterData:true,subtree:true});
  soon();
 })();

@@ -7013,7 +7013,7 @@ html,body{scrollbar-width:none;-ms-overflow-style:none}html::-webkit-scrollbar,b
 #fp-master-root .quote-text .fp-quote-line{display:block!important;white-space:nowrap!important}
 #fp-master-root blockquote{border:0!important;border-left:0!important;background:transparent!important;box-shadow:none!important;padding:0!important}
 
-/* viewport-refinements.css?v=mobile-s4-center-4 */
+/* viewport-refinements.css?v=continuous-mobile-2 */
 #fp-master-root .s4-bg-ellipse{max-width:none!important;max-height:none!important;aspect-ratio:1/1!important;flex-shrink:0!important}
 @media(min-width:1200px){#fp-master-root .s4-bg-ellipse{width:1120px!important;height:1120px!important;min-width:1120px!important;min-height:1120px!important}}
 @media(min-width:768px) and (max-width:1199.98px){#fp-master-root .s4-bg-ellipse{width:1120px!important;height:1120px!important}}
@@ -7207,6 +7207,13 @@ body{padding-top:var(--site-header-height,110px)!important}
 @media(max-width:767.98px){
  #fp-master-root .mobile-s6-track{overflow:visible!important;max-width:none!important}
  #fp-master-root .s5-m-bottom-line,#fp-master-root .s5-m-bottom-line>div,#fp-master-root .s5-m-bottom-line svg{overflow:visible!important;max-width:none!important}
+}
+
+/* One continuous stroke per mobile flow; keep references measurable. */
+@media(max-width:767.98px){
+ #fp-master-root .mobile-flow-reference{opacity:0!important}
+ #fp-master-root .mobile-continuous-flow{opacity:1!important;fill:none!important;stroke:var(--brand-line-color,#675D54)!important;stroke-width:var(--brand-line-mb-width,2px)!important;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none!important;stroke-dashoffset:0!important}
+ #fp-master-root .mobile-seams{overflow:visible!important;max-width:none!important}
 }
 
 /* webflow-integration.css */
