@@ -6426,7 +6426,7 @@ html{overflow-x:clip}
  .s2p34-mb-photo-card{left:29px}.s2p34-mb-brand-text{left:23.01px}
  .s2p34-mb-man-body{left:90.98px;top:0;width:23.484px;height:58.96px;transform:none}
  .s2p34-mb-man-shadow{left:46.01px;top:55.46px;width:93.687px;height:53.389px;transform:none}
- .s4-root{width:402px!important;padding:0!important;min-height:820px;overflow:hidden!important}
+ .s4-root{width:402px!important;padding:0!important;min-height:820px;overflow:visible!important}
  .s4-bg-ellipse{top:0!important;left:-207px!important;transform:none!important;width:820px!important;height:820px!important;min-width:820px!important;min-height:820px!important}
  .s4-top-connector{display:none!important}.s4-content-wrapper{padding-top:64px}
  .s4-header-title{font-size:16px;line-height:1.8;letter-spacing:.96px;margin:0}
@@ -7013,7 +7013,7 @@ html,body{scrollbar-width:none;-ms-overflow-style:none}html::-webkit-scrollbar,b
 #fp-master-root .quote-text .fp-quote-line{display:block!important;white-space:nowrap!important}
 #fp-master-root blockquote{border:0!important;border-left:0!important;background:transparent!important;box-shadow:none!important;padding:0!important}
 
-/* viewport-refinements.css?v=restore-native-3 */
+/* viewport-refinements.css?v=mobile-s4-center-4 */
 #fp-master-root .s4-bg-ellipse{max-width:none!important;max-height:none!important;aspect-ratio:1/1!important;flex-shrink:0!important}
 @media(min-width:1200px){#fp-master-root .s4-bg-ellipse{width:1120px!important;height:1120px!important;min-width:1120px!important;min-height:1120px!important}}
 @media(min-width:768px) and (max-width:1199.98px){#fp-master-root .s4-bg-ellipse{width:1120px!important;height:1120px!important}}
@@ -7105,6 +7105,12 @@ body{padding-top:var(--site-header-height,110px)!important}
 @media(min-width:1200px){#fp-master-root #sec6-d-flashlight-icon{left:calc(221px + var(--desktop-lamp-adjust-x,0px))!important;top:calc(25px + var(--desktop-seat-shift,0px) + var(--desktop-lamp-adjust-y,0px))!important}}
 
 #fp-master-root .s4-btn-watch-video[hidden]{display:none!important;pointer-events:none!important}
+/* Webflow applies overflow:hidden to SVGs. These strokes intentionally leave
+   their small native viewports to meet the arc and the viewport's left edge. */
+@media(min-width:768px){
+ #fp-master-root .s6-seat-holder svg{overflow:visible!important;max-width:none!important}
+ #fp-master-root .s6-seat-holder,.s6-seat-holder .s6-seat-line,.s6-seat-holder .s6-seat-arc{overflow:visible!important}
+}
 @media(max-width:767.98px){
  #fp-master-root .wf-sec6-m-line-container{overflow:visible!important;isolation:isolate}
  #fp-master-root .mobile-s6-node-dot{position:absolute;display:block;width:11px;height:11px;border-radius:50%;background:var(--brand-line-color,#675D54);transform:translate(-50%,-50%);z-index:3;pointer-events:none;filter:none!important;clip-path:none!important}
@@ -7120,8 +7126,81 @@ body{padding-top:var(--site-header-height,110px)!important}
 }
 
 @media(min-width:768px) and (max-width:1199.98px){
- #fp-master-root.fp-tablet{--body-size:calc(18px / var(--tablet-scale,1))}
- #fp-master-root.fp-tablet .s1-desc-paragraph,#fp-master-root.fp-tablet .desc-paragraph,#fp-master-root.fp-tablet .s2p2-card-text,#fp-master-root.fp-tablet .s2p34-brand-text,#fp-master-root.fp-tablet .s5-d-desc,#fp-master-root.fp-tablet .wf-sec6-desc,#fp-master-root.fp-tablet .wf-sec7-description,#fp-master-root.fp-tablet .wf-sec8-description,#fp-master-root.fp-tablet .s4-expanded-desc{font-size:calc(18px / var(--tablet-scale,1))!important;line-height:1.6!important}
+ #fp-master-root.fp-tablet{--tablet-body-size:clamp(16px,calc(16px + (100vw - 824px) * .01),18px);--body-size:calc(var(--tablet-body-size) / var(--tablet-scale,1))}
+ #fp-master-root.fp-tablet .s1-desc-paragraph,#fp-master-root.fp-tablet .desc-paragraph,#fp-master-root.fp-tablet .s2p2-card-text,#fp-master-root.fp-tablet .s2p34-brand-text,#fp-master-root.fp-tablet .s5-d-desc,#fp-master-root.fp-tablet .wf-sec6-desc,#fp-master-root.fp-tablet .wf-sec7-description,#fp-master-root.fp-tablet .wf-sec8-description,#fp-master-root.fp-tablet .s4-expanded-desc{font-size:calc(var(--tablet-body-size,18px) / var(--tablet-scale,1))!important;line-height:1.5!important}
+}
+
+@media(min-width:768px) and (max-width:1199.98px){
+ #fp-master-root.fp-tablet .wf-sec7-main-title{left:177.5px!important;font-size:calc(20px + 2px / var(--tablet-scale,1))!important;text-align:left!important}
+ #fp-master-root.fp-tablet .wf-sec7-description{text-align:left!important}
+}
+
+@media(min-width:768px) and (max-width:1199.98px){
+ #fp-master-root.fp-tablet .wf-sec7-main-title,
+ #fp-master-root.fp-tablet .wf-sec7-description{left:177.5px!important;width:663.5px!important;translate:0 var(--s7-tab-text-group-y,0px)!important;text-align:left!important}
+ #fp-master-root.fp-tablet .wf-sec7-ball-text{font-size:calc(16px / var(--tablet-scale,1))!important}
+ #fp-master-root.fp-tablet .fp-s8-lines{overflow:visible!important}
+}
+@media(min-width:768px) and (max-width:1199.98px){
+ #fp-master-root.fp-tablet .s2p1-dt-container .desc-paragraph{width:440px!important}
+ #fp-master-root.fp-tablet[data-s6-tablet-outro="1"] #sec6-d-desc{opacity:0!important;pointer-events:none;transition:opacity .25s ease!important}
+}
+@media(prefers-reduced-motion:reduce){
+ #fp-master-root.fp-tablet[data-s6-tablet-outro="1"] #sec6-d-desc{transition:none!important}
+}
+@media(min-width:768px){
+ #fp-master-root[data-s6-tablet-outro="1"] #sec6-d-desc{opacity:0!important;pointer-events:none;transition:opacity .25s ease!important}
+}
+@media(min-width:768px) and (max-width:1199.98px){
+ #fp-master-root.fp-tablet .s5-d-desc{width:calc(506px - 24px / var(--tablet-scale,1))!important}
+}
+@media(max-width:767.98px){
+ #fp-master-root .wf-sec7-mobile-canvas,
+ #fp-master-root .wf-sec7-mobile-outer,
+ #fp-master-root .wf-sec7-m-vector-svg{overflow:visible!important}
+ #fp-master-root .wf-sec7-m-vector-svg{max-width:none!important}
+}
+@media(prefers-reduced-motion:reduce){
+ #fp-master-root[data-s6-tablet-outro="1"] #sec6-d-desc{transition:none!important}
+}
+
+@media(max-width:767.98px){
+ #fp-master-root .wf-sec7-m-vector-svg{left:-8px!important;top:-8px!important;width:362px!important;height:734px!important;max-width:none!important;overflow:visible!important}
+}
+
+@media(min-width:768px) and (max-width:1199.98px){
+ #fp-master-root.fp-tablet .wf-sec8-description{width:calc(487px - 24px / var(--tablet-scale,1) - 3em)!important}
+}
+
+@media(max-width:767.98px){
+ #fp-master-root .wf-sec7-m-vector-svg path,
+ #fp-master-root .mobile-s6-track path{stroke-width:var(--brand-line-mb-width,2px)!important;vector-effect:none;stroke-linecap:round;stroke-linejoin:round;shape-rendering:auto}
+}
+@media(max-width:767.98px){
+ #fp-master-root .wf-sec8-mob-circle-text{font-size:var(--body-size,14px)!important}
+}
+
+/* An opaque, full-size circle masks the incoming arc, including during entry. */
+#fp-master-root .s4-bg-ellipse{opacity:1!important;background:#f4f4f4}
+@media(min-width:1200px){#fp-master-root .s4-bg-ellipse{transform:translateX(-50%)!important}}
+/* Mobile/tablet use explicit left coordinates rather than percentage centering. */
+@media(max-width:1199.98px){#fp-master-root .s4-bg-ellipse{transform:none!important}}
+
+/* Keep the mobile capsule and its lower shadow above the card stack. */
+@media(max-width:767.98px){
+ #fp-master-root .s4-tab-switcher{position:relative;z-index:20!important;overflow:visible!important;height:58px!important}
+ #fp-master-root .s4-tab-track{height:58px!important}
+ #fp-master-root .s4-tab-buttons-row{height:58px!important}
+ #fp-master-root .s4-panels-wrapper{position:relative;left:0!important;z-index:1}
+}
+
+/* One shared mobile center axis for the capsule and every card panel. */
+@media(max-width:767.98px){
+ #fp-master-root .s4-content-wrapper{left:0!important;right:auto!important;width:402px!important;box-sizing:border-box}
+ #fp-master-root .s4-tab-switcher{width:338px!important;max-width:338px!important;left:0!important;right:auto!important;align-self:center;margin-left:auto!important;margin-right:auto!important}
+ #fp-master-root .s4-tab-track{width:100%!important;max-width:100%!important;margin-left:0!important;margin-right:0!important}
+ #fp-master-root .s4-panels-wrapper{width:338px!important;max-width:338px!important;left:0!important;right:auto!important;align-self:center;margin-left:auto!important;margin-right:auto!important}
+ #fp-master-root .s4-panels-container{width:100%!important;max-width:100%!important;left:0!important;margin-left:0!important;margin-right:0!important}
 }
 
 /* webflow-integration.css */

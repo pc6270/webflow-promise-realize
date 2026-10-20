@@ -233,6 +233,7 @@ try{Typekit.load();}catch(error){}
 
       document.querySelectorAll('[data-fp-h]').forEach(function (p) {
         var k = p.getAttribute('data-fp-h');
+        if(window.innerWidth>=1200 && p.dataset.desktopSeam==='1')return;
         if(window.innerWidth>=1200 && k.startsWith('s8-') && p.closest('#wf-sec8-canvas[data-compact="1"]'))return;
         var s = num(cs, '--' + k + '-start', +p.dataset.s), e = num(cs, '--' + k + '-end', +p.dataset.e);
         var y = num(cs, p.dataset.yk, +p.dataset.y), ox = +p.dataset.ox || 0, oy = +p.dataset.oy || 0;
@@ -1801,11 +1802,12 @@ function switchS4Tab(index) {
   const measure=document.createElement('div');measure.setAttribute('aria-hidden','true');document.body.append(measure);
   function layout(){
     queued=false;if(innerWidth<1200){
+      document.getElementById('wf-sec7-canvas').style.removeProperty('left');
       const compact=document.getElementById('wf-sec8-canvas');
       if(compact.dataset.compact){
         delete compact.dataset.compact;for(const prop of ['height','left','top'])compact.style.removeProperty(prop);
         document.getElementById('wf-sec8-desktop-outer').style.removeProperty('height');
-        compact.querySelectorAll('.wf-sec8-subtitle,.wf-sec8-category-title,.wf-sec8-main-title,.wf-sec8-description,.wf-sec8-vert-line,.wf-sec8-circles-block,.wf-sec8-man3-group,.wf-sec8-man1-group,.wf-sec8-man2-group,.wf-sec8-circle-text,.wf-sec8-shadow-1,.wf-sec8-shadow-2').forEach(el=>{for(const prop of ['position','top','height','transform','transform-origin','translate','scale','font-size'])el.style.removeProperty(prop);});
+        compact.querySelectorAll('.wf-sec8-subtitle,.wf-sec8-category-title,.wf-sec8-main-title,.wf-sec8-description,.wf-sec8-vert-line,.wf-sec8-circles-block,.wf-sec8-man3-group,.wf-sec8-man1-group,.wf-sec8-man2-group,.wf-sec8-circle-text,.wf-sec8-shadow-1,.wf-sec8-shadow-2').forEach(el=>{for(const prop of ['position','left','top','height','transform','transform-origin','translate','scale','font-size'])el.style.removeProperty(prop);});
         compact.querySelector('path[data-k="s8-arc3"]')?.removeAttribute('transform');
       }
       [7,8].forEach(n=>{const canvas=document.getElementById('wf-sec'+n+'-canvas');for(const key of ['--body-size','--quote-size','--label-cn-size','--label-en-size'])canvas.style.removeProperty(key);});return;
@@ -1844,7 +1846,7 @@ function switchS4Tab(index) {
     const scale8=1;
     independent8.style.transform='scale('+scale8+')';
     const compactHeight=Math.max(560,Math.min(850,innerHeight-headerHeight-24));
-    const artScale=Math.min(1,(compactHeight-120)/606);
+    const artScale=.9*Math.min(1,(compactHeight-120)/606);
     independent8.dataset.compact='1';
     independent8.style.height=compactHeight+'px';
     document.getElementById('wf-sec8-desktop-outer').style.height=compactHeight+'px';
@@ -1853,13 +1855,21 @@ function switchS4Tab(index) {
     put('.wf-sec8-category-title','top','68px');
     put('.wf-sec8-main-title','top','148px');
     const quote=independent8.querySelector('.wf-sec8-main-title');
-    put('.wf-sec8-description','top',(148+quote.offsetHeight+28)+'px');
-    put('.wf-sec8-vert-line','top','137px');
+    const description8=independent8.querySelector('.wf-sec8-description');
+    // Keep the original column's x coordinates. Align the complete text
+    // group's vertical centre with the three-circle composition's centre.
+    const textTop=44;
+    const descriptionTop=148+quote.offsetHeight+28;
+    const textBottom=descriptionTop+description8.offsetHeight;
+    const circleCenter=90+303*artScale;
+    const textShift=circleCenter-(textTop+textBottom)/2;
+    for(const [selector,left]of [['.wf-sec8-subtitle',70],['.wf-sec8-category-title',68],['.wf-sec8-vert-line',68],['.wf-sec8-main-title',96],['.wf-sec8-description',68]])put(selector,'left',left+'px');
+    for(const [selector,top]of [['.wf-sec8-subtitle',textTop],['.wf-sec8-category-title',68],['.wf-sec8-main-title',148],['.wf-sec8-description',descriptionTop],['.wf-sec8-vert-line',137]])put(selector,'top',(top+textShift)+'px');
     put('.wf-sec8-vert-line','height',(quote.offsetHeight+22)+'px');
     for(const selector of ['.wf-sec8-circles-block','.wf-sec8-man3-group']){
       // Separate layout from the entrance animation's transform property.
       put(selector,'transform','none');
-      put(selector,'translate',`${786.5*(1-artScale)}px ${70-265*artScale}px`);
+      put(selector,'translate',`${786.5*(1-artScale)}px ${90-265*artScale}px`);
       put(selector,'scale',String(artScale));
       put(selector,'transform-origin','0 0');
     }
@@ -1879,12 +1889,12 @@ function switchS4Tab(index) {
       independent8.querySelector(shadowSelector)?.style.removeProperty('top');
     }
     const arc=document.querySelector('#wf-sec7-canvas path[data-k="s7-arc1"]');
-    const baseline=document.querySelector('#wf-sec7-canvas path[data-k="s7-h1"]');
     const svg=document.querySelector('.fp-s6-track'),track=document.getElementById('sec6-d-track'),sticky=track.querySelector('.wf-sec6-desktop-sticky-inner');
     const canvas7=document.getElementById('wf-sec7-canvas');
     const outer7=document.getElementById('wf-sec7-desktop-outer');
     // Restore the measured base before calculating the natural (released) position.
-    canvas7.style.left='0px';canvas7.style.top='0px';outer7.style.marginTop='0px';
+    canvas7.style.setProperty('left','0px','important');canvas7.style.top='0px';outer7.style.marginTop='0px';
+    arc.removeAttribute('transform');
     const release=track.getBoundingClientRect().bottom-sticky.getBoundingClientRect().height;
     const delta=release-sticky.getBoundingClientRect().top;
     const x=parseFloat(cs.getPropertyValue('--s6-h4-end'))||1131.87;
@@ -1892,9 +1902,37 @@ function switchS4Tab(index) {
     const target=new DOMPoint(x,y).matrixTransform(svg.getScreenCTM());
     target.y+=delta;
     const first=arc.getPointAtLength(0).matrixTransform(arc.getScreenCTM());
-    // Translate S7 to meet S6; never stretch or rebuild the original arc.
-    canvas7.style.left=(target.x-first.x)+'px';
+    // S6 can scale down while S7 retains native typography. Do not let the
+    // S6 anchor pull S7's content past either viewport edge.
+    const base7=canvas7.getBoundingClientRect();
+    const title7=canvas7.querySelector('.wf-sec7-main-title'),desc7=canvas7.querySelector('.wf-sec7-description');
+    const shiftX=el=>parseFloat(getComputedStyle(el).translate)||0;
+    const balls=canvas7.querySelector('.wf-sec7-balls-container');
+    const ballBounds=[...balls.querySelectorAll('.wf-sec7-ball')].map(ball=>{
+      const left=balls.offsetLeft+ball.offsetLeft+shiftX(ball);
+      return {left,right:left+ball.offsetWidth};
+    });
+    const contentLeft=Math.min(title7.offsetLeft+shiftX(title7),desc7.offsetLeft+shiftX(desc7),...ballBounds.map(b=>b.left));
+    const contentRight=Math.max(title7.offsetLeft+shiftX(title7)+title7.offsetWidth,desc7.offsetLeft+shiftX(desc7)+desc7.offsetWidth,...ballBounds.map(b=>b.right));
+    const parentScale7=base7.width/(canvas7.offsetWidth||base7.width)||1;
+    const gutter=24,minimumLeft=gutter-contentLeft*parentScale7,maximumLeft=Math.max(minimumLeft,innerWidth-gutter-contentRight*parentScale7);
+    const desiredLeft=base7.left+target.x-first.x;
+    const fittedLeft=Math.max(minimumLeft,Math.min(maximumLeft,desiredLeft));
+    canvas7.style.setProperty('left',((fittedLeft-base7.left)/parentScale7)+'px','important');
     canvas7.style.top=(target.y-first.y)+'px';
+    // Own both sides of the join; the parameter renderer must not restore
+    // the old rail endpoint after the responsive curve has moved.
+    const arcRect=arc.getBoundingClientRect(),arcMatrix=arc.getScreenCTM();
+    const correction=Math.min(0,innerWidth-gutter-arcRect.right);
+    if(correction<0)arc.setAttribute('transform',`translate(${correction/arcMatrix.a} 0)`);
+    const baseline=canvas7.querySelector('path[data-k="s7-h1"]');
+    if(baseline){
+      const join=arc.getPointAtLength(arc.getTotalLength()).matrixTransform(arc.getScreenCTM()).matrixTransform(baseline.getScreenCTM().inverse());
+      const circle=canvas7.querySelector('.wf-sec7-ball-2').getBoundingClientRect();
+      const end=new DOMPoint(circle.right,circle.top+circle.height/2).matrixTransform(baseline.getScreenCTM().inverse());
+      baseline.dataset.desktopSeam='1';
+      baseline.setAttribute('d',`M ${join.x} ${join.y} H ${end.x}`);
+    }
     const matrix=svg.getScreenCTM().inverse().multiply(arc.getScreenCTM());
     const tokens=arc.getAttribute('d').match(/[MC]|-?\d*\.?\d+(?:e[-+]?\d+)?/gi);
     const mapped=[];
@@ -2036,6 +2074,13 @@ function switchS4Tab(index) {
   const path=make('path',{class:'mobile-seam-path'});svg.append(path);container.append(svg);overlays.set(container,svg);return svg;
  }
  const scaler=document.getElementById('s5-mobile-scaler'),seams5=overlay(scaler);
+ const mirrored5=document.createElement('div');mirrored5.className='s5-mobile-mirrored-lines';
+ Object.assign(mirrored5.style,{position:'absolute',left:'0',top:'0',width:'100%',height:'100%',pointerEvents:'none',transformOrigin:'0 0',overflow:'visible'});
+ scaler.append(mirrored5);
+ for(const selector of ['.s5-m-top-curve','.s5-m-top-arch','.s5-m-left-line','.s5-m-bottom-arc','.s5-m-bottom-line']){
+  const line=scaler.querySelector(selector);if(line)mirrored5.append(line);
+ }
+ mirrored5.append(seams5);
  const p2=document.querySelector('.s2p2-mb-layer'),seams2=overlay(p2);
  const p34=document.querySelector('.s2p34-mb-canvas'),seams34=overlay(p34);
  const lineBox=document.querySelector('.wf-sec6-m-line-container');
@@ -2067,8 +2112,11 @@ function switchS4Tab(index) {
   });
  }
  function update(){
-  if(innerWidth>=768){restoreFilters();return;}
+  mirrored5.style.transform='none';
+  if(innerWidth>=768){document.querySelector('.wf-sec7-m-vector-svg').setAttribute('viewBox','0 0 346 718');restoreFilters();return;}
   const cs=getComputedStyle(root),stroke=parseFloat(cs.getPropertyValue('--brand-line-mb-width'))||2;
+  // Add paint padding without changing the path's displayed coordinates.
+  document.querySelector('.wf-sec7-m-vector-svg').setAttribute('viewBox','-8 -8 362 734');
   gray.setAttribute('stroke-width',stroke);fill.setAttribute('stroke-width',stroke);
   const scale=Math.min(1,innerWidth/402);
   // Beam geometry remains fixed when the lamp or character is adjusted.
@@ -2122,6 +2170,31 @@ function switchS4Tab(index) {
   const deltaY=connection.y-56.16;
   nextPath.setAttribute('d',`M ${connection.x} ${connection.y} H 134.60 C 69.93 ${56.21+deltaY} 21.16 104.98 21.16 165.16 V 547.50 C 21.16 590.85 55.32 625.05 97.46 625.05 H 134.85 C 176.99 625.26 211.16 659.46 211.16 701.66`);
   join(seams34,[[s2Paths[s2Paths.length-1],nextPath]]);
+  // Match the rendered width of an existing vertical flow line, including
+  // each SVG's viewBox scale. Equal CSS widths alone are not sufficient.
+  const seventhSvg=document.querySelector('.wf-sec7-m-vector-svg');
+  const seventh=seventhSvg.querySelector('path');
+  const reference=document.querySelector('.s2p2-mb-line-vert path');
+  seventhSvg.style.translate='none';
+  if(reference){
+   const perpendicularScale=path=>{
+    const matrix=path.getScreenCTM(),length=path.getTotalLength();
+    const a=path.getPointAtLength(length*.5-.01),b=path.getPointAtLength(length*.5+.01);
+    const dx=b.x-a.x,dy=b.y-a.y,n=Math.hypot(dx,dy)||1;
+    const tx=dx/n,ty=dy/n;
+    return Math.abs(matrix.a*matrix.d-matrix.b*matrix.c)/(Math.hypot(matrix.a*tx+matrix.c*ty,matrix.b*tx+matrix.d*ty)||1);
+   };
+   const target=(parseFloat(getComputedStyle(reference).strokeWidth)||stroke)*perpendicularScale(reference);
+   seventh.style.setProperty('vector-effect','none','important');
+   seventh.style.setProperty('stroke-width',String(target/perpendicularScale(seventh)),'important');
+   const ratio=devicePixelRatio||1;
+   const middle=seventh.getPointAtLength(seventh.getTotalLength()*.5).matrixTransform(seventh.getScreenCTM());
+   const referencePoint=reference.getPointAtLength(reference.getTotalLength()*.5).matrixTransform(reference.getScreenCTM());
+   const fraction=x=>x-Math.floor(x);
+   let correction=fraction(referencePoint.x*ratio)-fraction(middle.x*ratio);
+   correction-=Math.round(correction);
+   seventhSvg.style.translate=(correction/ratio/scale)+'px 0';
+  }
   // The S6 rail ends exactly at S7's original entry point.
   const arc=document.querySelector('.wf-sec7-m-vector-svg path'),entry=end(arc,0,track);
   const leftEdge=local(track,new DOMPoint(0,0)),rightEdge=local(track,new DOMPoint(innerWidth,0));
@@ -2152,6 +2225,11 @@ function switchS4Tab(index) {
    unfiltered(path);
    for(let parent=path.parentElement;parent&&parent.tagName.toLowerCase()!=='svg';parent=parent.parentElement)if(parent.hasAttribute('filter')||parent.style.filter)unfiltered(parent);
   });
+  // Reflect only the line layer around its incoming joint, so the previous
+  // section stays connected and photos, typography and actors are untouched.
+  const incoming=topCurve.getPointAtLength(0).matrixTransform(topCurve.getScreenCTM());
+  const anchorX=(incoming.x-scaler.getBoundingClientRect().left)/scale;
+  mirrored5.style.transform=`matrix(-1,0,0,1,${2*anchorX},0)`;
  }
  let pending=false;function soon(){if(!pending){pending=true;requestAnimationFrame(()=>{pending=false;update();});}}
  window.fpMobileConnectionsUpdate=update;
@@ -2194,7 +2272,7 @@ function switchS4Tab(index) {
  const definitions=[['sec1','s1-root-container','replayS1Animation'],['s2p1','s2p1-root-container','replayS2P1Animation'],['s2p2','s2p2-root-container','replayS2P2Animation'],['s2p34','s2p34-root-container','replayS2P34Animation'],['sec4','s4-root-container','replaySec4Animation'],['sec5','s5-global-container','replaySec5Animation'],['sec6','wf-sec6-root',null],['sec7','wf-sec7-root','replaySec7Animation'],['sec8','wf-sec8-root','replaySec8Animation']];
  const items=definitions.map(([id,root,replay])=>({id,root:document.getElementById(root),wrapper:document.querySelector('.fp-'+id+'-wrapper'),replay}));
  items.forEach(i=>i.wrapper.classList.add('fp-sequence-pending'));
- let current=-1,complete=false,lastY=scrollY,deadline=0,activeSeatRun=null;
+ let current=-1,complete=false,lastY=scrollY,deadline=0,activeSeatRun=null,startedScrollY=scrollY;
  const seconds=s=>s.endsWith('ms')?parseFloat(s)/1000:parseFloat(s)||0;
  function duration(item){let max=0;for(const el of [item.root,...item.root.querySelectorAll('*')]){
   if(!el.getClientRects().length)continue;const s=getComputedStyle(el);
@@ -2231,20 +2309,23 @@ function switchS4Tab(index) {
    const progress=(reduced||run.force)?1:Math.max(0,Math.min(1,(elapsed-lineDelay)/lineDuration));
    if(revealedAt===null&&progress>=arrival){revealedAt=now;document.getElementById('wf-sec6-root').dataset.s6ActorReady='1';}
    if(revealedAt!==null){const opacity=(reduced||run.force)?1:Math.min(1,(now-revealedAt)/280);actorParts.forEach(el=>el.style.setProperty('opacity',String(opacity),'important'));if(opacity===1)document.getElementById('wf-sec6-root').classList.add('s6-lower-ready');}
-   if(!reduced&&!run.force&&(elapsed<total||revealedAt===null||now-revealedAt<280))requestAnimationFrame(frame);else holder.classList.add('is-drawn');
+   if(!reduced&&!run.force&&(elapsed<total||revealedAt===null||now-revealedAt<280))requestAnimationFrame(frame);else{
+    for(const {path}of parts)path.style.setProperty('stroke-dashoffset','0','important');
+    holder.classList.add('is-drawn');
+   }
   }
   requestAnimationFrame(frame);
  }
- function start(index){current=index;complete=false;const item=items[index];window.fpSequenceAuthorize(item.root.id);item.wrapper.classList.remove('fp-sequence-pending');item.wrapper.classList.add('fp-sequence-enter');
+ function start(index){startedScrollY=scrollY;current=index;complete=false;const item=items[index];window.fpSequenceAuthorize(item.root.id);item.wrapper.classList.remove('fp-sequence-pending');item.wrapper.classList.add('fp-sequence-enter');
   if(item.id==='sec6'){if(innerWidth>=768)drawSeat();else{const actors=[document.getElementById('sec6-m-asset-tag'),document.getElementById('sec6-m-flashlight')],began=performance.now();function reveal(now){const opacity=Math.min(1,(now-began)/200);actors.forEach(el=>el.style.setProperty('opacity',String(opacity),'important'));if(opacity<1)requestAnimationFrame(reveal);else item.root.classList.add('s6-lower-ready');}actors.forEach(el=>el.style.setProperty('opacity','0','important'));requestAnimationFrame(reveal);}}
   if(item.replay)window[item.replay]?.();else{window.fpSequenceMark(item.root.id);window.handleSec6Scroll?.();}
   deadline=performance.now()+duration(item)+60;setTimeout(check,200);
  }
- function readyNext(){if(current<0||current>=items.length-1)return false;const next=items[current+1];const config=window.FP_PAGE_CONFIG||{};const raw=parseFloat(config[innerWidth<1200?'--animation-entry-mobile-percent':'--animation-entry-desktop-percent']);const percent=Number.isFinite(raw)?Math.max(0,Math.min(50,raw)):(innerWidth<1200?10:15);const threshold=1-percent/100;const lead=(next.id==='s2p1'||next.id==='s2p2')?.20:0;return next.wrapper.getBoundingClientRect().top<=innerHeight*(threshold+lead);}
+ function readyNext(){if(current<0||current>=items.length-1)return false;const next=items[current+1];const config=window.FP_PAGE_CONFIG||{};const raw=parseFloat(config[innerWidth<1200?'--animation-entry-mobile-percent':'--animation-entry-desktop-percent']);const percent=Number.isFinite(raw)?Math.max(0,Math.min(50,raw)):(innerWidth<1200?10:15);const threshold=1-percent/100;return next.wrapper.getBoundingClientRect().top<=innerHeight*threshold;}
  function check(){if(current<0||complete)return;const item=items[current];
   const active=item.root.getAnimations({subtree:true}).some(a=>a.playState==='running'&&a.effect?.getComputedTiming().iterations!==Infinity);
   let stickyDone=item.id!=='sec1'||window.fpHeroSequenceDone===true;if(item.id==='sec6'&&innerWidth>=768){const track=document.getElementById('sec6-d-track');stickyDone=track.getBoundingClientRect().top<=-(innerWidth<1200?1800:track.offsetHeight-innerHeight)+2;}
-  if(performance.now()>=deadline&&!active&&stickyDone){complete=true;lastY=scrollY;if(scrollY>0&&readyNext())start(current+1);return;}setTimeout(check,100);
+  if(performance.now()>=deadline&&!active&&stickyDone){complete=true;lastY=scrollY;if(scrollY>startedScrollY+24&&readyNext())start(current+1);return;}setTimeout(check,100);
  }
  function finishFast(){if(activeSeatRun)activeSeatRun.force=true;const item=items[current];item.root.dataset.motionCaughtUp='1';dispatchEvent(new CustomEvent('fp:motion-catchup',{detail:{rootId:item.root.id}}));for(const path of item.root.querySelectorAll('path.fp-seg'))path.style.setProperty('stroke-dashoffset','0','important');for(const animation of item.root.getAnimations({subtree:true})){if(animation.effect?.getComputedTiming().iterations!==Infinity)try{animation.finish();}catch{}}if(item.id==='sec6')item.root.classList.add('s6-lower-ready');complete=true;}
  function shouldCatchUp(bottom,nextTop,height,velocity,stickyReleased){return stickyReleased&&(bottom<height*.25||(velocity>900&&nextTop<height*.45));}
@@ -2340,7 +2421,7 @@ function switchS4Tab(index) {
  function layout(){queued=false;const tablet=innerWidth>=768&&innerWidth<1200;
   if(!tablet){if(active){root.classList.remove('fp-tablet');if(railBefore){if(railBefore[0])root.style.setProperty('--s6-h-y',railBefore[0],railBefore[1]);else root.style.removeProperty('--s6-h-y');}for(const name of ['--tablet-stage-height','--tablet-stage-top','--tablet-page-height','--tablet-world-track-height','--tablet-first-screen-extra'])root.style.removeProperty(name);lineSvg.setAttribute('viewBox',originalViewBox);curveSvgs.forEach((svg,i)=>svg.setAttribute('preserveAspectRatio',ratios[i]||'xMidYMid meet'));root.style.removeProperty('--tablet-scale');root.style.removeProperty('--tablet-scroll-extra');root.style.removeProperty('--tablet-track-height');for(const [el,style]of saved){if(style===null)el.removeAttribute('style');else el.setAttribute('style',style);}saved.clear();active=false;if(innerWidth>=1200)window.fpS6ReapplyPhase?.();if(innerWidth<768)window.fpMobileLayoutUpdate?.();}return;}
   if(!active){railBefore=[root.style.getPropertyValue('--s6-h-y'),root.style.getPropertyPriority('--s6-h-y')];sections.forEach(([id])=>{const el=document.querySelector('.fp-'+id+'-wrapper');saved.set(el,el.getAttribute('style'));});active=true;}
-  lineSvg.setAttribute('viewBox','0 0 960 716');curveSvgs.forEach(svg=>svg.setAttribute('preserveAspectRatio','xMinYMin meet'));root.classList.add('fp-tablet');const designWidth=innerWidth<1024?768:1024,scale=designWidth/1024,origin=(innerWidth-designWidth)/2;root.style.setProperty('--tablet-scale',scale);root.style.setProperty('--tablet-scroll-extra','1800px');root.style.setProperty('--tablet-track-height',(760+1800/scale)+'px');
+  lineSvg.setAttribute('viewBox','0 0 960 716');curveSvgs.forEach(svg=>svg.setAttribute('preserveAspectRatio','xMinYMin meet'));root.classList.add('fp-tablet');const designWidth=Math.min(innerWidth,1024),scale=designWidth/1024,origin=(innerWidth-designWidth)/2;root.style.setProperty('--tablet-scale',scale);root.style.setProperty('--tablet-scroll-extra','1800px');root.style.setProperty('--tablet-track-height',(760+1800/scale)+'px');
   const stageTop=220,stageHeight=stageTop+560;root.style.setProperty('--tablet-stage-height',stageHeight+'px');root.style.setProperty('--tablet-stage-top',stageTop+'px');root.style.setProperty('--s6-h-y',(stageTop+407)+'px','important');root.style.setProperty('--tablet-page-height',(7053.553+stageHeight-905)+'px');root.style.setProperty('--tablet-track-height',(stageHeight+1800/scale)+'px');root.style.setProperty('--tablet-world-track-height',(stageHeight*scale+1800)+'px');
   root.style.setProperty('--tablet-card-inset',(48+32/scale)+'px');root.style.setProperty('--tablet-card-width',((designWidth-64)/scale)+'px');const firstScreenTop=Math.min(222*scale,Math.max(24,innerHeight-(parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--site-header-height'))||110)-596*scale)),firstScreenExtra=0;root.style.setProperty('--tablet-first-screen-extra',(firstScreenTop+firstScreenExtra)+'px');const config=window.FP_PAGE_CONFIG||{},val=k=>parseFloat(config[k])||0;
   for(const [id,x,y,w,h]of sections){const el=document.querySelector('.fp-'+id+'-wrapper');el.style.setProperty('left',(origin+(x+val('--'+id+'-tab-x'))*scale)+'px','important');el.style.setProperty('top',(firstScreenTop+(id==='sec1'?0:firstScreenExtra)+(y-222+val('--'+id+'-tab-y')+val('--'+id+'-tab-mt'))*scale+(id==='sec7'||id==='sec8'?1800+(stageHeight-905)*scale:0))+'px','important');el.style.width=w+'px';el.style.height=(id==='sec6'?stageHeight*scale+1800:h)+'px';}
@@ -2398,6 +2479,14 @@ function switchS4Tab(index) {
    const step3=window.fpS6Steps?.step3||606;const railY=parseFloat(getComputedStyle(root).getPropertyValue('--s6-h-y'))||627;window.fpS6ConnectionD=`M ${step3} ${railY} H ${mapped[1]} `+mapped.slice(3).join(' ');document.getElementById('sec6-d-baton-arc').setAttribute('d',window.fpS6ConnectionD);
   }
   window.fpTabletOpticsUpdate?.();
+  const incoming8=path('s8-arc1'),circle7=document.querySelector('#wf-sec7-canvas .wf-sec7-ball-4 circle');
+  if(incoming8&&circle7){
+   const edge=new DOMPoint(+circle7.getAttribute('cx'),+circle7.getAttribute('cy')+(+circle7.getAttribute('r'))).matrixTransform(circle7.getScreenCTM());
+   const target=local(incoming8,edge),start=incoming8.getPointAtLength(0);
+   incoming8.setAttribute('transform',`translate(${target.x-start.x} ${target.y-start.y})`);changed.add(incoming8);
+   const svg=incoming8.closest('svg'),svgEdge=edge.matrixTransform(svg.getScreenCTM().inverse()),filter=document.getElementById('fpPencilS8');
+   if(filter){const top=Math.min(-200,svgEdge.y-24);filter.setAttribute('y',top);filter.setAttribute('height',Math.max(1600,1200-top));}
+  }
   horizontal(path('s8-h1'),path('s8-arc1'),path('s8-arc2'));
   const vertical=path('s8-v1');if(vertical){const a=local(vertical,point(path('s8-arc2'),true)),b=local(vertical,point(path('s8-arc3'),false));vertical.setAttribute('d',`M ${a.x} ${a.y} V ${b.y}`);join(vertical,path('s8-arc3'));}
   const bottom=path('s8-h2');if(bottom){const end=local(bottom,point(path('s8-arc3'),true));bottom.setAttribute('d',`M ${end.x} ${end.y} H 33.5`);}
@@ -2405,6 +2494,7 @@ function switchS4Tab(index) {
  window.fpTabletSeamsUpdate=update;
  const originalUpdate=window.fpLinesUpdate;if(originalUpdate)window.fpLinesUpdate=(...args)=>{originalUpdate(...args);if(root.classList.contains('fp-tablet'))update();};
  addEventListener('resize',()=>{if(innerWidth<768||innerWidth>=1200)update();});
+ document.querySelector('#wf-sec7-canvas .wf-sec7-ball-4')?.addEventListener('transitionend',()=>{if(root.classList.contains('fp-tablet'))update();});
 })();
 
 ;
@@ -2428,6 +2518,23 @@ function switchS4Tab(index) {
   const title=document.getElementById('sec6-d-title');
   root.style.setProperty('--tablet-header-x',anchor+'px');
  };
+ let outroQueued=false,outroHidden=false;
+ function updateOutro(){
+  outroQueued=false;
+  if(innerWidth<768){outroHidden=false;delete root.dataset.s6TabletOutro;return;}
+  const lastPhase=parseInt(document.getElementById('sec6-d-num').textContent,10)===3;
+  const next=document.querySelector('.fp-sec7-wrapper').getBoundingClientRect();
+  const header=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--site-header-height'))||110;
+  const available=Math.max(1,innerHeight-header);
+  const visible=Math.max(0,Math.min(innerHeight,next.bottom)-Math.max(header,next.top));
+  // Hysteresis avoids flickering when touch scrolling pauses at the boundary.
+  outroHidden=lastPhase&&visible/available>=(outroHidden ? 0.4 : 0.5);
+  root.dataset.s6TabletOutro=outroHidden?'1':'0';
+ }
+ function scheduleOutro(){if(!outroQueued){outroQueued=true;requestAnimationFrame(updateOutro);}}
+ addEventListener('scroll',scheduleOutro,{passive:true});addEventListener('resize',scheduleOutro);
+ new MutationObserver(scheduleOutro).observe(document.getElementById('sec6-d-num'),{childList:true,subtree:true,characterData:true});
+ scheduleOutro();
 })();
 
 ;
@@ -2682,14 +2789,14 @@ function switchS4Tab(index) {
  const path=key=>root.querySelector('path[data-k="'+key+'"]');
  const screen=(p,end)=>p.getPointAtLength(end?p.getTotalLength():0).matrixTransform(p.getScreenCTM());
  const local=(p,point)=>point.matrixTransform(p.getScreenCTM().inverse());
- function snap(a,b){if(!a||!b)return;const target=local(b,screen(a,true)),start=b.getPointAtLength(0);b.setAttribute('transform',`translate(${target.x-start.x} ${target.y-start.y})`);moved.add(b);}
- function bar(key,a,b){const p=path(key);a=path(a);b=path(b);if(!p||!a||!b)return;const start=local(p,screen(a,true)),end=local(p,screen(b,false));p.setAttribute('d',`M ${start.x} ${start.y} H ${end.x}`);snap(p,b);}
+ function snap(a,b){if(!a||!b)return;const target=local(b,screen(a,true)),start=b.getPointAtLength(0);const existing=b.transform.baseVal.consolidate()?.matrix;b.setAttribute('transform',`translate(${(existing?.e||0)+target.x-start.x} ${(existing?.f||0)+target.y-start.y})`);moved.add(b);}
+ function bar(key,a,b){const p=path(key);a=path(a);b=path(b);if(!p||!a||!b)return;const start=local(p,screen(a,true)),end=local(p,screen(b,false));p.setAttribute('d',`M ${start.x} ${start.y} H ${end.x}`);p.dataset.desktopSeam='1';snap(p,b);}
  function update(){
   moved.forEach(p=>p.removeAttribute('transform'));moved.clear();
   for(const [el,margin]of margins)el.style.marginTop=margin;
   if(text)text.style.marginTop=textMargin;
   for(const [el,[left,top]]of raisedMargins){el.style.marginLeft=left;el.style.marginTop=top;}
-  if(innerWidth<1200){if(ownsRailStart){if(originalRailStart[0])root.style.setProperty('--s2p34-h2-start',...originalRailStart);else root.style.removeProperty('--s2p34-h2-start');ownsRailStart=false;}return;}
+  if(innerWidth<1200){root.querySelectorAll('[data-desktop-seam]').forEach(p=>delete p.dataset.desktopSeam);if(ownsRailStart){if(originalRailStart[0])root.style.setProperty('--s2p34-h2-start',...originalRailStart);else root.style.removeProperty('--s2p34-h2-start');ownsRailStart=false;}return;}
   bar('s2p1-h1','s2p1-arc1','s2p1-arc2');
   bar('s2p2-h1','s2p2-arc1','s2p2-arc2');
   // The incoming rail owns the entry height; preserve the original next arc shape.
@@ -2715,6 +2822,9 @@ function switchS4Tab(index) {
    ownsRailStart=true;
    rail.dataset.s=String(to.x);
    rail.setAttribute('d',`M ${from.x} ${from.y} H ${to.x}`);
+   // Raising the actor changes the last arc again after bar() has aligned it.
+   // The completed rail endpoint must be the final authority for both axes.
+   snap(rail,arc);
   }
   if(text){const line=path('s2p34-h1'),rect=text.getBoundingClientRect(),scale=rect.width/(text.offsetWidth||rect.width)||1;
    const target=screen(line,false).y+24;
@@ -2723,7 +2833,7 @@ function switchS4Tab(index) {
  let pending=false;
  function schedule(){if(pending)return;pending=true;requestAnimationFrame(()=>requestAnimationFrame(()=>requestAnimationFrame(()=>{pending=false;update();})));}
  const previous=window.fpLinesUpdate;
- if(previous)window.fpLinesUpdate=(...args)=>{const result=previous(...args);schedule();return result;};
+ if(previous)window.fpLinesUpdate=(...args)=>{const result=previous(...args);if(innerWidth>=1200)update();else schedule();return result;};
  addEventListener('fp:webflow-ready',schedule);addEventListener('resize',schedule);document.fonts.ready.then(schedule);
  schedule();
 })();
