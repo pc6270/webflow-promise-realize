@@ -2255,7 +2255,23 @@ function switchS4Tab(index) {
   // section stays connected and photos, typography and actors are untouched.
   const incoming=topCurve.getPointAtLength(0).matrixTransform(topCurve.getScreenCTM());
   const anchorX=(incoming.x-scaler.getBoundingClientRect().left)/scale;
-  mirrored5.style.transform=`matrix(-1,0,0,1,${2*anchorX},0)`;
+  // Use one untransformed SVG for the final mobile sales route. WebKit's
+  // screen matrices for nested reflected/rotated SVGs are not needed here.
+  mirrored5.style.transform='none';
+  const salesRect=scaler.getBoundingClientRect(),salesScale=salesRect.width/380.5;
+  const halo=document.querySelector('.s4-bg-ellipse').getBoundingClientRect();
+  const startX=(halo.left+halo.width/2-salesRect.left)/salesScale;
+  const startY=(halo.bottom-salesRect.top)/salesScale;
+  const rightX=(innerWidth-18-salesRect.left)/salesScale;
+  const midX=(startX+rightX)/2;
+  const topBottom=startY+215;
+  const seatY=(br.top+br.height/2-salesRect.top)/salesScale;
+  const radius=Math.min(99.33,Math.max(1,(seatY-topBottom)/2));
+  const bottomX=rightX-radius,edgeX=(-2-salesRect.left)/salesScale;
+  const k=.5522847498;
+  const paint=seams5.querySelector('path');
+  paint.setAttribute('d',`M ${startX} ${startY} C ${startX} ${startY+59.6} ${midX-(midX-startX)*k} ${startY+108} ${midX} ${startY+108} C ${midX+(rightX-midX)*k} ${startY+108} ${rightX} ${topBottom-59.1} ${rightX} ${topBottom} V ${seatY-radius} C ${rightX} ${seatY-radius+radius*k} ${bottomX+radius*k} ${seatY} ${bottomX} ${seatY} H ${edgeX}`);
+  root.dataset.mobileSalesGeometry='viewport-anchors';
  }
  let pending=false;function soon(){if(!pending){pending=true;requestAnimationFrame(()=>{pending=false;update();});}}
  window.fpMobileConnectionsUpdate=update;
