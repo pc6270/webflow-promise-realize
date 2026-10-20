@@ -2186,41 +2186,29 @@ function switchS4Tab(index) {
   join(seams5,s5Paths.slice(1).map((p,i)=>[s5Paths[i],p]));
   const s2Paths=['.s2p2-mb-vector-top','.s2p2-mb-arc-top','.s2p2-mb-line-vert','.s2p2-mb-arc-bottom'].map(selector=>p2.querySelector(selector+' path'));
   join(seams2,s2Paths.slice(1).map((p,i)=>[s2Paths[i],p]),100);
-  continuous(seams2,s2Paths);
+  // Fixed 402px design coordinates: no reflected SVG matrix is used to
+  // determine the direction of the two right-hand bends on iOS WebKit.
+  s2Paths.forEach(p=>p.classList.add('mobile-flow-reference'));
+  const secondFlow=seams2.querySelector('path');
+  secondFlow.classList.add('mobile-continuous-flow');
+  secondFlow.setAttribute('d','M 46.222 1.1567 C 46.222 63.5666 96.8027 114.157 159.201 114.157 H 206.138 C 268.4766 114.157 317.5 164.8135 317.5 227.1521 V 489.1379 C 317.5 551.4765 266.8435 602.009 204.5049 602.009');
+  secondFlow.style.setProperty('opacity','1','important');
   continuous(seams5,s5Paths);
   // Snap the next horizontal segment to the bottom arc in its own SVG coordinates.
   // Preserve the remaining curve and all content positions.
   const nextPath=p34.querySelector('#s2p34-mb-master-path');
-  const arcExit=end(s2Paths[s2Paths.length-1],1);
+  const arcExit=end(secondFlow,1);
   const connection=arcExit.matrixTransform(nextPath.getScreenCTM().inverse());
   const deltaY=connection.y-56.16;
   nextPath.setAttribute('d',`M ${connection.x} ${connection.y} H 134.60 C 69.93 ${56.21+deltaY} 21.16 104.98 21.16 165.16 V 547.50 C 21.16 590.85 55.32 625.05 97.46 625.05 H 134.85 C 176.99 625.26 211.16 659.46 211.16 701.66`);
   join(seams34,[[s2Paths[s2Paths.length-1],nextPath]]);
-  // Match the rendered width of an existing vertical flow line, including
-  // each SVG's viewBox scale. Equal CSS widths alone are not sufficient.
+  // Keep the right stroke inside its containing canvas, with one uniform
+  // width. Perpendicular-scale estimation amplified WebKit matrix differences.
   const seventhSvg=document.querySelector('.wf-sec7-m-vector-svg');
   const seventh=seventhSvg.querySelector('path');
-  const reference=document.querySelector('.s2p2-mb-line-vert path');
   seventhSvg.style.translate='none';
-  if(reference){
-   const perpendicularScale=path=>{
-    const matrix=path.getScreenCTM(),length=path.getTotalLength();
-    const a=path.getPointAtLength(length*.5-.01),b=path.getPointAtLength(length*.5+.01);
-    const dx=b.x-a.x,dy=b.y-a.y,n=Math.hypot(dx,dy)||1;
-    const tx=dx/n,ty=dy/n;
-    return Math.abs(matrix.a*matrix.d-matrix.b*matrix.c)/(Math.hypot(matrix.a*tx+matrix.c*ty,matrix.b*tx+matrix.d*ty)||1);
-   };
-   const target=(parseFloat(getComputedStyle(reference).strokeWidth)||stroke)*perpendicularScale(reference);
-   seventh.style.setProperty('vector-effect','none','important');
-   seventh.style.setProperty('stroke-width',String(target/perpendicularScale(seventh)),'important');
-   const ratio=devicePixelRatio||1;
-   const middle=seventh.getPointAtLength(seventh.getTotalLength()*.5).matrixTransform(seventh.getScreenCTM());
-   const referencePoint=reference.getPointAtLength(reference.getTotalLength()*.5).matrixTransform(reference.getScreenCTM());
-   const fraction=x=>x-Math.floor(x);
-   let correction=fraction(referencePoint.x*ratio)-fraction(middle.x*ratio);
-   correction-=Math.round(correction);
-   seventhSvg.style.translate=(correction/ratio/scale)+'px 0';
-  }
+  seventh.style.setProperty('vector-effect','none','important');
+  seventh.style.setProperty('stroke-width',String(stroke),'important');
   // The S6 rail ends exactly at S7's original entry point.
   const arc=document.querySelector('.wf-sec7-m-vector-svg path'),entry=end(arc,0,track);
   const leftEdge=local(track,new DOMPoint(0,0)),rightEdge=local(track,new DOMPoint(innerWidth,0));

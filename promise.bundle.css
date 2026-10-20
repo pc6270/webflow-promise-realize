@@ -7216,5 +7216,11 @@ body{padding-top:var(--site-header-height,110px)!important}
  #fp-master-root .mobile-seams{overflow:visible!important;max-width:none!important}
 }
 
+/* Keep the complete right stroke within the mobile containing box on WebKit. */
+@media(max-width:767.98px){
+ #fp-master-root .wf-sec7-mobile-outer,#fp-master-root .wf-sec7-mobile-canvas{overflow:visible!important;clip-path:none!important}
+ #fp-master-root .wf-sec7-m-vector-svg{left:-10px!important;clip-path:none!important}
+}
+
 /* webflow-integration.css */
 body{padding-top:0!important}#fp-webflow-mount{padding-top:var(--site-header-height,110px);position:relative;overflow:visible}#fp-webflow-mount #fp-master-root{margin:0!important}[data-fp-fragment]{visibility:hidden}#fp-webflow-mount>.w-embed{display:contents}
