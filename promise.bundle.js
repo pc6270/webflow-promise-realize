@@ -2471,6 +2471,20 @@ function switchS4Tab(index) {
 ;/* tablet-seams.js */
 (() => {
  const root=document.getElementById('fp-master-root'),changed=new Set();
+ const family=root.querySelector('.wf-sec8-man-1'),familyShadow=root.querySelector('.wf-sec8-shadow-1');
+ const familyMargins=familyShadow?[familyShadow.style.marginLeft,familyShadow.style.marginTop]:null;
+ function restoreFamily(){if(familyMargins){familyShadow.style.marginLeft=familyMargins[0];familyShadow.style.marginTop=familyMargins[1];}}
+ function familyFoot(el){
+  const svg=el.querySelector('svg'),cs=getComputedStyle(el),ss=getComputedStyle(svg),box=svg.viewBox.baseVal;
+  const w=parseFloat(ss.width),h=parseFloat(ss.height),par=svg.preserveAspectRatio.baseVal;
+  let sx=w/box.width,sy=h/box.height,dx=0,dy=0;
+  if(par.align!==1){const s=par.meetOrSlice===2?Math.max(sx,sy):Math.min(sx,sy);dx=(w-box.width*s)*((par.align-2)%3)/2;dy=(h-box.height*s)*Math.floor((par.align-2)/3)/2;sx=sy=s;}
+  const origin=cs.transformOrigin.split(' ').map(parseFloat),scale=cs.scale==='none'?[1,1]:cs.scale.split(' ').map(Number),translate=cs.translate==='none'?[0,0]:cs.translate.split(' ').map(parseFloat);
+  const matrix=new DOMMatrix(cs.transform==='none'?undefined:cs.transform);
+  const p=new DOMPoint(dx+(13.4-box.x)*sx-origin[0],dy+(101.689-box.y)*sy-origin[1]).matrixTransform(matrix);
+  return {x:parseFloat(cs.left)+(parseFloat(cs.marginLeft)||0)+(translate[0]||0)+origin[0]+p.x*scale[0],y:parseFloat(cs.top)+(parseFloat(cs.marginTop)||0)+(translate[1]||0)+origin[1]+p.y*(scale[1]??scale[0])};
+ }
+ function alignFamily(){if(!family||!familyShadow)return;restoreFamily();const a=familyFoot(family),b=familyFoot(familyShadow);familyShadow.style.marginLeft=((parseFloat(familyMargins[0])||0)+a.x-b.x)+'px';familyShadow.style.marginTop=((parseFloat(familyMargins[1])||0)+a.y-b.y)+'px';}
  const path=k=>root.querySelector('path[data-k="'+k+'"]');
  // Derive SVG coordinates from its CSS viewport and native viewBox. This keeps
  // joins in the same layout coordinate space as photos and people on WebKit.
@@ -2495,7 +2509,7 @@ function switchS4Tab(index) {
   p.setAttribute('d',`M ${start.x} ${start.y} H ${finish.x}`);
   join(p,b);
  }
- function update(){if(!root.classList.contains('fp-tablet')){changed.forEach(p=>p.removeAttribute('transform'));changed.clear();return;}
+ function update(){if(!root.classList.contains('fp-tablet')){restoreFamily();changed.forEach(p=>p.removeAttribute('transform'));changed.clear();return;}
   changed.forEach(p=>p.removeAttribute('transform'));changed.clear();
   path('s2p1-arc1').setAttribute('d','M845.161 2.16C907.499 2.16 958.032 52.6924 958.032 115.031C958.032 177.37 907.499 227.902 845.161 227.902');
   horizontal(path('s2p1-h1'),path('s2p1-arc1'),path('s2p1-arc2'));
@@ -2547,6 +2561,7 @@ function switchS4Tab(index) {
   const vertical=path('s8-v1');if(vertical){const a=local(vertical,point(path('s8-arc2'),true)),b=local(vertical,point(path('s8-arc3'),false));vertical.setAttribute('d',`M ${a.x} ${a.y} V ${b.y}`);join(vertical,path('s8-arc3'));}
   const last=root.querySelector(".fp-sec8-wrapper"),scale=parseFloat(getComputedStyle(root).getPropertyValue("--tablet-scale"))||1;
   if(last){const height=(parseFloat(last.style.top)||0)+last.offsetHeight*scale;const value=height+"px";if(root.style.getPropertyValue("--tablet-content-height")!==value)root.style.setProperty("--tablet-content-height",value);}
+  alignFamily();
   const bottom=path('s8-h2');if(bottom){const end=local(bottom,point(path('s8-arc3'),true));bottom.setAttribute('d',`M ${end.x} ${end.y} H 33.5`);}
  }
  let pending=false;
@@ -2556,12 +2571,10 @@ function switchS4Tab(index) {
  root.querySelectorAll('.wf-sec7-balls-container,.wf-sec7-ball-4,.s2p1-dt-container .circle-photo-box').forEach(el=>{el.addEventListener('transitionend',schedule);el.addEventListener('animationend',schedule);});
  addEventListener('fp:motion-catchup',schedule);
  window.fpTabletSeamsUpdate=update;
-
  // The geometry engine invokes this hook before timing, including its private resize timer.
  addEventListener('resize',()=>{if(innerWidth<768||innerWidth>=1200)update();});
  document.querySelector('#wf-sec7-canvas .wf-sec7-ball-4')?.addEventListener('transitionend',()=>{if(root.classList.contains('fp-tablet'))update();});
 })();
-
 ;
 
 ;/* tablet-interactions.js */
@@ -2761,10 +2774,12 @@ function switchS4Tab(index) {
  function arm(){if(innerWidth<768)return;if(!visible||interacted||hinted||timer||!root.classList.contains('s4-active'))return;timer=setTimeout(()=>{timer=null;if(!visible||interacted||reduced())return;const card=root.querySelector('.s4-tab-panel.active .s4-accordion-card');if(!card||card.classList.contains('active'))return;hinted=true;hintCard=card;card.classList.add('fp-card-hint','active');closeTimer=setTimeout(()=>{card.classList.remove('fp-card-hint','active');hintCard=null;},850);},2200);}
  const first=root.querySelector('.s4-accordion-card');new IntersectionObserver(entries=>{visible=entries.some(e=>e.isIntersecting);if(!visible){clearTimeout(timer);timer=null;}else arm();},{threshold:.2}).observe(first);
  function entrance(panel){if(innerWidth<768||reduced()||!root.classList.contains('s4-active'))return;panel.querySelectorAll('.s4-accordion-card').forEach((card,index)=>{card.getAnimations().filter(a=>a.id==='fp-card-entrance').forEach(a=>a.cancel());const animation=card.animate([{opacity:0,translate:'-28px 0',clipPath:'inset(0 100% 0 0 round 25px)'},{opacity:1,translate:'0 0',clipPath:'inset(0 0 0 0 round 25px)'}],{duration:300,delay:index*65,easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'});animation.id='fp-card-entrance';});}
- const observer=new MutationObserver(records=>{if(records.some(r=>r.target===root)){const panel=root.querySelector('.s4-tab-panel.active');if(panel)entrance(panel);arm();}for(const r of records)if(r.target.classList.contains('s4-tab-panel')&&r.target.classList.contains('active'))entrance(r.target);});observer.observe(root,{subtree:true,attributes:true,attributeFilter:['class']});
+ // Scrolling changes the section class; it must not replay card entrances.
+ const observer=new MutationObserver(()=>arm());observer.observe(root,{attributes:true,attributeFilter:['class']});
+ root.addEventListener('click',event=>{if(!event.target.closest('.s4-tab-btn'))return;requestAnimationFrame(()=>{const panel=root.querySelector('.s4-tab-panel.active');if(panel)entrance(panel);});});
+
  document.querySelectorAll('.s4-btn-watch-video').forEach(button=>button.addEventListener('pointerdown',()=>{if(innerWidth>=768&&!reduced())button.animate([{scale:1},{scale:.94},{scale:1}],{duration:180,easing:'ease-out'});}));
 })();
-
 ;
 
 ;/* content-arrival.js */
