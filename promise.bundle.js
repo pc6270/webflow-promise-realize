@@ -1803,6 +1803,10 @@ function switchS4Tab(index) {
   function layout(){
     queued=false;if(innerWidth<1200){
       document.getElementById('wf-sec7-canvas').style.removeProperty('left');
+      const tabletArc=document.querySelector('#wf-sec7-canvas path[data-k="s7-arc1"]');
+      tabletArc?.removeAttribute('transform');
+      const tabletRail=document.querySelector('#wf-sec7-canvas path[data-k="s7-h1"]');
+      if(tabletRail)delete tabletRail.dataset.desktopSeam;
       const compact=document.getElementById('wf-sec8-canvas');
       if(compact.dataset.compact){
         delete compact.dataset.compact;for(const prop of ['height','left','top'])compact.style.removeProperty(prop);
@@ -2490,24 +2494,26 @@ function switchS4Tab(index) {
   if(seat&&seatArc){const photo=document.querySelector('.s5-d-photo-frame').getBoundingClientRect(),pin=document.querySelector('.wf-sec6-desktop-sticky-inner').getBoundingClientRect().top-document.getElementById('sec6-d-track').getBoundingClientRect().top,desired=local(seatArc,new DOMPoint(photo.left+photo.width/2,photo.bottom+pin)),first=seatArc.getPointAtLength(0);seatArc.setAttribute('transform',`translate(${desired.x-first.x} ${desired.y-first.y})`);changed.add(seatArc);const end=local(seat,point(seatArc,true)),left=local(seat,new DOMPoint(-20,0));seat.setAttribute('d',`M ${end.x} ${end.y} H ${left.x}`);}
   const arc=path('s7-arc1'),rail=path('s6-h4');
   if(arc&&rail){
+   // S7 owns a native tablet path. Desktop viewport fitting must not survive.
+   arc.removeAttribute('transform');
+   const cs=getComputedStyle(root),scale=parseFloat(cs.getPropertyValue('--tablet-scale'))||1;
    const track=document.getElementById('sec6-d-track'),sticky=track.querySelector('.wf-sec6-desktop-sticky-inner');
-   const y=parseFloat(getComputedStyle(root).getPropertyValue('--s6-h-y'))||627;
-   const screenRail=new DOMPoint(0,y).matrixTransform(rail.getScreenCTM());
-   const releaseTop=track.getBoundingClientRect().bottom-sticky.getBoundingClientRect().height;
-   const targetY=releaseTop+screenRail.y-sticky.getBoundingClientRect().top;
-   const correction=targetY-point(arc,false).y;
-   if(Math.abs(correction)>.1)for(const id of ['sec7','sec8']){
-    const wrapper=document.querySelector('.fp-'+id+'-wrapper');
-    wrapper.style.setProperty('top',(parseFloat(wrapper.style.top)+correction)+'px','important');
-   }
-   const entry=local(rail,point(arc,false)),start=rail.getPointAtLength(0);rail.setAttribute('d',`M ${start.x} ${y} H ${entry.x}`);
-
-  }
-  if(arc){const svg=document.querySelector('.fp-s6-track'),track=document.getElementById('sec6-d-track'),sticky=track.querySelector('.wf-sec6-desktop-sticky-inner');
-   const release=track.getBoundingClientRect().bottom-sticky.getBoundingClientRect().height,delta=release-sticky.getBoundingClientRect().top;
-   const sm=svg.getScreenCTM(),matrix=sm.inverse().multiply(arc.getScreenCTM());const tokens=arc.getAttribute('d').match(/[MC]|-?\d*\.?\d+(?:e[-+]?\d+)?/gi),mapped=[];
-   for(let i=0;i<tokens.length;){if(/[MC]/.test(tokens[i])){mapped.push(tokens[i++]);continue;}const p=new DOMPoint(+tokens[i++],+tokens[i++]).matrixTransform(matrix);mapped.push(p.x,p.y-delta/sm.a);}
-   const step3=window.fpS6Steps?.step3||606;const railY=parseFloat(getComputedStyle(root).getPropertyValue('--s6-h-y'))||627;window.fpS6ConnectionD=`M ${step3} ${railY} H ${mapped[1]} `+mapped.slice(3).join(' ');document.getElementById('sec6-d-baton-arc').setAttribute('d',window.fpS6ConnectionD);
+   const six=root.querySelector('.fp-sec6-wrapper'),seven=root.querySelector('.fp-sec7-wrapper'),eight=root.querySelector('.fp-sec8-wrapper');
+   const railY=parseFloat(cs.getPropertyValue('--s6-h-y'))||627;
+   const gx=parseFloat(cs.getPropertyValue('--s7-arc1-x'))||0,gy=parseFloat(cs.getPropertyValue('--s7-arc1-y'))||0;
+   const first=arc.getPointAtLength(0),startY=first.y+gy;
+   // S6's track is in unscaled document coordinates; only its inner canvas scales.
+   // Avoid mixing a compositor-pinned screen CTM with a document-flow release point.
+   const release=parseFloat(six.style.top)+track.offsetTop+track.offsetHeight-sticky.offsetHeight;
+   const targetTop=release+(railY-startY)*scale,correction=targetTop-parseFloat(seven.style.top);
+   if(Math.abs(correction)>.01){seven.style.setProperty('top',targetTop+'px','important');eight.style.setProperty('top',(parseFloat(eight.style.top)+correction)+'px','important');}
+   const dx=(parseFloat(seven.style.left)-parseFloat(six.style.left))/scale;
+   const tokens=arc.getAttribute('d').match(/[MC]|-?\d*\.?\d+(?:e[-+]?\d+)?/gi),mapped=[];
+   for(let i=0;i<tokens.length;){if(/^[MC]$/i.test(tokens[i])){mapped.push(tokens[i++]);continue;}const x=+tokens[i++],y=+tokens[i++];mapped.push(x+gx+dx,y+gy+railY-startY);}
+   const step3=window.fpS6Steps?.step3||606;
+   window.fpS6ConnectionD=`M ${step3} ${railY} H ${mapped[1]} `+mapped.slice(3).join(' ');
+   document.getElementById('sec6-d-baton-arc').setAttribute('d',window.fpS6ConnectionD);
+   rail.setAttribute('d',`M ${step3} ${railY} H ${mapped[1]}`);
   }
   // Desktop fitting changes the service rail endpoints; derive them again on tablet.
   const serviceRail=path('s7-h1'),serviceBall=root.querySelector('.wf-sec7-ball-2');
