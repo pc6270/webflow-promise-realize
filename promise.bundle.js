@@ -331,7 +331,7 @@ try{Typekit.load();}catch(error){}
         });
       });
     }
-    function update() { geom(); times(); if (window.handleSec6Scroll) window.handleSec6Scroll(); }
+    function update() { geom(); if (rootEl().classList.contains("fp-tablet")) window.fpTabletSeamsUpdate?.(); times(); if (window.handleSec6Scroll) window.handleSec6Scroll(); }
     window.fpLinesUpdate = update;
     window.fpChainLength = function (c) { if (!chainLen[c]) update(); return chainLen[c] || 0; };
     window.fpSegTiming = function (k) { if (!timing[k]) update(); return timing[k] || null; };
@@ -2450,7 +2450,7 @@ function switchS4Tab(index) {
  const sections=[['sec1',124,222,771,596],['s2p1',70,723,922,744],['s2p2',226,1467,764,603],['s2p34',32,2070,960,716],['sec4',-48,2778,1120,1237],['sec5',-197,4015,1171,731.38],['sec6',-49,4713,954,873],['sec7',34,5505,977,805.314],['sec8',42,6231,950,1044.553]];
  let queued=false,active=false,railBefore=null;const saved=new Map();const lineSvg=document.querySelector(".s2p34-line-svg"),originalViewBox=lineSvg.getAttribute("viewBox");const curveSvgs=[...document.querySelectorAll(".s2p2-vector1 svg,.s2p2-vector2 svg")],ratios=curveSvgs.map(svg=>svg.getAttribute("preserveAspectRatio"));
  function layout(){queued=false;const tablet=innerWidth>=768&&innerWidth<1200;
-  if(!tablet){if(active){root.classList.remove('fp-tablet');if(railBefore){if(railBefore[0])root.style.setProperty('--s6-h-y',railBefore[0],railBefore[1]);else root.style.removeProperty('--s6-h-y');}for(const name of ['--tablet-stage-height','--tablet-stage-top','--tablet-page-height','--tablet-world-track-height','--tablet-first-screen-extra'])root.style.removeProperty(name);lineSvg.setAttribute('viewBox',originalViewBox);curveSvgs.forEach((svg,i)=>svg.setAttribute('preserveAspectRatio',ratios[i]||'xMidYMid meet'));root.style.removeProperty('--tablet-scale');root.style.removeProperty('--tablet-scroll-extra');root.style.removeProperty('--tablet-track-height');for(const [el,style]of saved){if(style===null)el.removeAttribute('style');else el.setAttribute('style',style);}saved.clear();active=false;if(innerWidth>=1200)window.fpS6ReapplyPhase?.();if(innerWidth<768)window.fpMobileLayoutUpdate?.();}return;}
+  if(!tablet){if(active){root.classList.remove('fp-tablet');if(railBefore){if(railBefore[0])root.style.setProperty('--s6-h-y',railBefore[0],railBefore[1]);else root.style.removeProperty('--s6-h-y');}for(const name of ['--tablet-content-height','--tablet-stage-height','--tablet-stage-top','--tablet-page-height','--tablet-world-track-height','--tablet-first-screen-extra'])root.style.removeProperty(name);lineSvg.setAttribute('viewBox',originalViewBox);curveSvgs.forEach((svg,i)=>svg.setAttribute('preserveAspectRatio',ratios[i]||'xMidYMid meet'));root.style.removeProperty('--tablet-scale');root.style.removeProperty('--tablet-scroll-extra');root.style.removeProperty('--tablet-track-height');for(const [el,style]of saved){if(style===null)el.removeAttribute('style');else el.setAttribute('style',style);}saved.clear();active=false;if(innerWidth>=1200)window.fpS6ReapplyPhase?.();if(innerWidth<768)window.fpMobileLayoutUpdate?.();}return;}
   if(!active){railBefore=[root.style.getPropertyValue('--s6-h-y'),root.style.getPropertyPriority('--s6-h-y')];sections.forEach(([id])=>{const el=document.querySelector('.fp-'+id+'-wrapper');saved.set(el,el.getAttribute('style'));});active=true;}
   lineSvg.setAttribute('viewBox','0 0 960 716');curveSvgs.forEach(svg=>svg.setAttribute('preserveAspectRatio','xMinYMin meet'));root.classList.add('fp-tablet');const designWidth=Math.min(innerWidth,1024),scale=designWidth/1024,origin=(innerWidth-designWidth)/2;root.style.setProperty('--tablet-scale',scale);root.style.setProperty('--tablet-scroll-extra','1800px');root.style.setProperty('--tablet-track-height',(760+1800/scale)+'px');
   const stageTop=220,stageHeight=stageTop+560;root.style.setProperty('--tablet-stage-height',stageHeight+'px');root.style.setProperty('--tablet-stage-top',stageTop+'px');root.style.setProperty('--s6-h-y',(stageTop+407)+'px','important');root.style.setProperty('--tablet-page-height',(7053.553+stageHeight-905)+'px');root.style.setProperty('--tablet-track-height',(stageHeight+1800/scale)+'px');root.style.setProperty('--tablet-world-track-height',(stageHeight*scale+1800)+'px');
@@ -2509,6 +2509,9 @@ function switchS4Tab(index) {
    for(let i=0;i<tokens.length;){if(/[MC]/.test(tokens[i])){mapped.push(tokens[i++]);continue;}const p=new DOMPoint(+tokens[i++],+tokens[i++]).matrixTransform(matrix);mapped.push(p.x,p.y-delta/sm.a);}
    const step3=window.fpS6Steps?.step3||606;const railY=parseFloat(getComputedStyle(root).getPropertyValue('--s6-h-y'))||627;window.fpS6ConnectionD=`M ${step3} ${railY} H ${mapped[1]} `+mapped.slice(3).join(' ');document.getElementById('sec6-d-baton-arc').setAttribute('d',window.fpS6ConnectionD);
   }
+  // Desktop fitting changes the service rail endpoints; derive them again on tablet.
+  const serviceRail=path('s7-h1'),serviceBall=root.querySelector('.wf-sec7-ball-2');
+  if(arc&&serviceRail&&serviceBall){const from=local(serviceRail,point(arc,true)),rect=serviceBall.getBoundingClientRect(),to=local(serviceRail,new DOMPoint(rect.right,rect.top+rect.height/2));serviceRail.setAttribute('d',`M ${from.x} ${from.y} H ${to.x}`);}
   window.fpTabletOpticsUpdate?.();
   const incoming8=path('s8-arc1'),circle7=document.querySelector('#wf-sec7-canvas .wf-sec7-ball-4 circle');
   if(incoming8&&circle7){
@@ -2520,10 +2523,12 @@ function switchS4Tab(index) {
   }
   horizontal(path('s8-h1'),path('s8-arc1'),path('s8-arc2'));
   const vertical=path('s8-v1');if(vertical){const a=local(vertical,point(path('s8-arc2'),true)),b=local(vertical,point(path('s8-arc3'),false));vertical.setAttribute('d',`M ${a.x} ${a.y} V ${b.y}`);join(vertical,path('s8-arc3'));}
+  const last=root.querySelector(".fp-sec8-wrapper"),scale=parseFloat(getComputedStyle(root).getPropertyValue("--tablet-scale"))||1;
+  if(last){const height=(parseFloat(last.style.top)||0)+last.offsetHeight*scale;const value=height+"px";if(root.style.getPropertyValue("--tablet-content-height")!==value)root.style.setProperty("--tablet-content-height",value);}
   const bottom=path('s8-h2');if(bottom){const end=local(bottom,point(path('s8-arc3'),true));bottom.setAttribute('d',`M ${end.x} ${end.y} H 33.5`);}
  }
  window.fpTabletSeamsUpdate=update;
- const originalUpdate=window.fpLinesUpdate;if(originalUpdate)window.fpLinesUpdate=(...args)=>{originalUpdate(...args);if(root.classList.contains('fp-tablet'))update();};
+ // The geometry engine invokes this hook before timing, including its private resize timer.
  addEventListener('resize',()=>{if(innerWidth<768||innerWidth>=1200)update();});
  document.querySelector('#wf-sec7-canvas .wf-sec7-ball-4')?.addEventListener('transitionend',()=>{if(root.classList.contains('fp-tablet'))update();});
 })();
