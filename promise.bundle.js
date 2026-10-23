@@ -2457,7 +2457,7 @@ function switchS4Tab(index) {
   if(!tablet){if(active){root.classList.remove('fp-tablet');if(railBefore){if(railBefore[0])root.style.setProperty('--s6-h-y',railBefore[0],railBefore[1]);else root.style.removeProperty('--s6-h-y');}for(const name of ['--tablet-content-height','--tablet-stage-height','--tablet-stage-top','--tablet-page-height','--tablet-world-track-height','--tablet-first-screen-extra'])root.style.removeProperty(name);lineSvg.setAttribute('viewBox',originalViewBox);curveSvgs.forEach((svg,i)=>svg.setAttribute('preserveAspectRatio',ratios[i]||'xMidYMid meet'));root.style.removeProperty('--tablet-scale');root.style.removeProperty('--tablet-scroll-extra');root.style.removeProperty('--tablet-track-height');for(const [el,style]of saved){if(style===null)el.removeAttribute('style');else el.setAttribute('style',style);}saved.clear();active=false;if(innerWidth>=1200)window.fpS6ReapplyPhase?.();if(innerWidth<768)window.fpMobileLayoutUpdate?.();}return;}
   if(!active){railBefore=[root.style.getPropertyValue('--s6-h-y'),root.style.getPropertyPriority('--s6-h-y')];sections.forEach(([id])=>{const el=document.querySelector('.fp-'+id+'-wrapper');saved.set(el,el.getAttribute('style'));});active=true;}
   lineSvg.setAttribute('viewBox','0 0 960 716');curveSvgs.forEach(svg=>svg.setAttribute('preserveAspectRatio','xMinYMin meet'));root.classList.add('fp-tablet');const designWidth=Math.min(innerWidth,1024),scale=designWidth/1024,origin=(innerWidth-designWidth)/2;root.style.setProperty('--tablet-scale',scale);root.style.setProperty('--tablet-scroll-extra','1800px');root.style.setProperty('--tablet-track-height',(760+1800/scale)+'px');
-  const stageTop=220,stageHeight=stageTop+560;root.style.setProperty('--tablet-stage-height',stageHeight+'px');root.style.setProperty('--tablet-stage-top',stageTop+'px');root.style.setProperty('--s6-h-y',(stageTop+407)+'px','important');root.style.setProperty('--tablet-page-height',(7053.553+stageHeight-905)+'px');root.style.setProperty('--tablet-track-height',(stageHeight+1800/scale)+'px');root.style.setProperty('--tablet-world-track-height',(stageHeight*scale+1800)+'px');
+  const headerHeight=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--site-header-height'))||110;const stageHeight=Math.max(780,Math.min(1040,(innerHeight-headerHeight-48)/scale)),stageTop=stageHeight-560;root.style.setProperty('--tablet-stage-height',stageHeight+'px');root.style.setProperty('--tablet-stage-top',stageTop+'px');root.style.setProperty('--s6-h-y',(stageTop+407)+'px','important');root.style.setProperty('--tablet-page-height',(7053.553+stageHeight-905)+'px');root.style.setProperty('--tablet-track-height',(stageHeight+1800/scale)+'px');root.style.setProperty('--tablet-world-track-height',(stageHeight*scale+1800)+'px');
   root.style.setProperty('--tablet-card-inset',(48+32/scale)+'px');root.style.setProperty('--tablet-card-width',((designWidth-64)/scale)+'px');const firstScreenTop=Math.min(222*scale,Math.max(24,innerHeight-(parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--site-header-height'))||110)-596*scale)),firstScreenExtra=0;root.style.setProperty('--tablet-first-screen-extra',(firstScreenTop+firstScreenExtra)+'px');const config=window.FP_PAGE_CONFIG||{},val=k=>parseFloat(config[k])||0;
   for(const [id,x,y,w,h]of sections){const el=document.querySelector('.fp-'+id+'-wrapper');el.style.setProperty('left',(origin+(x+val('--'+id+'-tab-x'))*scale)+'px','important');el.style.setProperty('top',(firstScreenTop+(id==='sec1'?0:firstScreenExtra)+(y-222+val('--'+id+'-tab-y')+val('--'+id+'-tab-mt'))*scale+(id==='sec7'||id==='sec8'?1800+(stageHeight-905)*scale:0))+'px','important');el.style.width=w+'px';el.style.height=(id==='sec6'?stageHeight*scale+1800:h)+'px';}
   window.fpTabletSetPhase?.(Math.max(0,(+document.getElementById('sec6-d-num').textContent||1)-1));window.fpLinesUpdate?.();window.fpSectionGuidesUpdate?.();
@@ -2472,8 +2472,24 @@ function switchS4Tab(index) {
 (() => {
  const root=document.getElementById('fp-master-root'),changed=new Set();
  const path=k=>root.querySelector('path[data-k="'+k+'"]');
- const point=(p,last)=>p.getPointAtLength(last?p.getTotalLength():0).matrixTransform(p.getScreenCTM());
- const local=(p,v)=>v.matrixTransform(p.getScreenCTM().inverse());
+ // Derive SVG coordinates from its CSS viewport and native viewBox. This keeps
+ // joins in the same layout coordinate space as photos and people on WebKit.
+ function screenMatrix(el){
+  const svg=el.tagName.toLowerCase()==='svg'?el:el.ownerSVGElement;
+  if(!svg)return el.getScreenCTM();
+  const rect=svg.getBoundingClientRect(),box=svg.viewBox.baseVal;
+  const vw=box.width||svg.clientWidth||rect.width,vh=box.height||svg.clientHeight||rect.height;
+  let sx=rect.width/vw,sy=rect.height/vh,dx=0,dy=0;
+  const par=svg.preserveAspectRatio.baseVal,align=par.align;
+  if(align!==1){const s=par.meetOrSlice===2?Math.max(sx,sy):Math.min(sx,sy);dx=(rect.width-vw*s)*((align-2)%3)/2;dy=(rect.height-vh*s)*Math.floor((align-2)/3)/2;sx=sy=s;}
+  let matrix=new DOMMatrix([sx,0,0,sy,rect.left+dx-(box.x||0)*sx,rect.top+dy-(box.y||0)*sy]);
+  const chain=[];for(let node=el;node&&node!==svg;node=node.parentElement)chain.unshift(node);
+  for(const node of chain){const list=node.transform?.baseVal;if(list)for(let i=0;i<list.numberOfItems;i++)matrix=matrix.multiply(list.getItem(i).matrix);}
+  return matrix;
+ }
+ window.fpTabletScreenMatrix=screenMatrix;
+ const point=(p,last)=>{const v=p.getPointAtLength(last?p.getTotalLength():0);return new DOMPoint(v.x,v.y).matrixTransform(screenMatrix(p));};
+ const local=(p,v)=>v.matrixTransform(screenMatrix(p).inverse());
  function join(a,b){if(!a||!b)return;const target=local(b,point(a,true)),start=b.getPointAtLength(0);b.setAttribute('transform',`translate(${target.x-start.x} ${target.y-start.y})`);changed.add(b);}
  function horizontal(p,a,b){if(!p||!a||!b)return;const start=local(p,point(a,true)),finish=local(p,point(b,false));
   p.setAttribute('d',`M ${start.x} ${start.y} H ${finish.x}`);
@@ -2521,10 +2537,10 @@ function switchS4Tab(index) {
   window.fpTabletOpticsUpdate?.();
   const incoming8=path('s8-arc1'),circle7=document.querySelector('#wf-sec7-canvas .wf-sec7-ball-4 circle');
   if(incoming8&&circle7){
-   const edge=new DOMPoint(+circle7.getAttribute('cx'),+circle7.getAttribute('cy')+(+circle7.getAttribute('r'))).matrixTransform(circle7.getScreenCTM());
+   const edge=new DOMPoint(+circle7.getAttribute('cx'),+circle7.getAttribute('cy')+(+circle7.getAttribute('r'))).matrixTransform(screenMatrix(circle7));
    const target=local(incoming8,edge),start=incoming8.getPointAtLength(0);
    incoming8.setAttribute('transform',`translate(${target.x-start.x} ${target.y-start.y})`);changed.add(incoming8);
-   const svg=incoming8.closest('svg'),svgEdge=edge.matrixTransform(svg.getScreenCTM().inverse()),filter=document.getElementById('fpPencilS8');
+   const svg=incoming8.closest('svg'),svgEdge=edge.matrixTransform(screenMatrix(svg).inverse()),filter=document.getElementById('fpPencilS8');
    if(filter){const top=Math.min(-200,svgEdge.y-24);filter.setAttribute('y',top);filter.setAttribute('height',Math.max(1600,1200-top));}
   }
   horizontal(path('s8-h1'),path('s8-arc1'),path('s8-arc2'));
@@ -2533,7 +2549,14 @@ function switchS4Tab(index) {
   if(last){const height=(parseFloat(last.style.top)||0)+last.offsetHeight*scale;const value=height+"px";if(root.style.getPropertyValue("--tablet-content-height")!==value)root.style.setProperty("--tablet-content-height",value);}
   const bottom=path('s8-h2');if(bottom){const end=local(bottom,point(path('s8-arc3'),true));bottom.setAttribute('d',`M ${end.x} ${end.y} H 33.5`);}
  }
+ let pending=false;
+ function schedule(){if(pending)return;pending=true;requestAnimationFrame(()=>requestAnimationFrame(()=>{pending=false;if(root.classList.contains('fp-tablet'))update();}));}
+ addEventListener('resize',schedule);document.addEventListener('fp:webflow-ready',schedule);document.fonts?.ready.then(schedule);document.fonts?.addEventListener('loadingdone',schedule);
+ root.querySelectorAll('.s2p1-dt-container .circle-photo-box img,.s2p34-photo-card img').forEach(img=>img.addEventListener('load',schedule));
+ root.querySelectorAll('.wf-sec7-balls-container,.wf-sec7-ball-4,.s2p1-dt-container .circle-photo-box').forEach(el=>{el.addEventListener('transitionend',schedule);el.addEventListener('animationend',schedule);});
+ addEventListener('fp:motion-catchup',schedule);
  window.fpTabletSeamsUpdate=update;
+
  // The geometry engine invokes this hook before timing, including its private resize timer.
  addEventListener('resize',()=>{if(innerWidth<768||innerWidth>=1200)update();});
  document.querySelector('#wf-sec7-canvas .wf-sec7-ball-4')?.addEventListener('transitionend',()=>{if(root.classList.contains('fp-tablet'))update();});
@@ -2626,7 +2649,8 @@ function switchS4Tab(index) {
   if(innerWidth<768){lastPhase=-1;renderedEnds=[];return;}
   const tablet=root.classList.contains('fp-tablet');
   const seat=root.querySelector('path[data-k="s5-h2"]'),body=document.getElementById('sec6-d-asset-tag');
-  const rayMatrix=document.getElementById('sec6-d-ray-svg').getScreenCTM();if(!rayMatrix)return;const scale=Math.hypot(rayMatrix.a,rayMatrix.b);
+  const screenMatrix=el=>tablet&&window.fpTabletScreenMatrix?window.fpTabletScreenMatrix(el):el.getScreenCTM();
+  const rayMatrix=screenMatrix(document.getElementById('sec6-d-ray-svg'));if(!rayMatrix)return;const scale=Math.hypot(rayMatrix.a,rayMatrix.b);
   if(tablet){
   const seatLocal=seat.getPointAtLength(0),seatTop=parseFloat(getComputedStyle(seat.closest('.s6-seat-line')).top)||0;
   const next=seatTop+seatLocal.y-body.offsetHeight*.46;
@@ -2650,7 +2674,7 @@ function switchS4Tab(index) {
   const phase=Math.max(0,Math.min(2,+(root.dataset.s6Phase??root.dataset.tabletPhase??0)));
   const circle=document.getElementById('sec6-d-circle-'+(phase+1)).getBoundingClientRect();
   const cx=circle.left+circle.width/2,cy=circle.top+circle.height/2,rx=circle.width/2,ry=circle.height/2;
-  const ray=document.getElementById('sec6-d-ray-svg'),inverse=ray.getScreenCTM().inverse();
+  const ray=document.getElementById('sec6-d-ray-svg'),inverse=screenMatrix(ray).inverse();
   if(rx<=0||ry<=0)return;
   const lampScale=parseFloat(getComputedStyle(lamp).scale)||1;
   const starts=[[.0133118,20.4006],[8.33629,25.8939]].map(([x,y])=>{const edge=new DOMPoint((x/21-.5)*lamp.offsetWidth,(y/26-.5)*lamp.offsetHeight).matrixTransform(matrix);return new DOMPoint(lr.left+lr.width/2+edge.x*scale*lampScale,lr.top+lr.height/2+edge.y*scale*lampScale);}).sort((a,b)=>a.x-b.x);
