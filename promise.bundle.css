@@ -7231,3 +7231,6 @@ body{padding-top:var(--site-header-height,110px)!important}
 
 /* webflow-integration.css */
 body{padding-top:0!important}#fp-webflow-mount{padding-top:var(--site-header-height,110px);position:relative;overflow:visible}#fp-webflow-mount #fp-master-root{margin:0!important}[data-fp-fragment]{visibility:hidden}#fp-webflow-mount>.w-embed{display:contents}
+
+/* Include the first-screen inset and seam correction in the document flow. */
+#fp-master-root.fp-tablet{height:var(--tablet-content-height,calc(var(--tablet-page-height,6928.553px) * var(--tablet-scale) + var(--tablet-scroll-extra,0px) + var(--tablet-first-screen-extra,0px)))!important;min-height:var(--tablet-content-height,calc(var(--tablet-page-height,6928.553px) * var(--tablet-scale) + var(--tablet-scroll-extra,0px) + var(--tablet-first-screen-extra,0px)))!important}
