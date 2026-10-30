@@ -7229,5 +7229,18 @@ body{padding-top:var(--site-header-height,110px)!important}
  #fp-master-root .wf-sec6-m-btn-right{left:331.55px!important}
 }
 
+/* Short laptop viewports: retain image size by tightening the native stage. */
+@media(min-width:1200px){
+ #fp-master-root[data-s6-compact="1"] #sec6-d-desc{width:var(--s6-desktop-desc-width,440px)!important}
+ #fp-master-root[data-s6-compact="1"] #sec6-d-circle-1,
+ #fp-master-root[data-s6-compact="1"] #sec6-d-circle-2,
+ #fp-master-root[data-s6-compact="1"] #sec6-d-circle-3{top:var(--s6-desktop-small-top)!important}
+ #fp-master-root[data-s6-compact="1"][data-s6-phase="0"] #sec6-d-circle-1,
+ #fp-master-root[data-s6-compact="1"][data-s6-phase="1"] #sec6-d-circle-2,
+ #fp-master-root[data-s6-compact="1"][data-s6-phase="2"] #sec6-d-circle-3{top:var(--s6-desktop-active-top)!important}
+ #fp-master-root .s6-seat-holder svg path.fp-seg,
+ #fp-master-root .fp-s6-track path{stroke-width:2px!important;vector-effect:non-scaling-stroke!important}
+}
+
 /* webflow-integration.css */
 body{padding-top:0!important}#fp-webflow-mount{padding-top:var(--site-header-height,110px);position:relative;overflow:visible}#fp-webflow-mount #fp-master-root{margin:0!important}[data-fp-fragment]{visibility:hidden}#fp-webflow-mount>.w-embed{display:contents}

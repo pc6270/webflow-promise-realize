@@ -1550,16 +1550,19 @@ function switchS4Tab(index) {
         p[1].style.transform = 'scale(' + sc.toFixed(5) + ')';
       });
     }
+    var seatFrame=false,seatTimer;
     function placeSoon() {
-      placeSeatLine();
-      setTimeout(placeSeatLine, 200);
+      if(seatFrame)return;
+      seatFrame=true;
+      requestAnimationFrame(function(){seatFrame=false;placeSeatLine();});
+      clearTimeout(seatTimer);seatTimer=setTimeout(placeSeatLine,200);
     }
     window.addEventListener('resize', placeSoon);
     window.addEventListener('fp:webflow-ready', function () { placeSoon(); setTimeout(placeSeatLine, 1000); });
     document.addEventListener('fp:webflow-ready', placeSoon);
     var root = document.getElementById('fp-master-root');
     if (root && 'MutationObserver' in window) {
-      new MutationObserver(placeSoon).observe(root, { attributes: true, attributeFilter: ['style', 'class'] });
+      new MutationObserver(placeSoon).observe(root, { attributes: true, attributeFilter: ['class'] });
     }
     placeSoon();
 
@@ -1858,7 +1861,7 @@ window.fpSvgScreenMatrix = function(el){
 window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(window.fpSvgScreenMatrix(svg).inverse()).x);
 (function(){
   const root=document.getElementById('fp-master-root');
-  const originals=new WeakMap();let queued=false,applying=false;
+  const originals=new WeakMap();let queued=false,applying=false,sizeCache=null;
   const measure=document.createElement('div');measure.setAttribute('aria-hidden','true');document.body.append(measure);
   function layout(){
     queued=false;if(innerWidth<1200){
@@ -1878,22 +1881,31 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
     let shared=1;
     const headerHeight=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--site-header-height'))||110;
     const set=(key,value)=>{if(root.style.getPropertyValue(key)!==value)root.style.setProperty(key,value);};
-    set('--s6-desktop-beam-shorten','0px');set('--s6-h-y',window.FP_PAGE_CONFIG?.['--s6-h-y']||'855px');
+    const compact=innerWidth<1600&&innerHeight<=900;
+    root.dataset.s6Compact=compact?'1':'0';
+    const activeTop=compact?190:368,railY=compact?666:(parseFloat(window.FP_PAGE_CONFIG?.['--s6-h-y'])||855);
+    set('--s6-desktop-beam-shorten','0px');set('--s6-h-y',railY+'px');
+    set('--s6-desktop-active-top',activeTop+'px');set('--s6-desktop-small-top',(activeTop+172.2)+'px');
+    set('--s6-desktop-desc-width',compact?'440px':'320px');
     const available=Math.max(240,innerHeight-headerHeight-48);
-    let stageHeight=1010,scale=Math.min(1,innerWidth*.95/1221,available/stageHeight);
+    let stageHeight=compact?840:1010,scale=Math.min(1,innerWidth*.95/1221,available/stageHeight);
     const description=document.getElementById('sec6-d-desc'),header=document.getElementById('sec6-d-header-group');
     const finalText=window.FP_CONTENT_CONFIG?.section6?.[2]?.desc||description.textContent;
+    const sizeKey=[innerWidth,innerHeight,headerHeight,finalText,compact,railY].join('|');
+    if(sizeCache?.key===sizeKey){stageHeight=sizeCache.height;scale=sizeCache.scale;}else{
     measure.textContent=finalText;
     for(let pass=0;pass<4;pass++){
       set('--s6-desktop-scale',String(scale));set('--s6-desktop-font-factor',String(1/scale));
       const textStyle=getComputedStyle(description);
       Object.assign(measure.style,{position:'fixed',left:'-10000px',top:'0',visibility:'hidden',width:description.offsetWidth+'px',fontFamily:textStyle.fontFamily,fontSize:textStyle.fontSize,fontWeight:textStyle.fontWeight,lineHeight:textStyle.lineHeight,letterSpacing:textStyle.letterSpacing,whiteSpace:'normal',padding:'0',margin:'0'});
-      stageHeight=Math.max(936,883+measure.offsetHeight+24/scale);
+      stageHeight=Math.max(compact?760:936,railY+28+measure.offsetHeight+24/scale);
       scale=Math.min(1,innerWidth*.95/1221,available/stageHeight);
+    }
+    sizeCache={key:sizeKey,height:stageHeight,scale};
     }
     shared=scale;set('--s6-desktop-scale',String(scale));set('--s6-desktop-font-factor',String(1/scale));
     set('--s6-desktop-stage-height',stageHeight+'px');
-    set('--s6-desktop-header-top',(368-20/scale-header.offsetHeight)+'px');
+    set('--s6-desktop-header-top',(activeTop-20/scale-header.offsetHeight)+'px');
     const fixed7=document.getElementById('wf-sec7-canvas');
     fixed7.style.transform='none';document.getElementById('wf-sec7-desktop-outer').style.height='800px';
     for(const key of ['--body-size','--quote-size','--label-cn-size','--label-en-size'])fixed7.style.removeProperty(key);
@@ -2073,7 +2085,7 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
   if(section7)new MutationObserver(()=>{schedule();setTimeout(schedule,2800);}).observe(section7,{attributes:true,attributeFilter:['class']});
   // This layout writes root variables itself; observing those writes caused
   // repeated measure/write cycles and competing line geometry on each frame.
-  document.fonts.ready.then(schedule);schedule();
+  document.fonts.ready.then(()=>{sizeCache=null;schedule();});document.fonts.addEventListener?.('loadingdone',()=>{sizeCache=null;schedule();});schedule();
 })();
 
 ;
@@ -2924,14 +2936,16 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
  const actor=root.querySelector('.s2p34-man-body'),shadow=root.querySelector('.s2p34-man-shadow');
  const margins=new Map([actor,shadow].filter(Boolean).map(el=>[el,el.style.marginTop]));
  const text=root.querySelector('.s2p34-brand-text'),textMargin=text?.style.marginTop||'';
+ const content=root.querySelector('.s4-content-wrapper'),contentPadding=content.style.getPropertyValue('padding-top'),contentPriority=content.style.getPropertyPriority('padding-top');
  const raised=root.querySelector('.s4-top-line'),raisedShadow=root.querySelector('.s4-top-man');
  const raisedMargins=new Map([raised,raisedShadow].filter(Boolean).map(el=>[el,[el.style.marginLeft,el.style.marginTop]]));
  const path=key=>root.querySelector('path[data-k="'+key+'"]');
- const screen=(p,end)=>p.getPointAtLength(end?p.getTotalLength():0).matrixTransform(p.getScreenCTM());
- const local=(p,point)=>point.matrixTransform(p.getScreenCTM().inverse());
+ const screen=(p,end)=>p.getPointAtLength(end?p.getTotalLength():0).matrixTransform(window.fpSvgScreenMatrix(p));
+ const local=(p,point)=>point.matrixTransform(window.fpSvgScreenMatrix(p).inverse());
  function snap(a,b){if(!a||!b)return;const target=local(b,screen(a,true)),start=b.getPointAtLength(0);const existing=b.transform.baseVal.consolidate()?.matrix;b.setAttribute('transform',`translate(${(existing?.e||0)+target.x-start.x} ${(existing?.f||0)+target.y-start.y})`);moved.add(b);}
  function bar(key,a,b){const p=path(key);a=path(a);b=path(b);if(!p||!a||!b)return;const start=local(p,screen(a,true)),end=local(p,screen(b,false));p.setAttribute('d',`M ${start.x} ${start.y} H ${end.x}`);p.dataset.desktopSeam='1';snap(p,b);}
  function update(){
+  if(contentPadding)content.style.setProperty('padding-top',contentPadding,contentPriority);else content.style.removeProperty('padding-top');
   moved.forEach(p=>p.removeAttribute('transform'));moved.clear();
   for(const [el,margin]of margins)el.style.marginTop=margin;
   if(text)text.style.marginTop=textMargin;
@@ -2965,6 +2979,15 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
    // Raising the actor changes the last arc again after bar() has aligned it.
    // The completed rail endpoint must be the final authority for both axes.
    snap(rail,arc);
+  }
+  if(raisedShadow){
+   const title=root.querySelector('.s4-header-title'),man=raisedShadow.getBoundingClientRect(),heading=title?.getBoundingClientRect();
+   if(heading&&man.bottom+24>heading.top){
+    const content=root.querySelector('.s4-content-wrapper');
+    const scale=heading.width/(title.offsetWidth||heading.width)||1;
+    const needed=(man.bottom+24-heading.top)/scale;
+    content.style.setProperty('padding-top',(parseFloat(getComputedStyle(content).paddingTop)||0)+needed+'px','important');
+   }
   }
   if(text){const line=path('s2p34-h1'),rect=text.getBoundingClientRect(),scale=rect.width/(text.offsetWidth||rect.width)||1;
    const target=screen(line,false).y+24;
