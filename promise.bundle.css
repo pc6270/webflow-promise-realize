@@ -6586,6 +6586,9 @@ html,body{scrollbar-width:none;-ms-overflow-style:none}html::-webkit-scrollbar,b
  }
 }
 
+/* Keep the closing artwork intact; reserve space before the site footer. */
+#fp-webflow-mount #wf-sec8-root, .fp-master-container #wf-sec8-root { padding-bottom: 100px !important; }
+
 /* tablet-figma.css?v=compact-stage-11 */
 /* Native 1024px layout from Figma 685:12646; independent of desktop offsets. */
 .fp-tablet{position:relative!important;min-height:calc(7053.553px * var(--tablet-scale))!important;height:calc(7053.553px * var(--tablet-scale))!important;max-width:none!important;padding:0!important}
