@@ -6566,6 +6566,26 @@ html,body{scrollbar-width:none;-ms-overflow-style:none}html::-webkit-scrollbar,b
 .inspection-video-close:focus-visible{outline:1px solid white;outline-offset:5px}
 @media(prefers-reduced-motion:reduce){.inspection-close-roll{transition:none}}
 
+/* Keep initial dialog focus on the content, with the close control above media. */
+#inspection-video-modal .inspection-video-frame{z-index:1}
+#inspection-video-modal .inspection-video-frame:focus{outline:none}
+#inspection-video-modal .inspection-video-close{z-index:2}
+@media(orientation:landscape) and (max-width:1024px) and (max-height:600px){
+ #inspection-video-modal .inspection-video-close{
+  top:max(8px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right));
+  width:44px;height:44px;min-width:44px;min-height:44px;
+  border-radius:50%;background:rgba(0,0,0,.35);padding:0;
+ }
+ #inspection-video-modal .inspection-close-roll{height:44px;transform:none!important;transition:none}
+ #inspection-video-modal .inspection-close-row{display:flex;width:44px;height:44px;align-items:center;justify-content:center;gap:0}
+ #inspection-video-modal .inspection-close-row>span,
+ #inspection-video-modal .inspection-close-row[aria-hidden="true"]{display:none}
+ #inspection-video-modal .inspection-video-frame{
+  width:min(calc(100vw - 32px),calc((100dvh - 120px) * 1143 / 643));
+  max-height:calc(100dvh - 120px);
+ }
+}
+
 /* tablet-figma.css?v=compact-stage-11 */
 /* Native 1024px layout from Figma 685:12646; independent of desktop offsets. */
 .fp-tablet{position:relative!important;min-height:calc(7053.553px * var(--tablet-scale))!important;height:calc(7053.553px * var(--tablet-scale))!important;max-width:none!important;padding:0!important}

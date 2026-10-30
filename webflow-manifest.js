@@ -1,1 +1,1 @@
-window.FP_WEBFLOW_MANIFEST={"scripts": [{"src": "page-config.js"}, {"src": "media-config.js"}, {"src": "content-config.js"}, {"src": "promise.bundle.js"}], "styles": ["promise.bundle.css"], "release": "4215c4bfa880"};
+window.FP_WEBFLOW_MANIFEST={"scripts": [{"src": "page-config.js"}, {"src": "media-config.js"}, {"src": "content-config.js"}, {"src": "promise.bundle.js"}], "styles": ["promise.bundle.css"], "release": "d6c6f3b5efed"};

@@ -2512,7 +2512,7 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
 (() => {
  const modal=document.createElement('dialog');modal.id='inspection-video-modal';modal.setAttribute('aria-label','驗屋服務影片');
  modal.innerHTML='<button type="button" class="inspection-video-close" aria-label="關閉影片"><span class="inspection-close-roll"><span class="inspection-close-row"><img src="https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d40991d1fd2cd920b72_video-close.svg" alt=""><span>CLOSE</span></span><span class="inspection-close-row" aria-hidden="true"><img src="https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d40991d1fd2cd920b72_video-close.svg" alt=""><span>CLOSE</span></span></span></button><div class="inspection-video-frame"></div>';
- document.body.append(modal);const frame=modal.querySelector('.inspection-video-frame');let previousOverflow='';
+ document.body.append(modal);const frame=modal.querySelector('.inspection-video-frame');frame.setAttribute('tabindex','-1');frame.setAttribute('autofocus','');let previousOverflow='';
  function close(){modal.close();}
  modal.querySelector('button').onclick=()=>{modal.querySelector('button').classList.add('is-closing');setTimeout(close,180);};
  modal.addEventListener('click',e=>{if(e.target===modal)close();});
@@ -2523,7 +2523,7 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
   const card=window.FP_MEDIA_CONFIG?.section4?.find(c=>c.id===id);frame.replaceChildren();modal.setAttribute('aria-label',(card?.title||'驗屋服務')+'影片');
   if(card?.video){const player=document.createElement(card.videoType==='iframe'?'iframe':'video');player.src=card.video;if(player.tagName==='VIDEO'){player.controls=true;player.playsInline=true;}else{player.title=card.title;player.allow='fullscreen; picture-in-picture';player.allowFullscreen=true;}frame.append(player);}
   else{const message=document.createElement('p');message.textContent='影片準備中';frame.append(message);}
-  previousOverflow=document.documentElement.style.overflow;document.documentElement.style.overflow='hidden';modal.showModal();
+  previousOverflow=document.documentElement.style.overflow;document.documentElement.style.overflow='hidden';modal.showModal();frame.focus({preventScroll:true});
  }
  window.fpOpenInspectionVideo=open;
  document.querySelectorAll('.s4-btn-watch-video').forEach(button=>button.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();open(button);}));
