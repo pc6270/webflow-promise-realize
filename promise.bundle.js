@@ -1817,7 +1817,11 @@ window.fpSvgScreenMatrix = function(el){
     sx=sy=factor;
   }
   const viewport=new DOMMatrix([sx,0,0,sy,box.left+dx-vb.x*sx,box.top+dy-vb.y*sy]);
-  return viewport.multiply(base.inverse()).multiply(native);
+  const result=viewport.multiply(base.inverse()).multiply(native);
+  // Legacy SVGPoint.matrixTransform requires an SVGMatrix on WebKit.
+  const compatible=svg.createSVGMatrix();
+  for(const key of ['a','b','c','d','e','f'])compatible[key]=result[key];
+  return compatible;
 };
 window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(window.fpSvgScreenMatrix(svg).inverse()).x);
 (function(){
