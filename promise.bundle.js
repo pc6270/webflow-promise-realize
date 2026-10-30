@@ -30,7 +30,7 @@ window.FP_BUNDLE_READY=(async()=>{
 })();
 
 ;
-await new Promise(resolve=>{const s=document.createElement("script");s.src="https://use.typekit.net/usm6obt.js";s.onload=resolve;s.onerror=resolve;document.head.append(s);});
+(()=>{const s=document.createElement("script");s.src="https://use.typekit.net/usm6obt.js";s.async=true;s.onload=()=>window.Typekit?.load({async:true});s.onerror=()=>console.warn("Optional font service unavailable");document.head.append(s);})();
 
 ;/* inline-script-007.js */
 try{Typekit.load();}catch(error){}

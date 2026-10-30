@@ -3,17 +3,26 @@
  const own=document.currentScript;window.FP_ASSET_BASE=new URL('.',own.src).href;window.FP_WEBFLOW_BOOTSTRAP=true;
  const resolveAssets=node=>{if(node.nodeType!==1)return;for(const el of [node,...node.querySelectorAll('[data-fp-src]')])if(el.hasAttribute('data-fp-src')){el.src=new URL(el.dataset.fpSrc,window.FP_ASSET_BASE).href;el.removeAttribute('data-fp-src');}};
  new MutationObserver(records=>records.forEach(record=>record.addedNodes.forEach(resolveAssets))).observe(document.body,{childList:true,subtree:true});
- const script=src=>new Promise((resolve,reject)=>{const el=document.createElement('script');const url=new URL(src,window.FP_ASSET_BASE);if(!src.startsWith("https://"))url.searchParams.set("v","8b5df4d7ad30");el.src=url.href;el.async=false;el.onload=resolve;el.onerror=()=>reject(Error('無法載入 '+el.src));document.body.append(el);});
+ const script=src=>new Promise((resolve,reject)=>{const el=document.createElement('script');const url=new URL(src,window.FP_ASSET_BASE);if(!src.startsWith("https://"))url.searchParams.set("v","b00bb406115c");el.src=url.href;el.async=false;el.onload=resolve;el.onerror=()=>reject(Error('無法載入 '+el.src));document.body.append(el);});
  try{
   for(const fragment of document.querySelectorAll('[data-fp-fragment]')){const target=document.querySelector('[data-fp-node="'+fragment.dataset.fpParent+'"]');if(!target)throw Error('缺少 Embed：'+fragment.dataset.fpParent);target.append(...fragment.childNodes);fragment.remove();}
   const root=document.getElementById('fp-master-root');if(!root)throw Error('缺少第一個 Embed');
   root.querySelectorAll('[data-fp-src]').forEach(el=>{el.src=new URL(el.dataset.fpSrc,window.FP_ASSET_BASE).href;el.removeAttribute('data-fp-src');});
+  root.dataset.fpFirstPaint='1';
+  const hero=root.querySelector('.fp-sec1-wrapper');
+  if(hero)hero.querySelectorAll('img').forEach(img=>{img.loading='eager';img.setAttribute('fetchpriority','high');});
   await script('webflow-manifest.js');
   const loaded=window.FP_WEBFLOW_MANIFEST;
+  for(const item of loaded.scripts){
+   if(item.src.startsWith('https://'))continue;
+   const preload=document.createElement('link');preload.rel='preload';preload.as='script';
+   const url=new URL(item.src,window.FP_ASSET_BASE);url.searchParams.set('v',loaded.release);preload.href=url.href;document.head.append(preload);
+  }
   for(const item of loaded.scripts){try{await script(item.src);}catch(error){if(item.src.startsWith('https://use.typekit.net/'))console.warn(error);else throw error;}}
   await window.FP_BUNDLE_READY;
   dispatchEvent(new Event('resize'));
   document.dispatchEvent(new Event('fp:webflow-ready',{bubbles:true}));
   document.getElementById('fp-webflow-mount').dataset.loaded='1';
+  setTimeout(()=>{delete root.dataset.fpFirstPaint;},5000);
  }catch(error){console.error('[安心實踐部署]',error);const notice=document.createElement('p');notice.textContent='安心實踐頁面載入失敗，請檢查 Embed 是否完整，以及外部檔案網址。';document.getElementById('fp-webflow-mount')?.prepend(notice);}
 })();

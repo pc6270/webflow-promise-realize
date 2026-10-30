@@ -7244,3 +7244,5 @@ body{padding-top:var(--site-header-height,110px)!important}
 
 /* webflow-integration.css */
 body{padding-top:0!important}#fp-webflow-mount{padding-top:var(--site-header-height,110px);position:relative;overflow:visible}#fp-webflow-mount #fp-master-root{margin:0!important}[data-fp-fragment]{visibility:hidden}#fp-webflow-mount>.w-embed{display:contents}
+#fp-master-root[data-fp-first-paint="1"] .fp-sec1-wrapper{opacity:1!important}
+#fp-master-root[data-fp-first-paint="1"] .s1-header-box,#fp-master-root[data-fp-first-paint="1"] .s1-desc-paragraph{opacity:1!important;transform:none!important}
