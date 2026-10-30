@@ -211,8 +211,11 @@ try{Typekit.load();}catch(error){}
    const asset=config.assets[el.dataset.pageAsset];if(!asset)continue;
    el.src=asset.src;el.alt=asset.decorative?'':asset.alt;
   }
-  if(config.seo?.title)document.title=config.seo.title;
-  const description=document.querySelector('meta[name="description"]');if(description&&config.seo?.description)description.content=config.seo.description;
+  // Webflow owns the published page metadata; use config SEO only in standalone previews.
+  if(!window.FP_WEBFLOW_BOOTSTRAP){
+   if(config.seo?.title)document.title=config.seo.title;
+   const description=document.querySelector('meta[name="description"]');if(description&&config.seo?.description)description.content=config.seo.description;
+  }
  }
  window.fpContentUpdate=apply;apply();
 })();
