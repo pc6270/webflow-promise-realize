@@ -7222,5 +7222,12 @@ body{padding-top:var(--site-header-height,110px)!important}
  #fp-master-root .wf-sec7-m-vector-svg{left:-10px!important;clip-path:none!important}
 }
 
+/* Mobile S6 arrows: 37.8px -> 56.7px, keeping both original centres. */
+@media(max-width:767.98px){
+ #fp-master-root .wf-sec6-m-btn-left,#fp-master-root .wf-sec6-m-btn-right{width:56.7px!important;height:56.7px!important;min-width:56.7px!important;min-height:56.7px!important;top:211.65px!important;right:auto!important}
+ #fp-master-root .wf-sec6-m-btn-left{left:13.75px!important}
+ #fp-master-root .wf-sec6-m-btn-right{left:331.55px!important}
+}
+
 /* webflow-integration.css */
 body{padding-top:0!important}#fp-webflow-mount{padding-top:var(--site-header-height,110px);position:relative;overflow:visible}#fp-webflow-mount #fp-master-root{margin:0!important}[data-fp-fragment]{visibility:hidden}#fp-webflow-mount>.w-embed{display:contents}

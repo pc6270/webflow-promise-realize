@@ -36,7 +36,7 @@ window.FP_MEDIA_CONFIG = {
       "id": "wall-and-column-level",
       "title": "室內牆柱水平儀檢驗",
       "image": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f726bc37e5648145c0_04-wall-and-column-level.avif",
-      "icon": new URL("assets/icons/section4/04-wall-and-column-level-v2.svg",window.FP_ASSET_BASE).href,
+      "icon": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3ed0d04a27b5d789ea_5bea56e6b4f4e23fcbe386fe1975cdfda2b99fef29d0739051b72088f68520eb.svg",
       "video": "",
       "videoType": "video",
       "description": "使用精密垂直水平儀量測牆面與柱體直角水平度，確保結構施工無傾斜偏角。",

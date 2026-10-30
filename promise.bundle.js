@@ -1796,6 +1796,29 @@ function switchS4Tab(index) {
 ;
 
 ;/* s6-s7-connection.js */
+// Build viewport SVG coordinates from the rendered SVG box. WebKit versions
+// can omit ancestor CSS transforms from getScreenCTM(). Keep native CTMs for
+// internal SVG transforms, and replace only the outer viewport mapping.
+window.fpSvgScreenMatrix = function(el){
+  const native=el.getScreenCTM();
+  if(!native)return new DOMMatrix();
+  let svg=el.tagName.toLowerCase()==='svg'?el:el.ownerSVGElement;
+  while(svg?.ownerSVGElement)svg=svg.ownerSVGElement;
+  if(!svg)return native;
+  const base=svg.getScreenCTM(),box=svg.getBoundingClientRect(),vb=svg.viewBox.baseVal;
+  if(!base||!box.width||!box.height||!vb.width||!vb.height)return native;
+  let sx=box.width/vb.width,sy=box.height/vb.height,dx=0,dy=0;
+  const aspect=svg.preserveAspectRatio.baseVal;
+  if(aspect.align!==1){
+    const factor=aspect.meetOrSlice===2?Math.max(sx,sy):Math.min(sx,sy);
+    const alignment=aspect.align-2;
+    dx=(box.width-vb.width*factor)*(alignment%3)/2;
+    dy=(box.height-vb.height*factor)*Math.floor(alignment/3)/2;
+    sx=sy=factor;
+  }
+  const viewport=new DOMMatrix([sx,0,0,sy,box.left+dx-vb.x*sx,box.top+dy-vb.y*sy]);
+  return viewport.multiply(base.inverse()).multiply(native);
+};
 (function(){
   const root=document.getElementById('fp-master-root');
   const originals=new WeakMap();let queued=false,applying=false;
@@ -1845,7 +1868,7 @@ function switchS4Tab(index) {
     });
     const scale8=1;
     independent8.style.transform='scale('+scale8+')';
-    const compactHeight=Math.max(560,Math.min(850,innerHeight-headerHeight-24));
+    let compactHeight=Math.max(560,Math.min(850,innerHeight-headerHeight-24));
     const artScale=.9*Math.min(1,(compactHeight-120)/606);
     independent8.dataset.compact='1';
     independent8.style.height=compactHeight+'px';
@@ -1866,6 +1889,13 @@ function switchS4Tab(index) {
     for(const [selector,left]of [['.wf-sec8-subtitle',70],['.wf-sec8-category-title',68],['.wf-sec8-vert-line',68],['.wf-sec8-main-title',96],['.wf-sec8-description',68]])put(selector,'left',left+'px');
     for(const [selector,top]of [['.wf-sec8-subtitle',textTop],['.wf-sec8-category-title',68],['.wf-sec8-main-title',148],['.wf-sec8-description',descriptionTop],['.wf-sec8-vert-line',137]])put(selector,'top',(top+textShift)+'px');
     put('.wf-sec8-vert-line','height',(quote.offsetHeight+22)+'px');
+    // The family occupies 102px above the bottom rail. Let the section grow
+    // with the measured copy instead of forcing it into one laptop viewport.
+    const copyBottom=descriptionTop+textShift+description8.offsetHeight;
+    compactHeight=Math.max(compactHeight,Math.ceil(copyBottom+36+102+52));
+    independent8.style.height=compactHeight+'px';
+    document.getElementById('wf-sec8-desktop-outer').style.height=compactHeight+'px';
+
     for(const selector of ['.wf-sec8-circles-block','.wf-sec8-man3-group']){
       // Separate layout from the entrance animation's transform property.
       put(selector,'transform','none');
@@ -1899,9 +1929,9 @@ function switchS4Tab(index) {
     const delta=release-sticky.getBoundingClientRect().top;
     const x=parseFloat(cs.getPropertyValue('--s6-h4-end'))||1131.87;
     const y=parseFloat(cs.getPropertyValue('--s6-h-y'))||855;
-    const target=new DOMPoint(x,y).matrixTransform(svg.getScreenCTM());
+    const target=new DOMPoint(x,y).matrixTransform(window.fpSvgScreenMatrix(svg));
     target.y+=delta;
-    const first=arc.getPointAtLength(0).matrixTransform(arc.getScreenCTM());
+    const first=arc.getPointAtLength(0).matrixTransform(window.fpSvgScreenMatrix(arc));
     // S6 can scale down while S7 retains native typography. Do not let the
     // S6 anchor pull S7's content past either viewport edge.
     const base7=canvas7.getBoundingClientRect();
@@ -1922,18 +1952,18 @@ function switchS4Tab(index) {
     canvas7.style.top=(target.y-first.y)+'px';
     // Own both sides of the join; the parameter renderer must not restore
     // the old rail endpoint after the responsive curve has moved.
-    const arcRect=arc.getBoundingClientRect(),arcMatrix=arc.getScreenCTM();
+    const arcRect=arc.getBoundingClientRect(),arcMatrix=window.fpSvgScreenMatrix(arc);
     const correction=Math.min(0,innerWidth-gutter-arcRect.right);
     if(correction<0)arc.setAttribute('transform',`translate(${correction/arcMatrix.a} 0)`);
     const baseline=canvas7.querySelector('path[data-k="s7-h1"]');
     if(baseline){
-      const join=arc.getPointAtLength(arc.getTotalLength()).matrixTransform(arc.getScreenCTM()).matrixTransform(baseline.getScreenCTM().inverse());
+      const join=arc.getPointAtLength(arc.getTotalLength()).matrixTransform(window.fpSvgScreenMatrix(arc)).matrixTransform(window.fpSvgScreenMatrix(baseline).inverse());
       const circle=canvas7.querySelector('.wf-sec7-ball-2').getBoundingClientRect();
-      const end=new DOMPoint(circle.right,circle.top+circle.height/2).matrixTransform(baseline.getScreenCTM().inverse());
+      const end=new DOMPoint(circle.right,circle.top+circle.height/2).matrixTransform(window.fpSvgScreenMatrix(baseline).inverse());
       baseline.dataset.desktopSeam='1';
       baseline.setAttribute('d',`M ${join.x} ${join.y} H ${end.x}`);
     }
-    const matrix=svg.getScreenCTM().inverse().multiply(arc.getScreenCTM());
+    const matrix=window.fpSvgScreenMatrix(svg).inverse().multiply(window.fpSvgScreenMatrix(arc));
     const tokens=arc.getAttribute('d').match(/[MC]|-?\d*\.?\d+(?:e[-+]?\d+)?/gi);
     const mapped=[];
     for(let i=0;i<tokens.length;){
@@ -1961,43 +1991,43 @@ function switchS4Tab(index) {
       const circleShape=circle7.querySelector('circle');
       const rect=circle7.getBoundingClientRect();
       let edge=new DOMPoint(rect.left+rect.width/2,rect.bottom);
-      if(circleShape){const c=circleShape,border=parseFloat(getComputedStyle(c).strokeWidth)||0;edge=new DOMPoint(+c.getAttribute('cx'),+c.getAttribute('cy')+(+c.getAttribute('r'))+border/2).matrixTransform(c.getScreenCTM());}
-      const initialMatrix8=entry8.getScreenCTM(),cap=(parseFloat(getComputedStyle(entry8).strokeWidth)||3)*Math.hypot(initialMatrix8.a,initialMatrix8.b)/2;
+      if(circleShape){const c=circleShape,border=parseFloat(getComputedStyle(c).strokeWidth)||0;edge=new DOMPoint(+c.getAttribute('cx'),+c.getAttribute('cy')+(+c.getAttribute('r'))+border/2).matrixTransform(window.fpSvgScreenMatrix(c));}
+      const initialMatrix8=window.fpSvgScreenMatrix(entry8),cap=(parseFloat(getComputedStyle(entry8).strokeWidth)||3)*Math.hypot(initialMatrix8.a,initialMatrix8.b)/2;
       edge.y+=cap;
       // The entry arc stays on S7; its horizontal exit becomes S8's top edge.
       const entryRise=112.648*Math.hypot(initialMatrix8.a,initialMatrix8.b);
       const topShift=edge.y+entryRise-canvas8.getBoundingClientRect().top;
       canvas8.style.top=topShift+'px';
       outer8.style.height=(compactHeight+Math.max(0,topShift))+'px';
-      const matrix8=entry8.getScreenCTM();
+      const matrix8=window.fpSvgScreenMatrix(entry8);
       const entry=entry8.getPointAtLength(0).matrixTransform(matrix8);
       canvas8.querySelector('#s7-s8-extension')?.remove();
       const localEdge=edge.matrixTransform(matrix8.inverse()),localEntry=entry8.getPointAtLength(0);
       entry8.setAttribute('transform',`translate(${localEdge.x-localEntry.x} ${localEdge.y-localEntry.y})`);
       const rail8=canvas8.querySelector('path[data-k="s8-h1"]'),nextArc=canvas8.querySelector('path[data-k="s8-arc2"]');
       if(rail8&&nextArc){
-        const exit=entry8.getPointAtLength(entry8.getTotalLength()).matrixTransform(entry8.getScreenCTM()).matrixTransform(rail8.getScreenCTM().inverse());
-        const finish=nextArc.getPointAtLength(0).matrixTransform(nextArc.getScreenCTM()).matrixTransform(rail8.getScreenCTM().inverse());
+        const exit=entry8.getPointAtLength(entry8.getTotalLength()).matrixTransform(window.fpSvgScreenMatrix(entry8)).matrixTransform(window.fpSvgScreenMatrix(rail8).inverse());
+        const finish=nextArc.getPointAtLength(0).matrixTransform(window.fpSvgScreenMatrix(nextArc)).matrixTransform(window.fpSvgScreenMatrix(rail8).inverse());
         rail8.setAttribute('d',`M ${exit.x} ${exit.y} H ${finish.x}`);
         nextArc.removeAttribute('transform');
-        const wanted=new DOMPoint(finish.x,exit.y).matrixTransform(rail8.getScreenCTM()).matrixTransform(nextArc.getScreenCTM().inverse()),start=nextArc.getPointAtLength(0);
+        const wanted=new DOMPoint(finish.x,exit.y).matrixTransform(window.fpSvgScreenMatrix(rail8)).matrixTransform(window.fpSvgScreenMatrix(nextArc).inverse()),start=nextArc.getPointAtLength(0);
         nextArc.setAttribute('transform',`translate(${wanted.x-start.x} ${wanted.y-start.y})`);
         const vertical=canvas8.querySelector('path[data-k="s8-v1"]'),bottomArc=canvas8.querySelector('path[data-k="s8-arc3"]');
         if(vertical&&bottomArc){
           bottomArc.removeAttribute('transform');
           const arcEnd=bottomArc.getPointAtLength(bottomArc.getTotalLength());
           bottomArc.setAttribute('transform',`translate(0 ${compactHeight-52-arcEnd.y})`);
-          const from=nextArc.getPointAtLength(nextArc.getTotalLength()).matrixTransform(nextArc.getScreenCTM()).matrixTransform(vertical.getScreenCTM().inverse()),to=bottomArc.getPointAtLength(0).matrixTransform(bottomArc.getScreenCTM()).matrixTransform(vertical.getScreenCTM().inverse());vertical.setAttribute('d',`M ${from.x} ${from.y} V ${to.y}`);
+          const from=nextArc.getPointAtLength(nextArc.getTotalLength()).matrixTransform(window.fpSvgScreenMatrix(nextArc)).matrixTransform(window.fpSvgScreenMatrix(vertical).inverse()),to=bottomArc.getPointAtLength(0).matrixTransform(window.fpSvgScreenMatrix(bottomArc)).matrixTransform(window.fpSvgScreenMatrix(vertical).inverse());vertical.setAttribute('d',`M ${from.x} ${from.y} V ${to.y}`);
           const bottom=canvas8.querySelector('path[data-k="s8-h2"]');
-          if(bottom){const end=bottomArc.getPointAtLength(bottomArc.getTotalLength()).matrixTransform(bottomArc.getScreenCTM()).matrixTransform(bottom.getScreenCTM().inverse());bottom.setAttribute('d',`M ${end.x} ${end.y} H 33.5`);}
+          if(bottom){const end=bottomArc.getPointAtLength(bottomArc.getTotalLength()).matrixTransform(window.fpSvgScreenMatrix(bottomArc)).matrixTransform(window.fpSvgScreenMatrix(bottom).inverse());bottom.setAttribute('d',`M ${end.x} ${end.y} H 33.5`);}
         }
       }
 
     }
     const seatPath=root.querySelector('path[data-k="s5-h2"]'),seatArc=root.querySelector('path[data-k="s5-arc3"]');
     if(seatPath&&seatArc){
-      const inverse=seatPath.getScreenCTM().inverse();
-      const from=seatArc.getPointAtLength(seatArc.getTotalLength()).matrixTransform(seatArc.getScreenCTM()).matrixTransform(inverse);
+      const inverse=window.fpSvgScreenMatrix(seatPath).inverse();
+      const from=seatArc.getPointAtLength(seatArc.getTotalLength()).matrixTransform(window.fpSvgScreenMatrix(seatArc)).matrixTransform(inverse);
       const edge=new DOMPoint(-2,0).matrixTransform(inverse);
       set('--s5-h2-start',edge.x+'px');set('--s5-h2-end',from.x+'px');
       seatPath.setAttribute('d',`M ${from.x} ${from.y} H ${edge.x}`);
@@ -2615,14 +2645,14 @@ function switchS4Tab(index) {
   if(innerWidth<768){lastPhase=-1;renderedEnds=[];return;}
   const tablet=root.classList.contains('fp-tablet');
   const seat=root.querySelector('path[data-k="s5-h2"]'),body=document.getElementById('sec6-d-asset-tag');
-  const rayMatrix=document.getElementById('sec6-d-ray-svg').getScreenCTM();if(!rayMatrix)return;const scale=Math.hypot(rayMatrix.a,rayMatrix.b);
+  const rayMatrix=window.fpSvgScreenMatrix(document.getElementById('sec6-d-ray-svg'));if(!rayMatrix)return;const scale=Math.hypot(rayMatrix.a,rayMatrix.b);
   if(tablet){
   const seatLocal=seat.getPointAtLength(0),seatTop=parseFloat(getComputedStyle(seat.closest('.s6-seat-line')).top)||0;
   const next=seatTop+seatLocal.y-body.offsetHeight*.46;
   const current=parseFloat(root.style.getPropertyValue('--tablet-seat-shift'))||0;
   if(Math.abs(next-current)>.05)root.style.setProperty('--tablet-seat-shift',next+'px');
   }else{
-   const linePoint=seat.getPointAtLength(0).matrixTransform(seat.getScreenCTM()),rect=body.getBoundingClientRect();
+   const linePoint=seat.getPointAtLength(0).matrixTransform(window.fpSvgScreenMatrix(seat)),rect=body.getBoundingClientRect();
    const current=parseFloat(root.style.getPropertyValue('--desktop-seat-shift'))||0;
    const next=current+(linePoint.y-(rect.top+rect.height*.46))/scale;
    if(Math.abs(next-current)>.1)root.style.setProperty('--desktop-seat-shift',next+'px');
@@ -2639,7 +2669,7 @@ function switchS4Tab(index) {
   const phase=Math.max(0,Math.min(2,+(root.dataset.s6Phase??root.dataset.tabletPhase??0)));
   const circle=document.getElementById('sec6-d-circle-'+(phase+1)).getBoundingClientRect();
   const cx=circle.left+circle.width/2,cy=circle.top+circle.height/2,rx=circle.width/2,ry=circle.height/2;
-  const ray=document.getElementById('sec6-d-ray-svg'),inverse=ray.getScreenCTM().inverse();
+  const ray=document.getElementById('sec6-d-ray-svg'),inverse=window.fpSvgScreenMatrix(ray).inverse();
   if(rx<=0||ry<=0)return;
   const lampScale=parseFloat(getComputedStyle(lamp).scale)||1;
   const starts=[[.0133118,20.4006],[8.33629,25.8939]].map(([x,y])=>{const edge=new DOMPoint((x/21-.5)*lamp.offsetWidth,(y/26-.5)*lamp.offsetHeight).matrixTransform(matrix);return new DOMPoint(lr.left+lr.width/2+edge.x*scale*lampScale,lr.top+lr.height/2+edge.y*scale*lampScale);}).sort((a,b)=>a.x-b.x);
