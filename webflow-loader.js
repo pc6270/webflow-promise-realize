@@ -3,7 +3,7 @@
  const own=document.currentScript;window.FP_ASSET_BASE=new URL('.',own.src).href;window.FP_WEBFLOW_BOOTSTRAP=true;
  const resolveAssets=node=>{if(node.nodeType!==1)return;for(const el of [node,...node.querySelectorAll('[data-fp-src]')])if(el.hasAttribute('data-fp-src')){el.src=new URL(el.dataset.fpSrc,window.FP_ASSET_BASE).href;el.removeAttribute('data-fp-src');}};
  new MutationObserver(records=>records.forEach(record=>record.addedNodes.forEach(resolveAssets))).observe(document.body,{childList:true,subtree:true});
- const script=src=>new Promise((resolve,reject)=>{const el=document.createElement('script');const url=new URL(src,window.FP_ASSET_BASE);if(!src.startsWith("https://"))url.searchParams.set("v","fd7a08a9896c");el.src=url.href;el.async=false;el.onload=resolve;el.onerror=()=>reject(Error('無法載入 '+el.src));document.body.append(el);});
+ const script=src=>new Promise((resolve,reject)=>{const el=document.createElement('script');const url=new URL(src,window.FP_ASSET_BASE);if(!src.startsWith("https://"))url.searchParams.set("v","ac25054514fc");el.src=url.href;el.async=false;el.onload=resolve;el.onerror=()=>reject(Error('無法載入 '+el.src));document.body.append(el);});
  try{
   for(const fragment of document.querySelectorAll('[data-fp-fragment]')){const target=document.querySelector('[data-fp-node="'+fragment.dataset.fpParent+'"]');if(!target)throw Error('缺少 Embed：'+fragment.dataset.fpParent);target.append(...fragment.childNodes);fragment.remove();}
   const root=document.getElementById('fp-master-root');if(!root)throw Error('缺少第一個 Embed');

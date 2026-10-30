@@ -1,5 +1,22 @@
 window.FP_BUNDLE_READY=(async()=>{
 
+;/* reload-start.js */
+(() => {
+ if(window.fpReloadTopInstalled)return;
+ window.fpReloadTopInstalled=true;
+ const navigation=performance.getEntriesByType('navigation')[0];
+ if(navigation?.type!=='reload')return;
+ history.scrollRestoration='manual';
+ let cancelled=false;
+ function reset(){if(!cancelled)window.scrollTo({top:0,left:0,behavior:'instant'});}
+ function cancel(event){if(event.isTrusted!==false)cancelled=true;}
+ for(const event of ['wheel','touchstart','pointerdown','keydown'])addEventListener(event,cancel,{passive:true,capture:true});
+ reset();
+ for(const event of ['pageshow','load','fp:webflow-ready'])addEventListener(event,()=>{reset();requestAnimationFrame(reset);},{once:true});
+})();
+
+;
+
 ;/* sequence-gate.js */
 (() => {
  window.fpSequenceObserver=function(){this.observe=()=>{};this.unobserve=()=>{};this.disconnect=()=>{};};
@@ -15,7 +32,7 @@ window.FP_BUNDLE_READY=(async()=>{
 ;
 await new Promise(resolve=>{const s=document.createElement("script");s.src="https://use.typekit.net/usm6obt.js";s.onload=resolve;s.onerror=resolve;document.head.append(s);});
 
-;/* inline-script-006.js */
+;/* inline-script-007.js */
 try{Typekit.load();}catch(error){}
 ;
 
@@ -24,7 +41,7 @@ try{Typekit.load();}catch(error){}
 
 ;
 
-;/* inline-script-008.js */
+;/* inline-script-009.js */
 
   (function() {
     function updateS1Scale() {
@@ -83,7 +100,7 @@ try{Typekit.load();}catch(error){}
 
 ;
 
-;/* inline-script-009.js */
+;/* inline-script-010.js */
 
   (function() {
     function updateS2P1Scale() {
@@ -143,7 +160,7 @@ try{Typekit.load();}catch(error){}
 
 ;
 
-;/* inline-script-010.js */
+;/* inline-script-011.js */
 
   (function() {
     function initS2P2Animation() {
@@ -202,7 +219,7 @@ try{Typekit.load();}catch(error){}
 
 ;
 
-;/* inline-script-012.js */
+;/* inline-script-013.js */
 
 
   /* ✒️ 線段引擎：依 CSS 變數重畫橫線端點／弧線位移，並依長度分配畫線時間 */
@@ -350,7 +367,7 @@ try{Typekit.load();}catch(error){}
 
 ;
 
-;/* inline-script-013.js */
+;/* inline-script-014.js */
 
 (function() {
     function triggerS2P34Animation() {
@@ -408,7 +425,7 @@ try{Typekit.load();}catch(error){}
 
 ;
 
-;/* inline-script-014.js */
+;/* inline-script-015.js */
 
 function switchS4Tab(index) {
     var pill = document.getElementById('s4-tab-pill-el');
@@ -492,7 +509,7 @@ function switchS4Tab(index) {
 
 ;
 
-;/* inline-script-015.js */
+;/* inline-script-016.js */
 
 (function() {
     function triggerSec4Animation() {
@@ -528,7 +545,7 @@ function switchS4Tab(index) {
 
 ;
 
-;/* inline-script-016.js */
+;/* inline-script-017.js */
 
 (function() {
     function handleSec5Resize() {
@@ -686,7 +703,7 @@ function switchS4Tab(index) {
 
 ;
 
-;/* inline-script-017.js */
+;/* inline-script-018.js */
 
 (function() {
     function handleSec6Resize() {
@@ -1224,7 +1241,7 @@ function switchS4Tab(index) {
 
 ;
 
-;/* inline-script-018.js */
+;/* inline-script-019.js */
 
 (function() {
     function handleSec7Resize() {
@@ -1353,7 +1370,7 @@ function switchS4Tab(index) {
 
 ;
 
-;/* inline-script-019.js */
+;/* inline-script-020.js */
 
 (function() {
     function handleSec8Resize() {
@@ -1509,7 +1526,7 @@ function switchS4Tab(index) {
 
 ;
 
-;/* inline-script-020.js */
+;/* inline-script-021.js */
 
 
   (function () {
@@ -2959,6 +2976,45 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
  if(previous)window.fpLinesUpdate=(...args)=>{const result=previous(...args);if(innerWidth>=1200)update();else schedule();return result;};
  addEventListener('fp:webflow-ready',schedule);addEventListener('resize',schedule);document.fonts.ready.then(schedule);
  schedule();
+})();
+
+;
+
+;/* s6-wheel-steps.js */
+(() => {
+ const root=document.getElementById('fp-master-root'),track=document.getElementById('sec6-d-track');
+ if(!root||!track)return;
+ let busy=false,lastWheel=0,started=0,timer=0;
+ function release(){
+  const now=performance.now(),remaining=Math.max(240-(now-lastWheel),850-(now-started));
+  if(remaining>0){timer=setTimeout(release,remaining);return;}
+  busy=false;delete root.dataset.s6GestureBusy;
+ }
+ function lock(){busy=true;started=lastWheel=performance.now();root.dataset.s6GestureBusy='1';clearTimeout(timer);timer=setTimeout(release,850);}
+ function geometry(){
+  const rect=track.getBoundingClientRect(),style=getComputedStyle(root);
+  const stage=innerWidth<1200?(parseFloat(style.getPropertyValue('--tablet-stage-height'))||760)*(parseFloat(style.getPropertyValue('--tablet-scale'))||1):innerHeight;
+  return {rect,travel:rect.height-stage,top:rect.top+scrollY};
+ }
+ addEventListener('wheel',event=>{
+  if(innerWidth<768||event.ctrlKey||Math.abs(event.deltaX)>Math.abs(event.deltaY)||!event.deltaY)return;
+  if(document.querySelector('dialog[open]')||event.target.closest?.('input,textarea,select,[contenteditable="true"],.w-nav-overlay'))return;
+  if(busy){if(event.cancelable)event.preventDefault();lastWheel=performance.now();return;}
+  if(!event.cancelable||!window.fpSequenceStarted?.('wf-sec6-root'))return;
+  const {rect,travel,top}=geometry();if(travel<=0)return;
+  const direction=Math.sign(event.deltaY),progress=(scrollY-top)/travel;
+  const header=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--site-header-height'))||110;
+  const pixels=Math.abs(event.deltaY)*(event.deltaMode===1?16:event.deltaMode===2?innerHeight:1);
+  if(direction>0&&((rect.top>header+24&&pixels<rect.top-header-24)||progress>=1))return;
+  if(direction<0&&(progress<=0||progress>1.03))return;
+  event.preventDefault();lock();
+  const phase=Math.max(0,Math.min(2,(parseInt(document.getElementById('sec6-d-num').textContent,10)||1)-1));
+  if(direction>0&&progress<.08){window.goToSec6Step(0);return;}
+  const next=phase+direction;
+  if(next>=0&&next<=2){window.goToSec6Step(next);return;}
+  window.scrollTo({top:next<0?top-2:top+travel+2,behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'});
+ },{passive:false});
+ addEventListener('resize',()=>{busy=false;clearTimeout(timer);delete root.dataset.s6GestureBusy;});
 })();
 
 ;
