@@ -7247,6 +7247,12 @@ body{padding-top:var(--site-header-height,110px)!important}
  #fp-master-root .fp-s6-track circle.fp-node{visibility:hidden!important}
 }
 
+/* Calibrated local widths yield the same visible weight after each SVG scale. */
+@media(min-width:1200px){
+ #fp-master-root .s6-seat-holder svg path.fp-seg,
+ #fp-master-root .fp-s6-track path{stroke-width:var(--s6-matched-stroke,var(--brand-line-width,3px))!important;vector-effect:none!important}
+}
+
 /* webflow-integration.css */
 body{padding-top:0!important}#fp-webflow-mount{padding-top:var(--site-header-height,110px);position:relative;overflow:visible}#fp-webflow-mount #fp-master-root{margin:0!important}[data-fp-fragment]{visibility:hidden}#fp-webflow-mount>.w-embed{display:contents}
 #fp-loading-curtain{position:fixed;inset:0;z-index:9999;pointer-events:none}

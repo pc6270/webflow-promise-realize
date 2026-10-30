@@ -1858,6 +1858,25 @@ window.fpSvgScreenMatrix = function(el){
   for(const key of ['a','b','c','d','e','f'])compatible[key]=result[key];
   return compatible;
 };
+// Match the screen-space weight of the surrounding brand rail, not its raw CSS width.
+window.fpMatchS6Stroke = function(){
+ if(innerWidth<1200)return;
+ const root=document.getElementById('fp-master-root');
+ const reference=root.querySelector('path[data-k="s2p1-h1"]');if(!reference)return;
+ const scaleOf=path=>{
+  const m=window.fpSvgScreenMatrix(path);
+  return Math.abs(m.a*m.d-m.b*m.c)/(Math.hypot(m.a,m.b)||1);
+ };
+ const style=getComputedStyle(reference),referenceScale=scaleOf(reference);
+ const width=parseFloat(style.strokeWidth)||3;
+ const screenWidth=width*(style.vectorEffect==='non-scaling-stroke'?1:referenceScale);
+ if(!Number.isFinite(screenWidth)||screenWidth<=0)return;
+ root.querySelectorAll('.s6-seat-holder svg path.fp-seg,.fp-s6-track path').forEach(path=>{
+  const scale=scaleOf(path);if(!Number.isFinite(scale)||scale<=0)return;
+  const value=(screenWidth/scale).toFixed(5)+'px';
+  if(path.style.getPropertyValue('--s6-matched-stroke')!==value)path.style.setProperty('--s6-matched-stroke',value);
+ });
+};
 window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(window.fpSvgScreenMatrix(svg).inverse()).x);
 (function(){
   const root=document.getElementById('fp-master-root');
@@ -2074,6 +2093,7 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
       seatPath.dataset.oy=String((parseFloat(cs.getPropertyValue('--s5-h2-y'))||727.38)-from.y);
       seatPath.dataset.dir='rtl';
     }
+    window.fpMatchS6Stroke();
     applying=false;
   }
   function schedule(){if(!queued){queued=true;requestAnimationFrame(layout);}}
