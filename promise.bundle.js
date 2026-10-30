@@ -975,6 +975,12 @@ function switchS4Tab(index) {
       }
     }
 
+    // Release click/step navigation as soon as native smooth scrolling finishes.
+    window.addEventListener('scrollend',()=>{
+      if(!isClickNavigating)return;
+      clearTimeout(clickNavTimeout);isClickNavigating=false;handleSec6Scroll();
+    },{passive:true});
+
     // 滾動驅動交互處理
     let lastS6OutsideSide=0;
     function handleSec6Scroll() {
@@ -3050,13 +3056,14 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
 (() => {
  const root=document.getElementById('fp-master-root'),track=document.getElementById('sec6-d-track');
  if(!root||!track)return;
+ function unlock(){busy=false;clearTimeout(timer);delete root.dataset.s6GestureBusy;}
  let busy=false,lastWheel=0,started=0,timer=0;
  function release(){
-  const now=performance.now(),remaining=Math.max(140-(now-lastWheel),500-(now-started));
-  if(remaining>0&&now-started<1500){timer=setTimeout(release,remaining);return;}
+  const now=performance.now(),remaining=Math.max(110-(now-lastWheel),320-(now-started));
+  if(remaining>0&&now-started<900){timer=setTimeout(release,remaining);return;}
   busy=false;delete root.dataset.s6GestureBusy;
  }
- function lock(){busy=true;started=lastWheel=performance.now();root.dataset.s6GestureBusy='1';clearTimeout(timer);timer=setTimeout(release,500);}
+ function lock(){busy=true;started=lastWheel=performance.now();root.dataset.s6GestureBusy='1';clearTimeout(timer);timer=setTimeout(release,320);}
  function geometry(){
   const rect=track.getBoundingClientRect(),style=getComputedStyle(root);
   const stage=innerWidth<1200?(parseFloat(style.getPropertyValue('--tablet-stage-height'))||760)*(parseFloat(style.getPropertyValue('--tablet-scale'))||1):innerHeight;
@@ -3065,7 +3072,12 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
  addEventListener('wheel',event=>{
   if(innerWidth<768||event.ctrlKey||Math.abs(event.deltaX)>Math.abs(event.deltaY)||!event.deltaY)return;
   if(document.querySelector('dialog[open]')||event.target.closest?.('input,textarea,select,[contenteditable="true"],.w-nav-overlay'))return;
-  if(busy){const rect=track.getBoundingClientRect();if(rect.bottom<0||rect.top>innerHeight){busy=false;clearTimeout(timer);delete root.dataset.s6GestureBusy;return;}if(event.cancelable)event.preventDefault();lastWheel=performance.now();return;}
+  if(busy){
+   const {rect,travel,top}=geometry();
+   const passedExit=event.deltaY>0&&travel>0&&scrollY>=top+travel-2;
+   if(passedExit||rect.bottom<0||rect.top>innerHeight){unlock();return;}
+   if(event.cancelable)event.preventDefault();lastWheel=performance.now();return;
+  }
   if(!event.cancelable||!window.fpSequenceStarted?.('wf-sec6-root'))return;
   const {rect,travel,top}=geometry();if(travel<=0)return;
   const direction=Math.sign(event.deltaY),progress=(scrollY-top)/travel;
@@ -3073,8 +3085,10 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
   const pixels=Math.abs(event.deltaY)*(event.deltaMode===1?16:event.deltaMode===2?innerHeight:1);
   if(direction>0&&((rect.top>header+24&&pixels<rect.top-header-24)||progress>=1))return;
   if(direction<0&&(progress<=0||progress>1.03))return;
-  event.preventDefault();lock();
   const phase=Math.max(0,Math.min(2,(parseInt(document.getElementById('sec6-d-num').textContent,10)||1)-1));
+  // Once stage 3 is settled, native scrolling draws the arc and continues into S7.
+  if(direction>0&&phase===2&&progress>=.45)return;
+  event.preventDefault();lock();
   if(direction>0&&progress<.08){window.goToSec6Step(0);return;}
   const next=phase+direction;
   if(next>=0&&next<=2){window.goToSec6Step(next);return;}
