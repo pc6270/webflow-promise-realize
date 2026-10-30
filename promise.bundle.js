@@ -3038,7 +3038,7 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
 
 ;/* title-motion-toggle.js */
 (() => {
- // Set true to restore the preserved original section-title animations.
+ // Set true to restore the preserved original page-heading animation.
  window.FP_SECTION_TITLE_MOTION_ENABLED ??= false;
  const root=document.getElementById('fp-master-root');
  if(root)root.dataset.titleMotion=window.FP_SECTION_TITLE_MOTION_ENABLED?'on':'off';
