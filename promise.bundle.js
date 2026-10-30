@@ -749,6 +749,8 @@ function switchS4Tab(index) {
     let phaseTextTimer,phaseTextVersion=0;
     let isClickNavigating = false;
     let clickNavTimeout = null;
+    function writeS6Style(el,key,value){if(el.style[key]!==value)el.style[key]=value;}
+    function writeS6Attribute(el,key,value){if(el.getAttribute(key)!==value)el.setAttribute(key,value);}
     function alignStage(phase) {
       if(document.getElementById('fp-master-root').dataset.s6TextSwitching==='1')return;
       const index=Math.max(0,Math.min(2,phase));
@@ -759,8 +761,9 @@ function switchS4Tab(index) {
       const title=document.getElementById('sec6-d-title');
       const header=document.getElementById('sec6-d-header-group');
       const desc=document.getElementById('sec6-d-desc');
-      if(header&&title)header.style.left=(x-title.offsetLeft)+'px';
-      if(desc)desc.style.left=x+'px';
+      const headerLeft=header&&title?(x-title.offsetLeft)+'px':null;
+      if(headerLeft!==null)writeS6Style(header,'left',headerLeft);
+      if(desc)writeS6Style(desc,'left',x+'px');
     }
     window.fpS6AlignStage=()=>alignStage(currentPhase);
     window.fpS6ReapplyPhase=()=>{const phase=Math.max(0,currentPhase);currentPhase=-1;updateDesktopPhase(phase);};
@@ -953,6 +956,7 @@ function switchS4Tab(index) {
     }
 
     // 滾動驅動交互處理
+    let lastS6OutsideSide=0;
     function handleSec6Scroll() {
       if (!window.fpSequenceStarted?.('wf-sec6-root')) return;
       const windowW = window.innerWidth;
@@ -962,6 +966,9 @@ function switchS4Tab(index) {
       if (!track) return;
 
       const rect = track.getBoundingClientRect();
+      const outside=rect.top>innerHeight+160?1:rect.bottom < -160?-1:0;
+      if(outside && outside===lastS6OutsideSide)return;
+      lastS6OutsideSide=outside;
       const trackH = innerWidth>=768&&innerWidth<1200 ? track.getBoundingClientRect().height-(parseFloat(getComputedStyle(document.getElementById('fp-master-root')).getPropertyValue('--tablet-stage-height'))||760)*(parseFloat(getComputedStyle(document.getElementById('fp-master-root')).getPropertyValue('--tablet-scale'))||1) : track.offsetHeight-window.innerHeight;
       if (trackH <= 0) return;
 
@@ -994,9 +1001,9 @@ function switchS4Tab(index) {
       const step3 = (window.fpS6Steps && window.fpS6Steps.step3) || numVar('--s6-step3-x', 930);
       const endX = step3;
 
-      if (dot1) dot1.style.left = step1 + 'px';
-      if (dot2) dot2.style.left = step2 + 'px';
-      if (dot3) dot3.style.left = step3 + 'px';
+      if (dot1) writeS6Style(dot1,'left',step1+'px');
+      if (dot2) writeS6Style(dot2,'left',step2+'px');
+      if (dot3) writeS6Style(dot3,'left',step3+'px');
 
       const fillPath = document.getElementById('sec6-d-fill-path');
       const batonArc = document.getElementById('sec6-d-baton-arc');
@@ -1023,16 +1030,16 @@ function switchS4Tab(index) {
       }
 
       if (fillPath) {
-        fillPath.style.transition='none';
+        writeS6Style(fillPath,'transition','none');
         const geometry='M '+screenLeft+' '+numVar('--s6-h-y',855)+' H '+endX;
-        fillPath.setAttribute('d',geometry);
-        fillPath.style.strokeDasharray='1';
+        writeS6Attribute(fillPath,'d',geometry);
+        writeS6Style(fillPath,'strokeDasharray','1');
         const fraction=Math.max(0,Math.min(1,(curX-screenLeft)/(endX-screenLeft||1)));
-        fillPath.style.strokeDashoffset=String(1-fraction);
+        writeS6Style(fillPath,'strokeDashoffset',String(1-fraction));
       }
       if (fillBar) {
-        fillBar.style.transition = 'width 0.1s linear';
-        fillBar.style.width = Math.max(0, curX) + 'px';
+        writeS6Style(fillBar,'transition','width 0.1s linear');
+        writeS6Style(fillBar,'width',Math.max(0,curX)+'px');
       }
 
       // 當填滿條到達 step1, step2, step3 圓點時，圓點同步變為實心深咖啡色！
@@ -1055,8 +1062,8 @@ function switchS4Tab(index) {
         // Both layers meet at the same current third-dot coordinate.
         const tailD=(window.fpS6ConnectionD||batonArc.getAttribute('d')).replace(/^M\s+[-\d.]+\s+[-\d.]+/, 'M '+step3+' '+numVar('--s6-h-y',855));
         if(batonArc.getAttribute('d')!==tailD)batonArc.setAttribute('d',tailD);
-        batonArc.style.visibility=batonT>0?'visible':'hidden';
-        batonArc.style.strokeDashoffset = (1 - batonT).toFixed(4);
+        writeS6Style(batonArc,'visibility',batonT>0?'visible':'hidden');
+        writeS6Style(batonArc,'strokeDashoffset',(1-batonT).toFixed(4));
       }
       const s7Arc = document.querySelector('path[data-k="s7-arc1"]');
       if (s7Arc) {
@@ -1064,6 +1071,7 @@ function switchS4Tab(index) {
       }
 
       // 3. 虛線動態插值
+      if(!window.fpTabletOpticsUpdate){
       const p = window.sec6RayParams || {
         p1: { lx1: 242, ly1: 62, lx2: 188, ly2: 452, rx1: 249, ry1: 56, rx2: 549, ry2: 446 },
         p2: { lx1: 242, ly1: 63, lx2: 450, ly2: 578, rx1: 253, ry1: 56, rx2: 725, ry2: 371 },
@@ -1124,6 +1132,8 @@ function switchS4Tab(index) {
         rayRight.setAttribute('y1', curRY1);
         rayRight.setAttribute('x2', curRX2);
         rayRight.setAttribute('y2', curRY2);
+      }
+
       }
 
       // 4. 圓圈大小切換與內容對齊更新 Phase 0, 1, 2
@@ -1200,7 +1210,12 @@ function switchS4Tab(index) {
     }
 
     window.addEventListener('resize', handleSec6Resize);
-    window.addEventListener('scroll', handleSec6Scroll);
+    let s6ScrollFrame=false;
+    window.addEventListener('scroll',()=>{
+      if(s6ScrollFrame)return;
+      s6ScrollFrame=true;
+      requestAnimationFrame(()=>{s6ScrollFrame=false;handleSec6Scroll();});
+    },{passive:true});
     window.handleSec6Scroll = handleSec6Scroll;
 
     handleSec6Resize();
@@ -1967,9 +1982,11 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
     const destination=new DOMPoint(circle2.right,circle2.top+circle2.height/2-delta).matrixTransform(inverse6);
     const screenRight=new DOMPoint(innerWidth-24,0).matrixTransform(inverse6).x;
     const end=window.fpS6Steps?.step3||930;
-    const radius=Math.max(1,(destination.y-y)/2);
-    const turn=Math.min(screenRight-radius,Math.max(end,destination.x));
-    const far=Math.min(screenRight,turn+radius);
+    // Keep the whole descending curve to the right of the final text column.
+    // Use the final phase anchor even while the first phase is being shown.
+    const textRight=end+description.offsetWidth+32/shared;
+    const turn=Math.min(screenRight-8,Math.max(end,destination.x,textRight));
+    const far=screenRight;
     window.fpS6ConnectionD=`M ${end} ${y} H ${turn} C ${far} ${y} ${far} ${destination.y} ${turn} ${destination.y} H ${destination.x}`;
     document.getElementById('sec6-d-baton-arc').setAttribute('d',window.fpS6ConnectionD);
     if(baseline){baseline.dataset.desktopSeam='1';baseline.setAttribute('d',`M ${destination.x} ${destination.y}`);}
@@ -2561,7 +2578,8 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
    const end=new DOMPoint(rect.right,rect.top+rect.height/2-delta).matrixTransform(inverse);
    const y=parseFloat(getComputedStyle(root).getPropertyValue('--s6-h-y'))||627,step3=window.fpS6Steps?.step3||606;
    const right=new DOMPoint(innerWidth-18,0).matrixTransform(inverse).x;
-   const radius=Math.max(1,(end.y-y)/2),turn=Math.min(right-radius,Math.max(step3,end.x)),far=Math.min(right,turn+radius);
+   const desc=document.getElementById('sec6-d-desc'),gap=24/(parseFloat(getComputedStyle(root).getPropertyValue('--tablet-scale'))||1);
+   const turn=Math.min(right-8,Math.max(step3,end.x,606+desc.offsetWidth+gap)),far=right;
    window.fpS6ConnectionD=`M ${step3} ${y} H ${turn} C ${far} ${y} ${far} ${end.y} ${turn} ${end.y} H ${end.x}`;
    document.getElementById('sec6-d-baton-arc').setAttribute('d',window.fpS6ConnectionD);
    path('s7-h1').setAttribute('d',`M ${end.x} ${end.y}`);
@@ -2662,19 +2680,33 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
 
 ;/* quote-and-tablet-optics.js */
 (() => {
- const root=document.getElementById('fp-master-root');let lastPhase=-1,renderedEnds=[],fromEnds=[],phaseStarted=0,rayFrame=false;
+ const root=document.getElementById('fp-master-root');let lastPhase=-1,renderedEnds=[],fromEnds=[],phaseStarted=0;
+ const nodeCache=new Map();
+ function byId(id){let node=nodeCache.get(id);if(!node){node=document.getElementById(id);if(node)nodeCache.set(id,node);}return node;}
+ function writeAttribute(node,key,value){const next=String(value);if(node.getAttribute(key)!==next)node.setAttribute(key,next);}
+ function writeStyle(node,key,value){if(node.style.getPropertyValue(key)!==value||node.style.getPropertyPriority(key)!=='important')node.style.setProperty(key,value,'important');}
  function quotes(){
+  const updates=[];
   for(const [textSelector,lineSelector]of [['.s5-d-slogan-text','.s5-d-accent-line'],['.s5-m-slogan-text','.s5-m-accent-line'],['.wf-sec8-main-title','.wf-sec8-vert-line'],['.wf-sec8-mob-main-title','.wf-sec8-mob-vert-line']]){
-   const text=document.querySelector(textSelector),line=document.querySelector(lineSelector);if(!text||!line||!text.offsetHeight)continue;
-   line.style.setProperty('height',(text.offsetHeight+22)+'px','important');
-   line.style.setProperty('top',(text.offsetTop-11)+'px','important');
+   const text=document.querySelector(textSelector),line=document.querySelector(lineSelector);if(!text||!line)continue;
+   const height=text.offsetHeight;if(!height)continue;
+   updates.push([line,(height+22)+'px',(text.offsetTop-11)+'px']);
   }
+  for(const [line,height,top]of updates){writeStyle(line,'height',height);writeStyle(line,'top',top);}
+ }
+ let opticsQueued=false;
+ function scheduleOptics(){
+  if(opticsQueued)return;
+  opticsQueued=true;
+  requestAnimationFrame(()=>{opticsQueued=false;optics();});
  }
  function optics(){
   if(innerWidth<768){lastPhase=-1;renderedEnds=[];return;}
+  const section=byId('wf-sec6-root').getBoundingClientRect();
+  if(section.top>innerHeight+160||section.bottom < -160)return;
   const tablet=root.classList.contains('fp-tablet');
-  const seat=root.querySelector('path[data-k="s5-h2"]'),body=document.getElementById('sec6-d-asset-tag');
-  const rayMatrix=window.fpSvgScreenMatrix(document.getElementById('sec6-d-ray-svg'));if(!rayMatrix)return;const scale=Math.hypot(rayMatrix.a,rayMatrix.b);
+  const seat=root.querySelector('path[data-k="s5-h2"]'),body=byId('sec6-d-asset-tag');
+  const rayMatrix=window.fpSvgScreenMatrix(byId('sec6-d-ray-svg'));if(!rayMatrix)return;const scale=Math.hypot(rayMatrix.a,rayMatrix.b);
   if(tablet){
   const seatLocal=seat.getPointAtLength(0),seatTop=parseFloat(getComputedStyle(seat.closest('.s6-seat-line')).top)||0;
   const next=seatTop+seatLocal.y-body.offsetHeight*.46;
@@ -2686,7 +2718,7 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
    const next=current+(linePoint.y-(rect.top+rect.height*.46))/scale;
    if(Math.abs(next-current)>.1)root.style.setProperty('--desktop-seat-shift',next+'px');
   }
-  const lamp=document.getElementById('sec6-d-flashlight-icon');
+  const lamp=byId('sec6-d-flashlight-icon');
   if(!tablet){const br=body.getBoundingClientRect(),lr0=lamp.getBoundingClientRect();
    for(const [key,difference]of [['--desktop-lamp-adjust-x',br.left+br.width*56/59-lr0.left],['--desktop-lamp-adjust-y',br.top+br.height*30/74.09-lr0.top]]){
     const old=parseFloat(root.style.getPropertyValue(key))||0,next=old+difference/scale;
@@ -2694,13 +2726,13 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
    }
   }
   const lr=lamp.getBoundingClientRect();
-  const transform=getComputedStyle(lamp).transform,matrix=new DOMMatrix(transform==='none'?undefined:transform);
+  const lampStyle=getComputedStyle(lamp),transform=lampStyle.transform,matrix=new DOMMatrix(transform==='none'?undefined:transform);
   const phase=Math.max(0,Math.min(2,+(root.dataset.s6Phase??root.dataset.tabletPhase??0)));
-  const circle=document.getElementById('sec6-d-circle-'+(phase+1)).getBoundingClientRect();
+  const circle=byId('sec6-d-circle-'+(phase+1)).getBoundingClientRect();
   const cx=circle.left+circle.width/2,cy=circle.top+circle.height/2,rx=circle.width/2,ry=circle.height/2;
-  const ray=document.getElementById('sec6-d-ray-svg'),inverse=window.fpSvgScreenMatrix(ray).inverse();
+  const ray=byId('sec6-d-ray-svg'),inverse=window.fpSvgScreenMatrix(ray).inverse();
   if(rx<=0||ry<=0)return;
-  const lampScale=parseFloat(getComputedStyle(lamp).scale)||1;
+  const lampScale=parseFloat(lampStyle.scale)||1;
   const starts=[[.0133118,20.4006],[8.33629,25.8939]].map(([x,y])=>{const edge=new DOMPoint((x/21-.5)*lamp.offsetWidth,(y/26-.5)*lamp.offsetHeight).matrixTransform(matrix);return new DOMPoint(lr.left+lr.width/2+edge.x*scale*lampScale,lr.top+lr.height/2+edge.y*scale*lampScale);}).sort((a,b)=>a.x-b.x);
   const now=performance.now();if(phase!==lastPhase){fromEnds=renderedEnds.map(p=>({...p}));phaseStarted=now;lastPhase=phase;}const reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;const fraction=reduced?1:Math.min(1,(now-phaseStarted)/650),ease=1-Math.pow(1-fraction,3);
   for(const [index,id]of ['sec6-d-ray-left','sec6-d-ray-right'].entries()){
@@ -2709,14 +2741,14 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
    const k=Math.sqrt(d-1)/d;
    const candidates=[{x:x/d-y*k,y:y/d+x*k},{x:x/d+y*k,y:y/d-x*k}].sort((a,b)=>a.x-b.x);
    const tangent=candidates[index],end=new DOMPoint(cx+rx*tangent.x,cy+ry*tangent.y);
-   const a=start.matrixTransform(inverse),b=end.matrixTransform(inverse),line=document.getElementById(id);
-   line.setAttribute('x1',a.x);line.setAttribute('y1',a.y);const from=fromEnds[index]||b,finish={x:from.x+(b.x-from.x)*ease,y:from.y+(b.y-from.y)*ease};renderedEnds[index]=finish;line.setAttribute('x2',finish.x);line.setAttribute('y2',finish.y);
+   const a=start.matrixTransform(inverse),b=end.matrixTransform(inverse),line=byId(id);
+   writeAttribute(line,'x1',a.x);writeAttribute(line,'y1',a.y);const from=fromEnds[index]||b,finish={x:from.x+(b.x-from.x)*ease,y:from.y+(b.y-from.y)*ease};renderedEnds[index]=finish;writeAttribute(line,'x2',finish.x);writeAttribute(line,'y2',finish.y);
   }
-  if(now-phaseStarted<950&&!rayFrame){rayFrame=true;requestAnimationFrame(()=>{rayFrame=false;optics();});}
+  if(now-phaseStarted<700)scheduleOptics();
  }
- window.fpTabletOpticsUpdate=optics;
+ window.fpTabletOpticsUpdate=scheduleOptics;
  const resize=new ResizeObserver(quotes);document.querySelectorAll('.s5-d-slogan-text,.s5-m-slogan-text').forEach(el=>resize.observe(el));
- addEventListener('resize',()=>{quotes();optics();});addEventListener('fp:webflow-ready',()=>{quotes();optics();});document.fonts.ready.then(()=>{quotes();optics();});quotes();
+ addEventListener('resize',()=>{quotes();scheduleOptics();});addEventListener('fp:webflow-ready',()=>{quotes();scheduleOptics();});document.fonts.ready.then(()=>{quotes();scheduleOptics();});quotes();
 })();
 
 ;
