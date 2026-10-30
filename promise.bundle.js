@@ -1819,6 +1819,7 @@ window.fpSvgScreenMatrix = function(el){
   const viewport=new DOMMatrix([sx,0,0,sy,box.left+dx-vb.x*sx,box.top+dy-vb.y*sy]);
   return viewport.multiply(base.inverse()).multiply(native);
 };
+window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(window.fpSvgScreenMatrix(svg).inverse()).x);
 (function(){
   const root=document.getElementById('fp-master-root');
   const originals=new WeakMap();let queued=false,applying=false;
@@ -1955,27 +1956,27 @@ window.fpSvgScreenMatrix = function(el){
     const arcRect=arc.getBoundingClientRect(),arcMatrix=window.fpSvgScreenMatrix(arc);
     const correction=Math.min(0,innerWidth-gutter-arcRect.right);
     if(correction<0)arc.setAttribute('transform',`translate(${correction/arcMatrix.a} 0)`);
+    // Draw the released S6/S7 join in ONE SVG coordinate system.
     const baseline=canvas7.querySelector('path[data-k="s7-h1"]');
-    if(baseline){
-      const join=arc.getPointAtLength(arc.getTotalLength()).matrixTransform(window.fpSvgScreenMatrix(arc)).matrixTransform(window.fpSvgScreenMatrix(baseline).inverse());
-      const circle=canvas7.querySelector('.wf-sec7-ball-2').getBoundingClientRect();
-      const end=new DOMPoint(circle.right,circle.top+circle.height/2).matrixTransform(window.fpSvgScreenMatrix(baseline).inverse());
-      baseline.dataset.desktopSeam='1';
-      baseline.setAttribute('d',`M ${join.x} ${join.y} H ${end.x}`);
-    }
-    const matrix=window.fpSvgScreenMatrix(svg).inverse().multiply(window.fpSvgScreenMatrix(arc));
-    const tokens=arc.getAttribute('d').match(/[MC]|-?\d*\.?\d+(?:e[-+]?\d+)?/gi);
-    const mapped=[];
-    for(let i=0;i<tokens.length;){
-      if(/[MC]/.test(tokens[i])){mapped.push(tokens[i++]);continue;}
-      const p=new DOMPoint(+tokens[i++],+tokens[i++]).matrixTransform(matrix);
-      mapped.push(p.x,p.y-delta/shared);
-    }
-    const end=window.fpS6Steps?.step3||parseFloat(cs.getPropertyValue('--s6-step3-x'))||930;
-    window.fpS6ConnectionD=mapped.join(' ').replace(/^M\s+([^ ]+)\s+([^ ]+)/,(_,ax,ay)=>'M '+end+' '+y+' H '+ax);
+    const inverse6=window.fpSvgScreenMatrix(svg).inverse();
+    const circle2=canvas7.querySelector('.wf-sec7-ball-2').getBoundingClientRect();
+    const destination=new DOMPoint(circle2.right,circle2.top+circle2.height/2-delta).matrixTransform(inverse6);
+    const screenRight=new DOMPoint(innerWidth-24,0).matrixTransform(inverse6).x;
+    const end=window.fpS6Steps?.step3||930;
+    const radius=Math.max(1,(destination.y-y)/2);
+    const turn=Math.min(screenRight-radius,Math.max(end,destination.x));
+    const far=Math.min(screenRight,turn+radius);
+    window.fpS6ConnectionD=`M ${end} ${y} H ${turn} C ${far} ${y} ${far} ${destination.y} ${turn} ${destination.y} H ${destination.x}`;
     document.getElementById('sec6-d-baton-arc').setAttribute('d',window.fpS6ConnectionD);
-    // The original S7 path is a reference only. The visible arc lives with S6.
+    if(baseline){baseline.dataset.desktopSeam='1';baseline.setAttribute('d',`M ${destination.x} ${destination.y}`);}
     arc.setAttribute('aria-hidden','true');
+    // Extend the initial rail using the same rendered SVG viewport.
+    const firstRail=svg.querySelector('[data-fp-h="s6-h1"]');
+    if(firstRail){
+      const left=new DOMPoint(-2,0).matrixTransform(inverse6).x;
+      const step1=window.fpS6Steps?.step1||parseFloat(cs.getPropertyValue('--s6-step1-x'))||283;
+      firstRail.dataset.desktopSeam='1';firstRail.setAttribute('d',`M ${left} ${y} H ${step1}`);
+    }
     // Keep S8's original entry arc attached to the lower circle in S7.
     const canvas8=document.getElementById('wf-sec8-canvas');
     const outer8=document.getElementById('wf-sec8-desktop-outer');
@@ -1983,46 +1984,28 @@ window.fpSvgScreenMatrix = function(el){
     const circle7=canvas7.querySelector('.wf-sec7-ball-4');
     if(entry8&&circle7){
       canvas8.style.left='0px';canvas8.style.top='0px';outer8.style.marginTop='0px';
-      // Center the visible text/circle composition, rather than the 1221px artboard.
       const compositionCenter=(68+786.5+123.5*artScale)/2;
       const centered=canvas8.getBoundingClientRect();canvas8.style.left=(innerWidth/2-centered.left-compositionCenter)+'px';
-      entry8.removeAttribute('transform');
-      entry8.setAttribute('d','M29.16 2.16C29.16 64.3757 79.6129 114.808 141.854 114.808');
-      const circleShape=circle7.querySelector('circle');
-      const rect=circle7.getBoundingClientRect();
-      let edge=new DOMPoint(rect.left+rect.width/2,rect.bottom);
-      if(circleShape){const c=circleShape,border=parseFloat(getComputedStyle(c).strokeWidth)||0;edge=new DOMPoint(+c.getAttribute('cx'),+c.getAttribute('cy')+(+c.getAttribute('r'))+border/2).matrixTransform(window.fpSvgScreenMatrix(c));}
-      const initialMatrix8=window.fpSvgScreenMatrix(entry8),cap=(parseFloat(getComputedStyle(entry8).strokeWidth)||3)*Math.hypot(initialMatrix8.a,initialMatrix8.b)/2;
-      edge.y+=cap;
-      // The entry arc stays on S7; its horizontal exit becomes S8's top edge.
-      const entryRise=112.648*Math.hypot(initialMatrix8.a,initialMatrix8.b);
-      const topShift=edge.y+entryRise-canvas8.getBoundingClientRect().top;
+      const circleRect=circle7.getBoundingClientRect();
+      const edge=new DOMPoint(circleRect.left+circleRect.width/2,circleRect.bottom);
+      const topShift=edge.y+112.648-canvas8.getBoundingClientRect().top;
       canvas8.style.top=topShift+'px';
       outer8.style.height=(compactHeight+Math.max(0,topShift))+'px';
-      const matrix8=window.fpSvgScreenMatrix(entry8);
-      const entry=entry8.getPointAtLength(0).matrixTransform(matrix8);
-      canvas8.querySelector('#s7-s8-extension')?.remove();
-      const localEdge=edge.matrixTransform(matrix8.inverse()),localEntry=entry8.getPointAtLength(0);
-      entry8.setAttribute('transform',`translate(${localEdge.x-localEntry.x} ${localEdge.y-localEntry.y})`);
-      const rail8=canvas8.querySelector('path[data-k="s8-h1"]'),nextArc=canvas8.querySelector('path[data-k="s8-arc2"]');
-      if(rail8&&nextArc){
-        const exit=entry8.getPointAtLength(entry8.getTotalLength()).matrixTransform(window.fpSvgScreenMatrix(entry8)).matrixTransform(window.fpSvgScreenMatrix(rail8).inverse());
-        const finish=nextArc.getPointAtLength(0).matrixTransform(window.fpSvgScreenMatrix(nextArc)).matrixTransform(window.fpSvgScreenMatrix(rail8).inverse());
-        rail8.setAttribute('d',`M ${exit.x} ${exit.y} H ${finish.x}`);
-        nextArc.removeAttribute('transform');
-        const wanted=new DOMPoint(finish.x,exit.y).matrixTransform(window.fpSvgScreenMatrix(rail8)).matrixTransform(window.fpSvgScreenMatrix(nextArc).inverse()),start=nextArc.getPointAtLength(0);
-        nextArc.setAttribute('transform',`translate(${wanted.x-start.x} ${wanted.y-start.y})`);
-        const vertical=canvas8.querySelector('path[data-k="s8-v1"]'),bottomArc=canvas8.querySelector('path[data-k="s8-arc3"]');
-        if(vertical&&bottomArc){
-          bottomArc.removeAttribute('transform');
-          const arcEnd=bottomArc.getPointAtLength(bottomArc.getTotalLength());
-          bottomArc.setAttribute('transform',`translate(0 ${compactHeight-52-arcEnd.y})`);
-          const from=nextArc.getPointAtLength(nextArc.getTotalLength()).matrixTransform(window.fpSvgScreenMatrix(nextArc)).matrixTransform(window.fpSvgScreenMatrix(vertical).inverse()),to=bottomArc.getPointAtLength(0).matrixTransform(window.fpSvgScreenMatrix(bottomArc)).matrixTransform(window.fpSvgScreenMatrix(vertical).inverse());vertical.setAttribute('d',`M ${from.x} ${from.y} V ${to.y}`);
-          const bottom=canvas8.querySelector('path[data-k="s8-h2"]');
-          if(bottom){const end=bottomArc.getPointAtLength(bottomArc.getTotalLength()).matrixTransform(window.fpSvgScreenMatrix(bottomArc)).matrixTransform(window.fpSvgScreenMatrix(bottom).inverse());bottom.setAttribute('d',`M ${end.x} ${end.y} H 33.5`);}
-        }
-      }
-
+      const lines=canvas8.querySelector('.fp-s8-lines');
+      const local=edge.matrixTransform(window.fpSvgScreenMatrix(lines).inverse());
+      const bottom=compactHeight-52,right=1039.16,r=113,top=local.y+112.648;
+      const draw=(key,d)=>{
+        const path=canvas8.querySelector(`path[data-k="${key}"]`);
+        path.removeAttribute('transform');
+        path.parentElement.removeAttribute('transform');
+        path.setAttribute('d',d);
+      };
+      draw('s8-arc1',`M ${local.x} ${local.y} C ${local.x} ${top} ${local.x+60} ${top} ${local.x+112.694} ${top}`);
+      draw('s8-h1',`M ${local.x+112.694} ${top} H ${right-r}`);
+      draw('s8-arc2',`M ${right-r} ${top} C ${right-50} ${top} ${right} ${top+50} ${right} ${top+r}`);
+      draw('s8-v1',`M ${right} ${top+r} V ${bottom-r}`);
+      draw('s8-arc3',`M ${right} ${bottom-r} C ${right} ${bottom-50} ${right-50} ${bottom} ${right-r} ${bottom}`);
+      draw('s8-h2',`M ${right-r} ${bottom} H 33.5`);
     }
     const seatPath=root.querySelector('path[data-k="s5-h2"]'),seatArc=root.querySelector('path[data-k="s5-arc3"]');
     if(seatPath&&seatArc){
