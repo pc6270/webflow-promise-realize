@@ -1617,13 +1617,13 @@ function switchS4Tab(index) {
       }
     }
     window.fpLinesUpdate?.();
-    window.dispatchEvent(new Event('resize'));
+    window.fpTabletLayoutUpdate?.();window.fpMobileLayoutUpdate?.();window.fpS6AlignStage?.();
     updateTabletText();
     updateNoise();
     for(const flood of pencilFloods)flood.setAttribute('flood-color',window.FP_PAGE_CONFIG['--brand-line-flood']);
     const y=window.FP_PAGE_CONFIG['--s6-h-y'];
     for(const id of ['sec6-d-dot-1','sec6-d-dot-2','sec6-d-dot-3'])document.getElementById(id)?.style.setProperty('top',y);
-    window.dispatchEvent(new Event('scroll'));
+    window.handleSec6Scroll?.();
   };
   function updateTabletText(){
     const tablet=window.innerWidth>=768&&window.innerWidth<1200;
@@ -1649,7 +1649,7 @@ function switchS4Tab(index) {
     apply(event.data.values);
   });
   document.fonts?.ready.then(() => {
-    window.dispatchEvent(new Event('resize'));
+    window.fpTabletLayoutUpdate?.();window.fpMobileLayoutUpdate?.();window.fpS6AlignStage?.();
     window.fpLinesUpdate?.();
   });
 })();
@@ -1883,7 +1883,7 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
     const set=(key,value)=>{if(root.style.getPropertyValue(key)!==value)root.style.setProperty(key,value);};
     const compact=innerWidth<1600&&innerHeight<=900;
     root.dataset.s6Compact=compact?'1':'0';
-    const activeTop=compact?190:368,railY=compact?666:(parseFloat(window.FP_PAGE_CONFIG?.['--s6-h-y'])||855);
+    const activeTop=compact?290:368,railY=compact?766:(parseFloat(window.FP_PAGE_CONFIG?.['--s6-h-y'])||855);
     set('--s6-desktop-beam-shorten','0px');set('--s6-h-y',railY+'px');
     set('--s6-desktop-active-top',activeTop+'px');set('--s6-desktop-small-top',(activeTop+172.2)+'px');
     set('--s6-desktop-desc-width',compact?'440px':'320px');
@@ -3009,11 +3009,11 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
  if(!root||!track)return;
  let busy=false,lastWheel=0,started=0,timer=0;
  function release(){
-  const now=performance.now(),remaining=Math.max(240-(now-lastWheel),850-(now-started));
-  if(remaining>0){timer=setTimeout(release,remaining);return;}
+  const now=performance.now(),remaining=Math.max(140-(now-lastWheel),500-(now-started));
+  if(remaining>0&&now-started<1500){timer=setTimeout(release,remaining);return;}
   busy=false;delete root.dataset.s6GestureBusy;
  }
- function lock(){busy=true;started=lastWheel=performance.now();root.dataset.s6GestureBusy='1';clearTimeout(timer);timer=setTimeout(release,850);}
+ function lock(){busy=true;started=lastWheel=performance.now();root.dataset.s6GestureBusy='1';clearTimeout(timer);timer=setTimeout(release,500);}
  function geometry(){
   const rect=track.getBoundingClientRect(),style=getComputedStyle(root);
   const stage=innerWidth<1200?(parseFloat(style.getPropertyValue('--tablet-stage-height'))||760)*(parseFloat(style.getPropertyValue('--tablet-scale'))||1):innerHeight;
@@ -3022,7 +3022,7 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
  addEventListener('wheel',event=>{
   if(innerWidth<768||event.ctrlKey||Math.abs(event.deltaX)>Math.abs(event.deltaY)||!event.deltaY)return;
   if(document.querySelector('dialog[open]')||event.target.closest?.('input,textarea,select,[contenteditable="true"],.w-nav-overlay'))return;
-  if(busy){if(event.cancelable)event.preventDefault();lastWheel=performance.now();return;}
+  if(busy){const rect=track.getBoundingClientRect();if(rect.bottom<0||rect.top>innerHeight){busy=false;clearTimeout(timer);delete root.dataset.s6GestureBusy;return;}if(event.cancelable)event.preventDefault();lastWheel=performance.now();return;}
   if(!event.cancelable||!window.fpSequenceStarted?.('wf-sec6-root'))return;
   const {rect,travel,top}=geometry();if(travel<=0)return;
   const direction=Math.sign(event.deltaY),progress=(scrollY-top)/travel;
