@@ -2007,16 +2007,20 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
     // Draw the released S6/S7 join in ONE SVG coordinate system.
     const baseline=canvas7.querySelector('path[data-k="s7-h1"]');
     const inverse6=window.fpSvgScreenMatrix(svg).inverse();
-    const circle2=canvas7.querySelector('.wf-sec7-ball-2').getBoundingClientRect();
-    const destination=new DOMPoint(circle2.right,circle2.top+circle2.height/2-delta).matrixTransform(inverse6);
+    // Original S7 two-quarter-circle geometry, translated without stretching.
+    const circle2Element=canvas7.querySelector('.wf-sec7-ball-2');
+    const circle2=circle2Element.getBoundingClientRect();
+    const moveY=target.y+495-(circle2.top+circle2.height/2);
+    const canvasTop=(parseFloat(canvas7.style.top)||0)+moveY;
+    canvas7.style.top=canvasTop+'px';
+    outer7.style.height=(800+Math.max(0,canvasTop))+'px';
+    const alignedCircle=circle2Element.getBoundingClientRect();
+    const destination=new DOMPoint(alignedCircle.right,alignedCircle.top+alignedCircle.height/2-delta).matrixTransform(inverse6);
     const screenRight=new DOMPoint(innerWidth-24,0).matrixTransform(inverse6).x;
     const end=window.fpS6Steps?.step3||930;
-    // Keep the whole descending curve to the right of the final text column.
-    // Use the final phase anchor even while the first phase is being shown.
-    const textRight=end+description.offsetWidth+32/shared;
-    const turn=Math.min(screenRight-8,Math.max(end,destination.x,textRight));
-    const far=screenRight;
-    window.fpS6ConnectionD=`M ${end} ${y} H ${turn} C ${far} ${y} ${far} ${destination.y} ${turn} ${destination.y} H ${destination.x}`;
+    const unit=1/shared,half=247.5*unit,reach=247.686*unit,control=136.793*unit;
+    const turn=screenRight-reach;
+    window.fpS6ConnectionD=`M ${end} ${y} H ${turn} C ${turn+control} ${y} ${turn+reach} ${y+110.81*unit} ${turn+reach} ${y+half} C ${turn+reach} ${y+384.19*unit} ${turn+control} ${y+495*unit} ${turn} ${y+495*unit} H ${destination.x}`;
     document.getElementById('sec6-d-baton-arc').setAttribute('d',window.fpS6ConnectionD);
     if(baseline){baseline.dataset.desktopSeam='1';baseline.setAttribute('d',`M ${destination.x} ${destination.y}`);}
     arc.setAttribute('aria-hidden','true');
