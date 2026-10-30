@@ -2740,10 +2740,16 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
  function writeStyle(node,key,value){if(node.style.getPropertyValue(key)!==value||node.style.getPropertyPriority(key)!=='important')node.style.setProperty(key,value,'important');}
  function quotes(){
   const updates=[];
+  const reference=innerWidth<768?document.querySelector('.s2p1-mb-container .vertical-brown-line'):null;
+  const referenceStyle=reference?getComputedStyle(reference):null;
+  const extension=key=>referenceStyle?Math.max(0,-(parseFloat(referenceStyle[key])||0)):3;
+  const mobileTop=extension('marginTop'),mobileBottom=extension('marginBottom');
   for(const [textSelector,lineSelector]of [['.s5-d-slogan-text','.s5-d-accent-line'],['.s5-m-slogan-text','.s5-m-accent-line'],['.wf-sec8-main-title','.wf-sec8-vert-line'],['.wf-sec8-mob-main-title','.wf-sec8-mob-vert-line']]){
    const text=document.querySelector(textSelector),line=document.querySelector(lineSelector);if(!text||!line)continue;
    const height=text.offsetHeight;if(!height)continue;
-   updates.push([line,(height+22)+'px',(text.offsetTop-11)+'px']);
+   const mobile=innerWidth<768&&(textSelector==='.s5-m-slogan-text'||textSelector==='.wf-sec8-mob-main-title');
+   const above=mobile?mobileTop:11,below=mobile?mobileBottom:11;
+   updates.push([line,(height+above+below)+'px',(text.offsetTop-above)+'px']);
   }
   for(const [line,height,top]of updates){writeStyle(line,'height',height);writeStyle(line,'top',top);}
  }
@@ -2800,7 +2806,7 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
   if(now-phaseStarted<700)scheduleOptics();
  }
  window.fpTabletOpticsUpdate=scheduleOptics;
- const resize=new ResizeObserver(quotes);document.querySelectorAll('.s5-d-slogan-text,.s5-m-slogan-text').forEach(el=>resize.observe(el));
+ const resize=new ResizeObserver(quotes);document.querySelectorAll('.s5-d-slogan-text,.s5-m-slogan-text,.wf-sec8-main-title,.wf-sec8-mob-main-title').forEach(el=>resize.observe(el));
  addEventListener('resize',()=>{quotes();scheduleOptics();});addEventListener('fp:webflow-ready',()=>{quotes();scheduleOptics();});document.fonts.ready.then(()=>{quotes();scheduleOptics();});quotes();
 })();
 
