@@ -1,4 +1,4 @@
-取代上一版 iPad 程式釘選方案。上傳 webflow-promise-realize 根目錄覆蓋同名檔案。
-恢復原生sticky；移除每次scroll時的translateY；固定同方向的sticky頂部位置；釘選層維持實體尺寸，僅內部素材縮放；桌面座位舊校正不再操作平板。保留三階段互動、兩個icon修正與文字間距。
-上傳後核對commit並更新Head/Footer。Embed不需重貼。
-已通過腳本及設定檢查，尚未iPad Safari實機驗證。
+本包取代前兩包，包含直向與橫向平板修正。
+上傳 webflow-promise-realize 根目錄覆蓋同名檔案。平板範圍統一768至小於1280，避免1210橫向切入桌面；1280筆電保留桌面。原生sticky不變。含原始S7弧線及S8陰影相對位置修正，兩個icon修正。
+上傳後核對commit並更新Head/Footer；14個Embed不用重貼。
+斷點、幾何與語法檢查已通過；尚未iPad Safari實機驗證。
