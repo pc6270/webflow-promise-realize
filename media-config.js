@@ -35,7 +35,7 @@ window.FP_MEDIA_CONFIG = {
     {
       "id": "wall-and-column-level",
       "title": "室內牆柱水平儀檢驗",
-      "image": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f726bc37e5648145c0_04-wall-and-column-level.avif",
+      "image": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61f51082958035f324ebd_04-wall-and-column-level.svg",
       "icon": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61d3ed0d04a27b5d789ea_5bea56e6b4f4e23fcbe386fe1975cdfda2b99fef29d0739051b72088f68520eb.svg",
       "video": "",
       "videoType": "video",
