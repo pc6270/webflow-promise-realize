@@ -2544,13 +2544,14 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
 (() => {
  const root=document.getElementById('fp-master-root');
  const sections=[['sec1',124,222,771,596],['s2p1',70,723,922,744],['s2p2',226,1467,764,603],['s2p34',32,2070,960,716],['sec4',-48,2778,1120,1237],['sec5',-197,4015,1171,731.38],['sec6',-49,4713,954,873],['sec7',34,5505,977,805.314],['sec8',42,6231,950,1044.553]];
- let queued=false,active=false,railBefore=null;const saved=new Map();const lineSvg=document.querySelector(".s2p34-line-svg"),originalViewBox=lineSvg.getAttribute("viewBox");const curveSvgs=[...document.querySelectorAll(".s2p2-vector1 svg,.s2p2-vector2 svg")],ratios=curveSvgs.map(svg=>svg.getAttribute("preserveAspectRatio"));
+ let queued=false,active=false,railBefore=null,stableWidth=0,stableHeight=0;const saved=new Map();const lineSvg=document.querySelector(".s2p34-line-svg"),originalViewBox=lineSvg.getAttribute("viewBox");const curveSvgs=[...document.querySelectorAll(".s2p2-vector1 svg,.s2p2-vector2 svg")],ratios=curveSvgs.map(svg=>svg.getAttribute("preserveAspectRatio"));
  function layout(){queued=false;const tablet=innerWidth>=768&&innerWidth<1200;
   if(!tablet){if(active){root.classList.remove('fp-tablet');root.querySelectorAll('.wf-sec7-balls-container').forEach(el=>el.style.removeProperty('top'));root.querySelectorAll('.wf-sec7-man-push,.wf-sec7-man-shadow,.wf-sec8-man1-group,.wf-sec8-man2-group').forEach(el=>el.style.removeProperty('translate'));root.style.removeProperty('--tablet-family-extra');if(railBefore){if(railBefore[0])root.style.setProperty('--s6-h-y',railBefore[0],railBefore[1]);else root.style.removeProperty('--s6-h-y');}for(const name of ['--tablet-stage-height','--tablet-stage-top','--tablet-page-height','--tablet-world-track-height','--tablet-first-screen-extra'])root.style.removeProperty(name);lineSvg.setAttribute('viewBox',originalViewBox);curveSvgs.forEach((svg,i)=>svg.setAttribute('preserveAspectRatio',ratios[i]||'xMidYMid meet'));root.style.removeProperty('--tablet-scale');root.style.removeProperty('--tablet-scroll-extra');root.style.removeProperty('--tablet-track-height');for(const [el,style]of saved){if(style===null)el.removeAttribute('style');else el.setAttribute('style',style);}saved.clear();active=false;if(innerWidth>=1200)window.fpS6ReapplyPhase?.();if(innerWidth<768)window.fpMobileLayoutUpdate?.();}return;}
   if(!active){railBefore=[root.style.getPropertyValue('--s6-h-y'),root.style.getPropertyPriority('--s6-h-y')];sections.forEach(([id])=>{const el=document.querySelector('.fp-'+id+'-wrapper');saved.set(el,el.getAttribute('style'));});active=true;}
   lineSvg.setAttribute('viewBox','0 0 960 716');curveSvgs.forEach(svg=>svg.setAttribute('preserveAspectRatio','xMinYMin meet'));root.classList.add('fp-tablet');const designWidth=Math.min(innerWidth,1024),scale=designWidth/1024,origin=(innerWidth-designWidth)/2;root.style.setProperty('--tablet-scale',scale);root.style.setProperty('--tablet-scroll-extra','1800px');root.style.setProperty('--tablet-track-height',(760+1800/scale)+'px');
+  if(stableWidth!==innerWidth||Math.abs(innerHeight-stableHeight)>180){stableWidth=innerWidth;stableHeight=innerHeight;}
   const stageTop=220,stageHeight=stageTop+560;root.style.setProperty('--tablet-stage-height',stageHeight+'px');root.style.setProperty('--tablet-stage-top',stageTop+'px');root.style.setProperty('--s6-h-y',(stageTop+407)+'px','important');root.style.setProperty('--tablet-page-height',(7053.553+stageHeight-905)+'px');root.style.setProperty('--tablet-track-height',(stageHeight+1800/scale)+'px');root.style.setProperty('--tablet-world-track-height',(stageHeight*scale+1800)+'px');
-  root.style.setProperty('--tablet-card-inset',(48+32/scale)+'px');root.style.setProperty('--tablet-card-width',((designWidth-64)/scale)+'px');const firstScreenTop=Math.min(222*scale,Math.max(24,innerHeight-(parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--site-header-height'))||110)-596*scale)),firstScreenExtra=0;root.style.setProperty('--tablet-first-screen-extra',(firstScreenTop+firstScreenExtra)+'px');const config=window.FP_PAGE_CONFIG||{},val=k=>parseFloat(config[k])||0;
+  root.style.setProperty('--tablet-card-inset',(48+32/scale)+'px');root.style.setProperty('--tablet-card-width',((designWidth-64)/scale)+'px');const firstScreenTop=Math.min(222*scale,Math.max(24,stableHeight-(parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--site-header-height'))||110)-596*scale)),firstScreenExtra=0;root.style.setProperty('--tablet-first-screen-extra',(firstScreenTop+firstScreenExtra)+'px');const config=window.FP_PAGE_CONFIG||{},val=k=>parseFloat(config[k])||0;
   for(const [id,x,y,w,h]of sections){const el=document.querySelector('.fp-'+id+'-wrapper');el.style.setProperty('left',(origin+(x+val('--'+id+'-tab-x'))*scale)+'px','important');el.style.setProperty('top',(firstScreenTop+(id==='sec1'?0:firstScreenExtra)+(y-222+val('--'+id+'-tab-y')+val('--'+id+'-tab-mt'))*scale+(id==='sec7'||id==='sec8'?1800+(stageHeight-905)*scale:0))+'px','important');el.style.width=w+'px';el.style.height=(id==='sec6'?stageHeight*scale+1800:h)+'px';}
   window.fpTabletSetPhase?.(Math.max(0,(+document.getElementById('sec6-d-num').textContent||1)-1));
   window.fpTextFlowUpdate?.();
@@ -2580,6 +2581,16 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
   }
   root.style.setProperty('--tablet-page-height',(7053.553+stageHeight-905+extra)+'px');
   window.fpLinesUpdate?.();window.fpSectionGuidesUpdate?.();
+  // Larger tablet body text must finish above the inspection rail.
+  root.style.setProperty('--tablet-inspection-cards-top','213px');
+  const rail=root.querySelector('path[data-k="s2p2-h2"]');
+  if(rail&&window.fpSvgScreenMatrix){
+   const railY=rail.getPointAtLength(0).matrixTransform(window.fpSvgScreenMatrix(rail)).y;
+   const textBottom=Math.max(...[...root.querySelectorAll('.s2p2-card-text')].map(el=>el.getBoundingClientRect().bottom));
+   const overflow=Math.max(0,textBottom+24-railY);
+   root.style.setProperty('--tablet-inspection-cards-top',(213-overflow/scale)+'px');
+  }
+  window.fpTabletStickyUpdate?.();window.fpTabletOpticsUpdate?.();
  }
  function soon(){if(!queued){queued=true;requestAnimationFrame(()=>requestAnimationFrame(layout));}}
  window.fpTabletLayoutUpdate=soon;addEventListener('fp:webflow-ready',soon);addEventListener('resize',soon);
@@ -2790,9 +2801,11 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
   const seat=root.querySelector('path[data-k="s5-h2"]'),body=byId('sec6-d-asset-tag');
   const rayMatrix=window.fpSvgScreenMatrix(byId('sec6-d-ray-svg'));if(!rayMatrix)return;const scale=Math.hypot(rayMatrix.a,rayMatrix.b);
   if(tablet){
-  const seatLocal=seat.getPointAtLength(0),seatTop=parseFloat(getComputedStyle(seat.closest('.s6-seat-line')).top)||0;
-  const next=seatTop+seatLocal.y-body.offsetHeight*.46;
+  // Include the seam path's SVG translation; raw getPointAtLength omits it.
+  const linePoint=seat.getPointAtLength(0).matrixTransform(window.fpSvgScreenMatrix(seat));
+  const rect=body.getBoundingClientRect();
   const current=parseFloat(root.style.getPropertyValue('--tablet-seat-shift'))||0;
+  const next=current+(linePoint.y-(rect.top+rect.height*.46))/scale;
   if(Math.abs(next-current)>.05)root.style.setProperty('--tablet-seat-shift',next+'px');
   }else{
    const linePoint=seat.getPointAtLength(0).matrixTransform(window.fpSvgScreenMatrix(seat)),rect=body.getBoundingClientRect();

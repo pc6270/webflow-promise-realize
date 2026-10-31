@@ -7279,6 +7279,12 @@ body{padding-top:var(--site-header-height,110px)!important}
 /* Only the page heading pair is static; section-title animation rules stay active. */
 #fp-master-root[data-title-motion="off"] .s1-header-box{animation:none!important;transition:none!important;opacity:1!important;transform:translateY(0)!important}
 
+/* Tablet pinning has one owner: tablet-sticky.js, never native sticky + translation. */
+@media(min-width:768px) and (max-width:1199.98px){
+ #fp-master-root.fp-tablet .wf-sec6-desktop-sticky-inner{position:relative!important;top:0!important;transition:none!important;}
+ #fp-master-root.fp-tablet .s2p2-cards-container{top:var(--tablet-inspection-cards-top,213px)!important;}
+}
+
 /* webflow-integration.css */
 body{padding-top:0!important}#fp-webflow-mount{padding-top:var(--site-header-height,110px);position:relative;overflow:visible}#fp-webflow-mount #fp-master-root{margin:0!important}[data-fp-fragment]{visibility:hidden}#fp-webflow-mount>.w-embed{display:contents}
 #fp-loading-curtain{position:fixed;inset:0;z-index:9999;pointer-events:none}
