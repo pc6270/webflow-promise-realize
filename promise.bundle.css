@@ -7305,6 +7305,11 @@ body{padding-top:var(--site-header-height,110px)!important}
  #fp-master-root .s4-accordion-card{height:514.25px!important;min-height:514.25px!important;}
 }
 
+/* Keep S5's intact connector attached when desktop card height changes. */
+@media(min-width:1280px){
+ #fp-master-root>.fp-sec5-wrapper{margin-top:calc(var(--sec5-mt,0px) + var(--sec5-y,82px) + var(--s5-entry-offset,0px))!important;transition-property:left!important;}
+}
+
 /* tablet-reviewed-adjustments.css */
 @media(min-width:768px) and (max-width:1279.98px) and (orientation:landscape){
  #fp-master-root.fp-tablet #sec6-d-header-group{top:65px!important;bottom:auto!important;display:flex!important;flex-direction:row!important;align-items:baseline!important;gap:18px!important;height:auto!important;}

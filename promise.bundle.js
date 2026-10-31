@@ -3301,4 +3301,29 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
 })();
 
 ;
+
+;/* desktop-section5-entry.js */
+(() => {
+ const root=document.getElementById('fp-master-root');let pending=false;
+ function update(){
+  pending=false;
+  if(innerWidth<1280){root.style.removeProperty('--s5-entry-offset');return;}
+  const circle=root.querySelector('.s4-bg-ellipse'),arc=root.querySelector('path[data-k="s5-arc1"]');
+  if(!circle||!arc||!window.fpSvgScreenMatrix)return;
+  const start=arc.getPointAtLength(0).matrixTransform(window.fpSvgScreenMatrix(arc));
+  const difference=circle.getBoundingClientRect().bottom-start.y;
+  if(!Number.isFinite(difference)||Math.abs(difference)<.25)return;
+  const previous=parseFloat(root.style.getPropertyValue('--s5-entry-offset'))||0;
+  root.style.setProperty('--s5-entry-offset',(previous+difference)+'px');
+  window.fpLinesUpdate?.();
+ }
+ function schedule(){if(!pending){pending=true;requestAnimationFrame(update);}}
+ const previous=window.fpLinesUpdate;
+ if(previous)window.fpLinesUpdate=(...args)=>{const result=previous(...args);schedule();return result;};
+ addEventListener('resize',schedule);addEventListener('fp:webflow-ready',schedule);
+ document.fonts.ready.then(schedule);document.fonts.addEventListener?.('loadingdone',schedule);
+ schedule();
+})();
+
+;
 })();

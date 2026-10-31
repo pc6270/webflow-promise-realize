@@ -1,4 +1,0 @@
-安心實踐更新 6e1e16dc31a7
-桌面版（1280px起）區塊四卡片高度605px改為514.25px，即0.85倍；平板維持484px。
-上傳 webflow-promise-realize 儲存庫根目錄，覆蓋同名檔案，保留目錄結構。現有14個Embed與Loading保留。上傳後核對新commit再提供Head/Footer，不附Head/Footer檔案。
-包含先前已確認平板修正。部署結構及JS語法檢查通過，尚未發布。
