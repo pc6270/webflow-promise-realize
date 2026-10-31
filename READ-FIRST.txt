@@ -1,4 +1,8 @@
-安心實踐：上傳 webflow-promise-realize 根目錄覆蓋同名檔案。
-移除光線變數觸發整頁原始SVG重設的監聽，load/resize統一走完整接線流程。直向光線區域加高；橫向依可用高度縮短並測量最長說明預留高度。跑步陰影按反射後腳點接到人物腳底。保留原生sticky及前次圖示、弧線修正。
-上傳後核對新commit再給Head/Footer；Embed不用重貼。
-已通過斷點及幾何計算、打包及語法檢查；尚未iPad Safari實機驗證。
+安心實踐：已確認預覽 index-v8 的正式部署包
+版本：9af85aaadde7
+
+將本包內容上傳 pc6270/webflow-promise-realize 儲存庫根目錄，保留資料夾結構並覆蓋同名檔案。
+包含已確認平板排版、人物與陰影、區塊四卡片0.8倍、區塊七整組文字置中。
+現有14個Embed不需重貼；全站Loading保留。
+本包不附Head/Footer檔案。上傳後告知，再核對最新commit與CDN，直接提供Head/Footer程式碼。
+已確認預覽調整程式與樣式完整打包（Webflow載入事件依部署流程轉接），部署結構與JS語法檢查通過。尚未發布。

@@ -353,8 +353,8 @@ try{Typekit.load();}catch(error){}
     }
     function update() { geom(); times(); if (window.handleSec6Scroll) window.handleSec6Scroll(); }
     window.fpLinesUpdate = update;
-    window.fpChainLength = function (c) { if (!chainLen[c]) update(); return chainLen[c] || 0; };
-    window.fpSegTiming = function (k) { if (!timing[k]) update(); return timing[k] || null; };
+    window.fpChainLength = function (c) { if (!chainLen[c]) times(); return chainLen[c] || 0; };
+    window.fpSegTiming = function (k) { if (!timing[k]) times(); return timing[k] || null; };
     var tm = null;
     function soon() { clearTimeout(tm); tm = setTimeout(()=>window.fpLinesUpdate(), 30); }
     document.addEventListener('fp:webflow-ready',()=>window.fpLinesUpdate());
@@ -2558,8 +2558,8 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
   const descHeight=Math.max(120,...(copy.length?copy:[{desc:desc.textContent}]).map(item=>{probe.textContent=item.desc||'';return probe.offsetHeight+8;}));probe.remove();
   const available=Math.max(480,(stableHeight-header-48)/scale);
   const landscape=innerWidth>stableHeight;
-  const photoSize=landscape?Math.max(230,Math.min(372,available-80-35-29-descHeight-24)):372;
-  const stageTop=landscape?80:Math.max(220,Math.min(440,available-photoSize-35-29-descHeight-24));
+  const photoSize=landscape?Math.max(180,Math.min(372,available-170-35-29-descHeight-24)):372;
+  const stageTop=landscape?170:Math.max(220,Math.min(440,available-photoSize-35-29-descHeight-24));
   const railY=stageTop+photoSize+35,stageHeight=railY+29+descHeight+24;
   root.style.setProperty('--tablet-active-photo-size',photoSize+'px');
   root.style.setProperty('--tablet-rail-y',railY+'px');
@@ -2603,7 +2603,7 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
    const overflow=Math.max(0,textBottom+24-railY);
    root.style.setProperty('--tablet-inspection-cards-top',(213-overflow/scale)+'px');
   }
-  window.fpTabletStickyUpdate?.();window.fpTabletOpticsUpdate?.();
+  window.fpTabletStickyUpdate?.();window.fpTabletOpticsUpdate?.();window.fpTabletRunnerShadowUpdate?.();
  }
  function soon(){if(!queued){queued=true;requestAnimationFrame(()=>requestAnimationFrame(layout));}}
  window.fpTabletLayoutUpdate=soon;addEventListener('fp:webflow-ready',soon);addEventListener('resize',soon);
@@ -3032,6 +3032,8 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
  function snap(a,b){if(!a||!b)return;const target=local(b,screen(a,true)),start=b.getPointAtLength(0);const existing=b.transform.baseVal.consolidate()?.matrix;b.setAttribute('transform',`translate(${(existing?.e||0)+target.x-start.x} ${(existing?.f||0)+target.y-start.y})`);moved.add(b);}
  function bar(key,a,b){const p=path(key);a=path(a);b=path(b);if(!p||!a||!b)return;const start=local(p,screen(a,true)),end=local(p,screen(b,false));p.setAttribute('d',`M ${start.x} ${start.y} H ${end.x}`);p.dataset.desktopSeam='1';snap(p,b);}
  function update(){
+  // No desktop cleanup may overwrite the tablet foot calibration.
+  if(innerWidth<1280&&!moved.size&&!ownsRailStart)return;
   if(contentPadding)content.style.setProperty('padding-top',contentPadding,contentPriority);else content.style.removeProperty('padding-top');
   moved.forEach(p=>p.removeAttribute('transform'));moved.clear();
   for(const [el,margin]of margins)el.style.marginTop=margin;
@@ -3180,6 +3182,122 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
  const previous=window.fpLinesUpdate;
  if(previous)window.fpLinesUpdate=(...args)=>{const value=previous(...args);update();return value;};
  addEventListener('resize',()=>requestAnimationFrame(update));addEventListener('fp:webflow-ready',update);document.fonts.ready.then(update);update();
+})();
+
+;
+
+;/* tablet-reviewed-adjustments.js */
+(() => {
+ const root=document.getElementById('fp-master-root');
+ const body=document.getElementById('wf-sec8-man-2');
+ const shadow=document.getElementById('wf-sec8-shadow-2');
+ const ns='http://www.w3.org/2000/svg';
+ function alignShadow(){
+  if(!root.classList.contains('fp-tablet'))return;
+  if(!shadow.dataset.footAnchored){
+   const svg=document.createElementNS(ns,'svg');
+   svg.setAttribute('viewBox','0 0 36.12 53.1657');
+   svg.setAttribute('overflow','visible');
+   const defs=document.createElementNS(ns,'defs');
+   defs.innerHTML='<linearGradient id="ipadRunnerFootFade" x1="0" y1="53.1657" x2="0" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="white"/><stop offset="1" stop-color="white" stop-opacity="0"/></linearGradient><mask id="ipadRunnerFootMask"><rect x="-100" y="-100" width="300" height="300" fill="url(#ipadRunnerFootFade)"/></mask><filter id="ipadRunnerFootBlur" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="0.8"/></filter>';
+   const group=document.createElementNS(ns,'g');
+   // Match the mother's visible head-to-foot projection, including the
+   // runner's different leaning pose, rather than copying skew angles alone.
+   const mother=root.querySelector('.wf-sec8-shadow-1');
+   const reference=new DOMMatrix(getComputedStyle(mother).transform);
+   const a=reference.a,b=0,d=reference.d*1.35;
+   const motherDX=6.5-6.17,motherDY=-101.689;
+   const referenceX=reference.a*motherDX+reference.c*motherDY;
+   const referenceY=reference.b*motherDX+reference.d*motherDY;
+   const footX=14.23,footY=53.1657,headX=9.47,headY=.105599;
+   const dx=headX-footX,dy=headY-footY;
+   const targetY=b*dx+d*dy;
+   const targetX=referenceX/referenceY*targetY;
+   const c=(targetX-a*dx)/dy;
+   group.setAttribute('transform',`matrix(${a} ${b} ${c} ${d} ${footX-a*footX-c*footY} ${-b*footX-d*footY})`);
+   group.setAttribute('filter','url(#ipadRunnerFootBlur)');
+   group.setAttribute('mask','url(#ipadRunnerFootMask)');
+   body.querySelectorAll('svg path').forEach(path=>{const copy=path.cloneNode(true);copy.removeAttribute('id');group.append(copy);});
+   svg.append(defs,group);shadow.replaceChildren(svg);shadow.dataset.footAnchored='1';
+  }
+ }
+ function alignPusherShadow(){
+  if(!root.classList.contains('fp-tablet'))return;
+  const actor=root.querySelector('.wf-sec7-man-push'),old=root.querySelector('.wf-sec7-man-shadow');
+  if(!actor||actor.dataset.attachedFootShadow)return;
+  const art=actor.querySelector('svg');if(!art)return;
+  const vb=art.viewBox.baseVal,svg=document.createElementNS(ns,'svg');
+  svg.setAttribute('viewBox',`${vb.x} ${vb.y} ${vb.width} ${vb.height}`);
+  Object.assign(svg.style,{position:'absolute',left:'0',top:'0',width:'100%',height:'100%',overflow:'visible',pointerEvents:'none',opacity:'.45',zIndex:'-1'});
+  svg.innerHTML='<defs><linearGradient id="pushFootFade" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="white"/><stop offset="1" stop-color="white" stop-opacity="0"/></linearGradient><mask id="pushFootMask"><rect width="100%" height="100%" fill="url(#pushFootFade)"/></mask><filter id="pushFootBlur" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="1"/></filter></defs>';
+  const group=document.createElementNS(ns,'g');
+  const fy=vb.y+vb.height;
+  group.setAttribute('transform',`matrix(1 0 .4 -.65 ${-.4*fy} ${1.65*fy})`);
+  group.setAttribute('filter','url(#pushFootBlur)');group.setAttribute('mask','url(#pushFootMask)');
+  art.querySelectorAll('path').forEach(p=>{const copy=p.cloneNode(true);copy.removeAttribute('id');group.append(copy);});
+  svg.append(group);actor.append(svg);old?.style.setProperty('display','none','important');actor.dataset.attachedFootShadow='1';
+ }
+ const titlePositions=new Map();
+ function balanceSection7(){
+  const title=root.querySelector('.wf-sec7-main-title'),copy=root.querySelector('.wf-sec7-description');
+  if(!title||!copy)return;
+  if(!titlePositions.has(title))titlePositions.set(title,[title.style.getPropertyValue('top'),title.style.getPropertyPriority('top')]);
+  if(!root.classList.contains('fp-tablet')||innerWidth>=innerHeight){
+   const [value,priority]=titlePositions.get(title);if(value)title.style.setProperty('top',value,priority);else title.style.removeProperty('top');return;
+  }
+  const [value,priority]=titlePositions.get(title);if(value)title.style.setProperty('top',value,priority);else title.style.removeProperty('top');
+  const balls=[...root.querySelectorAll('#wf-sec7-canvas .wf-sec7-ball')];
+  const canvas=root.querySelector('#wf-sec7-canvas');if(!balls.length||!canvas)return;
+  const scale=parseFloat(getComputedStyle(root).getPropertyValue('--tablet-scale'))||1;
+  const titleRect=title.getBoundingClientRect(),copyHeight=copy.getBoundingClientRect().height;
+  const upper=canvas.getBoundingClientRect().top;
+  const lower=Math.min(...balls.map(el=>el.getBoundingClientRect().top));
+  const gap=45,total=titleRect.height+gap+copyHeight;
+  const newTop=upper+(lower-upper-total)/2;
+  if(lower-upper<total)return;
+  const localTitle=parseFloat(getComputedStyle(title).top);
+  title.style.setProperty('top',(localTitle+(newTop-titleRect.top)/scale)+'px','important');
+  const titleAfter=title.getBoundingClientRect();
+  const localCopy=parseFloat(getComputedStyle(copy).top),copyTop=copy.getBoundingClientRect().top;
+  copy.style.setProperty('top',(localCopy+(titleAfter.bottom+gap-copyTop)/scale)+'px','important');
+ }
+ const margins=new Map();
+ function alignFeet(){
+  if(!root.classList.contains('fp-tablet'))return;
+  for(const [selector,shadowSelector,key]of [
+   ['.s2p2-figure-body','.s2p2-shadow-wrapper','s2p2-h1'],
+   ['.s2p34-man-body','.s2p34-man-shadow','s2p2-h2'],
+   ['.s2p34-woman-body','.s2p34-woman-shadow','s2p34-h1']
+  ]){
+   const actor=root.querySelector(selector),shade=root.querySelector(shadowSelector);
+   const line=root.querySelector(`path[data-k="${key}"]`);
+   if(!actor||!line)continue;
+   for(const el of [actor,shade].filter(Boolean)){
+    if(!margins.has(el))margins.set(el,el.style.marginTop);
+    el.style.marginTop=margins.get(el);
+   }
+   const rect=actor.getBoundingClientRect();
+   let point=line.getPointAtLength(0).matrixTransform(window.fpSvgScreenMatrix(line));
+   if(selector==='.s2p34-woman-body'){
+    const arc=root.querySelector('path[data-k="s2p34-arc2"]');
+    if(arc){const matrix=window.fpSvgScreenMatrix(arc),length=arc.getTotalLength();let best=Infinity;
+     for(let i=0;i<=160;i++){const v=arc.getPointAtLength(length*i/160).matrixTransform(matrix);const distance=Math.abs(v.x-(rect.left+rect.width*.8))+Math.max(0,Math.abs(v.y-rect.bottom)-80)*10;if(distance<best){best=distance;point=v;}}
+    }
+   }
+   // A margin is measured in the parent canvas, independently of actor scaling.
+   const scale=parseFloat(getComputedStyle(root).getPropertyValue('--tablet-scale'))||1;
+   if(!Number.isFinite(scale)||scale<=0)continue;
+   const shift=(point.y-rect.bottom)/scale;
+   for(const el of [actor,shade].filter(Boolean))el.style.marginTop=((parseFloat(margins.get(el))||0)+shift)+'px';
+  }
+ }
+ const previous=window.fpLinesUpdate;
+ if(previous)window.fpLinesUpdate=(...args)=>{const result=previous(...args);alignFeet();return result;};
+ function refresh(){alignShadow();alignFeet();alignPusherShadow();balanceSection7();}
+ window.fpTabletRunnerShadowUpdate=refresh;
+ document.fonts.ready.then(()=>requestAnimationFrame(()=>requestAnimationFrame(refresh)));
+ addEventListener('fp:webflow-ready',()=>requestAnimationFrame(()=>requestAnimationFrame(refresh)));
+ addEventListener('resize',()=>requestAnimationFrame(()=>requestAnimationFrame(refresh)));refresh();
 })();
 
 ;

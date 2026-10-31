@@ -1,0 +1,13 @@
+{
+  "release": "9af85aaadde7",
+  "approved_preview": "index-v8.html",
+  "files": {
+    "content-config.js": "af02193b27e4ee34947235e9981acaee6acf66a527c13dc5fece05486008393f",
+    "media-config.js": "a4738a3b8830a2486e7f1743ae112d610c232d17ea58db3d89a2f55e800230d7",
+    "page-config.js": "aa51811624b0251f128afad79a10a384aab58a5925db136295d7922a717beee4",
+    "promise.bundle.css": "b1f1b19c8e156bf47866e09844429e81c4ee783a4bf4f26b20b6cd71975259f3",
+    "promise.bundle.js": "e3f8f38257579a92d90566947e6a802dc2e833d6d301ca9aefe81a6caeb55a51",
+    "webflow-loader.js": "6697960ec29aa2e21438ca28172dfa47f3670e6fcbfc6d4348c586db2d6d99b0",
+    "webflow-manifest.js": "3bb05522d0cead8c43b86afedf686ca870e13fed65de3bf245053f4a7f20acb1"
+  }
+}

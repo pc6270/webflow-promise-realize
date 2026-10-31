@@ -7299,6 +7299,21 @@ body{padding-top:var(--site-header-height,110px)!important}
  #fp-master-root.fp-tablet .wf-sec8-shadow-2{top:1012.56px!important;}
 }
 
+/* tablet-reviewed-adjustments.css */
+@media(min-width:768px) and (max-width:1279.98px) and (orientation:landscape){
+ #fp-master-root.fp-tablet #sec6-d-header-group{top:65px!important;bottom:auto!important;display:flex!important;flex-direction:row!important;align-items:baseline!important;gap:18px!important;height:auto!important;}
+ #fp-master-root.fp-tablet #sec6-d-num{position:relative!important;top:0!important;left:0!important;font-size:80px!important;line-height:1!important;}
+ #fp-master-root.fp-tablet #sec6-d-title{position:relative!important;top:0!important;left:0!important;line-height:1.4!important;}
+}
+@media(min-width:768px) and (max-width:1279.98px){
+ #fp-master-root.fp-tablet .wf-sec8-shadow-2[data-foot-anchored]{transform:none!important;width:36.1px!important;height:53.2px!important;left:135px!important;top:973.2px!important;}
+}
+
+@media(min-width:768px) and (max-width:1279.98px){
+ #fp-master-root.fp-tablet .s4-panels-container,
+ #fp-master-root.fp-tablet .s4-accordion-card{height:484px!important;min-height:484px!important;}
+}
+
 /* webflow-integration.css */
 body{padding-top:0!important}#fp-webflow-mount{padding-top:var(--site-header-height,110px);position:relative;overflow:visible}#fp-webflow-mount #fp-master-root{margin:0!important}[data-fp-fragment]{visibility:hidden}#fp-webflow-mount>.w-embed{display:contents}
 #fp-loading-curtain{position:fixed;inset:0;z-index:9999;pointer-events:none}
