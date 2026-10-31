@@ -7292,6 +7292,13 @@ body{padding-top:var(--site-header-height,110px)!important}
  #fp-master-root.fp-tablet .wf-sec8-shadow-3{left:603px!important;top:312.5px!important;width:83.6px!important;height:56.1px!important;transform:scaleY(-.85) scaleX(-1.25) rotate(-180deg) skewX(26deg)!important;}
 }
 
+@media(min-width:768px) and (max-width:1279.98px){
+ #fp-master-root.fp-tablet .wf-sec6-desc{top:var(--tablet-desc-top,656px)!important;}
+ #fp-master-root.fp-tablet .wf-sec6-node-dot{top:var(--tablet-rail-y,627px)!important;}
+ /* The shadow's existing -0.96 reflection puts its foot at its bottom edge. */
+ #fp-master-root.fp-tablet .wf-sec8-shadow-2{top:1012.56px!important;}
+}
+
 /* webflow-integration.css */
 body{padding-top:0!important}#fp-webflow-mount{padding-top:var(--site-header-height,110px);position:relative;overflow:visible}#fp-webflow-mount #fp-master-root{margin:0!important}[data-fp-fragment]{visibility:hidden}#fp-webflow-mount>.w-embed{display:contents}
 #fp-loading-curtain{position:fixed;inset:0;z-index:9999;pointer-events:none}

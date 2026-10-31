@@ -356,14 +356,13 @@ try{Typekit.load();}catch(error){}
     window.fpChainLength = function (c) { if (!chainLen[c]) update(); return chainLen[c] || 0; };
     window.fpSegTiming = function (k) { if (!timing[k]) update(); return timing[k] || null; };
     var tm = null;
-    function soon() { clearTimeout(tm); tm = setTimeout(update, 30); }
-    document.addEventListener('fp:webflow-ready', update);
-    window.addEventListener('fp:webflow-ready', update);
+    function soon() { clearTimeout(tm); tm = setTimeout(()=>window.fpLinesUpdate(), 30); }
+    document.addEventListener('fp:webflow-ready',()=>window.fpLinesUpdate());
+    window.addEventListener('fp:webflow-ready',()=>window.fpLinesUpdate());
     window.addEventListener('resize', soon);
     var r = document.getElementById('fp-master-root');
-    if (r && 'MutationObserver' in window) {
-      new MutationObserver(soon).observe(r, { attributes: true, attributeFilter: ['style'] });
-    }
+    // Runtime configuration explicitly refreshes geometry. Optical CSS variables
+    // must not reset every section's SVG paths while the user scrolls.
     update();
   })();
 
@@ -2550,7 +2549,21 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
   if(!active){railBefore=[root.style.getPropertyValue('--s6-h-y'),root.style.getPropertyPriority('--s6-h-y')];sections.forEach(([id])=>{const el=document.querySelector('.fp-'+id+'-wrapper');saved.set(el,el.getAttribute('style'));});active=true;}
   lineSvg.setAttribute('viewBox','0 0 960 716');curveSvgs.forEach(svg=>svg.setAttribute('preserveAspectRatio','xMinYMin meet'));root.classList.add('fp-tablet');const designWidth=Math.min(innerWidth,1024),scale=designWidth/1024,origin=(innerWidth-designWidth)/2;root.style.setProperty('--tablet-scale',scale);root.style.setProperty('--tablet-scroll-extra','1800px');root.style.setProperty('--tablet-track-height',(760+1800/scale)+'px');
   if(stableWidth!==innerWidth||Math.abs(innerHeight-stableHeight)>180){stableWidth=innerWidth;stableHeight=innerHeight;}
-  const stageTop=220,stageHeight=stageTop+560;root.style.setProperty('--tablet-stage-height',stageHeight+'px');root.style.setProperty('--tablet-stage-top',stageTop+'px');root.style.setProperty('--s6-h-y',(stageTop+407)+'px','important');root.style.setProperty('--tablet-page-height',(7053.553+stageHeight-905)+'px');root.style.setProperty('--tablet-track-height',(stageHeight+1800/scale)+'px');root.style.setProperty('--tablet-world-track-height',(stageHeight*scale+1800)+'px');
+  const header=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--site-header-height'))||110;
+  const desc=document.getElementById('sec6-d-desc'),font=getComputedStyle(desc);
+  const probe=document.createElement('div');
+  Object.assign(probe.style,{position:'fixed',left:'-10000px',top:'0',visibility:'hidden',width:'275px',fontFamily:font.fontFamily,fontSize:font.fontSize,fontWeight:font.fontWeight,lineHeight:font.lineHeight,letterSpacing:font.letterSpacing,whiteSpace:'normal'});
+  document.body.append(probe);
+  const copy=window.FP_CONTENT_CONFIG?.section6||[];
+  const descHeight=Math.max(120,...(copy.length?copy:[{desc:desc.textContent}]).map(item=>{probe.textContent=item.desc||'';return probe.offsetHeight+8;}));probe.remove();
+  const available=Math.max(480,(stableHeight-header-48)/scale);
+  const landscape=innerWidth>stableHeight;
+  const photoSize=landscape?Math.max(230,Math.min(372,available-80-35-29-descHeight-24)):372;
+  const stageTop=landscape?80:Math.max(220,Math.min(440,available-photoSize-35-29-descHeight-24));
+  const railY=stageTop+photoSize+35,stageHeight=railY+29+descHeight+24;
+  root.style.setProperty('--tablet-active-photo-size',photoSize+'px');
+  root.style.setProperty('--tablet-rail-y',railY+'px');
+  root.style.setProperty('--tablet-desc-top',(railY+29)+'px');root.style.setProperty('--tablet-stage-height',stageHeight+'px');root.style.setProperty('--tablet-stage-top',stageTop+'px');root.style.setProperty('--s6-h-y',railY+'px','important');root.style.setProperty('--tablet-page-height',(7053.553+stageHeight-905)+'px');root.style.setProperty('--tablet-track-height',(stageHeight+1800/scale)+'px');root.style.setProperty('--tablet-world-track-height',(stageHeight*scale+1800)+'px');
   root.style.setProperty('--tablet-card-inset',(48+32/scale)+'px');root.style.setProperty('--tablet-card-width',((designWidth-64)/scale)+'px');const firstScreenTop=Math.min(222*scale,Math.max(24,stableHeight-(parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--site-header-height'))||110)-596*scale)),firstScreenExtra=0;root.style.setProperty('--tablet-first-screen-extra',(firstScreenTop+firstScreenExtra)+'px');const config=window.FP_PAGE_CONFIG||{},val=k=>parseFloat(config[k])||0;
   for(const [id,x,y,w,h]of sections){const el=document.querySelector('.fp-'+id+'-wrapper');el.style.setProperty('left',(origin+(x+val('--'+id+'-tab-x'))*scale)+'px','important');el.style.setProperty('top',(firstScreenTop+(id==='sec1'?0:firstScreenExtra)+(y-222+val('--'+id+'-tab-y')+val('--'+id+'-tab-mt'))*scale+(id==='sec7'||id==='sec8'?1800+(stageHeight-905)*scale:0))+'px','important');el.style.width=w+'px';el.style.height=(id==='sec6'?stageHeight*scale+1800:h)+'px';}
   window.fpTabletSetPhase?.(Math.max(0,(+document.getElementById('sec6-d-num').textContent||1)-1));
@@ -2687,11 +2700,13 @@ window.fpScreenLeft = svg => Math.floor(new DOMPoint(-2,0).matrixTransform(windo
   if(innerWidth<768||innerWidth>=1280)return;
   root.dataset.tabletPhase=String(phase);
   phase=Math.max(0,Math.min(2,phase));
+  const size=parseFloat(root.style.getPropertyValue('--tablet-active-photo-size'))||372;
+  const small=size*222/372;
   const positions=phase===0?[78,488,732]:[78,338,phase===2?582:732];
   for(let i=0;i<3;i++){
    root.style.setProperty('--tablet-circle'+(i+1)+'-x',positions[i]+'px');
-   root.style.setProperty('--tablet-circle'+(i+1)+'-y',((parseFloat(root.style.getPropertyValue('--tablet-stage-top'))||190)+(i===phase?0:150))+'px');
-   root.style.setProperty('--tablet-circle'+(i+1)+'-size',(i===phase?372:222)+'px');
+   root.style.setProperty('--tablet-circle'+(i+1)+'-y',((parseFloat(root.style.getPropertyValue('--tablet-stage-top'))||190)+(i===phase?0:size-small))+'px');
+   root.style.setProperty('--tablet-circle'+(i+1)+'-size',(i===phase?size:small)+'px');
   }
   const anchor=positions[phase]+24;
   if(root.dataset.s6TextSwitching==='1')return;
