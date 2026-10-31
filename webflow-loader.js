@@ -34,7 +34,7 @@
   img.addEventListener('load',finish,{once:true});img.addEventListener('error',finish,{once:true});
  });
  const bounded=promise=>Promise.race([promise,new Promise(resolve=>setTimeout(resolve,4000))]);
- const script=src=>new Promise((resolve,reject)=>{const el=document.createElement('script');const url=new URL(src,window.FP_ASSET_BASE);if(!src.startsWith("https://"))url.searchParams.set("v","9af85aaadde7");el.src=url.href;el.async=false;const timeout=setTimeout(()=>{el.remove();reject(Error('載入逾時 '+el.src));},12000);el.onload=()=>{clearTimeout(timeout);resolve();};el.onerror=()=>{clearTimeout(timeout);reject(Error('無法載入 '+el.src));};document.body.append(el);});
+ const script=src=>new Promise((resolve,reject)=>{const el=document.createElement('script');const url=new URL(src,window.FP_ASSET_BASE);if(!src.startsWith("https://"))url.searchParams.set("v","6e1e16dc31a7");el.src=url.href;el.async=false;const timeout=setTimeout(()=>{el.remove();reject(Error('載入逾時 '+el.src));},12000);el.onload=()=>{clearTimeout(timeout);resolve();};el.onerror=()=>{clearTimeout(timeout);reject(Error('無法載入 '+el.src));};document.body.append(el);});
  try{
   for(const fragment of document.querySelectorAll('[data-fp-fragment]')){const target=document.querySelector('[data-fp-node="'+fragment.dataset.fpParent+'"]');if(!target)throw Error('缺少 Embed：'+fragment.dataset.fpParent);target.append(...fragment.childNodes);fragment.remove();}
   const root=document.getElementById('fp-master-root');if(!root)throw Error('缺少第一個 Embed');

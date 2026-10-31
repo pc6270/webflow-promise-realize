@@ -1,8 +1,4 @@
-安心實踐：已確認預覽 index-v8 的正式部署包
-版本：9af85aaadde7
-
-將本包內容上傳 pc6270/webflow-promise-realize 儲存庫根目錄，保留資料夾結構並覆蓋同名檔案。
-包含已確認平板排版、人物與陰影、區塊四卡片0.8倍、區塊七整組文字置中。
-現有14個Embed不需重貼；全站Loading保留。
-本包不附Head/Footer檔案。上傳後告知，再核對最新commit與CDN，直接提供Head/Footer程式碼。
-已確認預覽調整程式與樣式完整打包（Webflow載入事件依部署流程轉接），部署結構與JS語法檢查通過。尚未發布。
+安心實踐更新 6e1e16dc31a7
+桌面版（1280px起）區塊四卡片高度605px改為514.25px，即0.85倍；平板維持484px。
+上傳 webflow-promise-realize 儲存庫根目錄，覆蓋同名檔案，保留目錄結構。現有14個Embed與Loading保留。上傳後核對新commit再提供Head/Footer，不附Head/Footer檔案。
+包含先前已確認平板修正。部署結構及JS語法檢查通過，尚未發布。
