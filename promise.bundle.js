@@ -1545,7 +1545,7 @@ function switchS4Tab(index) {
       var aArc = document.querySelector('.s5-d-bottom-arc.s5-seat-anchor');
       var aLine = document.querySelector('.s5-d-bottom-line.s5-seat-anchor');
       if (!holder || !track || !aArc || !aLine) return;
-      if (window.innerWidth < 768) return;
+      if (window.innerWidth < 1200) return;
       var inner = holder.parentElement;
       var tr = track.getBoundingClientRect();   // 釘住層的自然頂點 = 軌道頂點（不受釘住影響）
       var ir = inner.getBoundingClientRect();
