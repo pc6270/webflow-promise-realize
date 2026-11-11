@@ -5,7 +5,7 @@ window.FP_MEDIA_CONFIG = {
     {
       "id": "wall-paint-and-floor-grout",
       "title": "牆面油漆及地板填縫檢驗",
-      "image": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f764d876e731708694_01-wall-paint-and-floor-grout.avif",
+      "image": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f764d876e731708694_0383615555b7c401141e40fc61c905d0_01-wall-paint-and-floor-grout.avif",
       "icon": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61f51f9ed22284b974896_01-wall-paint-and-floor-grout.svg",
       "video": "",
       "videoType": "video",
@@ -25,7 +25,7 @@ window.FP_MEDIA_CONFIG = {
     {
       "id": "door-and-window-operation",
       "title": "門窗操作檢驗",
-      "image": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f61c135e9d8d37f900_03-door-and-window-operation.avif",
+      "image": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f61c135e9d8d37f900_6a16cf610b7f0a187e1d0c20acade571_03-door-and-window-operation.avif",
       "icon": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61f505f450630fda7c85c_03-door-and-window-operation.svg",
       "video": "",
       "videoType": "video",
@@ -35,7 +35,7 @@ window.FP_MEDIA_CONFIG = {
     {
       "id": "wall-and-column-level",
       "title": "室內牆柱水平儀檢驗",
-      "image": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f726bc37e5648145c0_04-wall-and-column-level.avif",
+      "image": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f726bc37e5648145c0_500476d2f1ef166a7a02080b8214a611_04-wall-and-column-level.avif",
       "icon": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61f51082958035f324ebd_04-wall-and-column-level.svg",
       "video": "",
       "videoType": "video",
@@ -65,7 +65,7 @@ window.FP_MEDIA_CONFIG = {
     {
       "id": "shower-glass-water-test",
       "title": "淋浴間玻璃沖水測試",
-      "image": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f8ae8a115fc9feb521_07-shower-glass-water-test.avif",
+      "image": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f8ae8a115fc9feb521_551428b0306a79633d0f48ac3cbf37c4_07-shower-glass-water-test.avif",
       "icon": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61f51e9e805c6915442fb_07-shower-glass-water-test.svg",
       "video": "",
       "videoType": "video",
@@ -75,7 +75,7 @@ window.FP_MEDIA_CONFIG = {
     {
       "id": "drainage-pipe-water-test",
       "title": "各區排水管路試水",
-      "image": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f72301321ef22d574a_08-drainage-pipe-water-test.avif",
+      "image": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f72301321ef22d574a_a587d027cfc79ee6b5e080c9d29f24a0_08-drainage-pipe-water-test.avif",
       "icon": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61f517b9051f97311869e_08-drainage-pipe-water-test.svg",
       "video": "",
       "videoType": "video",
@@ -85,7 +85,7 @@ window.FP_MEDIA_CONFIG = {
     {
       "id": "balcony-ponding-and-drainage",
       "title": "陽台積水及排水測試",
-      "image": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f76f53e107860ddb18_09-balcony-ponding-and-drainage.avif",
+      "image": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f76f53e107860ddb18_97fd356028fdb13bf5d70410d7186783_09-balcony-ponding-and-drainage.avif",
       "icon": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61f5103039cc5f1f50203_09-balcony-ponding-and-drainage.svg",
       "video": "",
       "videoType": "video",
@@ -95,7 +95,7 @@ window.FP_MEDIA_CONFIG = {
     {
       "id": "bedroom-light-switch",
       "title": "臥室燈開關檢測",
-      "image": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f737b8878396a34b21_10-bedroom-light-switch.avif",
+      "image": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f737b8878396a34b21_f40d4c3b0a2ce479df982527095908ce_10-bedroom-light-switch.avif",
       "icon": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61f5192609b5033110c2b_10-bedroom-light-switch.svg",
       "video": "",
       "videoType": "video",
@@ -125,7 +125,7 @@ window.FP_MEDIA_CONFIG = {
     {
       "id": "distribution-board-bedroom-circuit",
       "title": "變電箱臥室開關測試",
-      "image": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f863ee8810d794e961_13-distribution-board-bedroom-circuit.avif",
+      "image": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f863ee8810d794e961_7672b454a18d150981774b9d29410870_13-distribution-board-bedroom-circuit.avif",
       "icon": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61f519d493b6a0eed2cc0_13-distribution-board-bedroom-circuit.svg",
       "video": "",
       "videoType": "video",
@@ -135,7 +135,7 @@ window.FP_MEDIA_CONFIG = {
     {
       "id": "earth-leakage-trip-test",
       "title": "漏電斷電測試",
-      "image": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f8b212e35336b3f269_14-earth-leakage-trip-test.avif",
+      "image": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad620f8b212e35336b3f269_b5dcabc553c3a74ff44723a6a6a2e54d_14-earth-leakage-trip-test.avif",
       "icon": "https://cdn.prod.website-files.com/66f11d3496b859f0be0769bc/6ad61f517b440f5dabbcf827_14-earth-leakage-trip-test.svg",
       "video": "",
       "videoType": "video",
